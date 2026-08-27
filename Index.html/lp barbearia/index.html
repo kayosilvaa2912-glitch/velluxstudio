@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="bg-[#050505] text-[#FFFFFF] antialiased">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sr. Gruta Barbearia | Excelência Absoluta</title>
+    
+    <!-- DNS Preconnects para aceleração de rede extrema -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://i.ibb.co">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons (Trocado script bloqueante por CSS nativo) -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#050505',
+                        zinc: '#18181B',
+                        coreOrange: '#FF5E00',
+                        muted: '#A1A1AA'
+                    },
+                    fontFamily: {
+                        heading: ['Bebas Neue', 'sans-serif'],
+                        body: ['Manrope', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Radical Performance Optimization: Preload LCP Image (Hero) -->
+    <link rel="preload" as="image" href="assets/images/hero-sr-gruta.jpg" fetchpriority="high">
+
+    <style>
+        /* Base Resets */
+        ::selection { background: #FF5E00; color: #050505; }
+        ::-webkit-scrollbar { display: none; }
+        body { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Estilização para o input de data manter o Dark Mode */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1) sepia(1) saturate(5) hue-rotate(350deg);
+            cursor: pointer;
+        }
+
+        /* Noise Texture */
+        .bg-noise {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Utility Glow */
+        .glow-orange {
+            box-shadow: 0 0 40px rgba(255, 94, 0, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 94, 0, 0.3);
+        }
+
+        /* Marquee Animation & Optimization */
+        .marquee-wrapper {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .marquee-content {
+            display: flex;
+            animation: scroll-left 20s linear infinite;
+            /* Performance Optimization: Pause by default, run only when in view */
+            animation-play-state: paused; 
+        }
+        .marquee-wrapper.in-view .marquee-content {
+            animation-play-state: running;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Cards Hover Effect */
+        .tilt-card {
+            transition: border-color 0.4s ease, background-color 0.4s ease;
+        }
+        .tilt-card:hover {
+            border-color: #FF5E00;
+            background-color: #0a0a0a;
+        }
+
+        /* Magnetic Button Container */
+        .magnetic-wrap {
+            display: inline-block;
+            position: relative;
+        }
+        
+        /* Mask for Hero Image */
+        .hero-mask {
+            mask-image: linear-gradient(to top, transparent 0%, black 15%);
+            -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+        }
+    </style>
+</head>
+<body class="font-body overflow-x-hidden">
+
+    <!-- CART OVERLAY & SIDEBAR -->
+    <div id="cart-overlay" class="fixed inset-0 bg-obsidian/80 backdrop-blur-sm z-[90] opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    <aside id="cart-sidebar" class="fixed top-0 right-0 w-full md:w-[450px] h-full bg-zinc border-l border-white/10 z-[100] translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col shadow-2xl">
+        <div class="p-8 border-b border-white/10 flex justify-between items-center bg-obsidian">
+            <h2 class="font-heading text-3xl tracking-widest text-white">Sua <span class="text-coreOrange">Reserva</span></h2>
+            <button id="close-cart" class="text-muted hover:text-coreOrange transition-colors">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-8 space-y-6">
+            <div id="cart-items" class="space-y-4">
+                <!-- Cart items injected here -->
+                <div id="empty-cart-msg" class="text-center text-muted font-light flex flex-col items-center gap-4 py-10">
+                    <i class="ph ph-calendar-blank text-5xl opacity-20"></i>
+                    <p class="text-sm">Nenhum ritual selecionado.</p>
+                </div>
+            </div>
+            
+            <div id="datetime-section" class="border-t border-white/10 pt-6 hidden">
+                <h3 class="font-heading text-2xl text-white mb-4">Data e Horário</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-coreOrange font-bold mb-2">Data</label>
+                        <input type="date" id="book-date" class="w-full bg-obsidian border border-white/10 rounded-lg p-3 text-white text-sm focus:border-coreOrange focus:outline-none transition-colors appearance-none">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-coreOrange font-bold mb-2">Horário</label>
+                        <select id="book-time" class="w-full bg-obsidian border border-white/10 rounded-lg p-3 text-white text-sm focus:border-coreOrange focus:outline-none transition-colors appearance-none">
+                            <option value="">Selecione...</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                        </select>
+                    </div>
+                </div>
+                <p id="datetime-error" class="text-red-500 text-xs mt-2 hidden">Por favor, selecione a data e o horário.</p>
+            </div>
+        </div>
+        
+        <div class="p-8 border-t border-white/10 bg-obsidian">
+            <div class="flex justify-between items-end mb-6">
+                <span class="text-[10px] text-muted font-bold uppercase tracking-widest">Total Estimado</span>
+                <span id="cart-total" class="font-heading text-4xl text-white">R$ 0</span>
+            </div>
+            <button id="checkout-btn" class="w-full bg-coreOrange text-white py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-white hover:text-obsidian transition-colors duration-300 disabled:opacity-50 disabled:pointer-events-none" disabled>
+                Confirmar no WhatsApp <i class="ph-fill ph-whatsapp-logo text-lg"></i>
+            </button>
+        </div>
+    </aside>
+
+    <div class="bg-noise"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-6 px-8 mix-blend-difference flex justify-between items-center transition-transform duration-300" id="navbar">
+        <a href="#" class="font-heading text-3xl tracking-widest text-white">SR<span class="text-coreOrange">.</span>GRUTA</a>
+        <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-white">
+            <a href="#metodo" class="hover:text-coreOrange transition-colors">O Método</a>
+            <a href="#servicos" class="hover:text-coreOrange transition-colors">Serviços</a>
+            <a href="#galeria" class="hover:text-coreOrange transition-colors">Galeria</a>
+        </div>
+        <div class="magnetic-wrap">
+            <a href="#servicos" class="magnetic-btn bg-white text-obsidian px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-coreOrange hover:text-white transition-colors duration-300">
+                Agendar
+            </a>
+        </div>
+    </nav>
+
+    <!-- Smooth Scroll Wrapper -->
+    <main id="smooth-wrapper">
+        <div id="smooth-content">
+
+            <!-- HERO SECTION -->
+            <section class="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+                <!-- Background Ambient Glow -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] bg-coreOrange/10 blur-[120px] rounded-full pointer-events-none z-0"></div>
+                
+                <div class="max-w-7xl mx-auto w-full px-8 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
+                    
+                    <div class="flex flex-col items-start gs-hero-stagger mt-10 md:mt-0">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 border border-coreOrange/30 rounded-full bg-coreOrange/5 mb-8">
+                            <div class="w-1.5 h-1.5 rounded-full bg-coreOrange animate-pulse"></div>
+                            <span class="text-[10px] font-bold uppercase tracking-widest text-coreOrange">A Referência Definitiva</span>
+                        </div>
+                        
+                        <h1 class="font-heading text-6xl md:text-[8rem] leading-[0.85] uppercase text-white mb-6">
+                            A Arte da<br>
+                            <span class="text-coreOrange text-glow">Masculinidade</span>
+                        </h1>
+                        
+                        <p class="text-muted text-lg max-w-md font-light mb-10 leading-relaxed">
+                            Visagismo aplicado, precisão cirúrgica e pontualidade britânica. O fim do corte genérico começa exatamenta aqui.
+                        </p>
+                        
+                        <div class="flex gap-4 items-center w-full md:w-auto">
+                            <div class="magnetic-wrap w-full md:w-auto">
+                                <a href="#servicos" class="magnetic-btn w-full md:w-auto justify-center bg-coreOrange text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                                    Ver Especialidades <i class="ph ph-arrow-down-right text-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Prova Social Atualizada -->
+                        <div class="mt-16 flex gap-12 border-t border-white/10 pt-8">
+                            <div>
+                                <p class="font-heading text-4xl text-white">4.9/5</p>
+                                <p class="text-[10px] uppercase tracking-widest text-coreOrange font-bold mt-1">Avaliação Média</p>
+                            </div>
+                            <div>
+                                <p class="font-heading text-4xl text-white">+1k</p>
+                                <p class="text-[10px] uppercase tracking-widest text-coreOrange font-bold mt-1">Cortes Realizados</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative h-[60vh] md:h-[70vh] flex items-end justify-center gs-hero-img">
+                        <!-- Imagem do Hero (Removido o decoding sync para não travar a thread principal) -->
+                        <img src="assets/images/hero-sr-gruta.jpg" alt="Especialista Sr Gruta" class="h-full object-contain filter contrast-125 hero-mask drop-shadow-[0_0_30px_rgba(255,94,0,0.1)]">
+                        
+                        <!-- Floating UI Element -->
+                        <div class="absolute bottom-10 -left-4 md:-left-10 bg-zinc/80 backdrop-blur-md border border-white/10 p-4 rounded-2xl flex items-center gap-4 animate-[bounce_4s_infinite]">
+                            <div class="w-10 h-10 rounded-full bg-coreOrange flex items-center justify-center text-white">
+                                <i class="ph-fill ph-scissors text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-white uppercase tracking-widest">Precisão</p>
+                                <p class="text-[10px] text-muted">Métrica Milimétrica</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MARQUEE -->
+            <div class="py-4 bg-coreOrange text-obsidian border-y border-white/10">
+                <div class="marquee-wrapper">
+                    <div class="marquee-content gap-8 text-sm font-bold uppercase tracking-widest">
+                        <span>A Arte da Presença</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Cortes Cirúrgicos</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Ritual de Barba</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Ambiente Exclusivo</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>A Arte da Presença</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Cortes Cirúrgicos</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Ritual de Barba</span>
+                        <i class="ph-fill ph-star-four"></i>
+                        <span>Ambiente Exclusivo</span>
+                        <i class="ph-fill ph-star-four"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE PROBLEM SECTION -->
+            <section id="metodo" class="py-32 px-8 relative">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center max-w-3xl mx-auto mb-20 gs-reveal">
+                        <h2 class="font-heading text-5xl md:text-6xl text-white mb-6 uppercase tracking-wide">
+                            A indústria aceitou a <span class="text-coreOrange">mediocridade</span>
+                        </h2>
+                        <p class="text-muted text-lg font-light">
+                            O padrão de mercado é a pressa. Agendamentos ignorados, profissionais correndo contra o relógio e resultados padronizados que ignoram completamente sua estrutura facial.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="tilt-card bg-zinc border border-white/5 p-8 rounded-3xl gs-reveal">
+                            <div class="w-12 h-12 rounded-full bg-obsidian border border-coreOrange/20 flex items-center justify-center text-coreOrange mb-6">
+                                <i class="ph ph-hourglass-high text-xl"></i>
+                            </div>
+                            <h3 class="font-heading text-3xl text-white mb-3 tracking-wide">Espera Infinita</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Você agenda um horário, mas a sala de espera está sempre lotada. Seu tempo pessoal não é respeitado pela gestão falha.
+                            </p>
+                        </div>
+
+                        <div class="tilt-card bg-zinc border border-white/5 p-8 rounded-3xl gs-reveal" style="transition-delay: 100ms;">
+                            <div class="w-12 h-12 rounded-full bg-obsidian border border-coreOrange/20 flex items-center justify-center text-coreOrange mb-6">
+                                <i class="ph ph-factory text-xl"></i>
+                            </div>
+                            <h3 class="font-heading text-3xl text-white mb-3 tracking-wide">Linha de Montagem</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Cortes executados em quinze minutos. Degradês fortemente marcados, linhas assimétricas e ausência total de refinamento final.
+                            </p>
+                        </div>
+
+                        <div class="tilt-card bg-zinc border border-white/5 p-8 rounded-3xl gs-reveal" style="transition-delay: 200ms;">
+                            <div class="w-12 h-12 rounded-full bg-obsidian border border-coreOrange/20 flex items-center justify-center text-coreOrange mb-6">
+                                <i class="ph ph-users-three text-xl"></i>
+                            </div>
+                            <h3 class="font-heading text-3xl text-white mb-3 tracking-wide">Cópia Genérica</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                O exato mesmo estilo aplicado para todos os clientes. Sem análise morfológica, sem adequação ao seu formato craniano ou rotina.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRECISÃO SECTION (Otimizada) -->
+            <section class="relative h-[60vh] md:h-[80vh] w-full flex items-center justify-center overflow-hidden bg-zinc border-y border-white/5" id="section-precisao">
+                <!-- Background Image Radicalmente Otimizada (Resolucao menor e compressão agressiva) -->
+                <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1593980633857-797746811e5a?q=30&w=800&fm=webp')] bg-cover bg-center bg-fixed"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent"></div>
+                
+                <!-- Overlay Text -->
+                <div class="relative z-10 text-center gs-reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 border border-coreOrange/30 rounded-full bg-coreOrange/10 mb-6">
+                        <i class="ph-fill ph-crosshair text-coreOrange"></i>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-coreOrange">Calibração: 0.1MM</span>
+                    </div>
+                    <h2 class="font-heading text-[12vw] md:text-[8vw] leading-none text-white uppercase tracking-tighter gs-scale-text">
+                        Precisão<br><span class="text-coreOrange">Absoluta</span>
+                    </h2>
+                </div>
+            </section>
+
+            <!-- SERVICES SECTION -->
+            <section id="servicos" class="py-32 px-8">
+                <div class="max-w-6xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-end justify-between mb-20 gap-8 gs-reveal">
+                        <div>
+                            <h2 class="font-heading text-6xl md:text-8xl uppercase text-white leading-none">
+                                O Menu de<br><span class="text-coreOrange">Rituais</span>
+                            </h2>
+                        </div>
+                        <p class="text-muted text-sm font-light max-w-sm">
+                            Cada serviço é executado com foco absoluto e detalhamento técnico de luxo. Selecione a sua experiência.
+                        </p>
+                    </div>
+
+                    <div class="border-t border-white/10">
+                        <!-- Service 1 -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-white/20 group-hover:text-coreOrange transition-colors mt-1 md:mt-0 shrink-0">01</span>
+                                <div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Corte Social</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">Corte clássico e atemporal com acabamento limpo. Inclui lavagem, secagem e finalização com produtos premium.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-4xl text-white">R$ 45</span>
+                                <button class="add-to-cart-btn w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-coreOrange group-hover:border-coreOrange transition-all" data-id="1" data-name="Corte Social" data-price="45" aria-label="Agendar Corte Social">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 2 -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-white/20 group-hover:text-coreOrange transition-colors mt-1 md:mt-0 shrink-0">02</span>
+                                <div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Corte Degradê</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">Fade executado na máquina ou navalha. Transição cirúrgica de tons sem linhas de marcação, perfeitamente adaptado.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-4xl text-white">R$ 55</span>
+                                <button class="add-to-cart-btn w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-coreOrange group-hover:border-coreOrange transition-all" data-id="2" data-name="Corte Degradê" data-price="55" aria-label="Agendar Corte Degradê">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3 -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-white/20 group-hover:text-coreOrange transition-colors mt-1 md:mt-0 shrink-0">03</span>
+                                <div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Barba</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">Alinhamento geométrico impecável, toalha quente, espuma aquecida, navalha afiada e hidratação total.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-4xl text-white">R$ 40</span>
+                                <button class="add-to-cart-btn w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-coreOrange group-hover:border-coreOrange transition-all" data-id="3" data-name="Barba" data-price="40" aria-label="Agendar Barba">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 4 -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-white/20 group-hover:text-coreOrange transition-colors mt-1 md:mt-0 shrink-0">04</span>
+                                <div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Sobrancelha</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">Limpeza e design de sobrancelha na navalha, mantendo a expressão masculina natural e simétrica.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-4xl text-white">R$ 20</span>
+                                <button class="add-to-cart-btn w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-coreOrange group-hover:border-coreOrange transition-all" data-id="4" data-name="Sobrancelha" data-price="20" aria-label="Agendar Sobrancelha">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 5 -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-white/20 group-hover:text-coreOrange transition-colors mt-1 md:mt-0 shrink-0">05</span>
+                                <div>
+                                    <div class="inline-block px-2 py-1 bg-coreOrange/10 text-coreOrange text-[10px] font-bold uppercase tracking-widest rounded mb-2">Combo Express</div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Corte + Sobrancelha</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">Alinhamento completo do perfil superior. Corte detalhado acompanhado de limpeza de expressão facial.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-4xl text-white">R$ 60</span>
+                                <button class="add-to-cart-btn w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-coreOrange group-hover:border-coreOrange transition-all" data-id="5" data-name="Corte + Sobrancelha" data-price="60" aria-label="Agendar Corte e Sobrancelha">
+                                    <i class="ph ph-arrow-up-right text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Service 6 (Assinatura) -->
+                        <div class="group py-8 border-b border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 cursor-pointer hover:bg-zinc/30 transition-colors px-4 gs-reveal">
+                            <div class="flex items-start md:items-center gap-6 md:w-2/3">
+                                <span class="font-heading text-4xl text-coreOrange mt-1 md:mt-0 shrink-0">06</span>
+                                <div>
+                                    <div class="inline-block px-2 py-1 bg-coreOrange/10 text-coreOrange text-[10px] font-bold uppercase tracking-widest rounded mb-2">A Experiência Completa</div>
+                                    <h3 class="font-heading text-3xl md:text-4xl text-white mb-2 tracking-wide group-hover:pl-4 transition-all duration-300">Assinatura (Corte e Barba)</h3>
+                                    <p class="text-muted text-sm font-light max-w-lg">A nossa obra magna. Todo o cuidado do corte de cabelo unido ao relaxamento imersivo do ritual de barba. Realinhamento visual total.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-start md:justify-end w-full md:w-1/3 gap-6 pl-[3.5rem] md:pl-0 mt-2 md:mt-0">
+                                <span class="font-heading text-5xl text-coreOrange">R$ 80</span>
+                                <button class="add-to-cart-btn w-14 h-14 rounded-full border border-coreOrange flex items-center justify-center text-white bg-coreOrange hover:scale-110 transition-transform" data-id="6" data-name="Assinatura Sr. Gruta (Corte e Barba)" data-price="80" aria-label="Agendar Assinatura">
+                                    <i class="ph ph-plus text-2xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GALLERY SECTION -->
+            <section id="galeria" class="py-32 px-8 bg-zinc border-t border-white/5">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex justify-between items-end mb-16 gs-reveal">
+                        <h2 class="font-heading text-5xl text-white uppercase tracking-wide">Resultados Visíveis</h2>
+                        <p class="text-[10px] uppercase tracking-widest text-muted hidden md:block font-bold">Sem artifícios. Apenas técnica.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Imagens com ultra-compressão nas de apoio e novos links otimizados -->
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-obsidian gs-reveal">
+                            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?q=50&w=400&fm=webp" alt="Corte Lateral" loading="lazy" decoding="async" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-obsidian gs-reveal lg:mt-12">
+                            <img src="assets/images/corte-cabelo.jpg" alt="Detalhe Barba" loading="lazy" decoding="async" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-obsidian gs-reveal">
+                            <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=50&w=400&fm=webp" alt="Acabamento Navalha" loading="lazy" decoding="async" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+                        </div>
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-obsidian gs-reveal lg:mt-12">
+                            <img src="assets/images/homem-barba.jpg" alt="Cliente Satisfeito" loading="lazy" decoding="async" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- REFUGIO SECTION -->
+            <section id="refugio" class="py-32 px-8 bg-obsidian border-t border-white/5 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center max-w-2xl mx-auto mb-20 gs-reveal">
+                        <h2 class="font-heading text-5xl md:text-6xl text-white mb-6 uppercase tracking-wide">
+                            O Refúgio.
+                        </h2>
+                        <p class="text-muted text-lg font-light leading-relaxed">
+                            A Gruta foi projetada para ser um ponto de desconexão. Chegue mais cedo, peça uma bebida e relaxe. A experiência vai além da cadeira.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="tilt-card bg-zinc border border-white/5 p-10 rounded-3xl flex flex-col items-center text-center gs-reveal">
+                            <div class="w-16 h-16 rounded-full border border-coreOrange/30 flex items-center justify-center text-coreOrange mb-8 shadow-[0_0_15px_rgba(255,94,0,0.1)]">
+                                <i class="ph ph-beer-bottle text-2xl"></i>
+                            </div>
+                            <h3 class="font-heading text-2xl text-white mb-4 tracking-wide uppercase">Bar Premium</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Primeira cerveja estupidamente gelada, whisky ou café expresso por nossa conta.
+                            </p>
+                        </div>
+
+                        <div class="tilt-card bg-zinc border border-white/5 p-10 rounded-3xl flex flex-col items-center text-center gs-reveal" style="transition-delay: 100ms;">
+                            <div class="w-16 h-16 rounded-full border border-coreOrange/30 flex items-center justify-center text-coreOrange mb-8 shadow-[0_0_15px_rgba(255,94,0,0.1)]">
+                                <i class="ph ph-thermometer text-2xl"></i>
+                            </div>
+                            <h3 class="font-heading text-2xl text-white mb-4 tracking-wide uppercase">Conforto Absoluto</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Climatização rigorosa e poltronas ergonômicas de alto padrão para seu relaxamento total.
+                            </p>
+                        </div>
+
+                        <div class="tilt-card bg-zinc border border-white/5 p-10 rounded-3xl flex flex-col items-center text-center gs-reveal" style="transition-delay: 200ms;">
+                            <div class="w-16 h-16 rounded-full border border-coreOrange/30 flex items-center justify-center text-coreOrange mb-8 shadow-[0_0_15px_rgba(255,94,0,0.1)]">
+                                <i class="ph ph-speaker-hifi text-2xl"></i>
+                            </div>
+                            <h3 class="font-heading text-2xl text-white mb-4 tracking-wide uppercase">Atmosfera</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Trilha sonora curada especificamente para criar um ambiente masculino e imersivo.
+                            </p>
+                        </div>
+
+                        <div class="tilt-card bg-zinc border border-white/5 p-10 rounded-3xl flex flex-col items-center text-center gs-reveal" style="transition-delay: 300ms;">
+                            <div class="w-16 h-16 rounded-full border border-coreOrange/30 flex items-center justify-center text-coreOrange mb-8 shadow-[0_0_15px_rgba(255,94,0,0.1)]">
+                                <i class="ph ph-car text-2xl"></i>
+                            </div>
+                            <h3 class="font-heading text-2xl text-white mb-4 tracking-wide uppercase">Acesso Fácil</h3>
+                            <p class="text-muted text-sm font-light leading-relaxed">
+                                Estacionamento exclusivo na porta. Chegue com tranquilidade e segurança.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="bg-obsidian pt-24 pb-8 px-8 border-t border-coreOrange relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-[40vw] h-[40vw] bg-coreOrange/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+                <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 mb-20 relative z-10">
+                    <div class="md:col-span-5">
+                        <a href="#" class="font-heading text-5xl tracking-widest text-white block mb-6">SR<span class="text-coreOrange">.</span>GRUTA</a>
+                        <p class="text-muted text-sm font-light leading-relaxed max-w-sm mb-8">
+                            A referência absoluta em barbearia clássica e contemporânea. Elevamos sua imagem pessoal através de técnica afiada, respeito ao seu tempo e uma atmosfera inigualável.
+                        </p>
+                        <div class="flex gap-4">
+                            <a href="https://www.instagram.com/sr.grutabarbearia?igsi=MTY5M29xN3J4bDB6Yw%3D%3D" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-coreOrange hover:border-coreOrange transition-colors">
+                                <i class="ph-fill ph-instagram-logo text-xl"></i>
+                            </a>
+                            <a href="https://wa.me/5582987614063" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-coreOrange hover:border-coreOrange transition-colors">
+                                <i class="ph-fill ph-whatsapp-logo text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-4">
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/10 pb-4">Coordenadas</h4>
+                        <ul class="space-y-4 text-muted text-sm font-light">
+                            <li class="flex items-start gap-3">
+                                <i class="ph-fill ph-map-pin text-coreOrange text-xl shrink-0 mt-0.5"></i>
+                                <span>R. Artur Vital da Silva, N°76 Loja 4<br>Gruta, Maceió - AL</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="ph-fill ph-phone text-coreOrange text-xl shrink-0"></i>
+                                <span>(82) 9 8761-4063</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="ph-fill ph-whatsapp-logo text-coreOrange text-xl shrink-0"></i>
+                                <span>(82) 9 8761-4063</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-white/10 pb-4">Operação</h4>
+                        <ul class="space-y-3 text-muted text-sm font-light font-mono">
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span>Seg a Sex</span>
+                                <span class="text-white">09:00 as 20:00</span>
+                            </li>
+                            <li class="flex justify-between border-b border-white/5 pb-2">
+                                <span>Sábado</span>
+                                <span class="text-white">08:00 as 18:00</span>
+                            </li>
+                            <li class="flex justify-between pb-2 text-coreOrange/60 italic">
+                                <span>Domingo</span>
+                                <span>Fechado</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-[10px] text-muted uppercase tracking-widest font-bold">
+                    <p>&copy; 2026 Sr. Gruta Barbearia. Todos os direitos reservados.</p>
+                    <p class="mt-4 md:mt-0">Design By <span class="text-white">VELLUX Studio</span></p>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Booking Action Desktop (Bottom Right) -->
+    <div class="fixed bottom-6 right-8 z-[80] hidden md:block">
+        <div class="magnetic-wrap">
+            <button class="cart-trigger-btn magnetic-btn bg-white text-obsidian px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-coreOrange hover:text-white transition-colors duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.8)] flex items-center gap-2 border border-white/10 cursor-pointer">
+                Ver Reserva <i class="ph-fill ph-calendar-plus text-lg"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Booking Action Mobile (Bottom Right) -->
+    <div class="fixed bottom-6 right-6 z-[80] md:hidden">
+        <button class="cart-trigger-btn w-14 h-14 rounded-full bg-white text-obsidian flex items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.8)] hover:scale-110 hover:bg-coreOrange hover:text-white transition-all duration-300 border border-white/10 cursor-pointer" aria-label="Abrir Reserva">
+             <i class="ph-fill ph-calendar-plus text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            gsap.registerPlugin(ScrollTrigger);
+
+            /* --- 1. SMOOTH SCROLL (LENIS) --- */
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => { lenis.raf(time * 1000) });
+            gsap.ticker.lagSmoothing(0, 0);
+
+            /* --- 2. MAGNETIC BUTTONS --- */
+            const magneticBtns = document.querySelectorAll('.magnetic-wrap');
+            magneticBtns.forEach(wrap => {
+                const btn = wrap.querySelector('.magnetic-btn');
+                if(!btn) return;
+                
+                wrap.addEventListener('mousemove', (e) => {
+                    const rect = wrap.getBoundingClientRect();
+                    const h = rect.width / 2;
+                    const v = rect.height / 2;
+                    const x = e.clientX - rect.left - h;
+                    const y = e.clientY - rect.top - v;
+                    
+                    gsap.to(btn, {
+                        x: x * 0.4,
+                        y: y * 0.4,
+                        duration: 0.5,
+                        ease: "power3.out"
+                    });
+                });
+                
+                wrap.addEventListener('mouseleave', () => {
+                    gsap.to(btn, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.8,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+
+            /* --- 3. GSAP REVEAL ANIMATIONS --- */
+            
+            // Removidos os delays artificiais de 0.2s e 0.5s para pintura imediata da tela
+            gsap.fromTo('.gs-hero-stagger > *', 
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+            );
+
+            gsap.fromTo('.gs-hero-img',
+                { x: 50, opacity: 0, scale: 0.95 },
+                { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "expo.out" }
+            );
+
+            const revealElements = document.querySelectorAll('.gs-reveal');
+            revealElements.forEach(el => {
+                gsap.fromTo(el,
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0, opacity: 1,
+                        duration: 1,
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%",
+                        }
+                    }
+                );
+            });
+
+            // Precisão Section Text Scale
+            gsap.to('.gs-scale-text', {
+                scale: 1.2,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#section-precisao",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            /* --- 4. NAVBAR HIDE/SHOW ON SCROLL --- */
+            let lastScroll = 0;
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll > 100 && currentScroll > lastScroll) {
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    navbar.style.transform = 'translateY(0)';
+                    if(currentScroll > 50) {
+                        navbar.classList.add('bg-obsidian/90', 'backdrop-blur-md', 'border-b', 'border-white/5');
+                        navbar.classList.remove('mix-blend-difference');
+                    } else {
+                        navbar.classList.remove('bg-obsidian/90', 'backdrop-blur-md', 'border-b', 'border-white/5');
+                        navbar.classList.add('mix-blend-difference');
+                    }
+                }
+                lastScroll = currentScroll;
+            });
+
+            /* --- 5. OTIMIZAÇÃO DE PERFORMANCE (Intersection Observer no Marquee) --- */
+            const marqueeWrapper = document.querySelector('.marquee-wrapper');
+            if (marqueeWrapper) {
+                const marqueeObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if(entry.isIntersecting) {
+                            marqueeWrapper.classList.add('in-view');
+                        } else {
+                            marqueeWrapper.classList.remove('in-view');
+                        }
+                    });
+                }, { threshold: 0 });
+                marqueeObserver.observe(marqueeWrapper);
+            }
+            
+            /* --- 6. SISTEMA DE CARRINHO E AGENDAMENTO --- */
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const emptyMsg = document.getElementById('empty-cart-msg');
+            const cartTotalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const datetimeSection = document.getElementById('datetime-section');
+            const bookDate = document.getElementById('book-date');
+            const bookTime = document.getElementById('book-time');
+            const datetimeError = document.getElementById('datetime-error');
+            
+            let cart = [];
+            
+            // TRAVA TEMPORAL DO CALENDÁRIO (Bloqueia datas passadas)
+            if(bookDate) {
+                // Pega a data de hoje no formato YYYY-MM-DD
+                const today = new Date().toISOString().split('T')[0];
+                bookDate.setAttribute('min', today);
+            }
+
+            function openCart() {
+                cartSidebar.classList.remove('translate-x-full');
+                cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeCart() {
+                cartSidebar.classList.add('translate-x-full');
+                cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+                document.body.style.overflow = '';
+            }
+            
+            if(closeCartBtn) closeCartBtn.addEventListener('click', closeCart);
+            if(cartOverlay) cartOverlay.addEventListener('click', closeCart);
+            
+            document.querySelectorAll('.cart-trigger-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openCart();
+                });
+            });
+
+            document.querySelectorAll('a[href="#servicos"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if(link.classList.contains('magnetic-btn')) {
+                         e.preventDefault();
+                         openCart();
+                    }
+                });
+            });
+        
+            window.removeFromCart = function(index) {
+                cart.splice(index, 1);
+                renderCart();
+            }
+            
+            function renderCart() {
+                cartItemsContainer.innerHTML = '';
+                let total = 0;
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.appendChild(emptyMsg);
+                    checkoutBtn.disabled = true;
+                    datetimeSection.classList.add('hidden');
+                    cartTotalEl.innerText = 'R$ 0';
+                    return;
+                }
+                
+                datetimeSection.classList.remove('hidden');
+                checkoutBtn.disabled = false;
+                
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-center p-4 bg-obsidian border border-white/5 rounded-xl';
+                    itemEl.innerHTML = `
+                        <div>
+                            <h4 class="font-heading text-xl text-white tracking-wide">${item.name}</h4>
+                            <p class="text-coreOrange text-sm font-bold mt-1">R$ ${item.price}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-muted hover:text-red-500 hover:border-red-500/50 transition-colors">
+                            <i class="ph ph-trash"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(itemEl);
+                });
+                
+                cartTotalEl.innerText = `R$ ${total}`;
+            }
+            
+            document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const id = btn.getAttribute('data-id');
+                    const name = btn.getAttribute('data-name');
+                    const price = parseFloat(btn.getAttribute('data-price'));
+                    
+                    const icon = btn.querySelector('i');
+                    if(icon) {
+                        icon.classList.replace('ph-arrow-up-right', 'ph-check');
+                        icon.classList.replace('ph-plus', 'ph-check');
+                    }
+                    
+                    cart.push({ id, name, price });
+                    renderCart();
+                    openCart();
+                    
+                    setTimeout(() => {
+                        if(icon) {
+                            icon.classList.replace('ph-check', 'ph-arrow-up-right');
+                            icon.classList.replace('ph-check', 'ph-plus');
+                        }
+                    }, 1000);
+                });
+            });
+            
+            if(checkoutBtn) {
+                checkoutBtn.addEventListener('click', () => {
+                    if (cart.length === 0) return;
+                    
+                    if (!bookDate.value || !bookTime.value) {
+                        datetimeError.classList.remove('hidden');
+                        return;
+                    }
+                    datetimeError.classList.add('hidden');
+                    
+                    const dateParts = bookDate.value.split('-');
+                    const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+                    
+                    let orderText = "Olá, Sr. Gruta! Gostaria de confirmar minha reserva:\n\n";
+                    let total = 0;
+                    
+                    cart.forEach(item => {
+                        orderText += `▪ ${item.name} (R$ ${item.price})\n`;
+                        total += item.price;
+                    });
+                    
+                    orderText += `\n📅 *Data:* ${formattedDate}`;
+                    orderText += `\n⏰ *Horário:* ${bookTime.value}`;
+                    orderText += `\n💰 *Total:* R$ ${total}\n\n`;
+                    orderText += `Podemos confirmar?`;
+                    
+                    const phone = "5582987614063"; 
+                    const encodedText = encodeURIComponent(orderText);
+                    window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELLUX Studio - Proposta Comercial</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'], impact: ['Oswald', 'sans-serif'] },
+                    colors: {
+                        void: '#030303', surface: '#0A0A0A',
+                        brand: { DEFAULT: '#FF5E00', glow: '#FF3300', gold: '#FF9500' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Configuração A4 para Impressão/PDF */
+        @page { size: A4; margin: 0; }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+        body { background-color: #030303; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; }
+        .a4-container { width: 210mm; min-height: 297mm; margin: 0 auto; background: #030303; position: relative; overflow: hidden; padding: 12mm 15mm; }
+        
+        .laser-grid {
+            position: absolute; inset: 0; z-index: 0; opacity: 0.15; pointer-events: none;
+            background-image: linear-gradient(45deg, rgba(255, 94, 0, 0.05) 1px, transparent 1px), linear-gradient(-45deg, rgba(255, 94, 0, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 10%, transparent 80%);
+        }
+
+        .card-plan {
+            background: linear-gradient(180deg, rgba(20,20,20,0.8) 0%, rgba(10,10,10,0.9) 100%);
+            border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 6mm;
+            position: relative;
+        }
+        .card-managed {
+            border-color: rgba(255, 94, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.1);
+        }
+        .card-managed::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, #FF5E00, transparent);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-container flex flex-col justify-between">
+        <div class="laser-grid"></div>
+
+        <!-- Cabeçalho -->
+        <header class="relative z-10 flex justify-between items-end border-b border-white/10 pb-4 mb-8">
+            <div>
+                <div class="font-impact text-3xl text-white tracking-widest uppercase">
+                    VELLUX<span class="text-brand">Studio</span>
+                </div>
+                <p class="text-[10px] text-white/50 uppercase tracking-widest mt-1 font-bold">Engenharia de Conversão & Performance</p>
+            </div>
+            <div class="text-right">
+                <div class="text-[11px] text-brand-gold font-bold mb-1"><i class="ph-fill ph-instagram-logo"></i> @vellux.web</div>
+                <div class="text-[10px] text-white/40">Proposta Técnica e Financeira</div>
+            </div>
+        </header>
+
+        <!-- Título -->
+        <main class="relative z-10 flex-1">
+            <h1 class="text-2xl font-bold mb-2">Estrutura de Infraestrutura Digital</h1>
+            <p class="text-xs text-white/50 mb-8 max-w-2xl leading-relaxed">
+                Nossos projetos não são apenas estéticos. Construímos ativos digitais de alta performance, 
+                otimizados para carregamento extremo e máxima retenção de tráfego em campanhas de lançamento. 
+                Selecione o escopo que melhor atende à sua operação:
+            </p>
+
+            <!-- Grid de Planos -->
+            <div class="grid grid-cols-3 gap-4 mb-8">
+                
+                <!-- Plano 1 -->
+                <div class="card-plan">
+                    <div class="text-[9px] uppercase tracking-widest text-white/40 font-bold mb-2">Setup Único</div>
+                    <h2 class="text-xl font-bold font-impact tracking-wide mb-1">VELLUX Essential</h2>
+                    <p class="text-[10px] text-white/40 border-b border-white/10 pb-3 mb-3 min-h-[35px]">
+                        Entrega do código fonte e instalação direta no seu servidor atual.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <span class="text-xs text-white/50 block mb-1">Investimento:</span>
+                        <div class="text-xl font-bold text-white">R$ 1.097</div>
+                        <span class="text-[9px] text-white/30 block mt-1">Taxa única. Sem mensalidade.</span>
+                    </div>
+
+                    <ul class="text-[10px] space-y-2 text-white/60 mb-4">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-white/30 mt-0.5"></i> Design High-Ticket Completo</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-white/30 mt-0.5"></i> Código Otimizado (GSAP/Tailwind)</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-white/30 mt-0.5"></i> Instalação no seu provedor</li>
+                        <li class="flex gap-2 text-white/30 line-through"><i class="ph ph-x-circle mt-0.5"></i> Hospedagem e Servidor Vellux</li>
+                        <li class="flex gap-2 text-white/30 line-through"><i class="ph ph-x-circle mt-0.5"></i> Manutenção e Ajustes Inclusos</li>
+                    </ul>
+                    <div class="p-2 bg-white/5 rounded border border-white/5 text-[9px] text-white/50 mt-auto">
+                        *A responsabilidade de uptime e manutenção do servidor é da sua equipe.
+                    </div>
+                </div>
+
+                <!-- Plano 2 -->
+                <div class="card-plan card-managed">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand text-white text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        Recomendado
+                    </div>
+                    <div class="text-[9px] uppercase tracking-widest text-brand font-bold mb-2">Foco em Conversão</div>
+                    <h2 class="text-xl font-bold font-impact tracking-wide mb-1 text-white">VELLUX Managed</h2>
+                    <p class="text-[10px] text-white/40 border-b border-white/10 pb-3 mb-3 min-h-[35px]">
+                        Hospedagem na nossa infraestrutura blindada com gestão completa.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <span class="text-xs text-white/50 block mb-1">Setup do Projeto:</span>
+                        <div class="text-2xl font-bold text-brand">R$ 1.500</div>
+                        <span class="text-[9px] text-white/60 block mt-1">+ R$ 120 / mensal (Infraestrutura)</span>
+                    </div>
+
+                    <ul class="text-[10px] space-y-2 text-white/80 mb-4">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand mt-0.5"></i> Tudo do plano Essential</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand mt-0.5"></i> Hospedagem Premium (Borda)</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand mt-0.5"></i> Manutenção Mensal e Ajustes</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand mt-0.5"></i> SEO Básico de Marca</li>
+                        <li class="flex gap-2 text-white/30 line-through"><i class="ph ph-x-circle mt-0.5"></i> SEO Técnico Avançado / IA</li>
+                    </ul>
+                    <div class="p-2 bg-brand/10 rounded border border-brand/20 text-[9px] text-brand/80 mt-auto">
+                        Garantia de estabilidade total para suportar picos de tráfego de lançamentos.
+                    </div>
+                </div>
+
+                <!-- Plano 3 -->
+                <div class="card-plan">
+                    <div class="text-[9px] uppercase tracking-widest text-brand-gold font-bold mb-2">Parceria de Escala</div>
+                    <h2 class="text-xl font-bold font-impact tracking-wide mb-1 text-white">VELLUX Scale</h2>
+                    <p class="text-[10px] text-white/40 border-b border-white/10 pb-3 mb-3 min-h-[35px]">
+                        SEO Avançado e benefícios exclusivos para clientes recorrentes.
+                    </p>
+                    
+                    <div class="mb-4">
+                        <span class="text-xs text-white/50 block mb-1">Setup do Projeto:</span>
+                        <div class="text-xl font-bold text-white">R$ 1.900</div>
+                        <span class="text-[9px] text-brand-gold font-bold block mt-1">+ R$ 96 / mensal (20% OFF)</span>
+                    </div>
+
+                    <ul class="text-[10px] space-y-2 text-white/70 mb-4">
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5"></i> Tudo do plano Managed</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5"></i> SEO Técnico (Microdados)</li>
+                        <li class="flex gap-2"><i class="ph-fill ph-check-circle text-brand-gold mt-0.5"></i> Otimização Semântica p/ IAs</li>
+                        <li class="flex gap-2 font-bold text-brand-gold"><i class="ph-fill ph-star mt-0.5"></i> 30% OFF em projetos futuros</li>
+                    </ul>
+                    <div class="p-2 bg-white/5 rounded border border-white/5 text-[9px] text-white/50 mt-auto">
+                        Ao precisar de novas LPs no futuro, o valor de setup cai automaticamente para R$ 1.330.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Rodapé e Condições -->
+            <div class="border-t border-white/10 pt-4">
+                <h3 class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/60">Termos de Operação</h3>
+                <div class="grid grid-cols-2 gap-4 text-[9px] text-white/40 leading-relaxed">
+                    <div>
+                        <strong>1. Condições de Pagamento:</strong> O valor de Setup é faturado via PIX ou Cartão (com acréscimo da plataforma). O início do desenvolvimento ocorre mediante compensação.
+                        <br><br>
+                        <strong>2. Prazos:</strong> A entrega do ambiente de testes ocorre em até 7 dias úteis após o recebimento completo do Briefing e Copys finais.
+                    </div>
+                    <div>
+                        <strong>3. Domínio:</strong> O domínio oficial (ex: seunome.com.br) é de propriedade e responsabilidade do cliente, que deverá fornecer o acesso para apontamento de DNS na entrega.
+                        <br><br>
+                        <strong>4. Mensalidade (Managed/Scale):</strong> Cobre custos de infraestrutura de nuvem, licenças de plugins premium, otimizações de segurança e pequenas alterações textuais/imagem ao longo do mês.
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+    </div>
+
+</body>
+</html>

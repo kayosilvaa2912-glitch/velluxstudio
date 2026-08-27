@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integra Ambiental | Consultoria e Licenciamento</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            white: '#FFFFFF',
+                            light: '#F5F8F6',     
+                            dark: '#03170D',      
+                            primary: '#0F612B',   
+                            action: '#439B47',    
+                            text: '#1F2937',      
+                            muted: '#4B5563',     
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(15, 97, 43, 0.08)',
+                        'float': '0 20px 40px -10px rgba(0,0,0,0.15)',
+                        'glow': '0 0 20px rgba(67, 155, 71, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body {
+            color: #1F2937;
+            background-color: #FFFFFF;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Sistema de Reveal Nativo (Leve e Rápido) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            will-change: opacity, transform;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #F5F8F6; }
+        ::-webkit-scrollbar-thumb { background: #439B47; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0F612B; }
+
+        /* Header Sticky Suave */
+        .header-scrolled {
+            background-color: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Glassmorphism Específico para Serviços */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+        .glass-card:hover {
+            border-color: #439B47;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(67, 155, 71, 0.3);
+        }
+
+        /* Sistema de Cards Empilhados (Sticky Scroll) */
+        .sticky-stack-container {
+            position: relative;
+        }
+        .stack-card {
+            position: sticky;
+            transition: all 0.3s ease;
+        }
+        /* Top offsets para criar o empilhamento. Baseado no header de ~80px + respiro */
+        .stack-card:nth-child(1) { top: 120px; z-index: 10; }
+        .stack-card:nth-child(2) { top: 140px; z-index: 20; }
+        .stack-card:nth-child(3) { top: 160px; z-index: 30; }
+
+        /* Processo Animações Específicas */
+        .process-step:hover .process-icon {
+            background-color: #439B47;
+            color: white;
+            border-color: #439B47;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(67, 155, 71, 0.4);
+        }
+        .process-line {
+            transition: width 1s ease-in-out;
+            width: 0%;
+        }
+        .process-container:hover .process-line {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans relative">
+
+    <a href="https://wa.me/5584986636330" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 bg-brand-action text-white w-14 h-14 rounded-full flex items-center justify-center shadow-float hover:scale-110 transition-transform duration-300 group">
+        <i class="ph-fill ph-whatsapp text-3xl group-hover:animate-bounce"></i>
+    </a>
+
+    <header id="main-header" class="fixed top-0 w-full z-40 transition-all duration-300 py-5 bg-white border-b border-gray-100">
+        <div class="max-w-[1200px] mx-auto px-6 flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-brand-primary rounded-lg flex items-center justify-center text-white">
+                    <i class="ph-fill ph-hard-hat text-2xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-black text-2xl leading-none text-brand-text tracking-tight">INTEGRA</span>
+                    <span class="text-[10px] font-bold text-brand-action tracking-[0.2em]">AMBIENTAL</span>
+                </div>
+            </a>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden lg:flex items-center gap-8 font-medium text-sm text-brand-muted">
+                <a href="#hero" class="hover:text-brand-action transition-colors">Início</a>
+                <a href="#riscos" class="hover:text-brand-action transition-colors">Riscos</a>
+                <a href="#servicos" class="hover:text-brand-action transition-colors">Serviços</a>
+                <a href="#sobre" class="hover:text-brand-action transition-colors">A Empresa</a>
+            </nav>
+
+            <!-- CTA Header -->
+            <a href="#contato" class="hidden md:flex items-center gap-2 px-6 py-2.5 bg-brand-action hover:bg-brand-primary text-white font-bold text-sm rounded-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+                <i class="ph-bold ph-whatsapp text-lg"></i> (84) 9 8663-6330
+            </a>
+
+            <!-- Menu Mobile Toggle -->
+            <button class="lg:hidden text-brand-text text-3xl">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <section id="hero" class="relative w-full min-h-screen flex items-center pt-20 overflow-hidden">
+        
+        <!-- Fundo com Imagem Otimizada Solicitada -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.ibb.co/DPm6YxgG/Chat-GPT-Image-22-de-ago-de-2026-22-24-37-1.png" alt="Engenharia Ambiental Integra" class="w-full h-full object-cover object-center">
+            <!-- Overlay gradiente para garantir leitura (Escuro para a esquerda, clareando pra direita) -->
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/60 to-transparent"></div>
+        </div>
+
+        <div class="w-full max-w-[1200px] mx-auto relative z-10 px-6 py-20">
+            <div class="max-w-2xl reveal">
+                <div class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-brand-action/20 border border-brand-action/30 backdrop-blur-sm mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-action animate-pulse"></span>
+                    <span class="text-white font-bold text-xs tracking-wider uppercase">Segurança e Conformidade Legal</span>
+                </div>
+                
+                <h1 class="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-[1.05] text-white mb-6 drop-shadow-lg">
+                    Sua empresa <br>precisa de <br><span class="text-brand-action">licenciamento?</span>
+                </h1>
+                
+                <p class="text-white/90 font-medium text-lg md:text-xl mb-10 leading-relaxed max-w-xl border-l-4 border-brand-action pl-4">
+                    Soluções ambientais inteligentes. Regularize sua operação com quem entende do assunto, evite multas e garanta seu funcionamento.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#contato" class="px-8 py-4 bg-brand-action hover:bg-brand-primary text-white font-bold rounded-md text-center transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-glow">
+                        Solicitar Consultoria
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="riscos" class="py-16 bg-brand-dark relative -mt-4 z-20 shadow-[0_-20px_40px_rgba(0,0,0,0.2)]">
+        <div class="max-w-[1200px] mx-auto px-6">
+            
+            <div class="swiper riskSwiper">
+                <div class="swiper-wrapper">
+                    <!-- Slide 1 -->
+                    <div class="swiper-slide bg-brand-dark">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 py-6">
+                            <div class="flex-1">
+                                <h3 class="text-brand-action font-display font-bold text-2xl mb-2">Por que é necessário?</h3>
+                                <p class="text-white/70 text-lg">A licença ambiental é o seu passaporte para operar na legalidade. Sem ela, seu negócio funciona de forma clandestina perante os órgãos de fiscalização.</p>
+                            </div>
+                            <div class="w-16 h-16 rounded-full bg-brand-action/20 flex items-center justify-center shrink-0">
+                                <i class="ph-fill ph-file-magnifying-glass text-3xl text-brand-action"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="swiper-slide bg-brand-dark">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 py-6">
+                            <div class="flex-1">
+                                <h3 class="text-red-500 font-display font-bold text-2xl mb-2">O que acontece sem ela?</h3>
+                                <p class="text-white/70 text-lg">Multas milionárias que inviabilizam o caixa, embargos, paralisação total das atividades e, em casos graves, processos criminais contra os gestores.</p>
+                            </div>
+                            <div class="w-16 h-16 rounded-full bg-red-500/20 flex items-center justify-center shrink-0">
+                                <i class="ph-fill ph-warning-octagon text-3xl text-red-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="swiper-slide bg-brand-dark">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 py-6">
+                            <div class="flex-1">
+                                <h3 class="text-blue-400 font-display font-bold text-2xl mb-2">A Vantagem Oculta</h3>
+                                <p class="text-white/70 text-lg">Empresas 100% regulares ganham confiança do mercado. Fecham grandes contratos B2B, atraem investidores e conseguem crédito fácil em bancos.</p>
+                            </div>
+                            <div class="w-16 h-16 rounded-full bg-blue-400/20 flex items-center justify-center shrink-0">
+                                <i class="ph-fill ph-bank text-3xl text-blue-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-24 bg-brand-light">
+        <div class="max-w-[1200px] mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="text-brand-action font-bold tracking-wider text-sm uppercase mb-3 block">A Realidade da Fiscalização</span>
+                <h2 class="font-display font-black text-3xl md:text-5xl text-brand-text mb-4">A licença ambiental é <span class="text-brand-primary">obrigatória.</span></h2>
+                <p class="text-brand-muted text-lg">Operar sem a devida regularização coloca o futuro e o patrimônio do seu negócio em risco extremo.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1: Multas (Vermelho) -->
+                <div class="group bg-white p-10 rounded-2xl border border-gray-200 shadow-sm hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 relative overflow-hidden reveal delay-100">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-200 group-hover:bg-red-500 transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-red-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
+                        <i class="ph-fill ph-money text-4xl text-red-500 group-hover:animate-pulse"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-brand-text mb-4">Multas Severas</h3>
+                    <p class="text-brand-muted leading-relaxed">Autuações ambientais possuem valores extremamente altos que comprometem diretamente o fluxo de caixa da empresa.</p>
+                </div>
+                
+                <!-- Card 2: Paralisação (Laranja) -->
+                <div class="group bg-white p-10 rounded-2xl border border-gray-200 shadow-sm hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 relative overflow-hidden reveal delay-200">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-200 group-hover:bg-orange-500 transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-orange-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-500">
+                        <i class="ph-fill ph-prohibit text-4xl text-orange-500 group-hover:animate-pulse"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-brand-text mb-4">Embargos</h3>
+                    <p class="text-brand-muted leading-relaxed">A fiscalização tem o poder de paralisar 100% das suas atividades imediatamente, causando perda irreparável de receita diária.</p>
+                </div>
+                
+                <!-- Card 3: Perda de Negócios (Verde/Ação) -->
+                <div class="group bg-white p-10 rounded-2xl border border-gray-200 shadow-sm hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 relative overflow-hidden reveal delay-300">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gray-200 group-hover:bg-brand-action transition-colors duration-500"></div>
+                    <div class="w-16 h-16 bg-brand-light rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <i class="ph-fill ph-trend-down text-4xl text-brand-primary"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-brand-text mb-4">Perda de Contratos</h3>
+                    <p class="text-brand-muted leading-relaxed">Grandes clientes B2B, licitações e instituições financeiras travam negócios e bloqueiam crédito para empresas irregulares.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-primary text-center px-6">
+        <div class="max-w-4xl mx-auto reveal">
+            <h2 class="font-display font-bold text-3xl md:text-4xl text-white mb-6">A Licença não é um custo. É um escudo protetor para o seu negócio.</h2>
+            <p class="text-white/80 text-lg">Todos os dias, empresas sofrem autuações por falta de informação ou burocracia mal resolvida. Nós assumimos essa dor para que você foque apenas em lucrar.</p>
+        </div>
+    </section>
+
+    <section id="sobre" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            
+            <div class="relative reveal">
+                <!-- Imagem de Perfil B2B Corporativo -->
+                <div class="rounded-2xl overflow-hidden relative z-10 border-4 border-white shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop" alt="Consultoria Ambiental Especializada" class="w-full h-auto object-cover aspect-[4/5]">
+                </div>
+                <!-- Gráficos decorativos -->
+                <div class="absolute -bottom-8 -left-8 w-48 h-48 bg-brand-light rounded-2xl -z-10"></div>
+                <div class="absolute top-10 -right-8 w-32 h-32 bg-brand-primary/5 rounded-full -z-10"></div>
+                
+                <!-- Badge de Autoridade -->
+                <div class="absolute bottom-10 -right-10 bg-white p-6 rounded-xl shadow-float border border-gray-100 max-w-[220px] hidden md:block z-20">
+                    <i class="ph-fill ph-seal-check text-4xl text-brand-action mb-2"></i>
+                    <p class="font-display font-bold text-brand-text text-sm">Garantia de Segurança Jurídica e Ambiental</p>
+                </div>
+            </div>
+
+            <div class="reveal delay-200">
+                <span class="text-brand-action font-bold tracking-wider text-sm uppercase mb-3 block">Quem Entende do Assunto</span>
+                <h2 class="font-display font-black text-3xl md:text-5xl text-brand-text mb-6">
+                    Segurança que protege. Sustentabilidade que transforma.
+                </h2>
+                <p class="text-brand-muted mb-8 leading-relaxed text-lg">
+                    A Integra Ambiental atua com foco absoluto em garantir a segurança jurídica das operações dos nossos clientes. Não somos despachantes de papéis; somos engenheiros construindo estratégias legais.
+                </p>
+                <div class="space-y-5 mb-10">
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 w-6 h-6 rounded-full bg-brand-action/20 flex items-center justify-center shrink-0">
+                            <i class="ph-bold ph-check text-brand-action text-sm"></i>
+                        </div>
+                        <p class="text-brand-text font-medium text-lg">Equipe multidisciplinar com vasta experiência em engenharia.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 w-6 h-6 rounded-full bg-brand-action/20 flex items-center justify-center shrink-0">
+                            <i class="ph-bold ph-check text-brand-action text-sm"></i>
+                        </div>
+                        <p class="text-brand-text font-medium text-lg">Trânsito direto e conhecimento técnico junto aos órgãos fiscais (IDEMA, IBAMA).</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 w-6 h-6 rounded-full bg-brand-action/20 flex items-center justify-center shrink-0">
+                            <i class="ph-bold ph-check text-brand-action text-sm"></i>
+                        </div>
+                        <p class="text-brand-text font-medium text-lg">Agilidade e desburocratização dos processos de regularização.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="servicos" class="py-32 relative overflow-hidden">
+        <!-- Fundo Solicitado Escurecido -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://i.ibb.co/YTDrPqV9/Chat-GPT-Image-22-de-ago-de-2026-23-03-32-1.png" alt="Fundo Serviços" class="w-full h-full object-cover">
+            <!-- Overlay bem escuro para o texto branco ler com perfeição e o vidro aparecer -->
+            <div class="absolute inset-0 bg-black/75"></div>
+        </div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brand-action font-bold tracking-wider text-sm uppercase mb-3 block">Nossos Serviços</span>
+                <h2 class="font-display font-black text-3xl md:text-5xl text-white mb-4">
+                    Soluções Completas B2B
+                </h2>
+                <p class="text-white/70 text-lg max-w-2xl mx-auto">Tudo que sua empresa precisa para estar regularizada em um só lugar.</p>
+            </div>
+
+            <!-- Grid de Glassmorphism (Referência Imagem) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="glass-card p-10 rounded-2xl reveal flex flex-col items-center text-center">
+                    <i class="ph-fill ph-file-text text-5xl text-white mb-6"></i>
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">Licenciamento Ambiental</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Obtenção e renovação de licenças Prévia, de Instalação e de Operação junto aos órgãos competentes.</p>
+                </div>
+                
+                <div class="glass-card p-10 rounded-2xl reveal delay-100 flex flex-col items-center text-center">
+                    <i class="ph-fill ph-buildings text-5xl text-white mb-6"></i>
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">Regularização</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Diagnóstico completo e adequação legal de empreendimentos que já operam de forma irregular.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-2xl reveal delay-200 flex flex-col items-center text-center">
+                    <i class="ph-fill ph-chart-bar text-5xl text-white mb-6"></i>
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">Estudos e Relatórios</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Elaboração técnica de laudos, PGRS, PCA, RCA e todos os estudos exigidos pela legislação vigente.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-2xl reveal flex flex-col items-center text-center">
+                    <i class="ph-fill ph-users text-5xl text-white mb-6"></i>
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">Consultoria e Gestão</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Terceirização do setor ambiental para garantir foco no seu negócio e conformidade contínua.</p>
+                </div>
+
+                <div class="glass-card p-10 rounded-2xl reveal delay-100 flex flex-col items-center text-center">
+                    <i class="ph-fill ph-gear text-5xl text-white mb-6"></i>
+                    <h3 class="font-display font-bold text-2xl text-white mb-4">Acompanhamento</h3>
+                    <p class="text-white/70 text-sm leading-relaxed">Monitoramento de condicionantes, respostas a notificações e tramitação de processos nos órgãos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-brand-light py-32">
+        <div class="max-w-[1200px] mx-auto px-6">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Lado Esquerdo Estático -->
+                <div class="lg:col-span-5 reveal">
+                    <div class="sticky top-32">
+                        <span class="text-brand-action font-bold tracking-wider text-sm uppercase mb-3 block">O Valor da Integra</span>
+                        <h2 class="font-display font-black text-4xl md:text-5xl text-brand-text mb-6 leading-tight">Pilares que sustentam negócios sólidos.</h2>
+                        <p class="text-brand-muted text-lg mb-8">Faça o scroll para ver as três bases principais que entregamos para a sua empresa. Não entregamos documentos, entregamos garantias.</p>
+                        <a href="#contato" class="inline-flex px-8 py-4 bg-brand-dark text-white font-bold rounded-md hover:bg-brand-action transition-colors">
+                            Começar agora
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lado Direito: Cards Empilháveis -->
+                <div class="lg:col-span-7 sticky-stack-container pb-20">
+                    
+                    <!-- Card 1 -->
+                    <div class="stack-card bg-white p-10 md:p-12 rounded-3xl border border-gray-200 shadow-xl mb-12">
+                        <div class="w-20 h-20 bg-brand-light rounded-2xl flex items-center justify-center mb-8">
+                            <i class="ph-fill ph-shield-check text-5xl text-brand-primary"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl text-brand-text mb-4">Segurança Legal Extrema</h3>
+                        <p class="text-brand-muted text-lg leading-relaxed">Blindamos sua empresa contra multas, paralisações e passivos ambientais. Tenha a certeza de que a lei está ao seu lado durante toda a operação.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="stack-card bg-brand-primary p-10 md:p-12 rounded-3xl border border-brand-primary shadow-xl mb-12">
+                        <div class="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mb-8">
+                            <i class="ph-fill ph-leaf text-5xl text-white"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl text-white mb-4">Sustentabilidade Lucrativa</h3>
+                        <p class="text-white/80 text-lg leading-relaxed">Mostramos como a gestão ambiental correta não apenas protege a natureza, mas reduz custos, desperdícios e melhora a imagem corporativa.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="stack-card bg-brand-dark p-10 md:p-12 rounded-3xl border border-gray-800 shadow-xl">
+                        <div class="w-20 h-20 bg-brand-action/20 rounded-2xl flex items-center justify-center mb-8">
+                            <i class="ph-fill ph-briefcase text-5xl text-brand-action"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-3xl text-white mb-4">Soluções Ponta a Ponta</h3>
+                        <p class="text-white/70 text-lg leading-relaxed">Do primeiro diagnóstico até a entrega da licença final em suas mãos, nossa equipe cuida de toda a tramitação e burocracia sem onerar seu tempo.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-32 bg-white">
+        <div class="max-w-[1200px] mx-auto px-6 process-container">
+            <div class="text-center mb-24 reveal">
+                <span class="text-brand-action font-bold tracking-wider text-sm uppercase mb-3 block">Processo Simples</span>
+                <h2 class="font-display font-black text-3xl md:text-5xl text-brand-text">Jornada de Regularização</h2>
+            </div>
+
+            <!-- Steps com Linha Conectora Animada -->
+            <div class="relative">
+                <!-- Linha Base -->
+                <div class="hidden md:block absolute top-12 left-[10%] right-[10%] h-1 bg-gray-100 z-0 rounded-full"></div>
+                <!-- Linha que Preenche no Hover da Seção -->
+                <div class="hidden md:block absolute top-12 left-[10%] h-1 bg-brand-action z-0 rounded-full process-line"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
+                    <!-- Passo 1 -->
+                    <div class="process-step text-center cursor-pointer group reveal">
+                        <div class="process-icon w-24 h-24 mx-auto bg-white border-4 border-gray-100 rounded-full flex items-center justify-center text-3xl font-display font-black text-gray-300 mb-6 transition-all duration-300">01</div>
+                        <h4 class="font-bold text-xl text-brand-text mb-3">Diagnóstico</h4>
+                        <p class="text-base text-brand-muted">Avaliamos a situação atual e as exigências da lei para o seu negócio.</p>
+                    </div>
+                    <!-- Passo 2 -->
+                    <div class="process-step text-center cursor-pointer group reveal delay-100">
+                        <div class="process-icon w-24 h-24 mx-auto bg-white border-4 border-gray-100 rounded-full flex items-center justify-center text-3xl font-display font-black text-gray-300 mb-6 transition-all duration-300">02</div>
+                        <h4 class="font-bold text-xl text-brand-text mb-3">Estratégia Legal</h4>
+                        <p class="text-base text-brand-muted">Elaboração rigorosa de todos os estudos, laudos e projetos técnicos.</p>
+                    </div>
+                    <!-- Passo 3 -->
+                    <div class="process-step text-center cursor-pointer group reveal delay-200">
+                        <div class="process-icon w-24 h-24 mx-auto bg-white border-4 border-gray-100 rounded-full flex items-center justify-center text-3xl font-display font-black text-gray-300 mb-6 transition-all duration-300">03</div>
+                        <h4 class="font-bold text-xl text-brand-text mb-3">Protocolo</h4>
+                        <p class="text-base text-brand-muted">Entrada e acompanhamento ágil nos órgãos (IDEMA, IBAMA, etc).</p>
+                    </div>
+                    <!-- Passo 4 -->
+                    <div class="process-step text-center cursor-pointer group reveal delay-300">
+                        <div class="process-icon w-24 h-24 mx-auto bg-brand-primary border-4 border-brand-primary rounded-full flex items-center justify-center text-3xl font-display font-black text-white mb-6 transition-all duration-300">
+                            <i class="ph-bold ph-check"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-brand-text mb-3">Licença Emitida</h4>
+                        <p class="text-base text-brand-muted">Sua empresa operando 100% regularizada e segura para lucrar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-brand-light">
+        <div class="max-w-[800px] mx-auto px-6 reveal">
+            <h2 class="font-display font-black text-3xl md:text-5xl text-brand-text mb-12 text-center">Dúvidas Comuns</h2>
+            
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden faq-item bg-white shadow-sm">
+                    <button class="faq-btn w-full px-8 py-6 text-left font-bold text-lg text-brand-text flex justify-between items-center hover:text-brand-action transition-colors">
+                        Toda empresa precisa de Licença Ambiental?
+                        <i class="ph ph-caret-down text-xl transition-transform duration-300 text-brand-primary"></i>
+                    </button>
+                    <div class="faq-content hidden px-8 pb-6 text-brand-muted text-base leading-relaxed">
+                        Nem todas, mas qualquer atividade que utilize recursos ambientais, seja efetiva ou potencialmente poluidora, ou possa causar degradação ambiental, necessita obrigatoriamente do licenciamento.
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden faq-item bg-white shadow-sm">
+                    <button class="faq-btn w-full px-8 py-6 text-left font-bold text-lg text-brand-text flex justify-between items-center hover:text-brand-action transition-colors">
+                        O que acontece se eu for pego sem licença?
+                        <i class="ph ph-caret-down text-xl transition-transform duration-300 text-brand-primary"></i>
+                    </button>
+                    <div class="faq-content hidden px-8 pb-6 text-brand-muted text-base leading-relaxed">
+                        As penalidades incluem advertências, multas severas (geralmente baseadas no faturamento), embargo de obras, interdição da atividade e até responsabilidade criminal dos gestores.
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="border border-gray-200 rounded-xl overflow-hidden faq-item bg-white shadow-sm">
+                    <button class="faq-btn w-full px-8 py-6 text-left font-bold text-lg text-brand-text flex justify-between items-center hover:text-brand-action transition-colors">
+                        Quanto tempo demora o processo?
+                        <i class="ph ph-caret-down text-xl transition-transform duration-300 text-brand-primary"></i>
+                    </button>
+                    <div class="faq-content hidden px-8 pb-6 text-brand-muted text-base leading-relaxed">
+                        O prazo varia conforme a complexidade e o órgão ambiental. Nossa assessoria atua preventivamente, entregando projetos perfeitos na primeira tentativa para evitar "exigências", cortando o tempo de espera pela metade.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="py-32 bg-brand-dark">
+        <div class="max-w-[800px] mx-auto px-6">
+            
+            <div class="text-center mb-16 reveal">
+                <h2 class="font-display font-black text-4xl md:text-5xl text-white mb-6">
+                    Fale com um Engenheiro
+                </h2>
+                <p class="text-white/70 text-lg">
+                    Preencha os dados abaixo. Faremos uma análise primária do seu caso e entraremos em contato rapidamente para propor a melhor estratégia legal.
+                </p>
+            </div>
+
+            <!-- Form B2B Centralizado -->
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-float reveal delay-100 border-4 border-brand-primary/10">
+                <form id="lead-form" class="space-y-6" onsubmit="event.preventDefault(); submitForm(this);">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-muted">Nome do Contato *</label>
+                            <input type="text" required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-brand-text focus:outline-none focus:border-brand-action focus:ring-2 focus:ring-brand-action/20 transition-all text-lg">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-muted">WhatsApp (Com DDD) *</label>
+                            <input type="tel" required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-brand-text focus:outline-none focus:border-brand-action focus:ring-2 focus:ring-brand-action/20 transition-all text-lg">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-muted">Nome da Empresa *</label>
+                            <input type="text" required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-brand-text focus:outline-none focus:border-brand-action focus:ring-2 focus:ring-brand-action/20 transition-all text-lg">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-bold text-brand-muted">CNPJ (Opcional)</label>
+                            <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-brand-text focus:outline-none focus:border-brand-action focus:ring-2 focus:ring-brand-action/20 transition-all text-lg">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-bold text-brand-muted">Qual a sua necessidade atual? *</label>
+                        <select required class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 text-brand-text focus:outline-none focus:border-brand-action focus:ring-2 focus:ring-brand-action/20 transition-all text-lg appearance-none bg-no-repeat bg-[url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%231F2937%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')] bg-[length:12px_12px] bg-[right_1.5rem_center]">
+                            <option value="">Selecione...</option>
+                            <option>Preciso tirar uma licença nova</option>
+                            <option>Preciso renovar licença vencida</option>
+                            <option>Fui notificado/multado pelo órgão</option>
+                            <option>Preciso de Estudos/Relatórios</option>
+                            <option>Outra necessidade</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="w-full bg-brand-action hover:bg-brand-primary text-white font-bold py-5 rounded-lg transition-all duration-300 text-xl mt-4 flex items-center justify-center gap-3 shadow-lg hover:-translate-y-1">
+                        Consultar Engenheiro Agora <i class="ph-bold ph-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer class="bg-black py-8 border-t border-white/10">
+        <div class="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-sm">
+            <p>&copy; 2026 Integra Ambiental. CNPJ e Todos os direitos reservados.</p>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+                <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Header Sticky Effect
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // 2. Intersection Observer (Reveal Leve e Rápido)
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15 
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // 3. Swiper Carrossel Autoplay (Riscos)
+        const riskSwiper = new Swiper('.riskSwiper', {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
+            allowTouchMove: false // Carrossel de leitura, sem arrasto para não bugar
+        });
+
+        // 4. Accordion (FAQ)
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const btn = item.querySelector('.faq-btn');
+            const content = item.querySelector('.faq-content');
+            const icon = item.querySelector('i');
+
+            btn.addEventListener('click', () => {
+                const isOpen = !content.classList.contains('hidden');
+                
+                // Fecha todos
+                faqItems.forEach(otherItem => {
+                    otherItem.querySelector('.faq-content').classList.add('hidden');
+                    otherItem.querySelector('i').classList.remove('rotate-180');
+                });
+
+                // Abre o clicado se estava fechado
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+
+        // 5. Simulação de Formulário
+        function submitForm(form) {
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Processando...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="ph-bold ph-check"></i> Solicitação Enviada';
+                btn.classList.replace('bg-brand-action', 'bg-brand-primary');
+                form.reset();
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-70', 'cursor-not-allowed');
+                    btn.classList.replace('bg-brand-primary', 'bg-brand-action');
+                }, 4000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
