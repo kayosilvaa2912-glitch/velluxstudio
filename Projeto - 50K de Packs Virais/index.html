@@ -2,16 +2,15 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pack de Cortes Virais – Packlândia</title>
     
-    <!-- Google Fonts: Montserrat -->
+    <!-- Pré-conexões para acelerar o carregamento de fontes e ícones -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome (Ícones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
     <style>
         :root {
@@ -23,14 +22,17 @@
             --dark-text: #111111;
         }
 
-        * {
+        /* RESET E TRAVA DE ROLAGEM HORIZONTAL */
+        html {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            overflow-x: hidden; /* Trava o deslize horizontal na raiz */
+            scroll-behavior: smooth;
         }
 
-        html {
-            scroll-behavior: smooth;
+        *, *:before, *:after {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -38,10 +40,19 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Garantia dupla contra rolagem horizontal */
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* OTIMIZAÇÃO DE RENDERIZAÇÃO PARA SEÇÕES ABAIXO DO TOPO */
+        section {
+            content-visibility: auto;
+            contain-intrinsic-size: 500px;
         }
 
         .container {
+            width: 100%;
             max-width: 1100px;
             margin: 0 auto;
             padding: 80px 20px;
@@ -89,6 +100,7 @@
             box-shadow: 0 4px 20px rgba(69, 225, 4, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: pulse 2s infinite;
+            text-align: center;
         }
 
         .btn:hover {
@@ -367,30 +379,78 @@
             max-width: 900px;
             font-size: 13px;
             color: #777;
+            margin: 0 auto 15px auto;
         }
 
-        /* Responsividade */
+        /* =========================================
+           RESPONSIVIDADE (MOBILE & TABLET)
+           ========================================= */
         @media (max-width: 900px) {
-            .grid-3 { grid-template-columns: repeat(2, 1fr); }
-            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .container { padding: 60px 20px; }
         }
+        
         @media (max-width: 600px) {
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-            h2 { font-size: 28px; }
-            .price-new { font-size: 50px; }
-            .pricing-box { padding: 40px 20px; }
-            .timeline::before { left: 15px; }
-            .timeline-icon { left: -7px; width: 40px; height: 40px; font-size: 16px; }
-            .timeline-step { padding-left: 50px; }
+            .grid-2, .grid-3, .grid-4 { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+            }
+            .container { 
+                padding: 50px 15px; 
+            }
+            h2 { 
+                font-size: 26px; /* Textos menores para não estourar a tela */
+            }
+            p {
+                font-size: 16px;
+            }
+            /* Ajuste do botão para ocupar a tela toda no celular */
+            .btn {
+                width: 100%;
+                padding: 18px 20px;
+                font-size: 16px;
+            }
+            /* Ajustes da Timeline para alinhar perfeitamente no mobile */
+            .timeline::before { 
+                left: 15px; 
+            }
+            .timeline-icon { 
+                left: -3px; 
+                width: 38px; 
+                height: 38px; 
+                font-size: 15px; 
+            }
+            .timeline-step { 
+                padding-left: 45px; 
+            }
+            /* Caixa de Preço no Mobile */
+            .pricing-section {
+                padding: 50px 15px;
+            }
+            .pricing-box { 
+                padding: 30px 20px; 
+                margin: 20px auto 0;
+            }
+            .pricing-box h3 {
+                font-size: 22px;
+            }
+            .price-new { 
+                font-size: 48px; 
+            }
+            /* FAQ no mobile */
+            .faq-question {
+                font-size: 16px;
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- 1. HEADER / HERO SECTION -->
-    <header class="container">
-        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" style="max-width: 800px; margin-bottom: 30px;">
+    <header class="container" style="content-visibility: visible;">
+        <!-- FETCHPRIORITY HIGH para carregar a imagem do topo imediatamente -->
+        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" fetchpriority="high" decoding="async" style="max-width: 800px; margin-bottom: 30px;">
         
         <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
         <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
@@ -403,10 +463,11 @@
         <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
         <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
         
+        <!-- LOADING LAZY em todas as imagens abaixo da primeira rolagem -->
         <div class="grid-3" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" style="border-radius: 8px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px;">
         </div>
     </section>
 
@@ -450,75 +511,75 @@
         
         <div class="grid-3" style="margin-top: 50px;">
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/filmes_e_series.png" alt="Filmes e Séries"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/filmes_e_series.png" alt="Filmes e Séries" loading="lazy" decoding="async"></div>
                 <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/memes.png" alt="Memes"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/memes.png" alt="Memes" loading="lazy" decoding="async"></div>
                 <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/family_guy.png" alt="Family Guy"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/family_guy.png" alt="Family Guy" loading="lazy" decoding="async"></div>
                 <p>Mais de 350 cortes de Family Guy selecionados.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/rick_and_morty.png" alt="Rick and Morty"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/rick_and_morty.png" alt="Rick and Morty" loading="lazy" decoding="async"></div>
                 <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/os_simpsons.png" alt="Os Simpsons"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/os_simpsons.png" alt="Os Simpsons" loading="lazy" decoding="async"></div>
                 <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/todo_mundo_odeia_o_chris.png" alt="Todo Mundo Odeia o Chris"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/todo_mundo_odeia_o_chris.png" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async"></div>
                 <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/pica_pau.png" alt="Pica-Pau"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/pica_pau.png" alt="Pica-Pau" loading="lazy" decoding="async"></div>
                 <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/lifestyles.png" alt="Lifestyles"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/lifestyles.png" alt="Lifestyles" loading="lazy" decoding="async"></div>
                 <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/futebol.png" alt="Futebol"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/futebol.png" alt="Futebol" loading="lazy" decoding="async"></div>
                 <p>Mais de 250 cortes de melhores momentos do futebol.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/academia.png" alt="Academia"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/academia.png" alt="Academia" loading="lazy" decoding="async"></div>
                 <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/acao_policial.png" alt="Ação Policial"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/acao_policial.png" alt="Ação Policial" loading="lazy" decoding="async"></div>
                 <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/espinhas.png" alt="Espinhas"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/espinhas.png" alt="Espinhas" loading="lazy" decoding="async"></div>
                 <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/parkour.png" alt="Parkour"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/parkour.png" alt="Parkour" loading="lazy" decoding="async"></div>
                 <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/ladroes_se_f.png" alt="Ladrões se dão mal"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/ladroes_se_f.png" alt="Ladrões se dão mal" loading="lazy" decoding="async"></div>
                 <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/marcal.png" alt="Marçal"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/marcal.png" alt="Marçal" loading="lazy" decoding="async"></div>
                 <p>Os melhores cortes de Pablo Marçal.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/religiosos.png" alt="Religiosos"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/religiosos.png" alt="Religiosos" loading="lazy" decoding="async"></div>
                 <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/motivacional.png" alt="Motivacional"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/motivacional.png" alt="Motivacional" loading="lazy" decoding="async"></div>
                 <p>Cortes com frases motivacionais e de melhoria de vida.</p>
             </div>
             <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/e_muito_mais.png" alt="E muito mais"></div>
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/e_muito_mais.png" alt="E muito mais" loading="lazy" decoding="async"></div>
                 <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
             </div>
         </div>
@@ -527,7 +588,7 @@
     <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (FUNDO BRANCO) -->
     <section class="bg-white">
         <div class="container">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" style="max-width: 400px; margin-bottom: 30px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" loading="lazy" decoding="async" style="max-width: 400px; margin-bottom: 30px;">
             
             <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
             
@@ -559,10 +620,10 @@
         <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
         
         <div class="grid-4" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" loading="lazy" decoding="async" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" loading="lazy" decoding="async" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" loading="lazy" decoding="async" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" loading="lazy" decoding="async" class="testimonial-img">
         </div>
     </section>
 
@@ -615,7 +676,7 @@
                 <div class="price-new">R$ 29,90</div>
                 <a href="#" class="btn" style="width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">GARANTIR ACESSO AGORA</a>
                 
-                <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" class="compra-segura">
+                <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
             </div>
         </div>
     </section>
