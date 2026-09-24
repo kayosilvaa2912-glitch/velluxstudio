@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- max-scale e user-scalable=no evitam zoom acidental, ajudando a travar o eixo horizontal -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pack de Cortes Virais – Packlândia</title>
     
@@ -22,10 +23,10 @@
             --dark-text: #111111;
         }
 
-        /* RESET E TRAVA DE ROLAGEM HORIZONTAL */
+        /* RESET E TRAVA ABSOLUTA DE ROLAGEM HORIZONTAL */
         html {
             box-sizing: border-box;
-            overflow-x: hidden; /* Trava o deslize horizontal na raiz */
+            overflow-x: hidden; 
             scroll-behavior: smooth;
         }
 
@@ -40,12 +41,13 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            overflow-x: hidden; /* Garantia dupla contra rolagem horizontal */
+            overflow-x: hidden; 
+            overscroll-behavior-x: none; /* Trava o "pulo" no mobile ao puxar pro lado */
             width: 100%;
-            max-width: 100%;
+            max-width: 100vw;
         }
 
-        /* OTIMIZAÇÃO DE RENDERIZAÇÃO PARA SEÇÕES ABAIXO DO TOPO */
+        /* OTIMIZAÇÃO DE RENDERIZAÇÃO PARA CARREGAMENTO RÁPIDO */
         section {
             content-visibility: auto;
             contain-intrinsic-size: 500px;
@@ -114,17 +116,44 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
         }
 
-        /* Grids */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        /* Grids e Sliders (Carrosséis) */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        /* Timeline (Como Funciona) */
+        .slider-wrapper { position: relative; width: 100%; }
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            scrollbar-width: none; /* Esconde scroll no Firefox */
+        }
+        .slider-container::-webkit-scrollbar { display: none; /* Esconde scroll no Chrome/Safari */ }
+        .slider-item {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .slider-btn.prev { left: -10px; }
+        .slider-btn.next { right: -10px; }
+
+        /* Timeline (Como Funciona) refinada para mobile (Estilo balão/caixa) */
         .timeline {
             text-align: left;
             max-width: 700px;
             margin: 50px auto;
             position: relative;
+            padding-left: 20px;
         }
         .timeline::before {
             content: '';
@@ -134,19 +163,18 @@
             bottom: 0;
             width: 2px;
             background-color: var(--primary-color);
-            opacity: 0.5;
         }
         .timeline-step {
             position: relative;
-            margin-bottom: 50px;
-            padding-left: 60px;
+            margin-bottom: 30px;
+            padding-left: 40px;
         }
         .timeline-icon {
             position: absolute;
-            left: -2px;
-            top: 0;
-            width: 46px;
-            height: 46px;
+            left: -21px; /* Centraliza a bolinha exatamente na linha */
+            top: 15px;
+            width: 44px;
+            height: 44px;
             background-color: var(--bg-color);
             border: 2px solid var(--primary-color);
             border-radius: 50%;
@@ -155,8 +183,14 @@
             justify-content: center;
             color: var(--primary-color);
             font-size: 18px;
+            z-index: 2;
         }
-        .timeline-step h3 { margin: 5px 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
+        .timeline-content {
+            border: 1px solid #333;
+            padding: 25px 20px;
+            border-radius: 10px;
+        }
+        .timeline-step h3 { margin: 0 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
         .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
 
         /* Cards Nichos */
@@ -177,9 +211,7 @@
             width: 100%;
             transition: transform 0.3s ease;
         }
-        .card-nicho:hover .card-nicho-img img {
-            transform: scale(1.05);
-        }
+        .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
         .card-nicho p {
             font-size: 14px;
             color: #aaa;
@@ -188,23 +220,16 @@
         }
 
         /* Seções de Fundo Branco */
-        .bg-white {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-        }
+        .bg-white { background-color: var(--light-bg); color: var(--dark-text); }
         .bg-white h2 { color: var(--dark-text); }
         .bg-white p { color: #444; }
 
         /* Ícones da seção de Redes */
         .benefits-box {
-            border: 2px solid #eaeaea;
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 30px 20px;
             text-align: center;
-            transition: border-color 0.3s ease;
-        }
-        .benefits-box:hover {
-            border-color: var(--primary-color);
         }
         .benefits-box i {
             font-size: 45px;
@@ -212,7 +237,7 @@
             margin-bottom: 20px;
         }
         .benefits-box p {
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             margin: 0;
             color: #111;
@@ -221,24 +246,15 @@
         /* Depoimentos */
         .testimonial-img {
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
-        }
-        .testimonial-img:hover {
-            transform: translateY(-10px);
+            width: 100%;
         }
 
         /* Bônus Section */
         .bonus-card {
-            border: 2px solid #eaeaea;
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 40px 20px;
             background: #fff;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .bonus-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
         }
         .bonus-card h2 {
             font-size: 55px;
@@ -291,39 +307,14 @@
             margin-bottom: 30px;
             color: #333;
         }
-        .pricing-box li { 
-            margin-bottom: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        .pricing-box li i { 
-            color: var(--primary-color); 
-            font-size: 22px; 
-        }
-        .price-old { 
-            text-decoration: line-through; 
-            color: #aaa; 
-            font-size: 24px; 
-            font-weight: 800;
-        }
-        .price-new { 
-            font-size: 65px; 
-            font-weight: 900; 
-            color: var(--primary-color); 
-            margin: 5px 0 20px 0; 
-            line-height: 1;
-        }
-        .compra-segura { 
-            margin-top: 25px; 
-            width: 90%; 
-        }
+        .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
+        .pricing-box li i { color: var(--primary-color); font-size: 22px; }
+        .price-old { text-decoration: line-through; color: #aaa; font-size: 24px; font-weight: 800; }
+        .price-new { font-size: 65px; font-weight: 900; color: var(--primary-color); margin: 5px 0 20px 0; line-height: 1; }
+        .compra-segura { margin-top: 25px; width: 90%; }
 
         /* FAQ (Dúvidas Frequentes) */
-        .faq-container {
-            max-width: 800px;
-            margin: 50px auto;
-        }
+        .faq-container { max-width: 800px; margin: 50px auto; }
         .faq-item {
             background-color: #111;
             margin-bottom: 15px;
@@ -343,9 +334,7 @@
             color: #fff;
             transition: background-color 0.3s;
         }
-        .faq-question:hover {
-            background-color: #1a1a1a;
-        }
+        .faq-question:hover { background-color: #1a1a1a; }
         .faq-answer {
             padding: 0 25px;
             max-height: 0;
@@ -375,73 +364,43 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        footer p {
-            max-width: 900px;
-            font-size: 13px;
-            color: #777;
-            margin: 0 auto 15px auto;
-        }
+        footer p { max-width: 900px; font-size: 13px; color: #777; margin: 0 auto 15px auto; }
 
+        /* =========================================
+           RESPONSIVIDADE (DESKTOP)
+           Desliga o slider e ativa a Grid no PC
+           ========================================= */
+        @media (min-width: 900px) {
+            .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+            .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
+            .slider-container.grid-desktop-3 .slider-item, .slider-container.grid-desktop-4 .slider-item { flex: auto; }
+            .slider-wrapper .slider-btn { display: none; }
+        }
+        
         /* =========================================
            RESPONSIVIDADE (MOBILE & TABLET)
            ========================================= */
-        @media (max-width: 900px) {
-            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-            .container { padding: 60px 20px; }
-        }
-        
         @media (max-width: 600px) {
-            .grid-2, .grid-3, .grid-4 { 
-                grid-template-columns: 1fr; 
-                gap: 20px;
-            }
-            .container { 
-                padding: 50px 15px; 
-            }
-            h2 { 
-                font-size: 26px; /* Textos menores para não estourar a tela */
-            }
-            p {
-                font-size: 16px;
-            }
-            /* Ajuste do botão para ocupar a tela toda no celular */
-            .btn {
-                width: 100%;
-                padding: 18px 20px;
-                font-size: 16px;
-            }
-            /* Ajustes da Timeline para alinhar perfeitamente no mobile */
-            .timeline::before { 
-                left: 15px; 
-            }
-            .timeline-icon { 
-                left: -3px; 
-                width: 38px; 
-                height: 38px; 
-                font-size: 15px; 
-            }
-            .timeline-step { 
-                padding-left: 45px; 
-            }
+            .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
+            .container { padding: 50px 15px; }
+            h2 { font-size: 28px; }
+            p { font-size: 16px; }
+            .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
+            
+            /* Ajustes da Timeline para Mobile */
+            .timeline::before { left: 15px; }
+            .timeline-icon { left: -6px; width: 40px; height: 40px; font-size: 15px; }
+            .timeline-step { padding-left: 45px; }
+            .timeline-content { padding: 20px 15px; }
+            
             /* Caixa de Preço no Mobile */
-            .pricing-section {
-                padding: 50px 15px;
-            }
-            .pricing-box { 
-                padding: 30px 20px; 
-                margin: 20px auto 0;
-            }
-            .pricing-box h3 {
-                font-size: 22px;
-            }
-            .price-new { 
-                font-size: 48px; 
-            }
+            .pricing-section { padding: 50px 15px; }
+            .pricing-box { padding: 30px 20px; margin: 20px auto 0; }
+            .pricing-box h3 { font-size: 22px; }
+            .price-new { font-size: 48px; }
+            
             /* FAQ no mobile */
-            .faq-question {
-                font-size: 16px;
-                padding: 20px 15px;
-            }
+            .faq-question { font-size: 16px; padding: 20px 15px; }
         }
     </style>
 </head>
@@ -449,7 +408,7 @@
 
     <!-- 1. HEADER / HERO SECTION -->
     <header class="container" style="content-visibility: visible;">
-        <!-- FETCHPRIORITY HIGH para carregar a imagem do topo imediatamente -->
+        <!-- priority="high" para carregar instantaneamente o topo -->
         <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" fetchpriority="high" decoding="async" style="max-width: 800px; margin-bottom: 30px;">
         
         <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
@@ -458,16 +417,25 @@
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </header>
 
-    <!-- 2. PROVA SOCIAL -->
+    <!-- 2. PROVA SOCIAL (CARROSSEL NO MOBILE) -->
     <section class="container">
         <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
         <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
         
-        <!-- LOADING LAZY em todas as imagens abaixo da primeira rolagem -->
-        <div class="grid-3" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px;">
+        <div class="slider-wrapper" style="margin-top: 50px;">
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-container grid-desktop-3">
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                </div>
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                </div>
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                </div>
+            </div>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
@@ -477,30 +445,38 @@
         <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
     </section>
 
-    <!-- 4. COMO FUNCIONA (TIMELINE) -->
+    <!-- 4. COMO FUNCIONA (TIMELINE COM BORDAS ESTILO REFERÊNCIA) -->
     <section class="container">
         <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
         
         <div class="timeline">
             <div class="timeline-step">
                 <div class="timeline-icon"><i class="far fa-flag"></i></div>
-                <h3>1. Crie sua conta</h3>
-                <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
+                <div class="timeline-content">
+                    <h3>1. Crie sua conta</h3>
+                    <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
+                </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-icon"><i class="fab fa-telegram-plane"></i></div>
-                <h3>2. Poste os cortes</h3>
-                <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
+                <div class="timeline-content">
+                    <h3>2. Poste os cortes</h3>
+                    <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
+                </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-icon"><i class="fas fa-shopping-cart"></i></div>
-                <h3>3. Venda como afiliado</h3>
-                <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
+                <div class="timeline-content">
+                    <h3>3. Venda como afiliado</h3>
+                    <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
+                </div>
             </div>
             <div class="timeline-step">
                 <div class="timeline-icon"><i class="fas fa-money-bill"></i></div>
-                <h3>4. Escale</h3>
-                <p>Com consistência, seus vídeos trazem mais seguidores, engajamento e vendas.</p>
+                <div class="timeline-content">
+                    <h3>4. Escale</h3>
+                    <p>Com consistência, seus vídeos trazem mais seguidores, engajamento e vendas.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -615,15 +591,27 @@
         </div>
     </section>
 
-    <!-- 7. DEPOIMENTOS -->
+    <!-- 7. DEPOIMENTOS (CARROSSEL NO MOBILE) -->
     <section class="container">
         <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
         
-        <div class="grid-4" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" loading="lazy" decoding="async" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" loading="lazy" decoding="async" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" loading="lazy" decoding="async" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" loading="lazy" decoding="async" class="testimonial-img">
+        <div class="slider-wrapper" style="margin-top: 50px;">
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-container grid-desktop-4">
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" loading="lazy" decoding="async" class="testimonial-img">
+                </div>
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" loading="lazy" decoding="async" class="testimonial-img">
+                </div>
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" loading="lazy" decoding="async" class="testimonial-img">
+                </div>
+                <div class="slider-item">
+                    <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" loading="lazy" decoding="async" class="testimonial-img">
+                </div>
+            </div>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
@@ -718,23 +706,33 @@
         <p style="margin-top: 30px;">© 2025 Packlândia</p>
     </footer>
 
-    <!-- SCRIPT PARA O FAQ (DÚVIDAS) -->
+    <!-- SCRIPTS MÍNIMOS (SLIDER E FAQ) -->
     <script>
+        // Função do FAQ (Abre/Fecha)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                
-                // Fecha as outras que estiverem abertas
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                });
-                
-                // Se não estava ativa, abre
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+
+        // Função dos Sliders para Mobile (Setas)
+        document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+            const container = wrapper.querySelector('.slider-container');
+            const prevBtn = wrapper.querySelector('.prev');
+            const nextBtn = wrapper.querySelector('.next');
+            
+            // Avança para a direita (rola a largura exata do container)
+            nextBtn.addEventListener('click', () => {
+                container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+            });
+            
+            // Volta para a esquerda
+            prevBtn.addEventListener('click', () => {
+                container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
             });
         });
     </script>
