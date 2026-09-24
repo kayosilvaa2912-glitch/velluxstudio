@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pack de Cortes Virais – Packlândia</title>
+    
+    <!-- Google Fonts: Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (Ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-color: #45E104; 
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --box-bg: #0a0a0a;
+            --light-bg: #ffffff;
+            --dark-text: #111111;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 36px;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            color: #dcdcdc;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Botões com efeito Pulse */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #000;
+            padding: 20px 45px;
+            text-decoration: none;
+            font-weight: 900;
+            border-radius: 8px;
+            font-size: 18px;
+            margin: 20px 0;
+            text-transform: uppercase;
+            box-shadow: 0 4px 20px rgba(69, 225, 4, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(69, 225, 4, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.7); }
+            70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(69, 225, 4, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
+        }
+
+        /* Grids */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+        /* Timeline (Como Funciona) */
+        .timeline {
+            text-align: left;
+            max-width: 700px;
+            margin: 50px auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-color);
+            opacity: 0.5;
+        }
+        .timeline-step {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 60px;
+        }
+        .timeline-icon {
+            position: absolute;
+            left: -2px;
+            top: 0;
+            width: 46px;
+            height: 46px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+        .timeline-step h3 { margin: 5px 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
+        .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
+
+        /* Cards Nichos */
+        .card-nicho {
+            background-color: transparent;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .card-nicho-img {
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .card-nicho-img img {
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .card-nicho:hover .card-nicho-img img {
+            transform: scale(1.05);
+        }
+        .card-nicho p {
+            font-size: 14px;
+            color: #aaa;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Seções de Fundo Branco */
+        .bg-white {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+        .bg-white h2 { color: var(--dark-text); }
+        .bg-white p { color: #444; }
+
+        /* Ícones da seção de Redes */
+        .benefits-box {
+            border: 2px solid #eaeaea;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+        .benefits-box:hover {
+            border-color: var(--primary-color);
+        }
+        .benefits-box i {
+            font-size: 45px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .benefits-box p {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0;
+            color: #111;
+        }
+
+        /* Depoimentos */
+        .testimonial-img {
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        .testimonial-img:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Bônus Section */
+        .bonus-card {
+            border: 2px solid #eaeaea;
+            border-radius: 12px;
+            padding: 40px 20px;
+            background: #fff;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .bonus-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        .bonus-card h2 {
+            font-size: 55px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        .bonus-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .bonus-card p {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Caixa de Preço */
+        .pricing-section {
+            background-color: var(--primary-color);
+            padding: 80px 20px;
+        }
+        .pricing-section h2 {
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .pricing-box {
+            background-color: #fff;
+            color: #000;
+            max-width: 480px;
+            margin: 40px auto 0;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .pricing-box h3 { 
+            font-size: 26px; 
+            margin-top: 0; 
+            font-weight: 900; 
+            margin-bottom: 30px;
+            color: #111;
+        }
+        .pricing-box ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        .pricing-box li { 
+            margin-bottom: 15px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .pricing-box li i { 
+            color: var(--primary-color); 
+            font-size: 22px; 
+        }
+        .price-old { 
+            text-decoration: line-through; 
+            color: #aaa; 
+            font-size: 24px; 
+            font-weight: 800;
+        }
+        .price-new { 
+            font-size: 65px; 
+            font-weight: 900; 
+            color: var(--primary-color); 
+            margin: 5px 0 20px 0; 
+            line-height: 1;
+        }
+        .compra-segura { 
+            margin-top: 25px; 
+            width: 90%; 
+        }
+
+        /* FAQ (Dúvidas Frequentes) */
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        .faq-item {
+            background-color: #111;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: left;
+            border: 1px solid #222;
+        }
+        .faq-question {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+        .faq-question:hover {
+            background-color: #1a1a1a;
+        }
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #bbb;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-answer {
+            padding: 20px 25px 25px 25px;
+            max-height: 400px;
+            border-top: 1px solid #222;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #222;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        footer p {
+            max-width: 900px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .container { padding: 60px 20px; }
+        }
+        @media (max-width: 600px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            h2 { font-size: 28px; }
+            .price-new { font-size: 50px; }
+            .pricing-box { padding: 40px 20px; }
+            .timeline::before { left: 15px; }
+            .timeline-icon { left: -7px; width: 40px; height: 40px; font-size: 16px; }
+            .timeline-step { padding-left: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HEADER / HERO SECTION -->
+    <header class="container">
+        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" style="max-width: 800px; margin-bottom: 30px;">
+        
+        <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
+        <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
+        
+        <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
+    </header>
+
+    <!-- 2. PROVA SOCIAL -->
+    <section class="container">
+        <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
+        <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
+        
+        <div class="grid-3" style="margin-top: 50px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" style="border-radius: 8px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" style="border-radius: 8px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" style="border-radius: 8px;">
+        </div>
+    </section>
+
+    <!-- 3. O QUE ELAS TÊM EM COMUM? -->
+    <section class="container">
+        <h2>O QUE ESSAS PÁGINAS <span class="highlight">TÊM EM COMUM?</span></h2>
+        <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
+    </section>
+
+    <!-- 4. COMO FUNCIONA (TIMELINE) -->
+    <section class="container">
+        <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
+        
+        <div class="timeline">
+            <div class="timeline-step">
+                <div class="timeline-icon"><i class="far fa-flag"></i></div>
+                <h3>1. Crie sua conta</h3>
+                <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon"><i class="fab fa-telegram-plane"></i></div>
+                <h3>2. Poste os cortes</h3>
+                <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon"><i class="fas fa-shopping-cart"></i></div>
+                <h3>3. Venda como afiliado</h3>
+                <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-icon"><i class="fas fa-money-bill"></i></div>
+                <h3>4. Escale</h3>
+                <p>Com consistência, seus vídeos trazem mais seguidores, engajamento e vendas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. O QUE VOCÊ VAI RECEBER (GRID DE NICHOS) -->
+    <section class="container">
+        <h2>VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
+        
+        <div class="grid-3" style="margin-top: 50px;">
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/filmes_e_series.png" alt="Filmes e Séries"></div>
+                <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/memes.png" alt="Memes"></div>
+                <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/family_guy.png" alt="Family Guy"></div>
+                <p>Mais de 350 cortes de Family Guy selecionados.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/rick_and_morty.png" alt="Rick and Morty"></div>
+                <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/os_simpsons.png" alt="Os Simpsons"></div>
+                <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/todo_mundo_odeia_o_chris.png" alt="Todo Mundo Odeia o Chris"></div>
+                <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/pica_pau.png" alt="Pica-Pau"></div>
+                <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/lifestyles.png" alt="Lifestyles"></div>
+                <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/futebol.png" alt="Futebol"></div>
+                <p>Mais de 250 cortes de melhores momentos do futebol.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/academia.png" alt="Academia"></div>
+                <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/acao_policial.png" alt="Ação Policial"></div>
+                <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/espinhas.png" alt="Espinhas"></div>
+                <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/parkour.png" alt="Parkour"></div>
+                <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/ladroes_se_f.png" alt="Ladrões se dão mal"></div>
+                <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/marcal.png" alt="Marçal"></div>
+                <p>Os melhores cortes de Pablo Marçal.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/religiosos.png" alt="Religiosos"></div>
+                <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/motivacional.png" alt="Motivacional"></div>
+                <p>Cortes com frases motivacionais e de melhoria de vida.</p>
+            </div>
+            <div class="card-nicho">
+                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/e_muito_mais.png" alt="E muito mais"></div>
+                <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (FUNDO BRANCO) -->
+    <section class="bg-white">
+        <div class="container">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" style="max-width: 400px; margin-bottom: 30px;">
+            
+            <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
+            
+            <div class="grid-4" style="margin-top: 50px;">
+                <div class="benefits-box">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
+                </div>
+                <div class="benefits-box">
+                    <i class="far fa-clock"></i>
+                    <p>Quer economizar tempo criando conteúdo.</p>
+                </div>
+                <div class="benefits-box">
+                    <i class="fas fa-chart-line"></i>
+                    <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
+                </div>
+                <div class="benefits-box">
+                    <i class="fas fa-users"></i>
+                    <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 50px;">ENTÃO ESSE PACK É PRA <span class="highlight">VOCÊ!</span></h2>
+        </div>
+    </section>
+
+    <!-- 7. DEPOIMENTOS -->
+    <section class="container">
+        <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
+        
+        <div class="grid-4" style="margin-top: 50px;">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" class="testimonial-img">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" class="testimonial-img">
+        </div>
+    </section>
+
+    <!-- 8. BÔNUS EXCLUSIVOS (FUNDO BRANCO) -->
+    <section class="bg-white">
+        <div class="container">
+            <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
+            
+            <div class="grid-4" style="margin-top: 50px;">
+                <div class="bonus-card">
+                    <h2>01</h2>
+                    <h3>Pack Memes</h3>
+                    <p>Pack de memes mais famosos 100% atualizados.</p>
+                </div>
+                <div class="bonus-card">
+                    <h2>02</h2>
+                    <h3>Efeitos Sonoros</h3>
+                    <p>Efeitos sonoros para utilizar em suas edições.</p>
+                </div>
+                <div class="bonus-card">
+                    <h2>03</h2>
+                    <h3>Músicas Sem Copyright</h3>
+                    <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
+                </div>
+                <div class="bonus-card">
+                    <h2>04</h2>
+                    <h3>Grupo Exclusivo</h3>
+                    <p>Grupo de Criadores Para Compartilhar Ideias.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. ÁREA DE PREÇO / OFERTA (FUNDO VERDE) -->
+    <section id="preco" class="pricing-section">
+        <div class="container" style="padding: 0;">
+            <h2>NÃO PERCA ESSA OFERTA!</h2>
+            
+            <div class="pricing-box">
+                <h3>PACK CORTES VIRAIS COMPLETO</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> 36 NICHOS VIRAIS</li>
+                    <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
+                    <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+                    <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+                    <li><i class="fas fa-gift"></i> 4 BÔNUS</li>
+                    <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
+                </ul>
+                <div class="price-old">DE R$ 99,99</div>
+                <div class="price-new">R$ 29,90</div>
+                <a href="#" class="btn" style="width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">GARANTIR ACESSO AGORA</a>
+                
+                <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" class="compra-segura">
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
+    <section class="container">
+        <h2>DÚVIDAS FREQUENTES</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. CHAMADA PARA AÇÃO FINAL -->
+    <section class="container" style="padding-top: 0;">
+        <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
+        <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
+    </section>
+
+    <!-- 12. RODAPÉ -->
+    <footer>
+        <p style="font-size: 14px; margin-bottom: 5px; color:#aaa; font-weight: bold;">Aviso</p>
+        <p><strong>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros.</strong> Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. <strong>Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</strong></p>
+        <p style="margin-top: 30px;">© 2025 Packlândia</p>
+    </footer>
+
+    <!-- SCRIPT PARA O FAQ (DÚVIDAS) -->
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Fecha as outras que estiverem abertas
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+                
+                // Se não estava ativa, abre
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
