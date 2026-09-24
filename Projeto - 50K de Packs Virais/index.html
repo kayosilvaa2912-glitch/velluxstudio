@@ -319,7 +319,7 @@
         .price-new { font-size: 65px; font-weight: 900; color: var(--primary-color); margin: 5px 0 20px 0; line-height: 1; }
         .compra-segura { margin-top: 25px; width: 90%; }
 
-        /* FAQ (Dúvidas Frequentes) */
+        /* FAQ (Dúvidas Frequentes) Corrigido */
         .faq-container { max-width: 800px; margin: 50px auto; }
         .faq-item {
             background-color: #111;
@@ -350,27 +350,36 @@
             font-size: 16px;
             line-height: 1.6;
         }
-        .faq-item.active .faq-answer {
+        .faq-answer p { margin: 0; } /* Remove as margens internas do p para animação limpa */
+        
+        /* A classe para abrir o FAQ agora é .faq-open, para não conflitar com o .active do Fade-Up */
+        .faq-item.faq-open .faq-answer {
             padding: 20px 25px 25px 25px;
             max-height: 400px;
             border-top: 1px solid #222;
         }
-        .faq-item.active .faq-question i {
+        .faq-item.faq-open .faq-question i {
             transform: rotate(180deg);
             color: var(--primary-color);
         }
 
-        /* Footer */
+        /* Footer Ajustado e Menor */
         footer {
             border-top: 1px solid #222;
-            padding: 40px 20px;
+            padding: 25px 15px; /* Menos espaçamento */
             text-align: center;
-            font-size: 13px;
+            font-size: 11px; /* Fonte menor */
             color: #666;
             max-width: 1100px;
             margin: 0 auto;
         }
-        footer p { max-width: 900px; font-size: 13px; color: #777; margin: 0 auto 15px auto; }
+        footer p { 
+            max-width: 900px; 
+            font-size: 11px; /* Fonte menor */
+            color: #777; 
+            margin: 0 auto 10px auto; /* Menos margem entre os parágrafos */
+            line-height: 1.4;
+        }
 
         /* =========================================
            RESPONSIVIDADE (DESKTOP)
@@ -389,7 +398,7 @@
             .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
             .container { padding: 50px 15px; }
             
-            /* CORREÇÃO CHAVE DA IMAGEM DO TOPO NO MOBILE */
+            /* IMAGEM DO TOPO NO MOBILE */
             .hero-img { 
                 max-width: 90%; 
                 margin-bottom: 20px;
@@ -399,7 +408,7 @@
             p { font-size: 16px; }
             .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
             
-            /* Ajustes da Timeline para Mobile */
+            /* Timeline Mobile */
             .timeline::before { left: 15px; }
             .timeline-icon { left: -6px; width: 40px; height: 40px; font-size: 15px; }
             .timeline-step { padding-left: 45px; }
@@ -411,8 +420,9 @@
             .pricing-box h3 { font-size: 22px; }
             .price-new { font-size: 48px; }
             
-            /* FAQ no mobile */
+            /* FAQ Mobile */
             .faq-question { font-size: 16px; padding: 20px 15px; }
+            .faq-item.faq-open .faq-answer { padding: 15px 15px 20px 15px; }
         }
     </style>
 </head>
@@ -457,7 +467,7 @@
         <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
     </section>
 
-    <!-- 4. COMO FUNCIONA (TIMELINE COM CAIXAS ESTILO REFERÊNCIA) -->
+    <!-- 4. COMO FUNCIONA (TIMELINE) -->
     <section class="container reveal">
         <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
         
@@ -713,12 +723,18 @@
 
     <!-- 12. RODAPÉ -->
     <footer class="reveal">
-        <p style="font-size: 14px; margin-bottom: 5px; color:#aaa; font-weight: bold;">Aviso</p>
-        <p><strong>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros.</strong> Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. <strong>Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</strong></p>
-        <p style="margin-top: 30px;">© 2025 Packlândia</p>
+        <p style="font-weight: bold; margin-bottom: 5px; color:#999;">Aviso Legal</p>
+        <p>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</p>
+        
+             <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-[10px] text-muted uppercase tracking-widest font-bold">
+                    <p>&copy; 2026 Mago Dos Cortes Virais. Todos os direitos reservados.</p>
+                    <p class="mt-4 md:mt-0">Design By <span class="text-white">VELLUX Studio</span></p>
+                </div>
+
+</p>
     </footer>
 
-    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ) -->
+    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ Corrigido) -->
     <script>
         // 1. ANIMAÇÕES DE ROLAGEM (FADE-UP)
         function revealElements() {
@@ -736,14 +752,20 @@
         window.addEventListener('scroll', revealElements);
         revealElements(); // Ativa uma vez ao carregar a página
 
-        // 2. FAQ (Abre/Fecha)
+        // 2. FAQ (Abre/Fecha) - BUG CORRIGIDO (Usa .faq-open em vez de .active)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                faqItems.forEach(otherItem => otherItem.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
+                const isOpen = item.classList.contains('faq-open');
+                
+                // Fecha todas as outras primeiro
+                faqItems.forEach(otherItem => otherItem.classList.remove('faq-open'));
+                
+                // Se a que eu cliquei não estava aberta, abre ela
+                if (!isOpen) {
+                    item.classList.add('faq-open');
+                }
             });
         });
 
@@ -756,7 +778,7 @@
             let autoPlayInterval;
 
             const nextSlide = () => {
-                // Se chegou no final (tolerância de 10px), volta pro começo
+                // Checa se o scroll chegou no final (tolerância de 10px)
                 if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
@@ -768,7 +790,7 @@
                 container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
             };
 
-            // Inicia o automático a cada 3 segundos (Apenas se for tela de mobile/tablet)
+            // Inicia o automático a cada 3 segundos (Apenas telas de mobile/tablet)
             const startAutoPlay = () => {
                 if(isAutoPlay && window.innerWidth <= 900) {
                     autoPlayInterval = setInterval(nextSlide, 3000);
@@ -779,11 +801,11 @@
                 clearInterval(autoPlayInterval);
             };
 
-            // Controles Manuais
+            // Botões Manuais
             nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
             prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
 
-            // Inicia o AutoPlay e para caso o usuário toque na tela
+            // Inicia a função e para ela se o usuário encostar o dedo na tela
             startAutoPlay();
             wrapper.addEventListener('touchstart', stopAutoPlay);
             wrapper.addEventListener('touchend', startAutoPlay);
