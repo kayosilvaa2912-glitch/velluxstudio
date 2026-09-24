@@ -2,11 +2,10 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <!-- max-scale e user-scalable=no evitam zoom acidental, ajudando a travar o eixo horizontal -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pack de Cortes Virais – Packlândia</title>
     
-    <!-- Pré-conexões para acelerar o carregamento de fontes e ícones -->
+    <!-- Pré-conexões para acelerar o carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -42,17 +41,23 @@
             color: var(--text-color);
             text-align: center;
             overflow-x: hidden; 
-            overscroll-behavior-x: none; /* Trava o "pulo" no mobile ao puxar pro lado */
+            overscroll-behavior-x: none;
             width: 100%;
             max-width: 100vw;
         }
 
-        /* OTIMIZAÇÃO DE RENDERIZAÇÃO PARA CARREGAMENTO RÁPIDO */
-        section {
-            content-visibility: auto;
-            contain-intrinsic-size: 500px;
+        /* ANIMAÇÕES GERAIS (EFEITO SURGIR AO ROLAR) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
+        /* ESTILOS BÁSICOS DE CONTAINERS */
         .container {
             width: 100%;
             max-width: 1100px;
@@ -60,9 +65,7 @@
             padding: 80px 20px;
         }
 
-        .highlight {
-            color: var(--primary-color);
-        }
+        .highlight { color: var(--primary-color); }
 
         h2 {
             font-size: 36px;
@@ -78,6 +81,16 @@
             max-width: 800px;
             margin: 0 auto 20px auto;
             color: #dcdcdc;
+        }
+
+        /* CORREÇÃO DA IMAGEM DO TOPO (NOTEBOOK) PARA MOBILE */
+        .hero-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 30px auto;
         }
 
         img {
@@ -126,9 +139,10 @@
             overflow-x: auto;
             scroll-snap-type: x mandatory;
             gap: 20px;
-            scrollbar-width: none; /* Esconde scroll no Firefox */
+            scrollbar-width: none;
+            scroll-behavior: smooth;
         }
-        .slider-container::-webkit-scrollbar { display: none; /* Esconde scroll no Chrome/Safari */ }
+        .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
             flex: 0 0 100%;
             scroll-snap-align: center;
@@ -138,16 +152,20 @@
             top: 50%;
             transform: translateY(-50%);
             background: transparent;
-            color: #fff;
+            color: var(--primary-color);
             border: none;
-            font-size: 28px;
+            font-size: 35px;
             cursor: pointer;
             z-index: 10;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            opacity: 0.7;
+            transition: opacity 0.3s;
         }
-        .slider-btn.prev { left: -10px; }
-        .slider-btn.next { right: -10px; }
+        .slider-btn:hover { opacity: 1; }
+        .slider-btn.prev { left: -15px; }
+        .slider-btn.next { right: -15px; }
 
-        /* Timeline (Como Funciona) refinada para mobile (Estilo balão/caixa) */
+        /* Timeline (Como Funciona) */
         .timeline {
             text-align: left;
             max-width: 700px;
@@ -171,7 +189,7 @@
         }
         .timeline-icon {
             position: absolute;
-            left: -21px; /* Centraliza a bolinha exatamente na linha */
+            left: -21px; 
             top: 15px;
             width: 44px;
             height: 44px;
@@ -189,6 +207,12 @@
             border: 1px solid #333;
             padding: 25px 20px;
             border-radius: 10px;
+            background-color: #050505;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: translateX(10px);
+            border-color: var(--primary-color);
         }
         .timeline-step h3 { margin: 0 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
         .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
@@ -200,6 +224,10 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            transition: transform 0.3s ease;
+        }
+        .card-nicho:hover {
+            transform: translateY(-5px);
         }
         .card-nicho-img {
             border-left: 5px solid var(--primary-color);
@@ -209,15 +237,10 @@
         }
         .card-nicho-img img {
             width: 100%;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
         }
-        .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
-        .card-nicho p {
-            font-size: 14px;
-            color: #aaa;
-            margin: 0;
-            line-height: 1.5;
-        }
+        .card-nicho:hover .card-nicho-img img { transform: scale(1.08); }
+        .card-nicho p { font-size: 14px; color: #aaa; margin: 0; line-height: 1.5; }
 
         /* Seções de Fundo Branco */
         .bg-white { background-color: var(--light-bg); color: var(--dark-text); }
@@ -230,23 +253,27 @@
             border-radius: 12px;
             padding: 30px 20px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .benefits-box:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
         }
         .benefits-box i {
             font-size: 45px;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        .benefits-box p {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0;
-            color: #111;
-        }
+        .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; }
 
         /* Depoimentos */
         .testimonial-img {
             border-radius: 12px;
             width: 100%;
+            transition: transform 0.3s ease;
+        }
+        .slider-item:hover .testimonial-img {
+            transform: scale(1.03);
         }
 
         /* Bônus Section */
@@ -255,33 +282,22 @@
             border-radius: 12px;
             padding: 40px 20px;
             background: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .bonus-card h2 {
-            font-size: 55px;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+        .bonus-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 10px 25px rgba(69, 225, 4, 0.3);
         }
-        .bonus-card h3 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        .bonus-card p {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
-        }
+        .bonus-card h2 { font-size: 55px; margin-bottom: 10px; color: var(--primary-color); }
+        .bonus-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: var(--primary-color); }
+        .bonus-card p { font-size: 14px; font-weight: 600; color: #333; }
 
         /* Caixa de Preço */
         .pricing-section {
             background-color: var(--primary-color);
             padding: 80px 20px;
         }
-        .pricing-section h2 {
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
+        .pricing-section h2 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .pricing-box {
             background-color: #fff;
             color: #000;
@@ -290,23 +306,13 @@
             padding: 50px 40px;
             border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
-        .pricing-box h3 { 
-            font-size: 26px; 
-            margin-top: 0; 
-            font-weight: 900; 
-            margin-bottom: 30px;
-            color: #111;
+        .pricing-box:hover {
+            transform: scale(1.02);
         }
-        .pricing-box ul {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            font-weight: 800;
-            font-size: 16px;
-            margin-bottom: 30px;
-            color: #333;
-        }
+        .pricing-box h3 { font-size: 26px; margin-top: 0; font-weight: 900; margin-bottom: 30px; color: #111; }
+        .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 16px; margin-bottom: 30px; color: #333; }
         .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
         .pricing-box li i { color: var(--primary-color); font-size: 22px; }
         .price-old { text-decoration: line-through; color: #aaa; font-size: 24px; font-weight: 800; }
@@ -368,13 +374,12 @@
 
         /* =========================================
            RESPONSIVIDADE (DESKTOP)
-           Desliga o slider e ativa a Grid no PC
            ========================================= */
         @media (min-width: 900px) {
             .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
             .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
             .slider-container.grid-desktop-3 .slider-item, .slider-container.grid-desktop-4 .slider-item { flex: auto; }
-            .slider-wrapper .slider-btn { display: none; }
+            .slider-wrapper .slider-btn { display: none; } /* Esconde setas no PC */
         }
         
         /* =========================================
@@ -383,6 +388,13 @@
         @media (max-width: 600px) {
             .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
             .container { padding: 50px 15px; }
+            
+            /* CORREÇÃO CHAVE DA IMAGEM DO TOPO NO MOBILE */
+            .hero-img { 
+                max-width: 90%; 
+                margin-bottom: 20px;
+            }
+
             h2 { font-size: 28px; }
             p { font-size: 16px; }
             .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
@@ -407,9 +419,9 @@
 <body>
 
     <!-- 1. HEADER / HERO SECTION -->
-    <header class="container" style="content-visibility: visible;">
-        <!-- priority="high" para carregar instantaneamente o topo -->
-        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" fetchpriority="high" decoding="async" style="max-width: 800px; margin-bottom: 30px;">
+    <header class="container reveal">
+        <!-- Imagem controlada pela classe .hero-img -->
+        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
         
         <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
         <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
@@ -417,12 +429,12 @@
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </header>
 
-    <!-- 2. PROVA SOCIAL (CARROSSEL NO MOBILE) -->
-    <section class="container">
+    <!-- 2. PROVA SOCIAL (CARROSSEL AUTOMÁTICO NO MOBILE) -->
+    <section class="container reveal">
         <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
         <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
         
-        <div class="slider-wrapper" style="margin-top: 50px;">
+        <div class="slider-wrapper" style="margin-top: 50px;" data-autoplay="true">
             <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
             <div class="slider-container grid-desktop-3">
                 <div class="slider-item">
@@ -440,38 +452,38 @@
     </section>
 
     <!-- 3. O QUE ELAS TÊM EM COMUM? -->
-    <section class="container">
+    <section class="container reveal">
         <h2>O QUE ESSAS PÁGINAS <span class="highlight">TÊM EM COMUM?</span></h2>
         <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
     </section>
 
-    <!-- 4. COMO FUNCIONA (TIMELINE COM BORDAS ESTILO REFERÊNCIA) -->
-    <section class="container">
+    <!-- 4. COMO FUNCIONA (TIMELINE COM CAIXAS ESTILO REFERÊNCIA) -->
+    <section class="container reveal">
         <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
         
         <div class="timeline">
-            <div class="timeline-step">
+            <div class="timeline-step reveal">
                 <div class="timeline-icon"><i class="far fa-flag"></i></div>
                 <div class="timeline-content">
                     <h3>1. Crie sua conta</h3>
                     <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
                 </div>
             </div>
-            <div class="timeline-step">
+            <div class="timeline-step reveal">
                 <div class="timeline-icon"><i class="fab fa-telegram-plane"></i></div>
                 <div class="timeline-content">
                     <h3>2. Poste os cortes</h3>
                     <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
                 </div>
             </div>
-            <div class="timeline-step">
+            <div class="timeline-step reveal">
                 <div class="timeline-icon"><i class="fas fa-shopping-cart"></i></div>
                 <div class="timeline-content">
                     <h3>3. Venda como afiliado</h3>
                     <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
                 </div>
             </div>
-            <div class="timeline-step">
+            <div class="timeline-step reveal">
                 <div class="timeline-icon"><i class="fas fa-money-bill"></i></div>
                 <div class="timeline-content">
                     <h3>4. Escale</h3>
@@ -483,78 +495,78 @@
 
     <!-- 5. O QUE VOCÊ VAI RECEBER (GRID DE NICHOS) -->
     <section class="container">
-        <h2>VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
+        <h2 class="reveal">VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
         
         <div class="grid-3" style="margin-top: 50px;">
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/filmes_e_series.png" alt="Filmes e Séries" loading="lazy" decoding="async"></div>
                 <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/memes.png" alt="Memes" loading="lazy" decoding="async"></div>
                 <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/family_guy.png" alt="Family Guy" loading="lazy" decoding="async"></div>
                 <p>Mais de 350 cortes de Family Guy selecionados.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/rick_and_morty.png" alt="Rick and Morty" loading="lazy" decoding="async"></div>
                 <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/os_simpsons.png" alt="Os Simpsons" loading="lazy" decoding="async"></div>
                 <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/todo_mundo_odeia_o_chris.png" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async"></div>
                 <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/pica_pau.png" alt="Pica-Pau" loading="lazy" decoding="async"></div>
                 <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/lifestyles.png" alt="Lifestyles" loading="lazy" decoding="async"></div>
                 <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/futebol.png" alt="Futebol" loading="lazy" decoding="async"></div>
                 <p>Mais de 250 cortes de melhores momentos do futebol.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/academia.png" alt="Academia" loading="lazy" decoding="async"></div>
                 <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/acao_policial.png" alt="Ação Policial" loading="lazy" decoding="async"></div>
                 <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/espinhas.png" alt="Espinhas" loading="lazy" decoding="async"></div>
                 <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/parkour.png" alt="Parkour" loading="lazy" decoding="async"></div>
                 <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/ladroes_se_f.png" alt="Ladrões se dão mal" loading="lazy" decoding="async"></div>
                 <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/marcal.png" alt="Marçal" loading="lazy" decoding="async"></div>
                 <p>Os melhores cortes de Pablo Marçal.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/religiosos.png" alt="Religiosos" loading="lazy" decoding="async"></div>
                 <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/motivacional.png" alt="Motivacional" loading="lazy" decoding="async"></div>
                 <p>Cortes com frases motivacionais e de melhoria de vida.</p>
             </div>
-            <div class="card-nicho">
+            <div class="card-nicho reveal">
                 <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/e_muito_mais.png" alt="E muito mais" loading="lazy" decoding="async"></div>
                 <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
             </div>
@@ -563,39 +575,39 @@
 
     <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (FUNDO BRANCO) -->
     <section class="bg-white">
-        <div class="container">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" loading="lazy" decoding="async" style="max-width: 400px; margin-bottom: 30px;">
+        <div class="container reveal">
+            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;">
             
             <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
             
             <div class="grid-4" style="margin-top: 50px;">
-                <div class="benefits-box">
+                <div class="benefits-box reveal">
                     <i class="fas fa-shopping-cart"></i>
                     <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
                 </div>
-                <div class="benefits-box">
+                <div class="benefits-box reveal">
                     <i class="far fa-clock"></i>
                     <p>Quer economizar tempo criando conteúdo.</p>
                 </div>
-                <div class="benefits-box">
+                <div class="benefits-box reveal">
                     <i class="fas fa-chart-line"></i>
                     <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
                 </div>
-                <div class="benefits-box">
+                <div class="benefits-box reveal">
                     <i class="fas fa-users"></i>
                     <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
                 </div>
             </div>
 
-            <h2 style="margin-top: 50px;">ENTÃO ESSE PACK É PRA <span class="highlight">VOCÊ!</span></h2>
+            <h2 style="margin-top: 50px;" class="reveal">ENTÃO ESSE PACK É PRA <span class="highlight">VOCÊ!</span></h2>
         </div>
     </section>
 
-    <!-- 7. DEPOIMENTOS (CARROSSEL NO MOBILE) -->
-    <section class="container">
+    <!-- 7. DEPOIMENTOS (CARROSSEL AUTOMÁTICO NO MOBILE) -->
+    <section class="container reveal">
         <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
         
-        <div class="slider-wrapper" style="margin-top: 50px;">
+        <div class="slider-wrapper" style="margin-top: 50px;" data-autoplay="true">
             <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
             <div class="slider-container grid-desktop-4">
                 <div class="slider-item">
@@ -617,26 +629,26 @@
 
     <!-- 8. BÔNUS EXCLUSIVOS (FUNDO BRANCO) -->
     <section class="bg-white">
-        <div class="container">
+        <div class="container reveal">
             <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
             
             <div class="grid-4" style="margin-top: 50px;">
-                <div class="bonus-card">
+                <div class="bonus-card reveal">
                     <h2>01</h2>
                     <h3>Pack Memes</h3>
                     <p>Pack de memes mais famosos 100% atualizados.</p>
                 </div>
-                <div class="bonus-card">
+                <div class="bonus-card reveal">
                     <h2>02</h2>
                     <h3>Efeitos Sonoros</h3>
                     <p>Efeitos sonoros para utilizar em suas edições.</p>
                 </div>
-                <div class="bonus-card">
+                <div class="bonus-card reveal">
                     <h2>03</h2>
                     <h3>Músicas Sem Copyright</h3>
                     <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
                 </div>
-                <div class="bonus-card">
+                <div class="bonus-card reveal">
                     <h2>04</h2>
                     <h3>Grupo Exclusivo</h3>
                     <p>Grupo de Criadores Para Compartilhar Ideias.</p>
@@ -646,7 +658,7 @@
     </section>
 
     <!-- 9. ÁREA DE PREÇO / OFERTA (FUNDO VERDE) -->
-    <section id="preco" class="pricing-section">
+    <section id="preco" class="pricing-section reveal">
         <div class="container" style="padding: 0;">
             <h2>NÃO PERCA ESSA OFERTA!</h2>
             
@@ -670,23 +682,23 @@
     </section>
 
     <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
-    <section class="container">
+    <section class="container reveal">
         <h2>DÚVIDAS FREQUENTES</h2>
         
         <div class="faq-container">
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
             </div>
-            <div class="faq-item">
+            <div class="faq-item reveal">
                 <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
             </div>
@@ -694,21 +706,37 @@
     </section>
 
     <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-    <section class="container" style="padding-top: 0;">
+    <section class="container reveal" style="padding-top: 0;">
         <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </section>
 
     <!-- 12. RODAPÉ -->
-    <footer>
+    <footer class="reveal">
         <p style="font-size: 14px; margin-bottom: 5px; color:#aaa; font-weight: bold;">Aviso</p>
         <p><strong>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros.</strong> Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. <strong>Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</strong></p>
         <p style="margin-top: 30px;">© 2025 Packlândia</p>
     </footer>
 
-    <!-- SCRIPTS MÍNIMOS (SLIDER E FAQ) -->
+    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ) -->
     <script>
-        // Função do FAQ (Abre/Fecha)
+        // 1. ANIMAÇÕES DE ROLAGEM (FADE-UP)
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const elementVisible = 50; 
+
+            reveals.forEach(reveal => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealElements);
+        revealElements(); // Ativa uma vez ao carregar a página
+
+        // 2. FAQ (Abre/Fecha)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
@@ -719,21 +747,46 @@
             });
         });
 
-        // Função dos Sliders para Mobile (Setas)
+        // 3. SLIDER AUTOMÁTICO (CARROSSEL) NO MOBILE
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
             const container = wrapper.querySelector('.slider-container');
             const prevBtn = wrapper.querySelector('.prev');
             const nextBtn = wrapper.querySelector('.next');
-            
-            // Avança para a direita (rola a largura exata do container)
-            nextBtn.addEventListener('click', () => {
-                container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
-            });
-            
-            // Volta para a esquerda
-            prevBtn.addEventListener('click', () => {
+            const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
+            let autoPlayInterval;
+
+            const nextSlide = () => {
+                // Se chegou no final (tolerância de 10px), volta pro começo
+                if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+                }
+            };
+
+            const prevSlide = () => {
                 container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
-            });
+            };
+
+            // Inicia o automático a cada 3 segundos (Apenas se for tela de mobile/tablet)
+            const startAutoPlay = () => {
+                if(isAutoPlay && window.innerWidth <= 900) {
+                    autoPlayInterval = setInterval(nextSlide, 3000);
+                }
+            };
+
+            const stopAutoPlay = () => {
+                clearInterval(autoPlayInterval);
+            };
+
+            // Controles Manuais
+            nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
+            prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
+
+            // Inicia o AutoPlay e para caso o usuário toque na tela
+            startAutoPlay();
+            wrapper.addEventListener('touchstart', stopAutoPlay);
+            wrapper.addEventListener('touchend', startAutoPlay);
         });
     </script>
 </body>
