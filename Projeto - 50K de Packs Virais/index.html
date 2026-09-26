@@ -43,7 +43,6 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            /* overflow-x apenas no body impede o vaze de conteúdo sem quebrar o scroll do iOS */
             overflow-x: hidden; 
             width: 100%;
         }
@@ -53,6 +52,7 @@
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
         }
         .reveal.active {
             opacity: 1;
@@ -106,7 +106,7 @@
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #ffffff; /* Texto branco solicitado */
+            color: #ffffff;
             padding: 20px 45px;
             text-decoration: none;
             font-weight: 900;
@@ -131,7 +131,7 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
         }
 
-        /* Grids e Sliders (Carrosséis) */
+        /* Grids e Sliders */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
@@ -144,7 +144,6 @@
             scrollbar-width: none;
             scroll-behavior: smooth;
             padding: 10px 0;
-            /* Isso impede que o slider bloqueie o scroll vertical do usuário */
             touch-action: pan-y; 
         }
         .slider-container::-webkit-scrollbar { display: none; }
@@ -170,7 +169,7 @@
         .slider-btn.prev { left: -10px; }
         .slider-btn.next { right: -10px; }
 
-        /* Timeline (Como Funciona) */
+        /* Timeline */
         .timeline {
             text-align: left;
             max-width: 700px;
@@ -254,7 +253,7 @@
         .bg-white h2 { color: var(--dark-text); }
         .bg-white p { color: #444; }
 
-        /* Ícones da seção de Redes */
+        /* Ícones Redes */
         .benefits-box {
             border: 2px solid var(--primary-color);
             border-radius: 12px;
@@ -296,23 +295,9 @@
             transform: translateY(-10px); 
             box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
-        .bonus-card h2 { 
-            font-size: 55px; 
-            margin-bottom: 5px; 
-            color: var(--primary-color); 
-        }
-        .bonus-card h3 { 
-            font-size: 24px; 
-            font-weight: 900; 
-            margin-bottom: 15px; 
-            color: var(--primary-color); 
-        }
-        .bonus-card p { 
-            font-size: 15px; 
-            font-weight: 600; 
-            color: #111; 
-            line-height: 1.5;
-        }
+        .bonus-card h2 { font-size: 55px; margin-bottom: 5px; color: var(--primary-color); }
+        .bonus-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 15px; color: var(--primary-color); }
+        .bonus-card p { font-size: 15px; font-weight: 600; color: #111; line-height: 1.5; }
 
         /* =========================================
            OFERTAS / PREÇOS
@@ -322,10 +307,7 @@
             padding: 80px 20px;
             border-top: 2px solid #222;
         }
-        .pricing-section h2 { 
-            color: #ffffff; 
-            margin-bottom: 50px; 
-        }
+        .pricing-section h2 { color: #ffffff; margin-bottom: 50px; }
         
         .pricing-grid {
             display: grid;
@@ -356,7 +338,6 @@
         }
         .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
         
-        /* Botão Oferta 19,90 */
         .btn.basic-btn {
             background-color: #2E2E2E; 
             color: #fff;
@@ -366,7 +347,7 @@
         }
         .btn.basic-btn:hover { background-color: #1f1f1f; transform: scale(1.02); }
 
-        /* OFERTA 2 - COMPLETA (DESTAQUE) */
+        /* OFERTA 2 - COMPLETA */
         .pricing-box.premium {
             background-color: #ffffff;
             border: 4px solid var(--offer-green); 
@@ -390,7 +371,6 @@
             white-space: nowrap;
         }
 
-        /* Botão Oferta Completa */
         .btn.premium-btn {
             background-color: var(--offer-green);
             color: #ffffff; 
@@ -399,32 +379,155 @@
             box-shadow: 0 6px 20px rgba(49, 185, 0, 0.5);
         }
 
-        /* Textos Internos das Ofertas */
         .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
         .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
         .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .pricing-box li i { color: var(--offer-green); font-size: 20px; }
         
-        /* Itens Riscados (Plano Básico) */
-        .pricing-box li.disabled {
-            text-decoration: line-through;
-            opacity: 0.5;
-            color: #888;
-        }
+        .pricing-box li.disabled { text-decoration: line-through; opacity: 0.5; color: #888; }
         .pricing-box li.disabled i { color: #888; }
 
         .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
         .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         .compra-segura { margin-top: 20px; width: 90%; }
 
-        /* FAQ (Dúvidas Frequentes) OTIMIZADO - CORRIGIDO O FUNDO */
+        /* =========================================
+           NOVO MODAL DE UPSELL (POP-UP)
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Fundo escurecido */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: #ffffff;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3);
+            border: 4px solid var(--offer-green);
+        }
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-badge {
+            background: var(--offer-green);
+            color: #ffffff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .modal-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #111;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        .modal-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 25px;
+        }
+        .modal-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .modal-list li {
+            font-size: 15px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-list li i {
+            color: var(--offer-green);
+            font-size: 18px;
+        }
+        .modal-price {
+            margin-bottom: 25px;
+        }
+        .modal-price-old {
+            display: block;
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+            font-weight: 800;
+        }
+        .modal-price-new {
+            display: block;
+            font-size: 50px;
+            font-weight: 900;
+            color: var(--offer-green);
+            line-height: 1;
+        }
+        .modal-btn-yes {
+            width: 100%;
+            padding: 18px 10px;
+            font-size: 16px;
+            margin: 0 0 15px 0;
+            background-color: var(--offer-green);
+            color: #ffffff;
+        }
+        .modal-btn-no {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 13px;
+            text-decoration: underline;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            padding: 5px;
+        }
+        .modal-btn-no:hover {
+            color: #444;
+        }
+
+        /* FAQ (Dúvidas Frequentes) */
+        .faq-section {
+            background-color: #262524;
+            padding: 80px 0; 
+        }
+        .faq-section h2 { color: #fff; }
+        .faq-section .container { padding-top: 0; padding-bottom: 0; }
+
         .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
         .faq-item {
-            background-color: #111;
+            background-color: #1a1a1a; 
             margin-bottom: 15px;
             border-radius: 8px;
             text-align: left;
-            border: 1px solid #222;
+            border: 1px solid #333;
         }
         .faq-question {
             padding: 20px;
@@ -447,15 +550,10 @@
             font-size: 16px;
             line-height: 1.6;
             margin: 0;
-            border-top: 1px solid #222;
+            border-top: 1px solid #333;
         }
-        .faq-item.faq-open .faq-answer {
-            max-height: 500px; 
-        }
-        .faq-item.faq-open .faq-question i {
-            transform: rotate(180deg);
-            color: var(--primary-color);
-        }
+        .faq-item.faq-open .faq-answer { max-height: 500px; }
+        .faq-item.faq-open .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
 
         /* Footer */
         footer {
@@ -486,9 +584,7 @@
             font-weight: bold;
             color: #555;
         }
-        .footer-bottom span {
-            color: #fff;
-        }
+        .footer-bottom span { color: #fff; }
 
         /* =========================================
            RESPONSIVIDADE (DESKTOP E MOBILE)
@@ -527,6 +623,7 @@
             .pricing-box h3 { font-size: 20px; }
             .price-new { font-size: 45px; }
             
+            .faq-section { padding: 50px 0; }
             .faq-question { font-size: 16px; padding: 20px 15px; }
         }
     </style>
@@ -794,7 +891,8 @@
                     <div>
                         <div class="price-old">DE R$ 69,90</div>
                         <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
-                        <a href="#" class="btn basic-btn" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
+                        <!-- Botão modificado para ter o ID id="btn-basic-plan" e acionar o Modal -->
+                        <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
                     </div>
                 </div>
 
@@ -815,7 +913,7 @@
                     <div>
                         <div class="price-old">DE R$ 99,99</div>
                         <div class="price-new">R$ 29,90</div>
-                        <a href="#" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
+                        <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
                         <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
                     </div>
                 </div>
@@ -825,31 +923,33 @@
     </section>
 
     <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
-    <section class="container reveal">
-        <h2>DÚVIDAS FREQUENTES</h2>
-        
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+    <section class="faq-section">
+        <div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
+            <h2>DÚVIDAS FREQUENTES</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-    <section class="container reveal" style="padding-top: 0;">
+    <section class="container reveal">
         <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </section>
@@ -865,7 +965,35 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ Corrigido) -->
+    <!-- MODAL DE UPSELL (ESCONDIDO POR PADRÃO) -->
+    <div class="modal-overlay" id="upsellModal">
+        <div class="modal-content">
+            <div class="modal-badge">MAIS VENDIDO 🏆</div>
+            <h2 class="modal-title">ESPERE! Oferta Única Antes de Finalizar...</h2>
+            <p class="modal-subtitle">Leve o PACK MAGO COMPLETO por uma diferença mínima!</p>
+            
+            <ul class="modal-list">
+                <li><i class="fas fa-check-circle"></i> 40 Nichos Virais</li>
+                <li><i class="fas fa-check-circle"></i> +50.000 Cortes Prontos</li>
+                <li><i class="fas fa-check-circle"></i> Atualizações Mensais</li>
+                <li><i class="fas fa-check-circle"></i> 4 Bônus Exclusivos</li>
+                <li><i class="fas fa-check-circle"></i> +250GB de Conteúdo</li>
+            </ul>
+            
+            <div class="modal-price">
+                <span class="modal-price-old">De R$ 29,90</span>
+                <span class="modal-price-new">R$ 24,90</span>
+            </div>
+            
+            <!-- Botão de Aceite (Leva para o Checkout de 24,90 - Edite este link) -->
+            <a href="https://app.zuptos.com.br/checkout/SEU_LINK_DE_24_90_AQUI" class="btn modal-btn-yes">SIM! GARANTIR PACOTE COMPLETO</a>
+            
+            <!-- Botão de Recusa (Leva para o Checkout de 19,90 que o cliente tinha clicado inicialmente) -->
+            <button class="modal-btn-no" id="btnContinueBasic">Não, obrigado. Quero continuar com o pacote iniciante.</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS GERAIS -->
     <script>
         // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS (INTERSECTION OBSERVER)
         document.addEventListener('DOMContentLoaded', () => {
@@ -875,7 +1003,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // Desliga o observer no elemento depois que anima, poupando a CPU do celular
                         observer.unobserve(entry.target); 
                     }
                 });
@@ -895,10 +1022,8 @@
             question.addEventListener('click', () => {
                 const isOpen = item.classList.contains('faq-open');
                 
-                // Fecha todas as outras
                 faqItems.forEach(otherItem => otherItem.classList.remove('faq-open'));
                 
-                // Abre a clicada se estava fechada
                 if (!isOpen) {
                     item.classList.add('faq-open');
                 }
@@ -926,7 +1051,6 @@
             };
 
             const startAutoPlay = () => {
-                // Apenas em mobile/tablet e se estiver ativado
                 if(isAutoPlay && window.innerWidth <= 900) {
                     autoPlayInterval = setInterval(nextSlide, 3500);
                 }
@@ -934,15 +1058,35 @@
 
             const stopAutoPlay = () => clearInterval(autoPlayInterval);
 
-            // Botões de navegação
             if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
             if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
 
-            // Inicia o Play e paralisa quando o usuário toca para rolar
             startAutoPlay();
             wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
             wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
         });
+
+        // 4. MODAL DE UPSELL (CAIXINHA DE AVISO)
+        const btnBasicPlan = document.getElementById('btn-basic-plan');
+        const upsellModal = document.getElementById('upsellModal');
+        const btnContinueBasic = document.getElementById('btnContinueBasic');
+
+        // Quando clicar em comprar pacote iniciante
+        if (btnBasicPlan && upsellModal) {
+            btnBasicPlan.addEventListener('click', function(e) {
+                e.preventDefault(); // Trava o link de ir para o checkout imediatamente
+                upsellModal.classList.add('show'); // Mostra a caixinha
+            });
+        }
+
+        // Quando o cliente clicar em recusar a oferta
+        if (btnContinueBasic) {
+            btnContinueBasic.addEventListener('click', function() {
+                upsellModal.classList.remove('show');
+                // Redireciona para o link do pacote iniciante que você enviou
+                window.location.href = "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
+            });
+        }
     </script>
 </body>
 </html>
