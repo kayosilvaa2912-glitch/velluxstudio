@@ -14,20 +14,22 @@
 
     <style>
         :root {
-            /* TEMA OFICIAL VERDE */
+            /* TEMA GLOBAL VERDE */
             --primary-color: #45E104; 
             --bg-color: #000000;
             --text-color: #ffffff;
             --box-bg: #0a0a0a;
             --light-bg: #ffffff;
             --dark-text: #111111;
+            
+            /* VERDE EXCLUSIVO DA SESSÃO DE OFERTAS */
+            --offer-green: #31B900;
         }
 
-        /* RESET E TRAVA ABSOLUTA DE ROLAGEM HORIZONTAL */
+        /* RESET E SOLUÇÃO DO TRAVAMENTO NO CELULAR */
         html {
             box-sizing: border-box;
             scroll-behavior: smooth;
-            overflow-x: hidden;
         }
 
         *, *:before, *:after {
@@ -41,17 +43,16 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
+            /* overflow-x apenas no body impede o vaze de conteúdo sem quebrar o scroll do iOS */
             overflow-x: hidden; 
-            overscroll-behavior-x: none;
             width: 100%;
         }
 
-        /* ANIMAÇÕES GERAIS LEVES (FADE-UP) */
+        /* ANIMAÇÕES GERAIS (LEVES - FADE UP) */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-            will-change: opacity, transform;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
         .reveal.active {
             opacity: 1;
@@ -101,7 +102,7 @@
             margin: 0 auto;
         }
 
-        /* Botões com efeito Pulse Verde */
+        /* Botões Globais */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -114,7 +115,7 @@
             margin: 20px 0;
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(69, 225, 4, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             animation: pulse 2s infinite;
             text-align: center;
         }
@@ -143,6 +144,8 @@
             scrollbar-width: none;
             scroll-behavior: smooth;
             padding: 10px 0;
+            /* Isso impede que o slider bloqueie o scroll vertical do usuário */
+            touch-action: pan-y; 
         }
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
@@ -219,7 +222,7 @@
         .timeline-step h3 { margin: 0 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
         .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
 
-        /* Cards Nichos (Com Efeito Hover Restaurado) */
+        /* Cards Nichos */
         .card-nicho {
             background-color: transparent;
             text-align: left;
@@ -233,7 +236,7 @@
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
         }
         .card-nicho-img img {
             width: 100%;
@@ -251,7 +254,7 @@
         .bg-white h2 { color: var(--dark-text); }
         .bg-white p { color: #444; }
 
-        /* Ícones da seção de Redes (Estilo idêntico ao Print) */
+        /* Ícones da seção de Redes */
         .benefits-box {
             border: 2px solid var(--primary-color);
             border-radius: 12px;
@@ -278,7 +281,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* Bônus Section (Estilo idêntico ao Print) */
+        /* Bônus Section */
         .bonus-card {
             border: 2px solid var(--primary-color);
             border-radius: 12px;
@@ -312,15 +315,15 @@
         }
 
         /* =========================================
-           NOVA SEÇÃO DE PREÇOS (OFERTAS LADO A LADO)
+           OFERTAS / PREÇOS (COM NOVO VERDE E AJUSTES)
            ========================================= */
         .pricing-section {
-            background-color: #0d0d0d; /* Fundo Escuro para destacar as caixas */
+            background-color: #0d0d0d; 
             padding: 80px 20px;
             border-top: 2px solid #222;
         }
         .pricing-section h2 { 
-            color: #ffffff; /* Título BRANCO conforme solicitado */
+            color: #ffffff; 
             margin-bottom: 50px; 
         }
         
@@ -333,7 +336,6 @@
             align-items: stretch; 
         }
 
-        /* Fundo Branco/Cinza claro para as caixas de oferta */
         .pricing-box {
             background-color: #f9f9f9;
             color: #000;
@@ -354,21 +356,22 @@
         }
         .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
         
+        /* Botão Oferta 19,90 */
         .btn.basic-btn {
-            background-color: #222;
+            background-color: #2E2E2E; /* Cor solicitada */
             color: #fff;
             box-shadow: none;
             animation: none; 
-            border: 1px solid #111;
+            border: none;
         }
-        .btn.basic-btn:hover { background-color: #000; transform: scale(1.02); }
+        .btn.basic-btn:hover { background-color: #1f1f1f; transform: scale(1.02); }
 
         /* OFERTA 2 - COMPLETA (DESTAQUE) */
         .pricing-box.premium {
             background-color: #ffffff;
-            border: 4px solid var(--primary-color);
+            border: 4px solid var(--offer-green); /* Novo verde #31B900 */
             transform: scale(1.02); 
-            box-shadow: 0 15px 40px rgba(69, 225, 4, 0.2);
+            box-shadow: 0 15px 40px rgba(49, 185, 0, 0.2);
             z-index: 2;
         }
         .pricing-box.premium:hover { transform: scale(1.05); }
@@ -377,8 +380,8 @@
             top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--primary-color);
-            color: #000;
+            background: var(--offer-green); /* Novo verde */
+            color: #ffffff; /* Cor Branca Solicitada */
             padding: 6px 20px;
             border-radius: 20px;
             font-weight: 900;
@@ -387,11 +390,20 @@
             white-space: nowrap;
         }
 
+        /* Botão Oferta Completa */
+        .btn.premium-btn {
+            background-color: var(--offer-green);
+            color: #ffffff; /* Letras Brancas Solicitadas */
+        }
+        .btn.premium-btn:hover {
+            box-shadow: 0 6px 20px rgba(49, 185, 0, 0.5);
+        }
+
         /* Textos Internos das Ofertas */
         .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
         .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
         .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .pricing-box li i { color: var(--primary-color); font-size: 20px; }
+        .pricing-box li i { color: var(--offer-green); font-size: 20px; }
         
         /* Itens Riscados (Plano Básico) */
         .pricing-box li.disabled {
@@ -402,17 +414,26 @@
         .pricing-box li.disabled i { color: #888; }
 
         .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
-        .price-new { font-size: 55px; font-weight: 900; color: var(--primary-color); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         .compra-segura { margin-top: 20px; width: 90%; }
 
-        /* FAQ (Dúvidas Frequentes) */
-        .faq-container { max-width: 800px; margin: 50px auto; }
+        /* =========================================
+           FAQ (PERGUNTAS FREQUENTES) - COR: #262524
+           ========================================= */
+        .faq-section {
+            background-color: #262524;
+            padding: 80px 0; /* Padding total na seção e não no container */
+        }
+        .faq-section h2 { color: #fff; }
+        .faq-section .container { padding-top: 0; padding-bottom: 0; }
+
+        .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
         .faq-item {
-            background-color: #111;
+            background-color: #1a1a1a; /* Escuro para dar contraste sobre o fundo #262524 */
             margin-bottom: 15px;
             border-radius: 8px;
             text-align: left;
-            border: 1px solid #222;
+            border: 1px solid #333;
         }
         .faq-question {
             padding: 20px;
@@ -435,7 +456,7 @@
             font-size: 16px;
             line-height: 1.6;
             margin: 0;
-            border-top: 1px solid #222;
+            border-top: 1px solid #333;
         }
         .faq-item.faq-open .faq-answer {
             max-height: 500px; 
@@ -515,6 +536,7 @@
             .pricing-box h3 { font-size: 20px; }
             .price-new { font-size: 45px; }
             
+            .faq-section { padding: 50px 0; }
             .faq-question { font-size: 16px; padding: 20px 15px; }
         }
     </style>
@@ -675,7 +697,7 @@
         </div>
     </section>
 
-    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (IGUAL AO PRINT) -->
+    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
     <section class="bg-white">
         <div class="container reveal">
             <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;">
@@ -729,7 +751,7 @@
         </div>
     </section>
 
-    <!-- 8. BÔNUS EXCLUSIVOS (IGUAL AO PRINT) -->
+    <!-- 8. BÔNUS EXCLUSIVOS -->
     <section class="bg-white">
         <div class="container reveal">
             <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
@@ -781,7 +803,7 @@
                     </div>
                     <div>
                         <div class="price-old">DE R$ 69,90</div>
-                        <div class="price-new">R$ 19,90</div>
+                        <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
                         <a href="#" class="btn basic-btn" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
                     </div>
                 </div>
@@ -803,7 +825,7 @@
                     <div>
                         <div class="price-old">DE R$ 99,99</div>
                         <div class="price-new">R$ 29,90</div>
-                        <a href="#" class="btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
+                        <a href="#" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
                         <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
                     </div>
                 </div>
@@ -812,32 +834,34 @@
         </div>
     </section>
 
-    <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
-    <section class="container reveal">
-        <h2>DÚVIDAS FREQUENTES</h2>
-        
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+    <!-- 10. DÚVIDAS FREQUENTES (FAQ) - FUNDO NOVO -->
+    <section class="faq-section">
+        <div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
+            <h2>DÚVIDAS FREQUENTES</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-    <section class="container reveal" style="padding-top: 0;">
+    <section class="container reveal">
         <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </section>
@@ -853,7 +877,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ Corrigido) -->
+    <!-- SCRIPTS GERAIS -->
     <script>
         // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS (INTERSECTION OBSERVER)
         document.addEventListener('DOMContentLoaded', () => {
