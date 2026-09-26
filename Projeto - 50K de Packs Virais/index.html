@@ -14,6 +14,7 @@
 
     <style>
         :root {
+            /* TEMA OFICIAL VERDE */
             --primary-color: #45E104; 
             --bg-color: #000000;
             --text-color: #ffffff;
@@ -25,8 +26,8 @@
         /* RESET E TRAVA ABSOLUTA DE ROLAGEM HORIZONTAL */
         html {
             box-sizing: border-box;
-            overflow-x: hidden; 
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         *, *:before, *:after {
@@ -43,14 +44,14 @@
             overflow-x: hidden; 
             overscroll-behavior-x: none;
             width: 100%;
-            max-width: 100vw;
         }
 
-        /* ANIMAÇÕES GERAIS (EFEITO SURGIR AO ROLAR) */
+        /* ANIMAÇÕES GERAIS LEVES (FADE-UP) */
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
         }
         .reveal.active {
             opacity: 1;
@@ -83,7 +84,7 @@
             color: #dcdcdc;
         }
 
-        /* CORREÇÃO DA IMAGEM DO TOPO (NOTEBOOK) PARA MOBILE */
+        /* IMAGEM DO TOPO PARA MOBILE */
         .hero-img {
             width: 100%;
             max-width: 800px;
@@ -100,7 +101,7 @@
             margin: 0 auto;
         }
 
-        /* Botões com efeito Pulse */
+        /* Botões com efeito Pulse Verde */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -112,7 +113,7 @@
             font-size: 18px;
             margin: 20px 0;
             text-transform: uppercase;
-            box-shadow: 0 4px 20px rgba(69, 225, 4, 0.4);
+            box-shadow: 0 4px 15px rgba(69, 225, 4, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             animation: pulse 2s infinite;
             text-align: center;
@@ -120,11 +121,11 @@
 
         .btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(69, 225, 4, 0.6);
+            box-shadow: 0 6px 20px rgba(69, 225, 4, 0.6);
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.7); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.6); }
             70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(69, 225, 4, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
         }
@@ -133,7 +134,7 @@
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        .slider-wrapper { position: relative; width: 100%; }
+        .slider-wrapper { position: relative; width: 100%; padding: 10px 0;}
         .slider-container {
             display: flex;
             overflow-x: auto;
@@ -141,6 +142,7 @@
             gap: 20px;
             scrollbar-width: none;
             scroll-behavior: smooth;
+            padding: 10px 0;
         }
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
@@ -158,12 +160,12 @@
             cursor: pointer;
             z-index: 10;
             text-shadow: 0 2px 5px rgba(0,0,0,0.8);
-            opacity: 0.7;
+            opacity: 0.8;
             transition: opacity 0.3s;
         }
         .slider-btn:hover { opacity: 1; }
-        .slider-btn.prev { left: -15px; }
-        .slider-btn.next { right: -15px; }
+        .slider-btn.prev { left: -10px; }
+        .slider-btn.next { right: -10px; }
 
         /* Timeline (Como Funciona) */
         .timeline {
@@ -184,16 +186,16 @@
         }
         .timeline-step {
             position: relative;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             padding-left: 40px;
         }
         .timeline-icon {
             position: absolute;
-            left: -21px; 
+            left: -20px; 
             top: 15px;
-            width: 44px;
-            height: 44px;
-            background-color: var(--bg-color);
+            width: 42px;
+            height: 42px;
+            background-color: #000;
             border: 2px solid var(--primary-color);
             border-radius: 50%;
             display: flex;
@@ -207,7 +209,7 @@
             border: 1px solid #333;
             padding: 25px 20px;
             border-radius: 10px;
-            background-color: #050505;
+            background-color: var(--box-bg);
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
         .timeline-content:hover {
@@ -217,29 +219,31 @@
         .timeline-step h3 { margin: 0 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
         .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
 
-        /* Cards Nichos */
+        /* Cards Nichos (Com Efeito Hover Restaurado) */
         .card-nicho {
             background-color: transparent;
             text-align: left;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            transition: transform 0.3s ease;
-        }
-        .card-nicho:hover {
-            transform: translateY(-5px);
+            cursor: pointer;
         }
         .card-nicho-img {
             border-left: 5px solid var(--primary-color);
             border-radius: 4px;
             overflow: hidden;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card-nicho-img img {
             width: 100%;
             transition: transform 0.5s ease;
         }
-        .card-nicho:hover .card-nicho-img img { transform: scale(1.08); }
+        .card-nicho:hover .card-nicho-img { 
+            transform: translateY(-8px); 
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
+        }
+        .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
         .card-nicho p { font-size: 14px; color: #aaa; margin: 0; line-height: 1.5; }
 
         /* Seções de Fundo Branco */
@@ -247,90 +251,171 @@
         .bg-white h2 { color: var(--dark-text); }
         .bg-white p { color: #444; }
 
-        /* Ícones da seção de Redes */
+        /* Ícones da seção de Redes (Estilo idêntico ao Print) */
         .benefits-box {
             border: 2px solid var(--primary-color);
             border-radius: 12px;
-            padding: 30px 20px;
+            padding: 35px 20px;
             text-align: center;
+            background-color: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .benefits-box:hover { 
             transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.15); 
         }
         .benefits-box i {
             font-size: 45px;
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; }
+        .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; line-height: 1.5; }
 
         /* Depoimentos */
         .testimonial-img {
             border-radius: 12px;
             width: 100%;
-            transition: transform 0.3s ease;
-        }
-        .slider-item:hover .testimonial-img {
-            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* Bônus Section */
+        /* Bônus Section (Estilo idêntico ao Print) */
         .bonus-card {
             border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 40px 20px;
             background: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
         .bonus-card:hover { 
             transform: translateY(-10px); 
-            box-shadow: 0 10px 25px rgba(69, 225, 4, 0.3);
+            box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
-        .bonus-card h2 { font-size: 55px; margin-bottom: 10px; color: var(--primary-color); }
-        .bonus-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 15px; color: var(--primary-color); }
-        .bonus-card p { font-size: 14px; font-weight: 600; color: #333; }
+        .bonus-card h2 { 
+            font-size: 55px; 
+            margin-bottom: 5px; 
+            color: var(--primary-color); 
+        }
+        .bonus-card h3 { 
+            font-size: 24px; 
+            font-weight: 900; 
+            margin-bottom: 15px; 
+            color: var(--primary-color); 
+        }
+        .bonus-card p { 
+            font-size: 15px; 
+            font-weight: 600; 
+            color: #111; 
+            line-height: 1.5;
+        }
 
-        /* Caixa de Preço */
+        /* =========================================
+           NOVA SEÇÃO DE PREÇOS (OFERTAS LADO A LADO)
+           ========================================= */
         .pricing-section {
-            background-color: var(--primary-color);
+            background-color: #0d0d0d; /* Fundo Escuro para destacar as caixas */
             padding: 80px 20px;
+            border-top: 2px solid #222;
         }
-        .pricing-section h2 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .pricing-section h2 { 
+            color: #ffffff; /* Título BRANCO conforme solicitado */
+            margin-bottom: 50px; 
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+            align-items: stretch; 
+        }
+
+        /* Fundo Branco/Cinza claro para as caixas de oferta */
         .pricing-box {
-            background-color: #fff;
+            background-color: #f9f9f9;
             color: #000;
-            max-width: 480px;
-            margin: 40px auto 0;
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: transform 0.3s ease;
         }
-        .pricing-box:hover {
-            transform: scale(1.02);
-        }
-        .pricing-box h3 { font-size: 26px; margin-top: 0; font-weight: 900; margin-bottom: 30px; color: #111; }
-        .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 16px; margin-bottom: 30px; color: #333; }
-        .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; }
-        .pricing-box li i { color: var(--primary-color); font-size: 22px; }
-        .price-old { text-decoration: line-through; color: #aaa; font-size: 24px; font-weight: 800; }
-        .price-new { font-size: 65px; font-weight: 900; color: var(--primary-color); margin: 5px 0 20px 0; line-height: 1; }
-        .compra-segura { margin-top: 25px; width: 90%; }
 
-        /* FAQ (Dúvidas Frequentes) Corrigido */
+        /* OFERTA 1 - INICIANTE */
+        .pricing-box.basic {
+            border: 2px solid #ddd;
+            transform: scale(0.95);
+        }
+        .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
+        
+        .btn.basic-btn {
+            background-color: #222;
+            color: #fff;
+            box-shadow: none;
+            animation: none; 
+            border: 1px solid #111;
+        }
+        .btn.basic-btn:hover { background-color: #000; transform: scale(1.02); }
+
+        /* OFERTA 2 - COMPLETA (DESTAQUE) */
+        .pricing-box.premium {
+            background-color: #ffffff;
+            border: 4px solid var(--primary-color);
+            transform: scale(1.02); 
+            box-shadow: 0 15px 40px rgba(69, 225, 4, 0.2);
+            z-index: 2;
+        }
+        .pricing-box.premium:hover { transform: scale(1.05); }
+        .pricing-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-color);
+            color: #000;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* Textos Internos das Ofertas */
+        .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
+        .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
+        .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .pricing-box li i { color: var(--primary-color); font-size: 20px; }
+        
+        /* Itens Riscados (Plano Básico) */
+        .pricing-box li.disabled {
+            text-decoration: line-through;
+            opacity: 0.5;
+            color: #888;
+        }
+        .pricing-box li.disabled i { color: #888; }
+
+        .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
+        .price-new { font-size: 55px; font-weight: 900; color: var(--primary-color); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .compra-segura { margin-top: 20px; width: 90%; }
+
+        /* FAQ (Dúvidas Frequentes) */
         .faq-container { max-width: 800px; margin: 50px auto; }
         .faq-item {
             background-color: #111;
             margin-bottom: 15px;
             border-radius: 8px;
-            overflow: hidden;
             text-align: left;
             border: 1px solid #222;
         }
         .faq-question {
-            padding: 25px;
+            padding: 20px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -338,91 +423,99 @@
             font-weight: 800;
             font-size: 18px;
             color: #fff;
-            transition: background-color 0.3s;
         }
-        .faq-question:hover { background-color: #1a1a1a; }
         .faq-answer {
-            padding: 0 25px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            color: #bbb;
+            transition: max-height 0.4s ease;
+        }
+        .faq-answer p {
+            padding: 0 20px 20px 20px;
+            color: #ccc;
             font-size: 16px;
             line-height: 1.6;
-        }
-        .faq-answer p { margin: 0; } /* Remove as margens internas do p para animação limpa */
-        
-        /* A classe para abrir o FAQ agora é .faq-open, para não conflitar com o .active do Fade-Up */
-        .faq-item.faq-open .faq-answer {
-            padding: 20px 25px 25px 25px;
-            max-height: 400px;
+            margin: 0;
             border-top: 1px solid #222;
+        }
+        .faq-item.faq-open .faq-answer {
+            max-height: 500px; 
         }
         .faq-item.faq-open .faq-question i {
             transform: rotate(180deg);
             color: var(--primary-color);
         }
 
-        /* Footer Ajustado e Menor */
+        /* Footer */
         footer {
             border-top: 1px solid #222;
-            padding: 25px 15px; /* Menos espaçamento */
+            padding: 30px 15px; 
             text-align: center;
-            font-size: 11px; /* Fonte menor */
             color: #666;
-            max-width: 1100px;
-            margin: 0 auto;
         }
         footer p { 
             max-width: 900px; 
-            font-size: 11px; /* Fonte menor */
+            font-size: 12px; 
             color: #777; 
-            margin: 0 auto 10px auto; /* Menos margem entre os parágrafos */
-            line-height: 1.4;
+            margin: 0 auto 15px auto; 
+            line-height: 1.5;
+        }
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: #555;
+        }
+        .footer-bottom span {
+            color: #fff;
         }
 
         /* =========================================
-           RESPONSIVIDADE (DESKTOP)
+           RESPONSIVIDADE (DESKTOP E MOBILE)
            ========================================= */
         @media (min-width: 900px) {
             .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
             .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
             .slider-container.grid-desktop-3 .slider-item, .slider-container.grid-desktop-4 .slider-item { flex: auto; }
-            .slider-wrapper .slider-btn { display: none; } /* Esconde setas no PC */
+            .slider-wrapper .slider-btn { display: none; } 
+            .footer-bottom { flex-direction: row; }
+            .footer-bottom p.mt { margin-top: 0; }
         }
         
-        /* =========================================
-           RESPONSIVIDADE (MOBILE & TABLET)
-           ========================================= */
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+            .pricing-box.basic { transform: scale(1); }
+            .pricing-box.premium { transform: scale(1); margin-top: 10px; }
+            .footer-bottom p.mt { margin-top: 15px; }
+        }
+
         @media (max-width: 600px) {
             .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
             .container { padding: 50px 15px; }
-            
-            /* IMAGEM DO TOPO NO MOBILE */
-            .hero-img { 
-                max-width: 90%; 
-                margin-bottom: 20px;
-            }
-
-            h2 { font-size: 28px; }
+            .hero-img { max-width: 90%; margin-bottom: 20px; }
+            h2 { font-size: 26px; }
             p { font-size: 16px; }
             .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
             
-            /* Timeline Mobile */
             .timeline::before { left: 15px; }
             .timeline-icon { left: -6px; width: 40px; height: 40px; font-size: 15px; }
             .timeline-step { padding-left: 45px; }
             .timeline-content { padding: 20px 15px; }
             
-            /* Caixa de Preço no Mobile */
             .pricing-section { padding: 50px 15px; }
-            .pricing-box { padding: 30px 20px; margin: 20px auto 0; }
-            .pricing-box h3 { font-size: 22px; }
-            .price-new { font-size: 48px; }
+            .pricing-box { padding: 30px 20px; }
+            .pricing-box h3 { font-size: 20px; }
+            .price-new { font-size: 45px; }
             
-            /* FAQ Mobile */
             .faq-question { font-size: 16px; padding: 20px 15px; }
-            .faq-item.faq-open .faq-answer { padding: 15px 15px 20px 15px; }
         }
     </style>
 </head>
@@ -430,7 +523,6 @@
 
     <!-- 1. HEADER / HERO SECTION -->
     <header class="container reveal">
-        <!-- Imagem controlada pela classe .hero-img -->
         <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
         
         <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
@@ -439,7 +531,7 @@
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </header>
 
-    <!-- 2. PROVA SOCIAL (CARROSSEL AUTOMÁTICO NO MOBILE) -->
+    <!-- 2. PROVA SOCIAL -->
     <section class="container reveal">
         <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
         <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
@@ -467,7 +559,7 @@
         <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
     </section>
 
-    <!-- 4. COMO FUNCIONA (TIMELINE) -->
+    <!-- 4. COMO FUNCIONA -->
     <section class="container reveal">
         <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
         
@@ -503,7 +595,7 @@
         </div>
     </section>
 
-    <!-- 5. O QUE VOCÊ VAI RECEBER (GRID DE NICHOS) -->
+    <!-- 5. O QUE VOCÊ VAI RECEBER -->
     <section class="container">
         <h2 class="reveal">VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
         
@@ -583,7 +675,7 @@
         </div>
     </section>
 
-    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (FUNDO BRANCO) -->
+    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (IGUAL AO PRINT) -->
     <section class="bg-white">
         <div class="container reveal">
             <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;">
@@ -613,7 +705,7 @@
         </div>
     </section>
 
-    <!-- 7. DEPOIMENTOS (CARROSSEL AUTOMÁTICO NO MOBILE) -->
+    <!-- 7. DEPOIMENTOS -->
     <section class="container reveal">
         <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
         
@@ -637,7 +729,7 @@
         </div>
     </section>
 
-    <!-- 8. BÔNUS EXCLUSIVOS (FUNDO BRANCO) -->
+    <!-- 8. BÔNUS EXCLUSIVOS (IGUAL AO PRINT) -->
     <section class="bg-white">
         <div class="container reveal">
             <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
@@ -667,26 +759,55 @@
         </div>
     </section>
 
-    <!-- 9. ÁREA DE PREÇO / OFERTA (FUNDO VERDE) -->
+    <!-- 9. ÁREA DE PREÇO / DUAS OFERTAS -->
     <section id="preco" class="pricing-section reveal">
         <div class="container" style="padding: 0;">
-            <h2>NÃO PERCA ESSA OFERTA!</h2>
+            <h2>ESCOLHA SEU PACOTE IDEAL</h2>
             
-            <div class="pricing-box">
-                <h3>PACK CORTES VIRAIS COMPLETO</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> 36 NICHOS VIRAIS</li>
-                    <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
-                    <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
-                    <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
-                    <li><i class="fas fa-gift"></i> 4 BÔNUS</li>
-                    <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
-                </ul>
-                <div class="price-old">DE R$ 99,99</div>
-                <div class="price-new">R$ 29,90</div>
-                <a href="#" class="btn" style="width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">GARANTIR ACESSO AGORA</a>
+            <div class="pricing-grid">
                 
-                <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
+                <!-- OFERTA 1: BÁSICA -->
+                <div class="pricing-box basic">
+                    <div>
+                        <h3>PACK INICIANTE</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 10 NICHOS VIRAIS</li>
+                            <li><i class="fas fa-check-circle"></i> 2.000 CORTES PRONTOS</li>
+                            <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+                            <li><i class="fas fa-check-circle"></i> +12GB DE CONTEÚDO</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+                            <li class="disabled"><i class="fas fa-times-circle"></i> 4 BÔNUS EXCLUSIVOS</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="price-old">DE R$ 69,90</div>
+                        <div class="price-new">R$ 19,90</div>
+                        <a href="#" class="btn basic-btn" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
+                    </div>
+                </div>
+
+                <!-- OFERTA 2: COMPLETA (DESTAQUE) -->
+                <div class="pricing-box premium">
+                    <div class="pricing-badge">MAIS VENDIDO 🏆</div>
+                    <div>
+                        <h3>PACK MAGO COMPLETO</h3>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> 40 NICHOS VIRAIS</li>
+                            <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
+                            <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+                            <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+                            <li><i class="fas fa-gift"></i> 4 BÔNUS EXCLUSIVOS</li>
+                            <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="price-old">DE R$ 99,99</div>
+                        <div class="price-new">R$ 29,90</div>
+                        <a href="#" class="btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
+                        <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -696,19 +817,19 @@
         <h2>DÚVIDAS FREQUENTES</h2>
         
         <div class="faq-container">
-            <div class="faq-item reveal">
+            <div class="faq-item">
                 <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
             </div>
-            <div class="faq-item reveal">
+            <div class="faq-item">
                 <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
             </div>
-            <div class="faq-item reveal">
+            <div class="faq-item">
                 <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
             </div>
-            <div class="faq-item reveal">
+            <div class="faq-item">
                 <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
                 <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
             </div>
@@ -723,53 +844,56 @@
 
     <!-- 12. RODAPÉ -->
     <footer class="reveal">
-        <p style="font-weight: bold; margin-bottom: 5px; color:#999;">Aviso Legal</p>
+        <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">Aviso Legal</p>
         <p>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</p>
         
-             <div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-[10px] text-muted uppercase tracking-widest font-bold">
-                    <p>&copy; 2026 Mago Dos Cortes Virais. Todos os direitos reservados.</p>
-                    <p class="mt-4 md:mt-0">Design By <span class="text-white">VELLUX Studio</span></p>
-                </div>
-
-</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Cortes Virais. Todos os direitos reservados.</p>
+            <p class="mt">Design By <span>VELLUX Studio</span></p>
+        </div>
     </footer>
 
     <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ Corrigido) -->
     <script>
-        // 1. ANIMAÇÕES DE ROLAGEM (FADE-UP)
-        function revealElements() {
+        // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS (INTERSECTION OBSERVER)
+        document.addEventListener('DOMContentLoaded', () => {
             const reveals = document.querySelectorAll('.reveal');
-            const windowHeight = window.innerHeight;
-            const elementVisible = 50; 
-
-            reveals.forEach(reveal => {
-                const elementTop = reveal.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveal.classList.add('active');
-                }
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Desliga o observer no elemento depois que anima, poupando a CPU do celular
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1, 
+                rootMargin: "0px 0px -50px 0px"
             });
-        }
-        window.addEventListener('scroll', revealElements);
-        revealElements(); // Ativa uma vez ao carregar a página
 
-        // 2. FAQ (Abre/Fecha) - BUG CORRIGIDO (Usa .faq-open em vez de .active)
+            reveals.forEach(el => revealObserver.observe(el));
+        });
+
+        // 2. FAQ (Abre/Fecha)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isOpen = item.classList.contains('faq-open');
                 
-                // Fecha todas as outras primeiro
+                // Fecha todas as outras
                 faqItems.forEach(otherItem => otherItem.classList.remove('faq-open'));
                 
-                // Se a que eu cliquei não estava aberta, abre ela
+                // Abre a clicada se estava fechada
                 if (!isOpen) {
                     item.classList.add('faq-open');
                 }
             });
         });
 
-        // 3. SLIDER AUTOMÁTICO (CARROSSEL) NO MOBILE
+        // 3. SLIDER AUTOMÁTICO E DESLIZÁVEL
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
             const container = wrapper.querySelector('.slider-container');
             const prevBtn = wrapper.querySelector('.prev');
@@ -778,7 +902,6 @@
             let autoPlayInterval;
 
             const nextSlide = () => {
-                // Checa se o scroll chegou no final (tolerância de 10px)
                 if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
                     container.scrollTo({ left: 0, behavior: 'smooth' });
                 } else {
@@ -790,25 +913,23 @@
                 container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
             };
 
-            // Inicia o automático a cada 3 segundos (Apenas telas de mobile/tablet)
             const startAutoPlay = () => {
+                // Apenas em mobile/tablet e se estiver ativado
                 if(isAutoPlay && window.innerWidth <= 900) {
-                    autoPlayInterval = setInterval(nextSlide, 3000);
+                    autoPlayInterval = setInterval(nextSlide, 3500);
                 }
             };
 
-            const stopAutoPlay = () => {
-                clearInterval(autoPlayInterval);
-            };
+            const stopAutoPlay = () => clearInterval(autoPlayInterval);
 
-            // Botões Manuais
-            nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
-            prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
+            // Botões de navegação
+            if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
+            if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
 
-            // Inicia a função e para ela se o usuário encostar o dedo na tela
+            // Inicia o Play e paralisa quando o usuário toca para rolar
             startAutoPlay();
-            wrapper.addEventListener('touchstart', stopAutoPlay);
-            wrapper.addEventListener('touchend', startAutoPlay);
+            wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
+            wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
         });
     </script>
 </body>
