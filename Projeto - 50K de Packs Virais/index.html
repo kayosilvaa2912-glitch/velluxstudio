@@ -106,7 +106,7 @@
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #000;
+            color: #ffffff; /* Texto branco solicitado */
             padding: 20px 45px;
             text-decoration: none;
             font-weight: 900;
@@ -315,7 +315,7 @@
         }
 
         /* =========================================
-           OFERTAS / PREÇOS (COM NOVO VERDE E AJUSTES)
+           OFERTAS / PREÇOS
            ========================================= */
         .pricing-section {
             background-color: #0d0d0d; 
@@ -358,7 +358,7 @@
         
         /* Botão Oferta 19,90 */
         .btn.basic-btn {
-            background-color: #2E2E2E; /* Cor solicitada */
+            background-color: #2E2E2E; 
             color: #fff;
             box-shadow: none;
             animation: none; 
@@ -369,7 +369,7 @@
         /* OFERTA 2 - COMPLETA (DESTAQUE) */
         .pricing-box.premium {
             background-color: #ffffff;
-            border: 4px solid var(--offer-green); /* Novo verde #31B900 */
+            border: 4px solid var(--offer-green); 
             transform: scale(1.02); 
             box-shadow: 0 15px 40px rgba(49, 185, 0, 0.2);
             z-index: 2;
@@ -380,8 +380,8 @@
             top: -16px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--offer-green); /* Novo verde */
-            color: #ffffff; /* Cor Branca Solicitada */
+            background: var(--offer-green); 
+            color: #ffffff; 
             padding: 6px 20px;
             border-radius: 20px;
             font-weight: 900;
@@ -393,7 +393,7 @@
         /* Botão Oferta Completa */
         .btn.premium-btn {
             background-color: var(--offer-green);
-            color: #ffffff; /* Letras Brancas Solicitadas */
+            color: #ffffff; 
         }
         .btn.premium-btn:hover {
             box-shadow: 0 6px 20px rgba(49, 185, 0, 0.5);
@@ -417,23 +417,14 @@
         .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         .compra-segura { margin-top: 20px; width: 90%; }
 
-        /* =========================================
-           FAQ (PERGUNTAS FREQUENTES) - COR: #262524
-           ========================================= */
-        .faq-section {
-            background-color: #262524;
-            padding: 80px 0; /* Padding total na seção e não no container */
-        }
-        .faq-section h2 { color: #fff; }
-        .faq-section .container { padding-top: 0; padding-bottom: 0; }
-
+        /* FAQ (Dúvidas Frequentes) OTIMIZADO - CORRIGIDO O FUNDO */
         .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
         .faq-item {
-            background-color: #1a1a1a; /* Escuro para dar contraste sobre o fundo #262524 */
+            background-color: #111;
             margin-bottom: 15px;
             border-radius: 8px;
             text-align: left;
-            border: 1px solid #333;
+            border: 1px solid #222;
         }
         .faq-question {
             padding: 20px;
@@ -456,7 +447,7 @@
             font-size: 16px;
             line-height: 1.6;
             margin: 0;
-            border-top: 1px solid #333;
+            border-top: 1px solid #222;
         }
         .faq-item.faq-open .faq-answer {
             max-height: 500px; 
@@ -536,7 +527,6 @@
             .pricing-box h3 { font-size: 20px; }
             .price-new { font-size: 45px; }
             
-            .faq-section { padding: 50px 0; }
             .faq-question { font-size: 16px; padding: 20px 15px; }
         }
     </style>
@@ -834,34 +824,32 @@
         </div>
     </section>
 
-    <!-- 10. DÚVIDAS FREQUENTES (FAQ) - FUNDO NOVO -->
-    <section class="faq-section">
-        <div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
-            <h2>DÚVIDAS FREQUENTES</h2>
-            
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
-                </div>
+    <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
+    <section class="container reveal">
+        <h2>DÚVIDAS FREQUENTES</h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
             </div>
         </div>
     </section>
 
     <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-    <section class="container reveal">
+    <section class="container reveal" style="padding-top: 0;">
         <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
         <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
     </section>
@@ -877,7 +865,7 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS GERAIS -->
+    <!-- SCRIPTS GERAIS (Animações, Slider Automático e FAQ Corrigido) -->
     <script>
         // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS (INTERSECTION OBSERVER)
         document.addEventListener('DOMContentLoaded', () => {
