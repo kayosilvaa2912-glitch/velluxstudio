@@ -34,10 +34,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Ativa o modo de animação somente quando o JavaScript estiver disponível -->
-    <script>
-        document.documentElement.classList.add('js-enabled');
-    </script>
+    <!-- O modo de animação é ativado pelo script somente após a inicialização -->
 
     <style>
         :root {
@@ -84,12 +81,12 @@
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        html.js-enabled .reveal {
+        html.reveal-ready .reveal {
             opacity: 0;
             transform: translateY(20px);
         }
 
-        html.js-enabled .reveal.active {
+        html.reveal-ready .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1680,6 +1677,11 @@
                     revealObserver.observe(el);
                 });
 
+                // Só ativa o estado de animação depois que o observer
+                // foi criado e aplicado. Se o JS falhar antes disso,
+                // o conteúdo permanece visível normalmente.
+                document.documentElement.classList.add('reveal-ready');
+
                 // Garante que elementos que já estão na tela
                 // apareçam mesmo em carregamentos muito rápidos.
                 setTimeout(() => {
@@ -1766,23 +1768,33 @@
             let isVisible = false;
 
             // Monitora se o carrossel está na tela
-            const observer = new IntersectionObserver((entries) => {
+            if ('IntersectionObserver' in window) {
 
-                entries.forEach(entry => {
+                const observer = new IntersectionObserver((entries) => {
 
-                    isVisible = entry.isIntersecting;
+                    entries.forEach(entry => {
 
-                    if (isVisible) {
-                        startAutoPlay();
-                    } else {
-                        stopAutoPlay();
-                    }
+                        isVisible = entry.isIntersecting;
+
+                        if (isVisible) {
+                            startAutoPlay();
+                        } else {
+                            stopAutoPlay();
+                        }
+
+                    });
 
                 });
 
-            });
+                observer.observe(wrapper);
 
-            observer.observe(wrapper);
+            } else {
+
+                // Sem IntersectionObserver, o carrossel continua funcionando
+                // normalmente; apenas o autoplay fica desativado.
+                isVisible = true;
+
+            }
 
             const nextSlide = () => {
 
