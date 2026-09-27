@@ -250,10 +250,6 @@
             right: -10px;
         }
 
-        /* Oculta as setas especificamente no slider de perfis (conforme solicitado) */
-        #slider-perfis .slider-btn {
-            display: none !important;
-        }
 
         /* =========================================
            NOVA SEÇÃO "COMO FUNCIONA" (BLOCOS)
@@ -898,6 +894,166 @@
         }
 
         /* =========================================
+           REFINO VISUAL + CARROSSEL DE PERFIS
+           ========================================= */
+        .section-kicker {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 6px 12px;
+            border: 1px solid rgba(49, 185, 0, 0.35);
+            border-radius: 999px;
+            color: var(--offer-green);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: rgba(49, 185, 0, 0.06);
+        }
+
+        .profile-proof-section,
+        .common-pages-section {
+            position: relative;
+        }
+
+        .profile-proof-section {
+            padding-top: 70px;
+            padding-bottom: 75px;
+        }
+
+        .common-pages-section {
+            padding-top: 55px;
+            padding-bottom: 65px;
+            border-top: 1px solid #151515;
+        }
+
+        .slider-wrapper {
+            max-width: 1000px;
+            margin: 48px auto 0;
+            padding: 0 42px 34px;
+            position: relative;
+        }
+
+        .slider-container {
+            display: flex !important;
+            gap: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
+            padding: 8px 2px 14px;
+        }
+
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-item {
+            flex: 0 0 calc((100% - 40px) / 3) !important;
+            min-width: 0;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0a0a0a;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .slider-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(69, 225, 4, 0.55);
+            box-shadow: 0 16px 35px rgba(69, 225, 4, 0.10);
+        }
+
+        .slider-item img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 0 !important;
+        }
+
+        .slider-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #101010;
+            border: 1px solid rgba(69, 225, 4, 0.55);
+            color: var(--primary-color);
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+            opacity: 1;
+        }
+
+        .slider-btn:hover {
+            background: var(--offer-green);
+            color: #fff;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .slider-btn.prev {
+            left: 0;
+        }
+
+        .slider-btn.next {
+            right: 0;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        .slider-dot {
+            width: 7px;
+            height: 7px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: #3a3a3a;
+            cursor: pointer;
+            transition: width 0.2s ease, background 0.2s ease;
+        }
+
+        .slider-dot.active {
+            width: 22px;
+            border-radius: 999px;
+            background: var(--offer-green);
+        }
+
+        @media (max-width: 768px) {
+            .slider-wrapper {
+                padding-left: 30px;
+                padding-right: 30px;
+                margin-top: 35px;
+            }
+
+            .slider-item {
+                flex-basis: 100% !important;
+            }
+
+            .slider-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .profile-proof-section {
+                padding-top: 50px;
+                padding-bottom: 55px;
+            }
+        }
+
+        /* =========================================
            RESPONSIVIDADE (DESKTOP E MOBILE)
            ========================================= */
         @media (min-width: 900px) {
@@ -1042,13 +1198,47 @@
             <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
         </header>
 
-        <!-- 2. O QUE ELAS TÊM EM COMUM? -->
-        <section class="container reveal">
+        <!-- 2. PERFIS QUE MAIS CRESCEM -->
+        <section class="container reveal profile-proof-section">
+            <span class="section-kicker">PROVA SOCIAL</span>
+            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
+            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
+
+            <div class="slider-wrapper" id="slider-perfis" data-autoplay="true" aria-label="Perfis que crescem sem mostrar o rosto">
+                <button class="slider-btn prev" type="button" aria-label="Ver perfil anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="slider-container">
+                    <div class="slider-item">
+                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Comentário de perfil 1" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Comentário de perfil 2" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Comentário de perfil 3" loading="lazy" decoding="async">
+                    </div>
+                </div>
+
+                <button class="slider-btn next" type="button" aria-label="Ver próximo perfil">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <div class="slider-dots" aria-label="Navegação dos perfis"></div>
+            </div>
+        </section>
+
+        <!-- 3. O QUE ELAS TÊM EM COMUM? -->
+        <section class="container reveal common-pages-section">
+            <span class="section-kicker">O PADRÃO SE REPETE</span>
             <h2>O QUE ESSAS PÁGINAS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
             <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
         </section>
 
-        <!-- 3. COMO FUNCIONA (É SIMPLES ASSIM) -->
+        <!-- 4. COMO FUNCIONA (É SIMPLES ASSIM) -->
         <section class="container reveal">
             <div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
                 <i class="fas fa-arrow-down"></i>
@@ -1076,36 +1266,6 @@
                     <div class="step-icon">🚀</div>
                     <h3 class="highlight-alt">Comece a crescer</h3>
                 </div>
-            </div>
-        </section>
-
-        <!-- 4. PERFIS QUE MAIS CRESCEM (Sem setas, rolagem livre nativa) -->
-        <section class="container reveal">
-            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
-            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
-            
-            <div class="slider-wrapper" id="slider-perfis" style="margin-top: 50px;">
-                <button class="slider-btn prev" aria-label="Anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <div class="slider-container grid-desktop-3">
-                    <div class="slider-item">
-                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-                </div>
-
-                <button class="slider-btn next" aria-label="Próximo">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
         </section>
 
@@ -1747,147 +1907,148 @@
         });
 
 
-        // 3. SLIDER OTIMIZADO APENAS QUANDO VISÍVEL NA TELA
+        // 3. CARROSSEL DE PERFIS
+        // Controles por setas, toque/deslize, indicadores e autoplay no mobile.
 
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
 
             const container = wrapper.querySelector('.slider-container');
+            const items = Array.from(wrapper.querySelectorAll('.slider-item'));
             const prevBtn = wrapper.querySelector('.prev');
             const nextBtn = wrapper.querySelector('.next');
+            const dotsContainer = wrapper.querySelector('.slider-dots');
             const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
 
-            if (!container) {
+            if (!container || !items.length) {
                 return;
             }
 
-            let autoPlayInterval;
-            let isVisible = false;
+            let autoPlayInterval = null;
+            let isVisible = true;
+            let currentIndex = 0;
 
-            // Monitora se o carrossel está na tela
-            if ('IntersectionObserver' in window) {
-
-                const observer = new IntersectionObserver((entries) => {
-
-                    entries.forEach(entry => {
-
-                        isVisible = entry.isIntersecting;
-
-                        if (isVisible) {
-                            startAutoPlay();
-                        } else {
-                            stopAutoPlay();
-                        }
-
-                    });
-
-                });
-
-                observer.observe(wrapper);
-
-            } else {
-
-                // Sem IntersectionObserver, o carrossel continua funcionando
-                // normalmente; apenas o autoplay fica desativado.
-                isVisible = true;
-
-            }
-
-            const nextSlide = () => {
-
-                if (
-                    container.scrollLeft + container.clientWidth >=
-                    container.scrollWidth - 10
-                ) {
-
-                    container.scrollTo({
-                        left: 0,
-                        behavior: 'smooth'
-                    });
-
-                } else {
-
-                    container.scrollBy({
-                        left: container.clientWidth,
-                        behavior: 'smooth'
-                    });
-
-                }
-
+            const getStep = () => {
+                const firstItem = items[0];
+                if (!firstItem) return container.clientWidth;
+                const styles = window.getComputedStyle(container);
+                const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+                return firstItem.getBoundingClientRect().width + gap;
             };
 
-            const prevSlide = () => {
+            const goToSlide = (index, smooth = true) => {
+                const maxIndex = items.length - 1;
+                currentIndex = (index + items.length) % items.length;
 
-                container.scrollBy({
-                    left: -container.clientWidth,
-                    behavior: 'smooth'
+                container.scrollTo({
+                    left: getStep() * currentIndex,
+                    behavior: smooth ? 'smooth' : 'auto'
                 });
 
+                if (dotsContainer) {
+                    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, dotIndex) => {
+                        dot.classList.toggle('active', dotIndex === currentIndex);
+                        dot.setAttribute('aria-current', dotIndex === currentIndex ? 'true' : 'false');
+                    });
+                }
+            };
+
+            const nextSlide = () => goToSlide(currentIndex + 1);
+            const prevSlide = () => goToSlide(currentIndex - 1);
+
+            if (dotsContainer) {
+                items.forEach((_, index) => {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `Ir para o perfil ${index + 1}`);
+                    dot.setAttribute('aria-current', index === 0 ? 'true' : 'false');
+                    dot.addEventListener('click', () => {
+                        stopAutoPlay();
+                        goToSlide(index);
+                        startAutoPlay();
+                    });
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            const stopAutoPlay = () => {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
             };
 
             const startAutoPlay = () => {
-
-                if (
-                    isAutoPlay &&
-                    isVisible &&
-                    window.innerWidth <= 900
-                ) {
-
-                    stopAutoPlay();
-
-                    autoPlayInterval = setInterval(
-                        nextSlide,
-                        3500
-                    );
-
+                stopAutoPlay();
+                if (isAutoPlay && isVisible && items.length > 1) {
+                    autoPlayInterval = setInterval(nextSlide, 4000);
                 }
-
-            };
-
-            const stopAutoPlay = () => {
-                clearInterval(autoPlayInterval);
             };
 
             if (nextBtn) {
-
                 nextBtn.addEventListener('click', () => {
-
                     stopAutoPlay();
                     nextSlide();
                     startAutoPlay();
-
                 });
-
             }
 
             if (prevBtn) {
-
                 prevBtn.addEventListener('click', () => {
-
                     stopAutoPlay();
                     prevSlide();
                     startAutoPlay();
-
                 });
-
             }
 
-            // Para no toque
-            wrapper.addEventListener(
-                'touchstart',
-                stopAutoPlay,
-                { passive: true }
-            );
+            let scrollTimer;
+            container.addEventListener('scroll', () => {
+                clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    const step = getStep();
+                    if (step > 0) {
+                        currentIndex = Math.max(0, Math.min(items.length - 1, Math.round(container.scrollLeft / step)));
+                        if (dotsContainer) {
+                            dotsContainer.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                                dot.classList.toggle('active', index === currentIndex);
+                                dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
+                            });
+                        }
+                    }
+                }, 80);
+            }, { passive: true });
 
-            wrapper.addEventListener(
-                'touchend',
-                startAutoPlay,
-                { passive: true }
-            );
+            wrapper.addEventListener('mouseenter', stopAutoPlay);
+            wrapper.addEventListener('mouseleave', startAutoPlay);
+            wrapper.addEventListener('touchstart', stopAutoPlay, { passive: true });
+            wrapper.addEventListener('touchend', startAutoPlay, { passive: true });
+
+            if ('IntersectionObserver' in window) {
+                try {
+                    const visibilityObserver = new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            isVisible = entry.isIntersecting;
+                            if (isVisible) startAutoPlay();
+                            else stopAutoPlay();
+                        });
+                    }, { threshold: 0.25 });
+
+                    visibilityObserver.observe(wrapper);
+                } catch (error) {
+                    startAutoPlay();
+                }
+            } else {
+                startAutoPlay();
+            }
+
+            window.addEventListener('resize', () => {
+                goToSlide(currentIndex, false);
+            }, { passive: true });
 
         });
 
 
-        // 4. MODAL DE UPSELL (CAIXINHA DE AVISO)
+        // 5. MODAL DE UPSELL (CAIXINHA DE AVISO)
 
         const btnBasicPlan =
             document.getElementById('btn-basic-plan');
