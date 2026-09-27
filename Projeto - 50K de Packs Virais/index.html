@@ -944,6 +944,7 @@
             -webkit-overflow-scrolling: touch;
             overscroll-behavior-x: contain;
             padding: 8px 2px 14px;
+            scroll-padding-inline: 2px;
         }
 
         .slider-container::-webkit-scrollbar {
@@ -953,10 +954,10 @@
         .slider-item {
             flex: 0 0 calc((100% - 40px) / 3) !important;
             min-width: 0;
-            scroll-snap-align: center;
+            scroll-snap-align: start;
             scroll-snap-stop: always;
             border: 1px solid #222;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             background: #0a0a0a;
             box-shadow: 0 12px 30px rgba(0,0,0,0.28);
@@ -972,8 +973,10 @@
         .slider-item img {
             display: block;
             width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
+            aspect-ratio: 16 / 9;
+            height: auto;
+            object-fit: contain;
+            background: #0a0a0a;
             border-radius: 0 !important;
         }
 
@@ -1028,6 +1031,84 @@
             width: 22px;
             border-radius: 999px;
             background: var(--offer-green);
+        }
+
+        /* =========================================
+           CARROSSEL DE DEPOIMENTOS
+           ========================================= */
+        .testimonials-slider-wrapper {
+            max-width: 760px;
+            margin: 42px auto 0;
+            padding: 0 44px 34px;
+            position: relative;
+        }
+
+        .testimonials-slider {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 0;
+            will-change: transform;
+            transition: transform 0.55s cubic-bezier(.22,.61,.36,1);
+        }
+
+        .testimonials-slide {
+            flex: 0 0 100%;
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 0 2px;
+        }
+
+        .testimonials-slide .testi-card {
+            min-height: 250px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.30);
+        }
+
+        .testimonials-slider-wrapper .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+        }
+
+        .testimonials-slider-wrapper .slider-btn.prev {
+            left: 0;
+        }
+
+        .testimonials-slider-wrapper .slider-btn.next {
+            right: 0;
+        }
+
+        .testimonials-slider-wrapper .slider-btn:hover {
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .testimonials-slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            margin-top: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-slider-wrapper {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .testimonials-slide .testi-card {
+                min-height: 270px;
+                padding: 24px 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1180,7 +1261,132 @@
                 font-size: 10px;
             }
         }
-    </style>
+    
+        /* =========================================
+           CARROSSÉIS — ESTRUTURA FINAL
+           ========================================= */
+        .infinite-carousel {
+            max-width: 1000px;
+            margin: 48px auto 0;
+            padding: 0 48px 38px;
+            position: relative;
+        }
+
+        .infinite-carousel .carousel-viewport {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .infinite-carousel .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            transition: transform 0.55s cubic-bezier(.22,.61,.36,1);
+            will-change: transform;
+        }
+
+        .infinite-carousel .slider-item {
+            margin: 0;
+            min-width: 0;
+            border: 1px solid #222;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #0a0a0a;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+            scroll-snap-align: none;
+            transform: none;
+        }
+
+        .infinite-carousel .slider-item:hover {
+            transform: none;
+        }
+
+        .infinite-carousel .slider-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: contain;
+            background: #0a0a0a;
+        }
+
+        .infinite-carousel .slider-btn {
+            display: flex !important;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #101010;
+            border: 1px solid rgba(69,225,4,.55);
+            color: var(--primary-color);
+            z-index: 5;
+        }
+
+        .infinite-carousel .slider-btn.prev { left: 0; }
+        .infinite-carousel .slider-btn.next { right: 0; }
+
+        .infinite-carousel .slider-dots,
+        .infinite-carousel .testimonials-slider-dots {
+            min-height: 18px;
+            margin-top: 12px;
+        }
+
+        .testimonials-slider-wrapper {
+            max-width: 760px;
+            margin: 42px auto 0;
+            padding: 0 48px 38px;
+            position: relative;
+        }
+
+        .testimonials-slider-wrapper .testimonials-slider {
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .testimonials-slider-wrapper .testimonials-track {
+            gap: 0;
+            width: max-content;
+        }
+
+        .testimonials-slider-wrapper .testimonials-slide {
+            min-width: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .testimonials-slider-wrapper .testi-card {
+            min-height: 250px;
+            box-sizing: border-box;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 18px 45px rgba(0,0,0,.30);
+        }
+
+        @media (max-width: 768px) {
+            .infinite-carousel {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .infinite-carousel .slider-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 18px;
+            }
+
+            .testimonials-slider-wrapper {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .testimonials-slider-wrapper .testi-card {
+                min-height: 270px;
+                padding: 24px 20px;
+            }
+        }
+</style>
 </head>
 
 <body>
@@ -1198,42 +1404,189 @@
             <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
         </header>
 
-        <!-- 2. PERFIS QUE MAIS CRESCEM -->
-        <section class="container reveal profile-proof-section">
-            <span class="section-kicker">PROVA SOCIAL</span>
-            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
-            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
+     <!-- 2. PERFIS QUE MAIS CRESCEM -->
 
-            <div class="slider-wrapper" id="slider-perfis" data-autoplay="true" aria-label="Perfis que crescem sem mostrar o rosto">
-                <button class="slider-btn prev" type="button" aria-label="Ver perfil anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
+<section class="container reveal profile-proof-section">
 
-                <div class="slider-container">
-                    <div class="slider-item">
-                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Comentário de perfil 1" loading="lazy" decoding="async">
-                    </div>
+    <h2>
+        OS PERFIS QUE MAIS CRESCEM HOJE
+        <span class="highlight">NÃO MOSTRAM O ROSTO!</span>
+    </h2>
 
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Comentário de perfil 2" loading="lazy" decoding="async">
-                    </div>
+    <p>
+        Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência,
+        atraindo seguidores todos os dias, com estratégias simples.
+    </p>
 
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Comentário de perfil 3" loading="lazy" decoding="async">
-                    </div>
+    <div
+        class="slider-wrapper infinite-carousel"
+        id="slider-perfis"
+        data-autoplay="true"
+        aria-label="Perfis que crescem sem mostrar o rosto"
+    >
+
+        <button
+            class="slider-btn prev"
+            type="button"
+            aria-label="Ver perfil anterior"
+        >
+            <i class="fas fa-chevron-left"></i>
+        </button>
+
+        <div
+            class="carousel-viewport"
+            style="
+                width: 100%;
+                max-width: 1120px;
+                margin: 0 auto;
+                overflow: hidden;
+            "
+        >
+
+            <div
+                class="carousel-track"
+                style="
+                    display: flex;
+                    align-items: center;
+                "
+            >
+
+                <!-- IMAGEM 1 -->
+                <div
+                    class="slider-item"
+                    style="
+                        flex: 0 0 33.333%;
+                        max-width: 360px;
+                        padding: 0 8px;
+                        box-sizing: border-box;
+                    "
+                >
+                    <img
+                        src="assets/images/Comentarios-1.jpeg"
+                        width="360"
+                        height="203"
+                        alt="Comentário de perfil 1"
+                        loading="lazy"
+                        decoding="async"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            aspect-ratio: 16 / 9;
+                            object-fit: cover;
+                            border-radius: 12px;
+                        "
+                    >
                 </div>
 
-                <button class="slider-btn next" type="button" aria-label="Ver próximo perfil">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <!-- IMAGEM 2 -->
+                <div
+                    class="slider-item"
+                    style="
+                        flex: 0 0 33.333%;
+                        max-width: 360px;
+                        padding: 0 8px;
+                        box-sizing: border-box;
+                    "
+                >
+                    <img
+                        src="assets/images/Comentario-2.jpeg"
+                        width="360"
+                        height="203"
+                        alt="Comentário de perfil 2"
+                        loading="lazy"
+                        decoding="async"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            aspect-ratio: 16 / 9;
+                            object-fit: cover;
+                            border-radius: 12px;
+                        "
+                    >
+                </div>
 
-                <div class="slider-dots" aria-label="Navegação dos perfis"></div>
+                <!-- IMAGEM 3 -->
+                <div
+                    class="slider-item"
+                    style="
+                        flex: 0 0 33.333%;
+                        max-width: 360px;
+                        padding: 0 8px;
+                        box-sizing: border-box;
+                    "
+                >
+                    <img
+                        src="assets/images/Comentario-3.jpeg"
+                        width="360"
+                        height="203"
+                        alt="Comentário de perfil 3"
+                        loading="lazy"
+                        decoding="async"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            aspect-ratio: 16 / 9;
+                            object-fit: cover;
+                            border-radius: 12px;
+                        "
+                    >
+                </div>
+
+                <!-- IMAGEM 4 -->
+                <div
+                    class="slider-item"
+                    style="
+                        flex: 0 0 33.333%;
+                        max-width: 360px;
+                        padding: 0 8px;
+                        box-sizing: border-box;
+                    "
+                >
+                    <img
+                        src="assets/images/Comentario-04.jpeg"
+                        width="360"
+                        height="203"
+                        alt="Comentário de perfil 4"
+                        loading="lazy"
+                        decoding="async"
+                        style="
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            aspect-ratio: 16 / 9;
+                            object-fit: cover;
+                            border-radius: 12px;
+                        "
+                    >
+                </div>
+
             </div>
-        </section>
+
+        </div>
+
+        <button
+            class="slider-btn next"
+            type="button"
+            aria-label="Ver próximo perfil"
+        >
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <div
+            class="slider-dots"
+            aria-label="Navegação dos perfis"
+        ></div>
+
+    </div>
+
+</section>
 
         <!-- 3. O QUE ELAS TÊM EM COMUM? -->
         <section class="container reveal common-pages-section">
-            <span class="section-kicker">O PADRÃO SE REPETE</span>
+           
             <h2>O QUE ESSAS PÁGINAS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
             <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
         </section>
@@ -1444,91 +1797,74 @@
                 Jute-se a mais de <strong class="highlight">2.970 pessoas</strong> que estão viralizando todos os dias.
             </p>
 
-            <div class="grid-3">
+            <div class="testimonials-slider-wrapper infinite-carousel" id="slider-depoimentos" data-autoplay="true" aria-label="Depoimentos de clientes">
+                <button class="slider-btn prev" type="button" aria-label="Depoimento anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
 
-                <!-- Depoimento 1 -->
-                <div class="testi-card">
-                    <div class="testi-header">
-                        <div class="testi-avatar">
-                            <img src="assets/images/01.jpg" alt="Depoimento de Luan Pereira" loading="lazy" decoding="async" width="50" height="50">
+                <div class="testimonials-slider carousel-viewport">
+                    <div class="testimonials-track carousel-track">
+                        <div class="testimonials-slide">
+                            <div class="testi-card">
+                                <div class="testi-header">
+                                    <div class="testi-avatar">
+                                        <img src="assets/images/01.jpg" alt="Depoimento de Luan Pereira" loading="lazy" decoding="async" width="50" height="50">
+                                    </div>
+                                    <div class="testi-info">
+                                        <h4>Luan Pereira</h4>
+                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                                    </div>
+                                </div>
+                                <div class="testi-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="testi-text">"Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"</p>
+                            </div>
                         </div>
 
-                        <div class="testi-info">
-                            <h4>Luan Pereira</h4>
-                            <span class="testi-verified">
-                                <i class="fas fa-check"></i> Compra Verificada
-                            </span>
+                        <div class="testimonials-slide">
+                            <div class="testi-card">
+                                <div class="testi-header">
+                                    <div class="testi-avatar">
+                                        <img src="assets/images/02.jpg" alt="Depoimento de Gabriel Martins" loading="lazy" decoding="async" width="50" height="50">
+                                    </div>
+                                    <div class="testi-info">
+                                        <h4>Gabriel Martins</h4>
+                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                                    </div>
+                                </div>
+                                <div class="testi-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="testi-text">"Gostei muito do material. Ta tudo muito bem feito e a biblioteca e muito bem organizada, tudo está separado por categoria. O suporte também é muito bom e prestativo! Otima qualidade, Recomendo."</p>
+                            </div>
+                        </div>
+
+                        <div class="testimonials-slide">
+                            <div class="testi-card">
+                                <div class="testi-header">
+                                    <div class="testi-avatar">
+                                        <img src="assets/images/03.jpg" alt="Depoimento de Lucas Ferreira" loading="lazy" decoding="async" width="50" height="50">
+                                    </div>
+                                    <div class="testi-info">
+                                        <h4>Lucas Ferreira</h4>
+                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                                    </div>
+                                </div>
+                                <div class="testi-stars">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="testi-text">"O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="testi-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-
-                    <p class="testi-text">
-                        "Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"
-                    </p>
                 </div>
 
-                <!-- Depoimento 2 -->
-                <div class="testi-card">
-                    <div class="testi-header">
-                        <div class="testi-avatar">
-                            <img src="assets/images/02.jpg" alt="Depoimento de Gabriel Martins" loading="lazy" decoding="async" width="50" height="50">
-                        </div>
+                <button class="slider-btn next" type="button" aria-label="Próximo depoimento">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
 
-                        <div class="testi-info">
-                            <h4>Gabriel Martins</h4>
-                            <span class="testi-verified">
-                                <i class="fas fa-check"></i> Compra Verificada
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="testi-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-
-                    <p class="testi-text">
-                        "Gostei muito do material. Ta tudo muito bem feito e a biblioteca e muito bem organizada, tudo está separado por categoria. O suporte também é muito bom e prestativo! Otima qualidade, Recomendo.                    </p>
-                </div>
-
-                <!-- Depoimento 3 -->
-                <div class="testi-card">
-                    <div class="testi-header">
-                        <div class="testi-avatar">
-                            <img src="assets/images/03.jpg" alt="Depoimento de Lucas Ferreira" loading="lazy" decoding="async" width="50" height="50">
-                        </div>
-
-                        <div class="testi-info">
-                            <h4>Lucas Ferreira</h4>
-                            <span class="testi-verified">
-                                <i class="fas fa-check"></i> Compra Verificada
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="testi-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-
-                    <p class="testi-text">
-                        "O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"
-                    </p>
-                </div>
-
+                <div class="testimonials-slider-dots" aria-label="Navegação dos depoimentos"></div>
             </div>
         </section>
 
@@ -1907,145 +2243,225 @@
         });
 
 
-        // 3. CARROSSEL DE PERFIS
-        // Controles por setas, toque/deslize, indicadores e autoplay no mobile.
+        // 3. CARROSSÉIS
+        // Loop infinito, troca a cada 3 segundos e pausa quando a seção sai da tela.
+        (() => {
+            const initInfiniteCarousel = (wrapper) => {
+                if (!wrapper) return;
 
-        document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+                const viewport = wrapper.querySelector('.carousel-viewport');
+                const track = wrapper.querySelector('.carousel-track');
+                const prevBtn = wrapper.querySelector('.prev');
+                const nextBtn = wrapper.querySelector('.next');
+                const dotsContainer = wrapper.querySelector('.slider-dots, .testimonials-slider-dots');
+                const originalSlides = Array.from(track ? track.children : []);
 
-            const container = wrapper.querySelector('.slider-container');
-            const items = Array.from(wrapper.querySelectorAll('.slider-item'));
-            const prevBtn = wrapper.querySelector('.prev');
-            const nextBtn = wrapper.querySelector('.next');
-            const dotsContainer = wrapper.querySelector('.slider-dots');
-            const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
+                if (!viewport || !track || originalSlides.length < 1) return;
 
-            if (!container || !items.length) {
-                return;
-            }
+                const originalCount = originalSlides.length;
+                let visibleCount = 1;
+                let current = 0;
+                let timer = null;
+                let isVisible = false;
+                let pausedByInteraction = false;
+                let startX = 0;
+                let deltaX = 0;
 
-            let autoPlayInterval = null;
-            let isVisible = true;
-            let currentIndex = 0;
-
-            const getStep = () => {
-                const firstItem = items[0];
-                if (!firstItem) return container.clientWidth;
-                const styles = window.getComputedStyle(container);
-                const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
-                return firstItem.getBoundingClientRect().width + gap;
-            };
-
-            const goToSlide = (index, smooth = true) => {
-                const maxIndex = items.length - 1;
-                currentIndex = (index + items.length) % items.length;
-
-                container.scrollTo({
-                    left: getStep() * currentIndex,
-                    behavior: smooth ? 'smooth' : 'auto'
-                });
-
-                if (dotsContainer) {
-                    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, dotIndex) => {
-                        dot.classList.toggle('active', dotIndex === currentIndex);
-                        dot.setAttribute('aria-current', dotIndex === currentIndex ? 'true' : 'false');
-                    });
-                }
-            };
-
-            const nextSlide = () => goToSlide(currentIndex + 1);
-            const prevSlide = () => goToSlide(currentIndex - 1);
-
-            if (dotsContainer) {
-                items.forEach((_, index) => {
-                    const dot = document.createElement('button');
-                    dot.type = 'button';
-                    dot.className = 'slider-dot' + (index === 0 ? ' active' : '');
-                    dot.setAttribute('aria-label', `Ir para o perfil ${index + 1}`);
-                    dot.setAttribute('aria-current', index === 0 ? 'true' : 'false');
-                    dot.addEventListener('click', () => {
-                        stopAutoPlay();
-                        goToSlide(index);
-                        startAutoPlay();
-                    });
-                    dotsContainer.appendChild(dot);
-                });
-            }
-
-            const stopAutoPlay = () => {
-                if (autoPlayInterval) {
-                    clearInterval(autoPlayInterval);
-                    autoPlayInterval = null;
-                }
-            };
-
-            const startAutoPlay = () => {
-                stopAutoPlay();
-                if (isAutoPlay && isVisible && items.length > 1) {
-                    autoPlayInterval = setInterval(nextSlide, 4000);
-                }
-            };
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', () => {
-                    stopAutoPlay();
-                    nextSlide();
-                    startAutoPlay();
-                });
-            }
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', () => {
-                    stopAutoPlay();
-                    prevSlide();
-                    startAutoPlay();
-                });
-            }
-
-            let scrollTimer;
-            container.addEventListener('scroll', () => {
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
-                    const step = getStep();
-                    if (step > 0) {
-                        currentIndex = Math.max(0, Math.min(items.length - 1, Math.round(container.scrollLeft / step)));
-                        if (dotsContainer) {
-                            dotsContainer.querySelectorAll('.slider-dot').forEach((dot, index) => {
-                                dot.classList.toggle('active', index === currentIndex);
-                                dot.setAttribute('aria-current', index === currentIndex ? 'true' : 'false');
-                            });
-                        }
+                const getVisibleCount = () => {
+                    if (wrapper.id === 'slider-perfis') {
+                        if (window.innerWidth >= 900) return Math.min(3, originalCount);
+                        return 1;
                     }
-                }, 80);
-            }, { passive: true });
+                    return 1;
+                };
 
-            wrapper.addEventListener('mouseenter', stopAutoPlay);
-            wrapper.addEventListener('mouseleave', startAutoPlay);
-            wrapper.addEventListener('touchstart', stopAutoPlay, { passive: true });
-            wrapper.addEventListener('touchend', startAutoPlay, { passive: true });
+                const getGap = () => parseFloat(getComputedStyle(track).gap || '0') || 0;
 
-            if ('IntersectionObserver' in window) {
-                try {
-                    const visibilityObserver = new IntersectionObserver(entries => {
+                const buildClones = () => {
+                    track.innerHTML = '';
+                    visibleCount = getVisibleCount();
+
+                    const prepend = originalSlides.slice(-visibleCount).map(slide => slide.cloneNode(true));
+                    const append = originalSlides.slice(0, visibleCount).map(slide => slide.cloneNode(true));
+                    [...prepend, ...originalSlides, ...append].forEach(slide => track.appendChild(slide));
+
+                    Array.from(track.children).forEach(slide => {
+                        slide.classList.add('carousel-slide');
+                    });
+
+                    current = visibleCount;
+                    updateSlideWidths();
+                    move(false);
+                    buildDots();
+                };
+
+                const updateSlideWidths = () => {
+                    const gap = getGap();
+                    const width = viewport.clientWidth;
+                    let slideWidth;
+
+                    if (wrapper.id === 'slider-perfis' && visibleCount > 1) {
+                        slideWidth = (width - gap * (visibleCount - 1)) / visibleCount;
+                    } else {
+                        slideWidth = width;
+                    }
+
+                    Array.from(track.children).forEach(slide => {
+                        slide.style.flex = `0 0 ${slideWidth}px`;
+                    });
+                };
+
+                const getStep = () => {
+                    const first = track.children[0];
+                    if (!first) return viewport.clientWidth;
+                    return first.getBoundingClientRect().width + getGap();
+                };
+
+                const move = (smooth = true) => {
+                    track.style.transition = smooth ? 'transform 0.55s cubic-bezier(.22,.61,.36,1)' : 'none';
+                    track.style.transform = `translate3d(${-current * getStep()}px, 0, 0)`;
+                    updateDots();
+                };
+
+                const logicalIndex = () => {
+                    let index = current - visibleCount;
+                    if (index < 0) index += originalCount;
+                    if (index >= originalCount) index -= originalCount;
+                    return index;
+                };
+
+                const updateDots = () => {
+                    if (!dotsContainer) return;
+                    dotsContainer.querySelectorAll('.slider-dot').forEach((dot, index) => {
+                        const active = index === logicalIndex();
+                        dot.classList.toggle('active', active);
+                        dot.setAttribute('aria-current', active ? 'true' : 'false');
+                    });
+                };
+
+                const buildDots = () => {
+                    if (!dotsContainer) return;
+                    dotsContainer.innerHTML = '';
+                    for (let i = 0; i < originalCount; i++) {
+                        const dot = document.createElement('button');
+                        dot.type = 'button';
+                        dot.className = 'slider-dot';
+                        dot.setAttribute('aria-label', `Ir para o item ${i + 1}`);
+                        dot.addEventListener('click', () => {
+                            stop();
+                            current = visibleCount + i;
+                            move(true);
+                            start();
+                        });
+                        dotsContainer.appendChild(dot);
+                    }
+                    updateDots();
+                };
+
+                const next = () => {
+                    current += 1;
+                    move(true);
+                };
+
+                const prev = () => {
+                    current -= 1;
+                    move(true);
+                };
+
+                track.addEventListener('transitionend', () => {
+                    if (current >= originalCount + visibleCount) {
+                        current = visibleCount;
+                        move(false);
+                    } else if (current < visibleCount) {
+                        current = originalCount + current;
+                        move(false);
+                    }
+                });
+
+                const stop = () => {
+                    if (timer) {
+                        clearInterval(timer);
+                        timer = null;
+                    }
+                };
+
+                const start = () => {
+                    stop();
+                    if (wrapper.dataset.autoplay === 'true' && isVisible && !pausedByInteraction && originalCount > 1) {
+                        timer = setInterval(next, 3000);
+                    }
+                };
+
+                nextBtn?.addEventListener('click', () => {
+                    stop();
+                    next();
+                    start();
+                });
+
+                prevBtn?.addEventListener('click', () => {
+                    stop();
+                    prev();
+                    start();
+                });
+
+                viewport.addEventListener('mouseenter', () => {
+                    pausedByInteraction = true;
+                    stop();
+                });
+
+                viewport.addEventListener('mouseleave', () => {
+                    pausedByInteraction = false;
+                    start();
+                });
+
+                viewport.addEventListener('touchstart', event => {
+                    startX = event.touches[0].clientX;
+                    deltaX = 0;
+                    pausedByInteraction = true;
+                    stop();
+                }, { passive: true });
+
+                viewport.addEventListener('touchmove', event => {
+                    deltaX = event.touches[0].clientX - startX;
+                }, { passive: true });
+
+                viewport.addEventListener('touchend', () => {
+                    if (Math.abs(deltaX) > 45) {
+                        deltaX < 0 ? next() : prev();
+                    }
+                    pausedByInteraction = false;
+                    start();
+                }, { passive: true });
+
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver(entries => {
                         entries.forEach(entry => {
                             isVisible = entry.isIntersecting;
-                            if (isVisible) startAutoPlay();
-                            else stopAutoPlay();
+                            if (isVisible) start();
+                            else stop();
                         });
-                    }, { threshold: 0.25 });
-
-                    visibilityObserver.observe(wrapper);
-                } catch (error) {
-                    startAutoPlay();
+                    }, { threshold: 0.2 });
+                    observer.observe(wrapper);
+                } else {
+                    isVisible = true;
                 }
-            } else {
-                startAutoPlay();
-            }
 
-            window.addEventListener('resize', () => {
-                goToSlide(currentIndex, false);
-            }, { passive: true });
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        buildClones();
+                        start();
+                    }, 120);
+                }, { passive: true });
 
-        });
+                buildClones();
+                start();
+            };
+
+            initInfiniteCarousel(document.getElementById('slider-perfis'));
+            initInfiniteCarousel(document.getElementById('slider-depoimentos'));
+        })();
 
 
         // 5. MODAL DE UPSELL (CAIXINHA DE AVISO)
