@@ -34,6 +34,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Ativa o modo de animação somente quando o JavaScript estiver disponível -->
+    <script>
+        document.documentElement.classList.add('js-enabled');
+    </script>
+
     <style>
         :root {
             /* TEMA GLOBAL VERDE ORIGINAL */
@@ -70,15 +75,29 @@
             box-sizing: border-box;
         }
 
-        /* ANIMAÇÕES GERAIS SUPER LEVES */
+        /* ANIMAÇÕES GERAIS SUPER LEVES
+           O conteúdo fica visível por padrão.
+           As animações só são aplicadas quando o JavaScript está disponível. */
         .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .reveal.active {
             opacity: 1;
             transform: translateY(0);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        html.js-enabled .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        html.js-enabled .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Fallback para ambientes sem JavaScript */
+        noscript .reveal {
+            opacity: 1 !important;
+            transform: none !important;
         }
 
         /* CONTAINERS GERAIS */
@@ -171,13 +190,19 @@
             animation: none; 
             box-shadow: none;
         }
+
         .btn.basic-btn:hover { background-color: #1f1f1f; }
 
         /* Grids e Sliders (Carrosséis) */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        .slider-wrapper { position: relative; width: 100%; padding: 10px 0;}
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            padding: 10px 0;
+        }
+
         .slider-container {
             display: flex;
             overflow-x: auto;
@@ -188,11 +213,16 @@
             padding: 10px 0;
             -webkit-overflow-scrolling: touch; 
         }
-        .slider-container::-webkit-scrollbar { display: none; }
+
+        .slider-container::-webkit-scrollbar {
+            display: none;
+        }
+
         .slider-item {
             flex: 0 0 100%;
             scroll-snap-align: center;
         }
+
         .slider-btn {
             position: absolute;
             top: 50%;
@@ -207,12 +237,23 @@
             opacity: 0.8;
             transition: opacity 0.3s;
         }
-        .slider-btn:hover { opacity: 1; }
-        .slider-btn.prev { left: -10px; }
-        .slider-btn.next { right: -10px; }
+
+        .slider-btn:hover {
+            opacity: 1;
+        }
+
+        .slider-btn.prev {
+            left: -10px;
+        }
+
+        .slider-btn.next {
+            right: -10px;
+        }
 
         /* Oculta as setas especificamente no slider de perfis (conforme solicitado) */
-        #slider-perfis .slider-btn { display: none !important; }
+        #slider-perfis .slider-btn {
+            display: none !important;
+        }
 
         /* =========================================
            NOVA SEÇÃO "COMO FUNCIONA" (BLOCOS)
@@ -230,10 +271,12 @@
             align-items: center;
             justify-content: center;
         }
+
         .simple-card:hover {
             border-color: var(--offer-green);
             transform: translateY(-5px);
         }
+
         .step-num {
             background-color: var(--offer-green);
             color: #FAFAFA;
@@ -248,10 +291,12 @@
             margin: 0 auto 20px auto;
             box-shadow: 0 5px 15px rgba(49, 185, 0, 0.3);
         }
+
         .step-icon {
             font-size: 35px;
             margin-bottom: 20px;
         }
+
         .simple-card h3 {
             font-size: 18px;
             color: #fff;
@@ -269,6 +314,7 @@
             gap: 15px;
             cursor: pointer;
         }
+
         .card-nicho-img {
             border-left: 5px solid var(--primary-color);
             border-radius: 4px;
@@ -276,43 +322,72 @@
             background-color: #111; 
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .card-nicho-img img {
             width: 100%;
             transition: transform 0.5s ease;
             aspect-ratio: 16/9;
             object-fit: cover;
         }
+
         .card-nicho:hover .card-nicho-img { 
             transform: translateY(-8px); 
             box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
         }
-        .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
-        .card-nicho p { font-size: 14px; color: #aaa; margin: 0; line-height: 1.5; }
+
+        .card-nicho:hover .card-nicho-img img {
+            transform: scale(1.05);
+        }
+
+        .card-nicho p {
+            font-size: 14px;
+            color: #aaa;
+            margin: 0;
+            line-height: 1.5;
+        }
 
         /* Seções de Fundo Branco */
-        .bg-white { background-color: var(--light-bg); color: var(--dark-text); }
-        .bg-white h2 { color: var(--dark-text); }
-        .bg-white p { color: #444; }
+        .bg-white {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+
+        .bg-white h2 {
+            color: var(--dark-text);
+        }
+
+        .bg-white p {
+            color: #444;
+        }
 
         /* Ícones Redes */
         .benefits-box {
-            border: 2px solid var(--offer-green); /* Verde alternativo (#31B900) */
+            border: 2px solid var(--offer-green);
             border-radius: 12px;
             padding: 35px 20px;
             text-align: center;
             background-color: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .benefits-box:hover { 
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(49, 185, 0, 0.15); 
         }
+
         .benefits-box i {
             font-size: 45px;
             color: var(--offer-green); 
             margin-bottom: 20px;
         }
-        .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; line-height: 1.5; }
+
+        .benefits-box p {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0;
+            color: #111;
+            line-height: 1.5;
+        }
 
         /* =========================================
            PROVAS SOCIAIS (DEPOIMENTOS TEXTO)
@@ -326,16 +401,19 @@
             transition: transform 0.3s ease, border-color 0.3s ease;
             height: 100%;
         }
+
         .testi-card:hover {
             transform: translateY(-5px);
             border-color: var(--primary-color);
         }
+
         .testi-header {
             display: flex;
             align-items: center;
             gap: 15px;
             margin-bottom: 15px;
         }
+
         .testi-avatar {
             width: 50px;
             height: 50px;
@@ -348,17 +426,20 @@
             color: #666;
             font-size: 20px;
         }
+
         .testi-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .testi-info h4 {
             margin: 0 0 5px 0;
             color: #fff;
             font-size: 18px;
             font-weight: 800;
         }
+
         .testi-verified {
             background-color: rgba(69, 225, 4, 0.15);
             color: var(--primary-color);
@@ -369,12 +450,14 @@
             display: inline-block;
             text-transform: uppercase;
         }
+
         .testi-stars {
             color: #FFD700;
             font-size: 14px;
             margin-bottom: 15px;
             letter-spacing: 2px;
         }
+
         .testi-text {
             font-size: 15px;
             color: #ccc;
@@ -394,13 +477,31 @@
             flex-direction: column;
             justify-content: flex-start;
         }
+
         .bonus-card:hover { 
             transform: translateY(-10px); 
             box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
-        .bonus-card h2 { font-size: 55px; margin-bottom: 5px; color: var(--primary-color); }
-        .bonus-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 15px; color: var(--primary-color); }
-        .bonus-card p { font-size: 15px; font-weight: 600; color: #111; line-height: 1.5; }
+
+        .bonus-card h2 {
+            font-size: 55px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .bonus-card h3 {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .bonus-card p {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111;
+            line-height: 1.5;
+        }
 
         /* =========================================
            OFERTAS / PREÇOS
@@ -410,7 +511,11 @@
             padding: 80px 20px;
             border-top: 1px solid #222;
         }
-        .pricing-section h2 { color: #ffffff; margin-bottom: 50px; }
+
+        .pricing-section h2 {
+            color: #ffffff;
+            margin-bottom: 50px;
+        }
         
         .pricing-grid {
             display: grid;
@@ -434,8 +539,15 @@
             transition: transform 0.3s ease;
         }
 
-        .pricing-box.basic { border: 2px solid #ddd; transform: scale(0.95); }
-        .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
+        .pricing-box.basic {
+            border: 2px solid #ddd;
+            transform: scale(0.95);
+        }
+
+        .pricing-box.basic:hover {
+            transform: scale(0.98);
+            border-color: #ccc;
+        }
 
         .pricing-box.premium {
             background-color: #ffffff;
@@ -443,7 +555,10 @@
             transform: scale(1.02); 
             z-index: 2;
         }
-        .pricing-box.premium:hover { transform: scale(1.05); }
+
+        .pricing-box.premium:hover {
+            transform: scale(1.05);
+        }
         
         .pricing-badge {
             position: absolute;
@@ -460,141 +575,458 @@
             white-space: nowrap;
         }
 
-        .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
-        .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
-        .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .pricing-box li i { color: var(--offer-green); font-size: 20px; }
+        .pricing-box h3 {
+            font-size: 24px;
+            margin-top: 0;
+            font-weight: 900;
+            margin-bottom: 25px;
+            color: #111;
+        }
+
+        .pricing-box ul {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            font-weight: 800;
+            font-size: 15px;
+            margin-bottom: 30px;
+            color: #333;
+            flex-grow: 1;
+        }
+
+        .pricing-box li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-box li i {
+            color: var(--offer-green);
+            font-size: 20px;
+        }
         
         /* Itens Riscados (Plano Básico) com Cor Cinza Restabelecida */
         .pricing-box li.disabled {
             text-decoration: line-through;
             opacity: 0.5;
-            color: #888; /* Voltou para o cinza, como na imagem */
+            color: #888;
         }
-        .pricing-box li.disabled i { color: #888; }
 
-        .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
-        .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .pricing-box li.disabled i {
+            color: #888;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .price-new {
+            font-size: 55px;
+            font-weight: 900;
+            color: var(--offer-green);
+            margin: 5px 0 20px 0;
+            line-height: 1;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
         
         /* SELOS DE SEGURANÇA NA MESMA LINHA E CINZAS */
         .trust-badges-inline {
             display: flex;
-            flex-wrap: nowrap; /* Impede quebra de linha */
+            flex-wrap: nowrap;
             justify-content: center;
             gap: 12px;
             margin-top: 15px;
             white-space: nowrap; 
         }
+
         .trust-badges-inline span {
             font-size: 11px;
             font-weight: 700;
-            color: #888; /* Cinza */
+            color: #888;
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        .trust-badges-inline span i { color: #888; font-size: 12px; }
+
+        .trust-badges-inline span i {
+            color: #888;
+            font-size: 12px;
+        }
 
         /* FAQ (Dúvidas Frequentes) */
-        .faq-section { background-color: var(--bg-color); padding: 80px 0; }
-        .faq-section h2 { color: #fff; }
-        .faq-section .container { padding-top: 0; padding-bottom: 0; }
+        .faq-section {
+            background-color: var(--bg-color);
+            padding: 80px 0;
+        }
 
-        .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
-        .faq-item { background-color: #111; margin-bottom: 15px; border-radius: 8px; text-align: left; border: 1px solid #333; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 18px; color: #fff; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-        .faq-answer p { padding: 0 20px 20px 20px; color: #ccc; font-size: 16px; line-height: 1.6; margin: 0; border-top: 1px solid #333; }
-        .faq-item.faq-open .faq-answer { max-height: 500px; }
-        .faq-item.faq-open .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
+        .faq-section h2 {
+            color: #fff;
+        }
+
+        .faq-section .container {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0 auto;
+        }
+
+        .faq-item {
+            background-color: #111;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            text-align: left;
+            border: 1px solid #333;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 20px 20px 20px;
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            border-top: 1px solid #333;
+        }
+
+        .faq-item.faq-open .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-item.faq-open .faq-question i {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
 
         /* MODAL DE UPSELL (POP-UP) */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center;
-            z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
         }
-        .modal-overlay.show { opacity: 1; visibility: visible; }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .modal-content {
-            background: #ffffff; width: 90%; max-width: 420px; border-radius: 20px; padding: 35px 25px;
-            text-align: center; position: relative; transform: scale(0.9); transition: transform 0.3s ease;
-            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3); border: 4px solid var(--offer-green);
+            background: #ffffff;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3);
+            border: 4px solid var(--offer-green);
         }
-        .modal-overlay.show .modal-content { transform: scale(1); }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
         .modal-badge {
-            background: var(--offer-green); color: #ffffff; padding: 6px 20px; border-radius: 20px;
-            font-weight: 900; font-size: 13px; display: inline-block; margin-bottom: 15px; letter-spacing: 1px;
+            background: var(--offer-green);
+            color: #ffffff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 13px;
+            display: inline-block;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
-        .modal-title { font-size: 24px; font-weight: 900; color: #111; margin-bottom: 10px; line-height: 1.2; text-transform: uppercase; }
-        .modal-subtitle { font-size: 15px; font-weight: 600; color: #444; margin-bottom: 25px; }
-        .modal-list { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; }
-        .modal-list li { font-size: 15px; font-weight: 800; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .modal-list li i { color: var(--offer-green); font-size: 18px; }
-        .modal-price { margin-bottom: 25px; }
-        .modal-price-old { display: block; text-decoration: line-through; color: #999; font-size: 16px; font-weight: 800; }
-        .modal-price-new { display: block; font-size: 50px; font-weight: 900; color: var(--offer-green); line-height: 1; }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #111;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .modal-subtitle {
+            font-size: 15px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 25px;
+        }
+
+        .modal-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .modal-list li {
+            font-size: 15px;
+            font-weight: 800;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-list li i {
+            color: var(--offer-green);
+            font-size: 18px;
+        }
+
+        .modal-price {
+            margin-bottom: 25px;
+        }
+
+        .modal-price-old {
+            display: block;
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .modal-price-new {
+            display: block;
+            font-size: 50px;
+            font-weight: 900;
+            color: var(--offer-green);
+            line-height: 1;
+        }
+
         .modal-btn-yes {
-            width: 100%; padding: 18px 10px; font-size: 16px; margin: 0 0 15px 0;
-            background-color: var(--offer-green); color: #FAFAFA; border-radius: 8px;
-            font-weight: 900; text-transform: uppercase; text-decoration: none; display: inline-block;
-            transition: transform 0.2s; animation: pulse-alt 2s infinite;
+            width: 100%;
+            padding: 18px 10px;
+            font-size: 16px;
+            margin: 0 0 15px 0;
+            background-color: var(--offer-green);
+            color: #FAFAFA;
+            border-radius: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+            animation: pulse-alt 2s infinite;
         }
-        .modal-btn-yes:hover { transform: scale(1.03); }
-        .modal-btn-no { background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 5px; }
+
+        .modal-btn-yes:hover {
+            transform: scale(1.03);
+        }
+
+        .modal-btn-no {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 13px;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 5px;
+        }
 
         /* Footer */
-        footer { border-top: 1px solid #222; padding: 30px 15px; text-align: center; color: #666; }
-        footer p { max-width: 900px; font-size: 12px; color: #777; margin: 0 auto 15px auto; line-height: 1.5; }
-        .footer-bottom {
-            max-width: 1100px; margin: 0 auto; border-top: 1px solid #222; padding-top: 20px;
-            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-            font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; color: #555;
+        footer {
+            border-top: 1px solid #222;
+            padding: 30px 15px;
+            text-align: center;
+            color: #666;
         }
-        .footer-bottom span { color: #fff; }
+
+        footer p {
+            max-width: 900px;
+            font-size: 12px;
+            color: #777;
+            margin: 0 auto 15px auto;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 0 auto;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .footer-bottom span {
+            color: #fff;
+        }
 
         /* =========================================
            RESPONSIVIDADE (DESKTOP E MOBILE)
            ========================================= */
         @media (min-width: 900px) {
-            .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
-            .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
-            .slider-container.grid-desktop-3 .slider-item, .slider-container.grid-desktop-4 .slider-item { flex: auto; }
-            .slider-wrapper .slider-btn { display: none; } 
-            .footer-bottom { flex-direction: row; }
-            .footer-bottom p.mt { margin-top: 0; }
+            .slider-container.grid-desktop-3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                overflow: visible;
+            }
+
+            .slider-container.grid-desktop-4 {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                overflow: visible;
+            }
+
+            .slider-container.grid-desktop-3 .slider-item,
+            .slider-container.grid-desktop-4 .slider-item {
+                flex: auto;
+            }
+
+            .slider-wrapper .slider-btn {
+                display: none;
+            }
+
+            .footer-bottom {
+                flex-direction: row;
+            }
+
+            .footer-bottom p.mt {
+                margin-top: 0;
+            }
         }
         
         @media (max-width: 768px) {
-            .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
-            .pricing-box.basic { transform: scale(1); }
-            .pricing-box.premium { transform: scale(1); margin-top: 10px; }
-            .footer-bottom p.mt { margin-top: 15px; }
-            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .pricing-box.basic {
+                transform: scale(1);
+            }
+
+            .pricing-box.premium {
+                transform: scale(1);
+                margin-top: 10px;
+            }
+
+            .footer-bottom p.mt {
+                margin-top: 15px;
+            }
+
+            .grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 600px) {
-            .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
-            .container { padding: 50px 15px; }
-            .hero-img { max-width: 90%; margin-bottom: 20px; }
-            h2 { font-size: 26px; }
-            p { font-size: 16px; }
-            .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .container {
+                padding: 50px 15px;
+            }
+
+            .hero-img {
+                max-width: 90%;
+                margin-bottom: 20px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 18px 20px;
+                font-size: 16px;
+            }
             
-            .pricing-section { padding: 50px 15px; }
-            .pricing-box { padding: 30px 20px; }
-            .pricing-box h3 { font-size: 20px; }
-            .price-new { font-size: 45px; }
+            .pricing-section {
+                padding: 50px 15px;
+            }
+
+            .pricing-box {
+                padding: 30px 20px;
+            }
+
+            .pricing-box h3 {
+                font-size: 20px;
+            }
+
+            .price-new {
+                font-size: 45px;
+            }
             
-            .faq-section { padding: 50px 0; }
-            .faq-question { font-size: 16px; padding: 20px 15px; }
+            .faq-section {
+                padding: 50px 0;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 20px 15px;
+            }
 
             /* Faz os selos caberem na tela em 1 linha no Mobile perfeitamente */
-            .trust-badges-inline { gap: 6px; }
-            .trust-badges-inline span { font-size: 9.5px; gap: 3px; }
-            .trust-badges-inline span i { font-size: 10px; }
+            .trust-badges-inline {
+                gap: 6px;
+            }
+
+            .trust-badges-inline span {
+                font-size: 9.5px;
+                gap: 3px;
+            }
+
+            .trust-badges-inline span i {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
@@ -621,6 +1053,7 @@
             <div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
                 <i class="fas fa-arrow-down"></i>
             </div>
+
             <h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
             
             <div class="grid-4" style="margin-top: 40px;">
@@ -628,14 +1061,17 @@
                     <div class="step-num">1</div>
                     <h3>Escolha um vídeo pronto</h3>
                 </div>
+
                 <div class="simple-card">
                     <div class="step-num">2</div>
                     <h3>Poste no TikTok ou Instagram</h3>
                 </div>
+
                 <div class="simple-card">
                     <div class="step-num">3</div>
                     <h3>Repita todos os dias</h3>
                 </div>
+
                 <div class="simple-card" style="border-color: var(--offer-green);">
                     <div class="step-icon">🚀</div>
                     <h3 class="highlight-alt">Comece a crescer</h3>
@@ -649,19 +1085,27 @@
             <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
             
             <div class="slider-wrapper" id="slider-perfis" style="margin-top: 50px;">
-                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn prev" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
                 <div class="slider-container grid-desktop-3">
                     <div class="slider-item">
                         <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
                     </div>
+
                     <div class="slider-item">
                         <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
                     </div>
+
                     <div class="slider-item">
                         <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
                     </div>
                 </div>
-                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+
+                <button class="slider-btn next" aria-label="Próximo">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </section>
 
@@ -671,75 +1115,128 @@
             
             <div class="grid-3" style="margin-top: 50px;">
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async">
+                    </div>
                     <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 350 cortes de Family Guy selecionados.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async">
+                    </div>
                     <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async">
+                    </div>
                     <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async">
+                    </div>
                     <p>Mais de 250 cortes de melhores momentos do futebol.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async">
+                    </div>
                     <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async">
+                    </div>
                     <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async">
+                    </div>
                     <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async">
+                    </div>
                     <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async">
+                    </div>
                     <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async">
+                    </div>
                     <p>Os melhores cortes de Pablo Marçal.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async">
+                    </div>
                     <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async">
+                    </div>
                     <p>Cortes com frases motivacionais e de melhoria de vida.</p>
                 </div>
+
                 <div class="card-nicho reveal">
-                    <div class="card-nicho-img"><img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async"></div>
+                    <div class="card-nicho-img">
+                        <img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async">
+                    </div>
                     <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
                 </div>
             </div>
@@ -757,30 +1254,38 @@
                         <i class="fas fa-shopping-cart"></i>
                         <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
                     </div>
+
                     <div class="benefits-box reveal">
                         <i class="far fa-clock"></i>
                         <p>Quer economizar tempo criando conteúdo.</p>
                     </div>
+
                     <div class="benefits-box reveal">
                         <i class="fas fa-chart-line"></i>
                         <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
                     </div>
+
                     <div class="benefits-box reveal">
                         <i class="fas fa-users"></i>
                         <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
                     </div>
                 </div>
 
-                <h2 style="margin-top: 50px;" class="reveal">ENTÃO ESSE PACK É PRA <span class="highlight-alt">VOCÊ!</span></h2>
+                <h2 style="margin-top: 50px;" class="reveal">
+                    ENTÃO ESSE PACK É PRA <span class="highlight-alt">VOCÊ!</span>
+                </h2>
             </div>
         </section>
 
         <!-- 7. PROVAS SOCIAIS (DEPOIMENTOS TEXTO) -->
         <section class="container reveal">
             <h2>PESSOAS COMUNS JÁ ESTÃO <span class="highlight">USANDO</span></h2>
-            <p style="font-size: 16px; margin-bottom: 40px;">Junte-se a mais de <strong class="highlight">4.850 alunos</strong> que estão viralizando todos os dias.</p>
+            <p style="font-size: 16px; margin-bottom: 40px;">
+                Junte-se a mais de <strong class="highlight">4.850 alunos</strong> que estão viralizando todos os dias.
+            </p>
 
             <div class="grid-3">
+
                 <!-- Depoimento 1 -->
                 <div class="testi-card">
                     <div class="testi-header">
@@ -789,15 +1294,26 @@
                             <!-- <img src="assets/images/foto-cliente-1.jpeg" alt="Foto"> -->
                             <i class="fas fa-user"></i>
                         </div>
+
                         <div class="testi-info">
                             <h4>Marcos Alves</h4>
-                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                            <span class="testi-verified">
+                                <i class="fas fa-check"></i> Compra Verificada
+                            </span>
                         </div>
                     </div>
+
                     <div class="testi-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <p class="testi-text">"Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"</p>
+
+                    <p class="testi-text">
+                        "Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"
+                    </p>
                 </div>
 
                 <!-- Depoimento 2 -->
@@ -808,15 +1324,26 @@
                             <!-- <img src="assets/images/foto-cliente-2.jpeg" alt="Foto"> -->
                             <i class="fas fa-user"></i>
                         </div>
+
                         <div class="testi-info">
                             <h4>Gabriel Martins</h4>
-                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                            <span class="testi-verified">
+                                <i class="fas fa-check"></i> Compra Verificada
+                            </span>
                         </div>
                     </div>
+
                     <div class="testi-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <p class="testi-text">"Eu trabalhava o dia todo e não tinha tempo para editar nada. Agora consigo criar vídeos inéditos em menos de 2 minutos."</p>
+
+                    <p class="testi-text">
+                        "Eu trabalhava o dia todo e não tinha tempo para editar nada. Agora consigo criar vídeos inéditos em menos de 2 minutos."
+                    </p>
                 </div>
 
                 <!-- Depoimento 3 -->
@@ -827,16 +1354,28 @@
                             <!-- <img src="assets/images/foto-cliente-3.jpeg" alt="Foto"> -->
                             <i class="fas fa-user"></i>
                         </div>
+
                         <div class="testi-info">
                             <h4>Lucas Ferreira</h4>
-                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                            <span class="testi-verified">
+                                <i class="fas fa-check"></i> Compra Verificada
+                            </span>
                         </div>
                     </div>
+
                     <div class="testi-stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-                    <p class="testi-text">"O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"</p>
+
+                    <p class="testi-text">
+                        "O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"
+                    </p>
                 </div>
+
             </div>
         </section>
 
@@ -846,26 +1385,31 @@
                 <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
                 
                 <div class="grid-4" style="margin-top: 50px;">
+
                     <div class="bonus-card reveal">
                         <h2>01</h2>
                         <h3>Pack Memes</h3>
                         <p>Pack de memes mais famosos 100% atualizados.</p>
                     </div>
+
                     <div class="bonus-card reveal">
                         <h2>02</h2>
                         <h3>Efeitos Sonoros</h3>
                         <p>Efeitos sonoros para utilizar em suas edições.</p>
                     </div>
+
                     <div class="bonus-card reveal">
                         <h2>03</h2>
                         <h3>Músicas Sem Copyright</h3>
                         <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
                     </div>
+
                     <div class="bonus-card reveal">
                         <h2>04</h2>
                         <h3>Grupo Exclusivo</h3>
                         <p>Grupo de Criadores Para Compartilhar Ideias.</p>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -881,6 +1425,7 @@
                     <div class="pricing-box basic">
                         <div>
                             <h3>PACK INICIANTE</h3>
+
                             <ul>
                                 <li><i class="fas fa-check-circle"></i> 10 NICHOS VIRAIS</li>
                                 <li><i class="fas fa-check-circle"></i> 2.000 CORTES PRONTOS</li>
@@ -890,10 +1435,14 @@
                                 <li class="disabled"><i class="fas fa-times-circle"></i> 4 BÔNUS EXCLUSIVOS</li>
                             </ul>
                         </div>
+
                         <div>
                             <div class="price-old">DE R$ 69,90</div>
                             <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
-                            <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
+
+                            <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">
+                                GARANTIR PACOTE INICIANTE
+                            </a>
                             
                             <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
                             <div class="trust-badges-inline">
@@ -907,8 +1456,10 @@
                     <!-- OFERTA 2: COMPLETA (DESTAQUE) -->
                     <div class="pricing-box premium">
                         <div class="pricing-badge">MAIS VENDIDO 🏆</div>
+
                         <div>
                             <h3>PACK MAGO COMPLETO</h3>
+
                             <ul>
                                 <li><i class="fas fa-check-circle"></i> 40 NICHOS VIRAIS</li>
                                 <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
@@ -918,10 +1469,14 @@
                                 <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
                             </ul>
                         </div>
+
                         <div>
                             <div class="price-old">DE R$ 99,99</div>
                             <div class="price-new">R$ 29,90</div>
-                            <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
+
+                            <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">
+                                GARANTIR PACOTE COMPLETO
+                            </a>
                             
                             <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
                             <div class="trust-badges-inline">
@@ -942,22 +1497,55 @@
                 <h2>DÚVIDAS FREQUENTES</h2>
                 
                 <div class="faq-container">
+
                     <div class="faq-item">
-                        <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+                        <div class="faq-question">
+                            Eu preciso aparecer nos vídeos?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".
+                            </p>
+                        </div>
                     </div>
+
                     <div class="faq-item">
-                        <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+                        <div class="faq-question">
+                            Como acesso ao Pack após comprar?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.
+                            </p>
+                        </div>
                     </div>
+
                     <div class="faq-item">
-                        <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+                        <div class="faq-question">
+                            Preciso editar os vídeos?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!
+                            </p>
+                        </div>
                     </div>
+
                     <div class="faq-item">
-                        <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+                        <div class="faq-question">
+                            Recebo novos vídeos no futuro?
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>
+                                Atualizamos as pastas com frequência. E você sempre é avisado!
+                            </p>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -972,8 +1560,13 @@
 
     <!-- 12. RODAPÉ -->
     <footer class="reveal">
-        <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">Aviso Legal</p>
-        <p>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</p>
+        <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">
+            Aviso Legal
+        </p>
+
+        <p>
+            Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.
+        </p>
         
         <div class="footer-bottom">
             <p>&copy; 2026 Cortes Virais. Todos os direitos reservados.</p>
@@ -984,9 +1577,16 @@
     <!-- MODAL DE UPSELL (ESCONDIDO POR PADRÃO) -->
     <div class="modal-overlay" id="upsellModal">
         <div class="modal-content">
+
             <div class="modal-badge">MAIS VENDIDO 🏆</div>
-            <h2 class="modal-title">ESPERE! Oferta Única Antes de Finalizar...</h2>
-            <p class="modal-subtitle">Leve o PACK MAGO COMPLETO por uma diferença mínima!</p>
+
+            <h2 class="modal-title">
+                ESPERE! Oferta Única Antes de Finalizar...
+            </h2>
+
+            <p class="modal-subtitle">
+                Leve o PACK MAGO COMPLETO por uma diferença mínima!
+            </p>
             
             <ul class="modal-list">
                 <li><i class="fas fa-check-circle"></i> 40 Nichos Virais</li>
@@ -1001,116 +1601,323 @@
                 <span class="modal-price-new">R$ 24,90</span>
             </div>
             
-            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes" style="color: #FAFAFA;">SIM! GARANTIR PACOTE COMPLETO</a>
+            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes" style="color: #FAFAFA;">
+                SIM! GARANTIR PACOTE COMPLETO
+            </a>
             
-            <button class="modal-btn-no" id="btnContinueBasic">Não, obrigado. Quero continuar com o pacote iniciante.</button>
+            <button class="modal-btn-no" id="btnContinueBasic">
+                Não, obrigado. Quero continuar com o pacote iniciante.
+            </button>
         </div>
     </div>
 
     <!-- SCRIPTS GERAIS -->
     <script>
-        // 1. ANIMAÇÕES DE ROLAGEM (INTERSECTION OBSERVER COM DESLIGAMENTO)
-        document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal');
-            
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        // Tira o monitoramento após a animação para poupar a CPU do celular
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, {
-                root: null,
-                threshold: 0.1, 
-                rootMargin: "0px 0px -20px 0px"
-            });
 
-            reveals.forEach(el => revealObserver.observe(el));
-        });
+        // 1. ANIMAÇÕES DE ROLAGEM
+        // CORREÇÃO:
+        // - O conteúdo não fica permanentemente invisível se o JS falhar.
+        // - Mantém as animações originais.
+        // - Possui fallback caso IntersectionObserver não esteja disponível.
+        // - Ativa rapidamente os elementos que já estão na tela.
+
+        (function initRevealAnimations() {
+
+            const init = () => {
+
+                const reveals = document.querySelectorAll('.reveal');
+
+                if (!reveals.length) {
+                    return;
+                }
+
+                // Fallback caso IntersectionObserver não exista
+                if (!('IntersectionObserver' in window)) {
+
+                    reveals.forEach(el => {
+                        el.classList.add('active');
+                    });
+
+                    return;
+                }
+
+                let revealObserver;
+
+                try {
+
+                    revealObserver = new IntersectionObserver((entries, observer) => {
+
+                        entries.forEach(entry => {
+
+                            if (entry.isIntersecting) {
+
+                                entry.target.classList.add('active');
+
+                                // Tira o monitoramento após a animação para poupar CPU
+                                observer.unobserve(entry.target);
+                            }
+
+                        });
+
+                    }, {
+                        root: null,
+                        threshold: 0.05,
+                        rootMargin: '0px 0px -10px 0px'
+                    });
+
+                } catch (error) {
+
+                    // Se o observer apresentar qualquer problema,
+                    // mostra todo o conteúdo normalmente.
+                    reveals.forEach(el => {
+                        el.classList.add('active');
+                    });
+
+                    return;
+                }
+
+                reveals.forEach(el => {
+                    revealObserver.observe(el);
+                });
+
+                // Garante que elementos que já estão na tela
+                // apareçam mesmo em carregamentos muito rápidos.
+                setTimeout(() => {
+
+                    reveals.forEach(el => {
+
+                        if (el.classList.contains('active')) {
+                            return;
+                        }
+
+                        const rect = el.getBoundingClientRect();
+
+                        if (
+                            rect.top < window.innerHeight &&
+                            rect.bottom > 0
+                        ) {
+                            el.classList.add('active');
+                        }
+
+                    });
+
+                }, 300);
+
+            };
+
+            if (document.readyState === 'loading') {
+
+                document.addEventListener('DOMContentLoaded', init, {
+                    once: true
+                });
+
+            } else {
+
+                init();
+
+            }
+
+        })();
+
 
         // 2. FAQ (Abre/Fecha)
+
         const faqItems = document.querySelectorAll('.faq-item');
+
         faqItems.forEach(item => {
+
             const question = item.querySelector('.faq-question');
+
+            if (!question) {
+                return;
+            }
+
             question.addEventListener('click', () => {
+
                 const isOpen = item.classList.contains('faq-open');
-                
-                faqItems.forEach(otherItem => otherItem.classList.remove('faq-open'));
-                
+
+                faqItems.forEach(otherItem =>
+                    otherItem.classList.remove('faq-open')
+                );
+
                 if (!isOpen) {
                     item.classList.add('faq-open');
                 }
+
             });
+
         });
 
+
         // 3. SLIDER OTIMIZADO APENAS QUANDO VISÍVEL NA TELA
+
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+
             const container = wrapper.querySelector('.slider-container');
             const prevBtn = wrapper.querySelector('.prev');
             const nextBtn = wrapper.querySelector('.next');
             const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
+
+            if (!container) {
+                return;
+            }
+
             let autoPlayInterval;
             let isVisible = false;
 
-            // Monitora se o carrossel está na tela para só animar quando estiver visível
+            // Monitora se o carrossel está na tela
             const observer = new IntersectionObserver((entries) => {
+
                 entries.forEach(entry => {
+
                     isVisible = entry.isIntersecting;
-                    if(isVisible) startAutoPlay();
-                    else stopAutoPlay();
+
+                    if (isVisible) {
+                        startAutoPlay();
+                    } else {
+                        stopAutoPlay();
+                    }
+
                 });
+
             });
+
             observer.observe(wrapper);
 
             const nextSlide = () => {
-                if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-                    container.scrollTo({ left: 0, behavior: 'smooth' });
+
+                if (
+                    container.scrollLeft + container.clientWidth >=
+                    container.scrollWidth - 10
+                ) {
+
+                    container.scrollTo({
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+
                 } else {
-                    container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+
+                    container.scrollBy({
+                        left: container.clientWidth,
+                        behavior: 'smooth'
+                    });
+
                 }
+
             };
 
             const prevSlide = () => {
-                container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+
+                container.scrollBy({
+                    left: -container.clientWidth,
+                    behavior: 'smooth'
+                });
+
             };
 
             const startAutoPlay = () => {
-                if(isAutoPlay && isVisible && window.innerWidth <= 900) {
-                    stopAutoPlay(); // garante que não crie vários loops
-                    autoPlayInterval = setInterval(nextSlide, 3500);
+
+                if (
+                    isAutoPlay &&
+                    isVisible &&
+                    window.innerWidth <= 900
+                ) {
+
+                    stopAutoPlay();
+
+                    autoPlayInterval = setInterval(
+                        nextSlide,
+                        3500
+                    );
+
                 }
+
             };
 
-            const stopAutoPlay = () => clearInterval(autoPlayInterval);
+            const stopAutoPlay = () => {
+                clearInterval(autoPlayInterval);
+            };
 
-            if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
-            if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
+            if (nextBtn) {
+
+                nextBtn.addEventListener('click', () => {
+
+                    stopAutoPlay();
+                    nextSlide();
+                    startAutoPlay();
+
+                });
+
+            }
+
+            if (prevBtn) {
+
+                prevBtn.addEventListener('click', () => {
+
+                    stopAutoPlay();
+                    prevSlide();
+                    startAutoPlay();
+
+                });
+
+            }
 
             // Para no toque
-            wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
-            wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
+            wrapper.addEventListener(
+                'touchstart',
+                stopAutoPlay,
+                { passive: true }
+            );
+
+            wrapper.addEventListener(
+                'touchend',
+                startAutoPlay,
+                { passive: true }
+            );
+
         });
 
+
         // 4. MODAL DE UPSELL (CAIXINHA DE AVISO)
-        const btnBasicPlan = document.getElementById('btn-basic-plan');
-        const upsellModal = document.getElementById('upsellModal');
-        const btnContinueBasic = document.getElementById('btnContinueBasic');
+
+        const btnBasicPlan =
+            document.getElementById('btn-basic-plan');
+
+        const upsellModal =
+            document.getElementById('upsellModal');
+
+        const btnContinueBasic =
+            document.getElementById('btnContinueBasic');
+
 
         if (btnBasicPlan && upsellModal) {
+
             btnBasicPlan.addEventListener('click', function(e) {
-                e.preventDefault(); 
-                upsellModal.classList.add('show'); 
+
+                e.preventDefault();
+
+                upsellModal.classList.add('show');
+
             });
+
         }
 
+
         if (btnContinueBasic) {
+
             btnContinueBasic.addEventListener('click', function() {
+
                 upsellModal.classList.remove('show');
-                window.location.href = "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
+
+                window.location.href =
+                    "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
+
             });
+
         }
+
     </script>
+
 </body>
 </html>
