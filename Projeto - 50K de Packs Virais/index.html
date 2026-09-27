@@ -21,18 +21,13 @@
     <!-- End Meta Pixel Code -->
 
     <meta charset="UTF-8">
-    <!-- CORREÇÃO ACESSIBILIDADE: Removido user-scalable=no (A tela continuará travada nas laterais pelo CSS) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- CORREÇÃO SEO: Adicionada Meta Description -->
-    <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar sem aparecer.">
-
+    <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Vídeos virais prontos para postar e monetizar sem aparecer.">
     <title>Pack de Cortes Virais – Packlândia</title>
     
-    <!-- Pré-conexões para acelerar o carregamento (Otimização) -->
+    <!-- Pré-conexões para acelerar o carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
 
@@ -50,18 +45,15 @@
             --offer-green: #31B900;
         }
 
-        /* RESET E SOLUÇÃO DE ROLAGEM HORIZONTAL */
-        html, body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        /* RESET BÁSICO */
+        html {
             scroll-behavior: smooth;
-            overflow-x: hidden; /* Trava qualquer vazamento lateral */
-            width: 100%;
         }
 
         *, *:before, *:after {
-            box-sizing: inherit;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -69,14 +61,16 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
+            overflow-x: hidden; /* Trava o vazamento lateral de forma segura */
+            width: 100%;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ANIMAÇÕES GERAIS (FADE UP OTIMIZADO PARA GPU) */
+        /* ANIMAÇÕES GERAIS (FADE UP OTIMIZADO) */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            will-change: opacity, transform;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .reveal.active {
             opacity: 1;
@@ -109,7 +103,7 @@
             color: #dcdcdc;
         }
 
-        /* CONFIGURAÇÃO GLOBAL DE IMAGENS PARA EVITAR CLS (PULOS DE TELA) */
+        /* IMAGENS GERAIS E DO TOPO */
         img {
             max-width: 100%;
             height: auto;
@@ -124,7 +118,7 @@
             margin-bottom: 30px;
         }
 
-        /* CORREÇÃO DE PERFORMANCE: ANIMAÇÃO DE BOTÃO ACELERADA POR HARDWARE (GPU) */
+        /* BOTÕES COM A ANIMAÇÃO ORIGINAL E BONITA */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
@@ -136,34 +130,20 @@
             font-size: 18px;
             margin: 20px 0;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(69, 225, 4, 0.4);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            animation: pulse 2s infinite;
             text-align: center;
-            position: relative;
-            z-index: 1;
-            /* Adiciona leve sombra no texto para corrigir o aviso de contraste do Google */
-            text-shadow: 0px 1px 3px rgba(0,0,0,0.6);
-            transition: transform 0.2s ease;
         }
 
         .btn:hover {
             transform: scale(1.05);
         }
 
-        /* Efeito Pulse Otimizado (Animando Opacidade e Scale não trava o celular) */
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            border: 2px solid var(--primary-color);
-            animation: pulse-gpu 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-            z-index: -1;
-        }
-        
-        .btn.basic-btn::after { display: none; /* Tira o pulse do botão básico */ }
-
-        @keyframes pulse-gpu {
-            0% { transform: scale(0.95); opacity: 1; }
-            100% { transform: scale(1.15); opacity: 0; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(69, 225, 4, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
         }
 
         /* Grids e Sliders (Carrosséis) */
@@ -179,7 +159,7 @@
             scrollbar-width: none;
             scroll-behavior: smooth;
             padding: 10px 0;
-            touch-action: pan-y; /* Ensina o celular a não travar a rolagem vertical */
+            -webkit-overflow-scrolling: touch; /* Rola liso no iPhone/Android */
         }
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
@@ -269,8 +249,8 @@
             border-left: 5px solid var(--primary-color);
             border-radius: 4px;
             overflow: hidden;
-            background-color: #111; /* Cor de fundo caso a imagem demore */
-            transition: transform 0.3s ease;
+            background-color: #111; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card-nicho-img img {
             width: 100%;
@@ -278,6 +258,7 @@
         }
         .card-nicho:hover .card-nicho-img { 
             transform: translateY(-8px); 
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
         }
         .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
         .card-nicho p { font-size: 14px; color: #aaa; margin: 0; line-height: 1.5; }
@@ -294,10 +275,11 @@
             padding: 35px 20px;
             text-align: center;
             background-color: #fff;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .benefits-box:hover { 
             transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.15); 
         }
         .benefits-box i {
             font-size: 45px;
@@ -318,13 +300,14 @@
             border-radius: 12px;
             padding: 40px 20px;
             background: #fff;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
         }
         .bonus-card:hover { 
             transform: translateY(-10px); 
+            box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
         .bonus-card h2 { font-size: 55px; margin-bottom: 5px; color: var(--primary-color); }
         .bonus-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 15px; color: var(--primary-color); }
@@ -372,11 +355,8 @@
         .btn.basic-btn {
             background-color: #2E2E2E; 
             color: #fff;
-            border: none;
-            /* Força a coroa de pulse a ficar invisível e sem animar aqui */
-        }
-        .btn.basic-btn::after {
-            display: none;
+            animation: none; 
+            box-shadow: none;
         }
         .btn.basic-btn:hover { background-color: #1f1f1f; transform: scale(1.02); }
 
@@ -385,6 +365,7 @@
             background-color: #ffffff;
             border: 4px solid var(--offer-green); 
             transform: scale(1.02); 
+            box-shadow: 0 15px 40px rgba(49, 185, 0, 0.2);
             z-index: 2;
         }
         .pricing-box.premium:hover { transform: scale(1.05); }
@@ -405,9 +386,17 @@
 
         .btn.premium-btn {
             background-color: var(--offer-green);
+            color: #ffffff; 
+            animation: pulse-premium 2s infinite;
         }
-        .btn.premium-btn::after {
-            border-color: var(--offer-green);
+        @keyframes pulse-premium {
+            0% { box-shadow: 0 0 0 0 rgba(49, 185, 0, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(49, 185, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(49, 185, 0, 0); }
+        }
+        .btn.premium-btn:hover {
+            box-shadow: 0 6px 20px rgba(49, 185, 0, 0.5);
+            transform: scale(1.05);
         }
 
         .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
@@ -431,7 +420,7 @@
             left: 0; 
             width: 100%; 
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.85); 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -454,6 +443,7 @@
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3);
             border: 4px solid var(--offer-green);
         }
         .modal-overlay.show .modal-content {
@@ -503,7 +493,9 @@
             color: var(--offer-green);
             font-size: 18px;
         }
-        .modal-price { margin-bottom: 25px; }
+        .modal-price {
+            margin-bottom: 25px;
+        }
         .modal-price-old {
             display: block;
             text-decoration: line-through;
@@ -524,10 +516,16 @@
             font-size: 16px;
             margin: 0 0 15px 0;
             background-color: var(--offer-green);
+            color: #ffffff;
+            border-radius: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(49, 185, 0, 0.4);
+            transition: transform 0.2s;
         }
-        .modal-btn-yes::after {
-            border-color: var(--offer-green);
-        }
+        .modal-btn-yes:hover { transform: scale(1.03); }
         .modal-btn-no {
             background: none;
             border: none;
@@ -658,12 +656,9 @@
 </head>
 <body>
 
-    <!-- MAIN CONTENT WRAPPER -->
     <main>
-
-        <!-- 1. HEADER / HERO SECTION -->
-        <header class="container reveal">
-            <!-- Tamanho fixado p/ evitar CLS -->
+        <!-- 1. HEADER / HERO SECTION (Atenção: sem classe .reveal aqui para o Google PageSpeed pontuar nota 100) -->
+        <header class="container">
             <img src="assets/images/banner-.jpeg" width="800" height="450" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
             
             <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
@@ -945,7 +940,6 @@
                             <div class="price-old">DE R$ 99,99</div>
                             <div class="price-new">R$ 29,90</div>
                             <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
-                            <img src="assets/images/compra-segura.jpeg" width="400" height="60" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
                         </div>
                     </div>
 
@@ -988,7 +982,7 @@
     </main>
 
     <!-- 12. RODAPÉ -->
-    <footer class="reveal">
+    <footer>
         <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">Aviso Legal</p>
         <p>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</p>
         
@@ -1018,25 +1012,23 @@
                 <span class="modal-price-new">R$ 24,90</span>
             </div>
             
-            <!-- Botão de Aceite: Leva para o Checkout de 24,90 -->
             <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes">SIM! GARANTIR PACOTE COMPLETO</a>
             
-            <!-- Botão de Recusa: Leva para o Checkout de 19,90 -->
             <button class="modal-btn-no" id="btnContinueBasic">Não, obrigado. Quero continuar com o pacote iniciante.</button>
         </div>
     </div>
 
     <!-- SCRIPTS GERAIS -->
     <script>
-        // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS (INTERSECTION OBSERVER)
+        // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS PARA NÃO TRAVAR O CELULAR
         document.addEventListener('DOMContentLoaded', () => {
             const reveals = document.querySelectorAll('.reveal');
             
+            // IntersectionObserver nativo, não consome memória do aparelho
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
-                        // Desliga o observer no elemento depois que anima, poupando a CPU do celular
                         observer.unobserve(entry.target); 
                     }
                 });
@@ -1085,7 +1077,6 @@
             };
 
             const startAutoPlay = () => {
-                // Apenas em mobile/tablet e se estiver ativado
                 if(isAutoPlay && window.innerWidth <= 900) {
                     autoPlayInterval = setInterval(nextSlide, 3500);
                 }
@@ -1093,11 +1084,9 @@
 
             const stopAutoPlay = () => clearInterval(autoPlayInterval);
 
-            // Botões de navegação
             if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
             if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
 
-            // Inicia o Play e paralisa quando o usuário toca para rolar
             startAutoPlay();
             wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
             wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
@@ -1118,7 +1107,6 @@
         if (btnContinueBasic) {
             btnContinueBasic.addEventListener('click', function() {
                 upsellModal.classList.remove('show');
-                // Link do plano de 19,90 fornecido
                 window.location.href = "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
             });
         }
