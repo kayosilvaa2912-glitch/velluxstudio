@@ -25,7 +25,6 @@
     <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar.">
     <title>Pack de Cortes Virais – Packlândia</title>
     
-    <!-- PRELOAD DA IMAGEM PRINCIPAL PARA MELHORAR O LCP NO GOOGLE PAGESPEED -->
     <link rel="preload" as="image" href="assets/images/banner-.jpeg">
 
     <!-- Pré-conexões para acelerar o carregamento -->
@@ -44,21 +43,19 @@
             --box-bg: #0a0a0a;
             --light-bg: #ffffff;
             --dark-text: #111111;
-            
-            /* VERDE EXCLUSIVO DA SESSÃO DE OFERTAS */
             --offer-green: #31B900;
         }
 
         /* RESET E SOLUÇÃO DO TRAVAMENTO NO CELULAR */
-        html {
+        html, body {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             scroll-behavior: smooth;
         }
 
         *, *:before, *:after {
             box-sizing: inherit;
-            margin: 0;
-            padding: 0;
         }
 
         body {
@@ -66,16 +63,15 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Trava vazamento lateral */
             width: 100%;
         }
 
-        /* ANIMAÇÕES GERAIS (LEVES - FADE UP) */
+        /* ANIMAÇÕES GERAIS (LEVES PARA NÃO TRAVAR O CELULAR) */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            will-change: opacity, transform;
         }
         .reveal.active {
             opacity: 1;
@@ -108,16 +104,6 @@
             color: #dcdcdc;
         }
 
-        /* IMAGEM DO TOPO PARA MOBILE */
-        .hero-img {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 30px auto;
-        }
-
         img {
             max-width: 100%;
             height: auto;
@@ -125,13 +111,18 @@
             margin: 0 auto;
         }
 
-        /* =========================================
-           BOTÕES GLOBAIS (PULSE OTIMIZADO PARA GPU)
-           ========================================= */
+        .hero-img {
+            width: 100%;
+            max-width: 800px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        /* BOTÕES GLOBAIS */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #000000; /* Texto Preto para Nota 100 em Acessibilidade */
+            color: #FAFAFA; /* Branco Suave solicitado */
             padding: 20px 45px;
             text-decoration: none;
             font-weight: 900;
@@ -142,6 +133,7 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            text-shadow: 0px 1px 3px rgba(0,0,0,0.4);
             transition: transform 0.2s ease;
         }
 
@@ -149,7 +141,7 @@
             transform: scale(1.05);
         }
 
-        /* Efeito de Pulse acelerado por Hardware (Resolve aviso do PageSpeed) */
+        /* Efeito Pulse Acelerado (GPU) */
         .btn::after {
             content: '';
             position: absolute;
@@ -160,40 +152,33 @@
             z-index: -1;
             animation: pulse-gpu 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
         }
-
-        /* Botão Básico ou Secundário não precisa piscar */
-        .btn.basic-btn::after {
-            display: none;
-        }
         
-        .btn.premium-btn::after {
-            box-shadow: 0 0 0 0 var(--offer-green);
-        }
+        .btn.basic-btn::after { display: none; }
+        .btn.premium-btn::after { box-shadow: 0 0 0 0 var(--offer-green); }
 
         @keyframes pulse-gpu {
             0% { transform: scale(1); opacity: 0.7; }
             100% { transform: scale(1.15); opacity: 0; }
         }
 
-        /* Grids e Sliders */
+        /* Grids Genéricos */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
+        /* Sliders (Carrosséis) Otimizados (Sem Scroll-Snap para não travar iOS) */
         .slider-wrapper { position: relative; width: 100%; padding: 10px 0;}
         .slider-container {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
             gap: 20px;
             scrollbar-width: none;
             scroll-behavior: smooth;
             padding: 10px 0;
-            touch-action: pan-y; 
+            -webkit-overflow-scrolling: touch; 
         }
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
             flex: 0 0 100%;
-            scroll-snap-align: center;
         }
         .slider-btn {
             position: absolute;
@@ -213,57 +198,50 @@
         .slider-btn.prev { left: -10px; }
         .slider-btn.next { right: -10px; }
 
-        /* Timeline */
-        .timeline {
-            text-align: left;
-            max-width: 700px;
-            margin: 50px auto;
-            position: relative;
-            padding-left: 20px;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: var(--primary-color);
-        }
-        .timeline-step {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 40px;
-        }
-        .timeline-icon {
-            position: absolute;
-            left: -20px; 
-            top: 15px;
-            width: 42px;
-            height: 42px;
-            background-color: #000;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
+        /* =========================================
+           NOVA SEÇÃO "É SIMPLES ASSIM"
+           ========================================= */
+        .simple-card {
+            background-color: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            height: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
-            font-size: 18px;
-            z-index: 2;
         }
-        .timeline-content {
-            border: 1px solid #333;
-            padding: 25px 20px;
-            border-radius: 10px;
-            background-color: var(--box-bg);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .timeline-content:hover {
-            transform: translateX(10px);
+        .simple-card:hover {
             border-color: var(--primary-color);
+            transform: translateY(-5px);
         }
-        .timeline-step h3 { margin: 0 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
-        .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
+        .step-num {
+            background-color: var(--primary-color);
+            color: #000;
+            font-size: 26px;
+            font-weight: 900;
+            width: 60px; 
+            height: 60px;
+            border-radius: 12px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 5px 15px rgba(69, 225, 4, 0.3);
+        }
+        .step-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .simple-card h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 0;
+            font-weight: 800;
+        }
 
         /* Cards Nichos */
         .card-nicho {
@@ -278,8 +256,8 @@
             border-left: 5px solid var(--primary-color);
             border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            transition: transform 0.3s ease;
+            background-color: #111; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card-nicho-img img {
             width: 100%;
@@ -312,19 +290,11 @@
             transform: translateY(-8px);
             box-shadow: 0 10px 20px rgba(69, 225, 4, 0.15); 
         }
-        .benefits-box i {
-            font-size: 45px;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
+        .benefits-box i { font-size: 45px; color: var(--primary-color); margin-bottom: 20px; }
         .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; line-height: 1.5; }
 
         /* Depoimentos */
-        .testimonial-img {
-            border-radius: 12px;
-            width: 100%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
+        .testimonial-img { border-radius: 12px; width: 100%; }
 
         /* Bônus Section */
         .bonus-card {
@@ -341,23 +311,9 @@
             transform: translateY(-10px); 
             box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
-        .bonus-card h2 { 
-            font-size: 55px; 
-            margin-bottom: 5px; 
-            color: var(--primary-color); 
-        }
-        .bonus-card h3 { 
-            font-size: 24px; 
-            font-weight: 900; 
-            margin-bottom: 15px; 
-            color: var(--primary-color); 
-        }
-        .bonus-card p { 
-            font-size: 15px; 
-            font-weight: 600; 
-            color: #111; 
-            line-height: 1.5;
-        }
+        .bonus-card h2 { font-size: 55px; margin-bottom: 5px; color: var(--primary-color); }
+        .bonus-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 15px; color: var(--primary-color); }
+        .bonus-card p { font-size: 15px; font-weight: 600; color: #111; line-height: 1.5; }
 
         /* =========================================
            OFERTAS / PREÇOS
@@ -367,10 +323,7 @@
             padding: 80px 20px;
             border-top: 2px solid #222;
         }
-        .pricing-section h2 { 
-            color: #ffffff; 
-            margin-bottom: 50px; 
-        }
+        .pricing-section h2 { color: #ffffff; margin-bottom: 50px; }
         
         .pricing-grid {
             display: grid;
@@ -394,264 +347,114 @@
             transition: transform 0.3s ease;
         }
 
-        /* OFERTA 1 - INICIANTE */
-        .pricing-box.basic {
-            border: 2px solid #ddd;
-            transform: scale(0.95);
-        }
+        .pricing-box.basic { border: 2px solid #ddd; transform: scale(0.95); }
         .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
         
-        .btn.basic-btn {
-            background-color: #2E2E2E; 
-            color: #fff;
-            border: none;
-        }
+        .btn.basic-btn { background-color: #2E2E2E; color: #FAFAFA; }
         .btn.basic-btn:hover { background-color: #1f1f1f; transform: scale(1.02); }
 
-        /* OFERTA 2 - COMPLETA */
         .pricing-box.premium {
             background-color: #ffffff;
             border: 4px solid var(--offer-green); 
             transform: scale(1.02); 
-            box-shadow: 0 15px 40px rgba(49, 185, 0, 0.2);
             z-index: 2;
         }
         .pricing-box.premium:hover { transform: scale(1.05); }
+        
         .pricing-badge {
             position: absolute;
-            top: -16px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--offer-green); 
-            color: #ffffff; 
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-size: 14px;
-            letter-spacing: 1px;
-            white-space: nowrap;
+            top: -16px; left: 50%; transform: translateX(-50%);
+            background: var(--offer-green); color: #ffffff; 
+            padding: 6px 20px; border-radius: 20px;
+            font-weight: 900; font-size: 14px; letter-spacing: 1px; white-space: nowrap;
         }
 
-        .btn.premium-btn {
-            background-color: var(--offer-green);
-            color: #ffffff; /* Texto branco */
-        }
+        .btn.premium-btn { background-color: var(--offer-green); color: #FAFAFA; }
 
         .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
         .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
         .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .pricing-box li i { color: var(--offer-green); font-size: 20px; }
-        
         .pricing-box li.disabled { text-decoration: line-through; opacity: 0.5; color: #888; }
         .pricing-box li.disabled i { color: #888; }
 
         .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
         .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-        .compra-segura { margin-top: 20px; width: 90%; }
-
-        /* =========================================
-           MODAL DE UPSELL (POP-UP)
-           ========================================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85); 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-        }
-        .modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background: #ffffff;
-            width: 90%;
-            max-width: 420px;
-            border-radius: 20px;
-            padding: 35px 25px;
-            text-align: center;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3);
-            border: 4px solid var(--offer-green);
-        }
-        .modal-overlay.show .modal-content {
-            transform: scale(1);
-        }
-        .modal-badge {
-            background: var(--offer-green);
-            color: #ffffff;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-weight: 900;
-            font-size: 13px;
-            display: inline-block;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-        .modal-title {
-            font-size: 24px;
-            font-weight: 900;
-            color: #111;
-            margin-bottom: 10px;
-            line-height: 1.2;
-            text-transform: uppercase;
-        }
-        .modal-subtitle {
-            font-size: 15px;
-            font-weight: 600;
-            color: #444;
-            margin-bottom: 25px;
-        }
-        .modal-list {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            margin-bottom: 25px;
-        }
-        .modal-list li {
-            font-size: 15px;
-            font-weight: 800;
-            color: #333;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
+        
+        /* SELOS DE CONFIANÇA ABAIXO DOS BOTÕES DE COMPRA */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
+            margin-top: 20px;
+            text-align: left;
         }
-        .modal-list li i {
-            color: var(--offer-green);
-            font-size: 18px;
+        .trust-badges span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .modal-price {
-            margin-bottom: 25px;
-        }
-        .modal-price-old {
-            display: block;
-            text-decoration: line-through;
-            color: #999;
-            font-size: 16px;
-            font-weight: 800;
-        }
-        .modal-price-new {
-            display: block;
-            font-size: 50px;
-            font-weight: 900;
-            color: var(--offer-green);
-            line-height: 1;
-        }
-        .modal-btn-yes {
-            width: 100%;
-            padding: 18px 10px;
-            font-size: 16px;
-            margin: 0 0 15px 0;
-            background-color: var(--offer-green);
-            color: #ffffff;
-            border-radius: 8px;
-            font-weight: 900;
-            text-transform: uppercase;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-        .modal-btn-yes:hover { transform: scale(1.03); }
-        .modal-btn-no {
-            background: none;
-            border: none;
-            color: #888;
-            font-size: 13px;
-            text-decoration: underline;
-            cursor: pointer;
-            font-family: inherit;
-            font-weight: 600;
-            padding: 5px;
-        }
-        .modal-btn-no:hover { color: #444; }
+        .trust-badges span i { color: var(--offer-green); font-size: 14px; }
 
         /* FAQ (Dúvidas Frequentes) */
-        .faq-section {
-            background-color: var(--bg-color);
-            padding: 80px 0; 
-        }
+        .faq-section { background-color: var(--bg-color); padding: 80px 0; }
         .faq-section h2 { color: #fff; }
         .faq-section .container { padding-top: 0; padding-bottom: 0; }
 
         .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
-        .faq-item {
-            background-color: #111; 
-            margin-bottom: 15px;
-            border-radius: 8px;
-            text-align: left;
-            border: 1px solid #333;
-        }
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-            font-size: 18px;
-            color: #fff;
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-        .faq-answer p {
-            padding: 0 20px 20px 20px;
-            color: #ccc;
-            font-size: 16px;
-            line-height: 1.6;
-            margin: 0;
-            border-top: 1px solid #333;
-        }
+        .faq-item { background-color: #111; margin-bottom: 15px; border-radius: 8px; text-align: left; border: 1px solid #333; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 18px; color: #fff; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-answer p { padding: 0 20px 20px 20px; color: #ccc; font-size: 16px; line-height: 1.6; margin: 0; border-top: 1px solid #333; }
         .faq-item.faq-open .faq-answer { max-height: 500px; }
         .faq-item.faq-open .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
 
+        /* MODAL DE UPSELL (POP-UP) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center;
+            z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: #ffffff; width: 90%; max-width: 420px; border-radius: 20px; padding: 35px 25px;
+            text-align: center; position: relative; transform: scale(0.9); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3); border: 4px solid var(--offer-green);
+        }
+        .modal-overlay.show .modal-content { transform: scale(1); }
+        .modal-badge {
+            background: var(--offer-green); color: #ffffff; padding: 6px 20px; border-radius: 20px;
+            font-weight: 900; font-size: 13px; display: inline-block; margin-bottom: 15px; letter-spacing: 1px;
+        }
+        .modal-title { font-size: 24px; font-weight: 900; color: #111; margin-bottom: 10px; line-height: 1.2; text-transform: uppercase; }
+        .modal-subtitle { font-size: 15px; font-weight: 600; color: #444; margin-bottom: 25px; }
+        .modal-list { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; }
+        .modal-list li { font-size: 15px; font-weight: 800; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .modal-list li i { color: var(--offer-green); font-size: 18px; }
+        .modal-price { margin-bottom: 25px; }
+        .modal-price-old { display: block; text-decoration: line-through; color: #999; font-size: 16px; font-weight: 800; }
+        .modal-price-new { display: block; font-size: 50px; font-weight: 900; color: var(--offer-green); line-height: 1; }
+        .modal-btn-yes {
+            width: 100%; padding: 18px 10px; font-size: 16px; margin: 0 0 15px 0;
+            background-color: var(--offer-green); color: #FAFAFA; border-radius: 8px;
+            font-weight: 900; text-transform: uppercase; text-decoration: none; display: inline-block;
+        }
+        .modal-btn-no { background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 5px; }
+
         /* Footer */
-        footer {
-            border-top: 1px solid #222;
-            padding: 30px 15px; 
-            text-align: center;
-            color: #666;
-        }
-        footer p { 
-            max-width: 900px; 
-            font-size: 12px; 
-            color: #777; 
-            margin: 0 auto 15px auto; 
-            line-height: 1.5;
-        }
+        footer { border-top: 1px solid #222; padding: 30px 15px; text-align: center; color: #666; }
+        footer p { max-width: 900px; font-size: 12px; color: #777; margin: 0 auto 15px auto; line-height: 1.5; }
         .footer-bottom {
-            max-width: 1100px;
-            margin: 0 auto;
-            border-top: 1px solid #222;
-            padding-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            color: #555;
+            max-width: 1100px; margin: 0 auto; border-top: 1px solid #222; padding-top: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; color: #555;
         }
         .footer-bottom span { color: #fff; }
 
-        /* =========================================
-           RESPONSIVIDADE (DESKTOP E MOBILE)
-           ========================================= */
+        /* RESPONSIVIDADE */
         @media (min-width: 900px) {
             .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
             .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
@@ -666,6 +469,7 @@
             .pricing-box.basic { transform: scale(1); }
             .pricing-box.premium { transform: scale(1); margin-top: 10px; }
             .footer-bottom p.mt { margin-top: 15px; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 600px) {
@@ -675,19 +479,13 @@
             h2 { font-size: 26px; }
             p { font-size: 16px; }
             .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
-            
-            .timeline::before { left: 15px; }
-            .timeline-icon { left: -6px; width: 40px; height: 40px; font-size: 15px; }
-            .timeline-step { padding-left: 45px; }
-            .timeline-content { padding: 20px 15px; }
-            
             .pricing-section { padding: 50px 15px; }
             .pricing-box { padding: 30px 20px; }
             .pricing-box h3 { font-size: 20px; }
             .price-new { font-size: 45px; }
-            
             .faq-section { padding: 50px 0; }
             .faq-question { font-size: 16px; padding: 20px 15px; }
+            .trust-badges { grid-template-columns: 1fr; gap: 8px; text-align: center; justify-items: center;}
         }
     </style>
 </head>
@@ -696,7 +494,6 @@
     <main>
         <!-- 1. HEADER / HERO SECTION -->
         <header class="container reveal">
-            <!-- Tamanho fixado p/ evitar CLS (Pulo de tela no carregamento) -->
             <img src="assets/images/banner-.jpeg" width="800" height="450" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
             
             <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
@@ -733,38 +530,29 @@
             <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
         </section>
 
-        <!-- 4. COMO FUNCIONA -->
+        <!-- 4. NOVA SEÇÃO: É SIMPLES ASSIM -->
         <section class="container reveal">
-            <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
+            <div style="font-size: 30px; color: var(--primary-color); margin-bottom: 10px;">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <h2>É SIMPLES ASSIM</h2>
             
-            <div class="timeline">
-                <div class="timeline-step reveal">
-                    <div class="timeline-icon"><i class="far fa-flag"></i></div>
-                    <div class="timeline-content">
-                        <h3>1. Crie sua conta</h3>
-                        <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
-                    </div>
+            <div class="grid-4" style="margin-top: 40px;">
+                <div class="simple-card">
+                    <div class="step-num">1</div>
+                    <h3>Escolha um vídeo pronto</h3>
                 </div>
-                <div class="timeline-step reveal">
-                    <div class="timeline-icon"><i class="fab fa-telegram-plane"></i></div>
-                    <div class="timeline-content">
-                        <h3>2. Poste os cortes</h3>
-                        <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
-                    </div>
+                <div class="simple-card">
+                    <div class="step-num">2</div>
+                    <h3>Poste no TikTok ou Instagram</h3>
                 </div>
-                <div class="timeline-step reveal">
-                    <div class="timeline-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <div class="timeline-content">
-                        <h3>3. Venda como afiliado</h3>
-                        <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
-                    </div>
+                <div class="simple-card">
+                    <div class="step-num">3</div>
+                    <h3>Repita todos os dias</h3>
                 </div>
-                <div class="timeline-step reveal">
-                    <div class="timeline-icon"><i class="fas fa-money-bill"></i></div>
-                    <div class="timeline-content">
-                        <h3>4. Escale</h3>
-                        <p>Com consistência, seus vídeos trazem mais seguidores, engajamento e vendas.</p>
-                    </div>
+                <div class="simple-card" style="border-color: var(--primary-color);">
+                    <div class="step-icon">🚀</div>
+                    <h3 class="highlight">Comece a crescer</h3>
                 </div>
             </div>
         </section>
@@ -957,6 +745,14 @@
                             <div class="price-old">DE R$ 69,90</div>
                             <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
                             <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
+                            
+                            <!-- SELOS DE CONFIANÇA TEXTUAIS -->
+                            <div class="trust-badges">
+                                <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
+                                <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
+                                <span><i class="fas fa-medal"></i> Satisfação Garantida</span>
+                                <span><i class="fas fa-lock"></i> Privacidade Protegida</span>
+                            </div>
                         </div>
                     </div>
 
@@ -978,7 +774,14 @@
                             <div class="price-old">DE R$ 99,99</div>
                             <div class="price-new">R$ 29,90</div>
                             <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
-                            <img src="assets/images/compra-segura.jpeg" width="400" height="60" alt="Compra Segura" loading="lazy" decoding="async" class="compra-segura">
+                            
+                            <!-- SELOS DE CONFIANÇA TEXTUAIS -->
+                            <div class="trust-badges">
+                                <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
+                                <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
+                                <span><i class="fas fa-medal"></i> Satisfação Garantida</span>
+                                <span><i class="fas fa-lock"></i> Privacidade Protegida</span>
+                            </div>
                         </div>
                     </div>
 
@@ -1115,7 +918,6 @@
             };
 
             const startAutoPlay = () => {
-                // Apenas em mobile/tablet e se estiver ativado
                 if(isAutoPlay && window.innerWidth <= 900) {
                     autoPlayInterval = setInterval(nextSlide, 3500);
                 }
