@@ -21,7 +21,7 @@
     <!-- End Meta Pixel Code -->
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar.">
     <title>Pack de Cortes Virais – Packlândia</title>
     
@@ -32,42 +32,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* TEMA GLOBAL VERDE */
+            /* TEMA GLOBAL VERDE ORIGINAL */
             --primary-color: #45E104; 
             --bg-color: #000000;
             --text-color: #ffffff;
             --box-bg: #0a0a0a;
             --light-bg: #ffffff;
             --dark-text: #111111;
+            
+            /* VERDE ALTERNATIVO (Ofertas, Redes e Funciona) */
             --offer-green: #31B900;
         }
 
-        /* RESET E SOLUÇÃO DO TRAVAMENTO NO CELULAR */
+        /* RESET E SOLUÇÃO DEFINITIVA DO TRAVAMENTO NO CELULAR */
         html, body {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            scroll-behavior: smooth;
+            width: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Container mestre que blinda o site e resolve o vazamento lateral sem travar o scroll */
+        .site-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
         }
 
         *, *:before, *:after {
-            box-sizing: inherit;
+            box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: center;
-            overflow-x: hidden; /* Trava vazamento lateral */
-            width: 100%;
-        }
-
-        /* ANIMAÇÕES GERAIS (LEVES PARA NÃO TRAVAR O CELULAR) */
+        /* ANIMAÇÕES GERAIS SUPER LEVES */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
@@ -78,15 +81,17 @@
             transform: translateY(0);
         }
 
-        /* ESTILOS BÁSICOS DE CONTAINERS */
+        /* CONTAINERS GERAIS */
         .container {
             width: 100%;
             max-width: 1100px;
             margin: 0 auto;
             padding: 80px 20px;
+            text-align: center;
         }
 
         .highlight { color: var(--primary-color); }
+        .highlight-alt { color: var(--offer-green); }
 
         h2 {
             font-size: 36px;
@@ -118,11 +123,13 @@
             margin-bottom: 30px;
         }
 
-        /* BOTÕES GLOBAIS */
+        /* =========================================
+           BOTÕES GLOBAIS (ANIMAÇÃO RESTAURADA E TEXTO #FAFAFA)
+           ========================================= */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #FAFAFA; /* Branco Suave solicitado */
+            color: #FAFAFA; 
             padding: 20px 45px;
             text-decoration: none;
             font-weight: 900;
@@ -133,43 +140,48 @@
             text-align: center;
             position: relative;
             z-index: 1;
-            text-shadow: 0px 1px 3px rgba(0,0,0,0.4);
-            transition: transform 0.2s ease;
+            text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            animation: pulse-green 2s infinite;
         }
 
         .btn:hover {
             transform: scale(1.05);
         }
 
-        /* Efeito Pulse Acelerado (GPU) */
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            box-shadow: 0 0 0 0 var(--primary-color);
-            opacity: 0.7;
-            z-index: -1;
-            animation: pulse-gpu 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-        
-        .btn.basic-btn::after { display: none; }
-        .btn.premium-btn::after { box-shadow: 0 0 0 0 var(--offer-green); }
-
-        @keyframes pulse-gpu {
-            0% { transform: scale(1); opacity: 0.7; }
-            100% { transform: scale(1.15); opacity: 0; }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(69, 225, 4, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
         }
 
-        /* Grids Genéricos */
+        @keyframes pulse-alt {
+            0% { box-shadow: 0 0 0 0 rgba(49, 185, 0, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(49, 185, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(49, 185, 0, 0); }
+        }
+
+        .btn.premium-btn {
+            background-color: var(--offer-green);
+            animation: pulse-alt 2s infinite;
+        }
+
+        .btn.basic-btn {
+            background-color: #2E2E2E; 
+            animation: none; 
+            box-shadow: none;
+        }
+        .btn.basic-btn:hover { background-color: #1f1f1f; }
+
+        /* Grids e Sliders (Carrosséis) */
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        /* Sliders (Carrosséis) Otimizados (Sem Scroll-Snap para não travar iOS) */
         .slider-wrapper { position: relative; width: 100%; padding: 10px 0;}
         .slider-container {
             display: flex;
             overflow-x: auto;
+            scroll-snap-type: x mandatory;
             gap: 20px;
             scrollbar-width: none;
             scroll-behavior: smooth;
@@ -179,6 +191,7 @@
         .slider-container::-webkit-scrollbar { display: none; }
         .slider-item {
             flex: 0 0 100%;
+            scroll-snap-align: center;
         }
         .slider-btn {
             position: absolute;
@@ -198,8 +211,11 @@
         .slider-btn.prev { left: -10px; }
         .slider-btn.next { right: -10px; }
 
+        /* Oculta as setas especificamente no slider de perfis (conforme solicitado) */
+        #slider-perfis .slider-btn { display: none !important; }
+
         /* =========================================
-           NOVA SEÇÃO "É SIMPLES ASSIM"
+           NOVA SEÇÃO "COMO FUNCIONA" (BLOCOS)
            ========================================= */
         .simple-card {
             background-color: #111111;
@@ -215,12 +231,12 @@
             justify-content: center;
         }
         .simple-card:hover {
-            border-color: var(--primary-color);
+            border-color: var(--offer-green);
             transform: translateY(-5px);
         }
         .step-num {
-            background-color: var(--primary-color);
-            color: #000;
+            background-color: var(--offer-green);
+            color: #FAFAFA;
             font-size: 26px;
             font-weight: 900;
             width: 60px; 
@@ -230,7 +246,7 @@
             align-items: center; 
             justify-content: center;
             margin: 0 auto 20px auto;
-            box-shadow: 0 5px 15px rgba(69, 225, 4, 0.3);
+            box-shadow: 0 5px 15px rgba(49, 185, 0, 0.3);
         }
         .step-icon {
             font-size: 35px;
@@ -241,6 +257,7 @@
             color: #fff;
             margin-bottom: 0;
             font-weight: 800;
+            line-height: 1.4;
         }
 
         /* Cards Nichos */
@@ -279,7 +296,7 @@
 
         /* Ícones Redes */
         .benefits-box {
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--offer-green); /* Verde alternativo (#31B900) */
             border-radius: 12px;
             padding: 35px 20px;
             text-align: center;
@@ -288,13 +305,83 @@
         }
         .benefits-box:hover { 
             transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.15); 
+            box-shadow: 0 10px 20px rgba(49, 185, 0, 0.15); 
         }
-        .benefits-box i { font-size: 45px; color: var(--primary-color); margin-bottom: 20px; }
+        .benefits-box i {
+            font-size: 45px;
+            color: var(--offer-green); 
+            margin-bottom: 20px;
+        }
         .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; line-height: 1.5; }
 
-        /* Depoimentos */
-        .testimonial-img { border-radius: 12px; width: 100%; }
+        /* =========================================
+           PROVAS SOCIAIS (DEPOIMENTOS TEXTO)
+           ========================================= */
+        .testi-card {
+            background-color: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: left;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+        }
+        .testi-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        .testi-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .testi-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #222;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 20px;
+        }
+        .testi-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .testi-info h4 {
+            margin: 0 0 5px 0;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+        .testi-verified {
+            background-color: rgba(69, 225, 4, 0.15);
+            color: var(--primary-color);
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        .testi-stars {
+            color: #FFD700;
+            font-size: 14px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        .testi-text {
+            font-size: 15px;
+            color: #ccc;
+            font-style: italic;
+            line-height: 1.6;
+            margin: 0;
+        }
 
         /* Bônus Section */
         .bonus-card {
@@ -321,7 +408,7 @@
         .pricing-section {
             background-color: #0d0d0d; 
             padding: 80px 20px;
-            border-top: 2px solid #222;
+            border-top: 1px solid #222;
         }
         .pricing-section h2 { color: #ffffff; margin-bottom: 50px; }
         
@@ -349,9 +436,6 @@
 
         .pricing-box.basic { border: 2px solid #ddd; transform: scale(0.95); }
         .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
-        
-        .btn.basic-btn { background-color: #2E2E2E; color: #FAFAFA; }
-        .btn.basic-btn:hover { background-color: #1f1f1f; transform: scale(1.02); }
 
         .pricing-box.premium {
             background-color: #ffffff;
@@ -363,41 +447,53 @@
         
         .pricing-badge {
             position: absolute;
-            top: -16px; left: 50%; transform: translateX(-50%);
-            background: var(--offer-green); color: #ffffff; 
-            padding: 6px 20px; border-radius: 20px;
-            font-weight: 900; font-size: 14px; letter-spacing: 1px; white-space: nowrap;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--offer-green); 
+            color: #ffffff; 
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
-
-        .btn.premium-btn { background-color: var(--offer-green); color: #FAFAFA; }
 
         .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
         .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
         .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .pricing-box li i { color: var(--offer-green); font-size: 20px; }
-        .pricing-box li.disabled { text-decoration: line-through; opacity: 0.5; color: #888; }
+        
+        /* Itens Riscados (Plano Básico) com Cor Cinza Restabelecida */
+        .pricing-box li.disabled {
+            text-decoration: line-through;
+            opacity: 0.5;
+            color: #888; /* Voltou para o cinza, como na imagem */
+        }
         .pricing-box li.disabled i { color: #888; }
 
         .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
         .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
         
-        /* SELOS DE CONFIANÇA ABAIXO DOS BOTÕES DE COMPRA */
-        .trust-badges {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 20px;
-            text-align: left;
+        /* SELOS DE SEGURANÇA NA MESMA LINHA E CINZAS */
+        .trust-badges-inline {
+            display: flex;
+            flex-wrap: nowrap; /* Impede quebra de linha */
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            white-space: nowrap; 
         }
-        .trust-badges span {
+        .trust-badges-inline span {
             font-size: 11px;
             font-weight: 700;
-            color: #666;
+            color: #888; /* Cinza */
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
-        .trust-badges span i { color: var(--offer-green); font-size: 14px; }
+        .trust-badges-inline span i { color: #888; font-size: 12px; }
 
         /* FAQ (Dúvidas Frequentes) */
         .faq-section { background-color: var(--bg-color); padding: 80px 0; }
@@ -441,7 +537,9 @@
             width: 100%; padding: 18px 10px; font-size: 16px; margin: 0 0 15px 0;
             background-color: var(--offer-green); color: #FAFAFA; border-radius: 8px;
             font-weight: 900; text-transform: uppercase; text-decoration: none; display: inline-block;
+            transition: transform 0.2s; animation: pulse-alt 2s infinite;
         }
+        .modal-btn-yes:hover { transform: scale(1.03); }
         .modal-btn-no { background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 5px; }
 
         /* Footer */
@@ -454,7 +552,9 @@
         }
         .footer-bottom span { color: #fff; }
 
-        /* RESPONSIVIDADE */
+        /* =========================================
+           RESPONSIVIDADE (DESKTOP E MOBILE)
+           ========================================= */
         @media (min-width: 900px) {
             .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
             .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
@@ -479,19 +579,27 @@
             h2 { font-size: 26px; }
             p { font-size: 16px; }
             .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
+            
             .pricing-section { padding: 50px 15px; }
             .pricing-box { padding: 30px 20px; }
             .pricing-box h3 { font-size: 20px; }
             .price-new { font-size: 45px; }
+            
             .faq-section { padding: 50px 0; }
             .faq-question { font-size: 16px; padding: 20px 15px; }
-            .trust-badges { grid-template-columns: 1fr; gap: 8px; text-align: center; justify-items: center;}
+
+            /* Faz os selos caberem na tela em 1 linha no Mobile perfeitamente */
+            .trust-badges-inline { gap: 6px; }
+            .trust-badges-inline span { font-size: 9.5px; gap: 3px; }
+            .trust-badges-inline span i { font-size: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <main>
+    <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
+    <div class="site-wrapper">
+
         <!-- 1. HEADER / HERO SECTION -->
         <header class="container reveal">
             <img src="assets/images/banner-.jpeg" width="800" height="450" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
@@ -502,40 +610,18 @@
             <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
         </header>
 
-        <!-- 2. PROVA SOCIAL -->
+        <!-- 2. O QUE ELAS TÊM EM COMUM? -->
         <section class="container reveal">
-            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
-            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
-            
-            <div class="slider-wrapper" style="margin-top: 50px;" data-autoplay="true">
-                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-container grid-desktop-3">
-                    <div class="slider-item">
-                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-                    <div class="slider-item">
-                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
-                    </div>
-                </div>
-                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </section>
-
-        <!-- 3. O QUE ELAS TÊM EM COMUM? -->
-        <section class="container reveal">
-            <h2>O QUE ESSAS PÁGINAS <span class="highlight">TÊM EM COMUM?</span></h2>
+            <h2>O QUE ESSAS PÁGINAS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
             <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
         </section>
 
-        <!-- 4. NOVA SEÇÃO: É SIMPLES ASSIM -->
+        <!-- 3. COMO FUNCIONA (É SIMPLES ASSIM) -->
         <section class="container reveal">
-            <div style="font-size: 30px; color: var(--primary-color); margin-bottom: 10px;">
+            <div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
                 <i class="fas fa-arrow-down"></i>
             </div>
-            <h2>É SIMPLES ASSIM</h2>
+            <h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
             
             <div class="grid-4" style="margin-top: 40px;">
                 <div class="simple-card">
@@ -550,10 +636,32 @@
                     <div class="step-num">3</div>
                     <h3>Repita todos os dias</h3>
                 </div>
-                <div class="simple-card" style="border-color: var(--primary-color);">
+                <div class="simple-card" style="border-color: var(--offer-green);">
                     <div class="step-icon">🚀</div>
-                    <h3 class="highlight">Comece a crescer</h3>
+                    <h3 class="highlight-alt">Comece a crescer</h3>
                 </div>
+            </div>
+        </section>
+
+        <!-- 4. PERFIS QUE MAIS CRESCEM (Sem setas, rolagem livre nativa) -->
+        <section class="container reveal">
+            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
+            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
+            
+            <div class="slider-wrapper" id="slider-perfis" style="margin-top: 50px;">
+                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-container grid-desktop-3">
+                    <div class="slider-item">
+                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
+                </div>
+                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
             </div>
         </section>
 
@@ -663,37 +771,78 @@
                     </div>
                 </div>
 
-                <h2 style="margin-top: 50px;" class="reveal">ENTÃO ESSE PACK É PRA <span class="highlight">VOCÊ!</span></h2>
+                <h2 style="margin-top: 50px;" class="reveal">ENTÃO ESSE PACK É PRA <span class="highlight-alt">VOCÊ!</span></h2>
             </div>
         </section>
 
-        <!-- 7. DEPOIMENTOS -->
+        <!-- 7. PROVAS SOCIAIS (DEPOIMENTOS TEXTO) -->
         <section class="container reveal">
-            <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
-            
-            <div class="slider-wrapper" style="margin-top: 50px;" data-autoplay="true">
-                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-container grid-desktop-4">
-                    <div class="slider-item">
-                        <img src="assets/images/prova-social-1.jpeg" width="300" height="500" alt="Depoimento 1" loading="lazy" decoding="async" class="testimonial-img">
+            <h2>PESSOAS COMUNS JÁ ESTÃO <span class="highlight">USANDO</span></h2>
+            <p style="font-size: 16px; margin-bottom: 40px;">Junte-se a mais de <strong class="highlight">4.850 alunos</strong> que estão viralizando todos os dias.</p>
+
+            <div class="grid-3">
+                <!-- Depoimento 1 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <div class="testi-avatar">
+                            <!-- ESPAÇO PARA FOTO DO CLIENTE 1 -->
+                            <!-- <img src="assets/images/foto-cliente-1.jpeg" alt="Foto"> -->
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testi-info">
+                            <h4>Marcos Alves</h4>
+                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                        </div>
                     </div>
-                    <div class="slider-item">
-                        <img src="assets/images/prova-social-2.jpeg" width="300" height="500" alt="Depoimento 2" loading="lazy" decoding="async" class="testimonial-img">
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <div class="slider-item">
-                        <img src="assets/images/prova-social-3.jpeg" width="300" height="500" alt="Depoimento 3" loading="lazy" decoding="async" class="testimonial-img">
-                    </div>
-                    <div class="slider-item">
-                        <img src="assets/images/prova-social-4.jpeg" width="300" height="500" alt="Depoimento 4" loading="lazy" decoding="async" class="testimonial-img">
-                    </div>
+                    <p class="testi-text">"Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"</p>
                 </div>
-                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+
+                <!-- Depoimento 2 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <div class="testi-avatar">
+                            <!-- ESPAÇO PARA FOTO DO CLIENTE 2 -->
+                            <!-- <img src="assets/images/foto-cliente-2.jpeg" alt="Foto"> -->
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testi-info">
+                            <h4>Gabriel Martins</h4>
+                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testi-text">"Eu trabalhava o dia todo e não tinha tempo para editar nada. Agora consigo criar vídeos inéditos em menos de 2 minutos."</p>
+                </div>
+
+                <!-- Depoimento 3 -->
+                <div class="testi-card">
+                    <div class="testi-header">
+                        <div class="testi-avatar">
+                            <!-- ESPAÇO PARA FOTO DO CLIENTE 3 -->
+                            <!-- <img src="assets/images/foto-cliente-3.jpeg" alt="Foto"> -->
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="testi-info">
+                            <h4>Lucas Ferreira</h4>
+                            <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+                        </div>
+                    </div>
+                    <div class="testi-stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testi-text">"O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"</p>
+                </div>
             </div>
         </section>
 
         <!-- 8. BÔNUS EXCLUSIVOS -->
         <section class="bg-white">
-            <div class="container reveal">
+            <div class="container reveal" style="padding-top: 80px;">
                 <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
                 
                 <div class="grid-4" style="margin-top: 50px;">
@@ -746,12 +895,11 @@
                             <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
                             <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
                             
-                            <!-- SELOS DE CONFIANÇA TEXTUAIS -->
-                            <div class="trust-badges">
+                            <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
+                            <div class="trust-badges-inline">
                                 <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
                                 <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
-                                <span><i class="fas fa-medal"></i> Satisfação Garantida</span>
-                                <span><i class="fas fa-lock"></i> Privacidade Protegida</span>
+                                <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
                             </div>
                         </div>
                     </div>
@@ -775,12 +923,11 @@
                             <div class="price-new">R$ 29,90</div>
                             <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
                             
-                            <!-- SELOS DE CONFIANÇA TEXTUAIS -->
-                            <div class="trust-badges">
+                            <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
+                            <div class="trust-badges-inline">
                                 <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
                                 <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
-                                <span><i class="fas fa-medal"></i> Satisfação Garantida</span>
-                                <span><i class="fas fa-lock"></i> Privacidade Protegida</span>
+                                <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
                             </div>
                         </div>
                     </div>
@@ -821,7 +968,7 @@
             <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
         </section>
 
-    </main>
+    </div> <!-- FIM DA WRAPPER DE BLINDAGEM DE ROLAGEM HORIZONTAL -->
 
     <!-- 12. RODAPÉ -->
     <footer class="reveal">
@@ -854,7 +1001,7 @@
                 <span class="modal-price-new">R$ 24,90</span>
             </div>
             
-            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes">SIM! GARANTIR PACOTE COMPLETO</a>
+            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes" style="color: #FAFAFA;">SIM! GARANTIR PACOTE COMPLETO</a>
             
             <button class="modal-btn-no" id="btnContinueBasic">Não, obrigado. Quero continuar com o pacote iniciante.</button>
         </div>
@@ -862,7 +1009,7 @@
 
     <!-- SCRIPTS GERAIS -->
     <script>
-        // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS PARA NÃO TRAVAR O CELULAR
+        // 1. ANIMAÇÕES DE ROLAGEM (INTERSECTION OBSERVER COM DESLIGAMENTO)
         document.addEventListener('DOMContentLoaded', () => {
             const reveals = document.querySelectorAll('.reveal');
             
@@ -870,13 +1017,14 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        // Tira o monitoramento após a animação para poupar a CPU do celular
                         observer.unobserve(entry.target); 
                     }
                 });
             }, {
                 root: null,
                 threshold: 0.1, 
-                rootMargin: "0px 0px -50px 0px"
+                rootMargin: "0px 0px -20px 0px"
             });
 
             reveals.forEach(el => revealObserver.observe(el));
@@ -897,13 +1045,24 @@
             });
         });
 
-        // 3. SLIDER AUTOMÁTICO E DESLIZÁVEL
+        // 3. SLIDER OTIMIZADO APENAS QUANDO VISÍVEL NA TELA
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
             const container = wrapper.querySelector('.slider-container');
             const prevBtn = wrapper.querySelector('.prev');
             const nextBtn = wrapper.querySelector('.next');
             const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
             let autoPlayInterval;
+            let isVisible = false;
+
+            // Monitora se o carrossel está na tela para só animar quando estiver visível
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                    if(isVisible) startAutoPlay();
+                    else stopAutoPlay();
+                });
+            });
+            observer.observe(wrapper);
 
             const nextSlide = () => {
                 if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
@@ -918,7 +1077,8 @@
             };
 
             const startAutoPlay = () => {
-                if(isAutoPlay && window.innerWidth <= 900) {
+                if(isAutoPlay && isVisible && window.innerWidth <= 900) {
+                    stopAutoPlay(); // garante que não crie vários loops
                     autoPlayInterval = setInterval(nextSlide, 3500);
                 }
             };
@@ -928,7 +1088,7 @@
             if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
             if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
 
-            startAutoPlay();
+            // Para no toque
             wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
             wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
         });
