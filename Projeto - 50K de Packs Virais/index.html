@@ -1386,6 +1386,200 @@
                 padding: 24px 20px;
             }
         }
+
+        /* =========================================
+           SEÇÕES ESTRATÉGICAS DA OFERTA
+           Adicionadas sem alterar as seções existentes.
+           ========================================= */
+        .strategy-section {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto 0;
+            text-align: left;
+        }
+
+        .strategy-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 28px 24px;
+        }
+
+        .strategy-card h3 {
+            color: #fff;
+            font-size: 18px;
+            margin: 0 0 10px;
+            font-weight: 900;
+        }
+
+        .strategy-card p {
+            color: #bbb;
+            font-size: 15px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .strategy-card .strategy-icon {
+            color: var(--offer-green);
+            font-size: 24px;
+            margin-bottom: 14px;
+        }
+
+        .strategy-flow {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 12px;
+            max-width: 900px;
+            margin: 35px auto 0;
+        }
+
+        .strategy-flow-item {
+            flex: 1;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 22px 15px;
+            text-align: center;
+        }
+
+        .strategy-flow-item strong {
+            display: block;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .strategy-flow-item span {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .strategy-flow-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--offer-green);
+            font-size: 20px;
+        }
+
+        .offer-transition {
+            max-width: 760px;
+            margin: 0 auto 50px;
+            text-align: center;
+        }
+
+        .strategy-kicker {
+            display: inline-block;
+            color: var(--offer-green);
+            border: 1px solid rgba(49,185,0,.35);
+            background: rgba(49,185,0,.06);
+            border-radius: 999px;
+            padding: 7px 13px;
+            margin-bottom: 16px;
+            font-size: 11px;
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
+
+        .offer-transition-title {
+            color: #fff;
+            font-size: 24px;
+            line-height: 1.3;
+            font-weight: 800;
+            margin: 0 auto 12px;
+            text-transform: none;
+        }
+
+        .offer-transition p {
+            font-size: 16px;
+            margin-bottom: 0;
+            color: #aaa;
+        }
+
+        .objection-title {
+            margin-top: 0;
+        }
+
+        .objection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-width: 850px;
+            margin: 35px auto 0;
+            text-align: left;
+        }
+
+        .objection-item {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .objection-item strong {
+            display: block;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .objection-item span {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .strategy-final {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .strategy-final-box {
+            background: #0d0d0d;
+            border: 1px solid #222;
+            border-radius: 14px;
+            padding: 30px 22px;
+            margin-top: 30px;
+        }
+
+        .strategy-final-box p {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 700px) {
+            .strategy-grid,
+            .objection-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-flow {
+                flex-direction: column;
+            }
+
+            .strategy-flow-arrow {
+                justify-content: center;
+                transform: rotate(90deg);
+            }
+
+            .offer-transition {
+                margin-bottom: 40px;
+            }
+
+            .offer-transition-title {
+                font-size: 21px;
+            }
+        }
+
 </style>
 </head>
 
@@ -1403,6 +1597,62 @@
             
             <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
         </header>
+
+        <!-- NOVA: PROBLEMA / DOR -->
+        <section class="container reveal strategy-section">
+            <h2>VOCÊ QUER POSTAR MAIS, <span class="highlight">MAS FALTA CONTEÚDO?</span></h2>
+            <p>Encontrar vídeos todos os dias, separar por nicho e manter uma rotina de postagem pode consumir muito tempo.</p>
+
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-icon"><i class="fas fa-search"></i></div>
+                    <h3>Perde tempo procurando vídeos</h3>
+                    <p>Em vez de passar horas procurando conteúdo, tenha uma biblioteca organizada para encontrar o que precisa.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-icon"><i class="fas fa-clock"></i></div>
+                    <h3>Fica difícil manter frequência</h3>
+                    <p>Quando cada postagem começa do zero, manter uma rotina de conteúdo fica muito mais trabalhoso.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-icon"><i class="fas fa-folder-open"></i></div>
+                    <h3>Conteúdo espalhado</h3>
+                    <p>Ter materiais organizados por categorias facilita encontrar diferentes opções para o seu perfil.</p>
+                </div>
+
+                <div class="strategy-card">
+                    <div class="strategy-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                    <h3>Você quer começar de forma simples</h3>
+                    <p>A ideia é reduzir a parte mais trabalhosa: encontrar conteúdo para publicar com consistência.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVA: RESULTADO DESEJADO -->
+        <section class="container reveal strategy-section">
+            <h2>IMAGINE TER <span class="highlight">CONTEÚDO DISPONÍVEL</span> QUANDO PRECISAR</h2>
+            <p>Em vez de começar do zero todos os dias, você pode escolher um conteúdo, baixar e preparar sua próxima publicação.</p>
+
+            <div class="strategy-flow">
+                <div class="strategy-flow-item">
+                    <strong>ESCOLHA</strong>
+                    <span>Encontre um conteúdo no seu nicho.</span>
+                </div>
+                <div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="strategy-flow-item">
+                    <strong>BAIXE</strong>
+                    <span>Tenha o material disponível para usar.</span>
+                </div>
+                <div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="strategy-flow-item">
+                    <strong>PUBLIQUE</strong>
+                    <span>Prepare e publique no seu perfil.</span>
+                </div>
+            </div>
+        </section>
+
 
      <!-- 2. PERFIS QUE MAIS CRESCEM -->
 
@@ -1903,6 +2153,42 @@
             </div>
         </section>
 
+
+
+        <!-- NOVA: TRANSIÇÃO E QUEBRA DE OBJEÇÕES -->
+        <section class="container reveal strategy-section">
+            <div class="offer-transition">
+                <span class="strategy-kicker">PRÓXIMO PASSO</span>
+                <div class="offer-transition-title">Agora você já entende o que tem dentro.</div>
+                <p>Antes de escolher, vale eliminar as principais dúvidas sobre como o pack funciona.</p>
+            </div>
+
+            <h2 class="objection-title">ANTES DE DECIDIR, <span class="highlight">TIRE SUAS DÚVIDAS</span></h2>
+
+            <div class="objection-grid">
+                <div class="objection-item">
+                    <strong>“Preciso aparecer?”</strong>
+                    <span>Não. O material foi pensado para perfis que trabalham com conteúdo sem depender de aparecer nos vídeos.</span>
+                </div>
+
+                <div class="objection-item">
+                    <strong>“Preciso saber editar?”</strong>
+                    <span>Não é obrigatório. Ainda assim, uma edição básica pode ajudar a diferenciar o conteúdo antes da publicação.</span>
+                </div>
+
+                <div class="objection-item">
+                    <strong>“Vou receber o quê?”</strong>
+                    <span>Você recebe acesso ao pacote escolhido, com os conteúdos e recursos descritos na oferta.</span>
+                </div>
+
+                <div class="objection-item">
+                    <strong>“Isso garante viralização?”</strong>
+                    <span>Não. O conteúdo é uma ferramenta para facilitar sua produção; alcance, crescimento e vendas dependem também da execução e da plataforma.</span>
+                </div>
+            </div>
+        </section>
+
+
         <!-- 9. ÁREA DE PREÇO / DUAS OFERTAS -->
         <section id="preco" class="pricing-section reveal">
             <div class="container" style="padding: 0;">
@@ -2038,6 +2324,21 @@
                 </div>
             </div>
         </section>
+
+
+
+        <!-- NOVA: FECHAMENTO E REDUÇÃO DE RISCO -->
+        <section class="container reveal strategy-section">
+            <div class="strategy-final">
+                <h2>VOCÊ NÃO PRECISA <span class="highlight">COMEÇAR DO ZERO</span></h2>
+                <p>Tenha uma biblioteca de conteúdos para facilitar sua rotina de postagem e escolha o pacote de acordo com a quantidade de material que você deseja ter disponível.</p>
+
+                <div class="strategy-final-box">
+                    <p><strong>Compare os pacotes acima e veja exatamente o que está incluído antes de finalizar a compra.</strong></p>
+                </div>
+            </div>
+        </section>
+
 
         <!-- 11. CHAMADA PARA AÇÃO FINAL -->
         <section class="container reveal">
