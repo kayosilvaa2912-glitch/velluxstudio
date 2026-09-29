@@ -28,17 +28,29 @@
     <title>Pack de Cortes Virais | 50.000 Vídeos Prontos para Postar</title>
     <link rel="icon" type="image/jpeg" href="assets/images/Favicon.jpeg">
     
-    <link rel="preload" as="image" href="assets/images/banner-.jpeg">
+    <link rel="preload" as="image" href="assets/images/banner-.jpeg"
+          type="image/jpeg" fetchpriority="high">
 
     <!-- Pré-conexões para acelerar o carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet"></noscript>
+    <!-- CSS externo não bloqueia a primeira pintura -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap"
+          rel="stylesheet" media="print"
+          onload="this.onload=null;this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap"
+              rel="stylesheet">
+    </noscript>
 
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          rel="stylesheet" media="print"
+          onload="this.onload=null;this.media='all'">
+    <noscript>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <!-- O modo de animação é ativado pelo script somente após a inicialização -->
 
@@ -90,6 +102,11 @@
         html.reveal-ready .reveal {
             opacity: 0;
             transform: translateY(20px);
+        }
+
+        /* A animação continua igual; a camada é promovida somente durante a execução. */
+        html.reveal-ready .reveal.active {
+            will-change: opacity, transform;
         }
 
         html.reveal-ready .reveal.active {
@@ -1598,7 +1615,11 @@
 
         <!-- 1. HEADER / HERO SECTION -->
         <header class="container reveal">
-            <img src="assets/images/banner-.jpeg" width="800" height="450" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
+            <img src="assets/images/banner-.jpeg"
+             width="800" height="450"
+             alt="Cortes Prontos"
+             fetchpriority="high"
+             class="hero-img">
             
             <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
             <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
@@ -1734,7 +1755,7 @@
                             object-fit: cover;
                             border-radius: 12px;
                         "
-                    >
+                     fetchpriority="low">
                 </div>
 
                 <!-- IMAGEM 2 -->
@@ -1762,7 +1783,7 @@
                             object-fit: cover;
                             border-radius: 12px;
                         "
-                    >
+                     fetchpriority="low">
                 </div>
 
                 <!-- IMAGEM 3 -->
@@ -1790,7 +1811,7 @@
                             object-fit: cover;
                             border-radius: 12px;
                         "
-                    >
+                     fetchpriority="low">
                 </div>
 
                 <!-- IMAGEM 4 -->
@@ -1818,7 +1839,7 @@
                             object-fit: cover;
                             border-radius: 12px;
                         "
-                    >
+                     fetchpriority="low">
                 </div>
 
             </div>
@@ -1887,126 +1908,126 @@
             <div class="grid-3" style="margin-top: 50px;">
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async">
+                        <img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async">
+                        <img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async">
+                        <img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 350 cortes de Family Guy selecionados.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async">
+                        <img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async">
+                        <img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async">
+                        <img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async">
+                        <img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async">
+                        <img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async">
+                        <img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Mais de 250 cortes de melhores momentos do futebol.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async">
+                        <img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async">
+                        <img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async">
+                        <img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async">
+                        <img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async">
+                        <img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async">
+                        <img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Os melhores cortes de Pablo Marçal.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async">
+                        <img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async">
+                        <img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Cortes com frases motivacionais e de melhoria de vida.</p>
                 </div>
 
                 <div class="card-nicho reveal">
                     <div class="card-nicho-img">
-                        <img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async">
+                        <img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async" fetchpriority="low">
                     </div>
                     <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
                 </div>
@@ -2016,7 +2037,7 @@
         <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
         <section class="bg-white">
             <div class="container reveal">
-                <img src="assets/images/instagram-e-tiktok.jpeg" width="400" height="200" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;">
+                <img src="assets/images/instagram-e-tiktok.jpeg" width="400" height="200" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;" fetchpriority="low">
                 
                 <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
                 
@@ -2066,7 +2087,7 @@
                             <div class="testi-card">
                                 <div class="testi-header">
                                     <div class="testi-avatar">
-                                        <img src="assets/images/01.jpg" alt="Depoimento de Luan Pereira" loading="lazy" decoding="async" width="50" height="50">
+                                        <img src="assets/images/01.jpg" alt="Depoimento de Luan Pereira" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
                                     </div>
                                     <div class="testi-info">
                                         <h4>Luan Pereira</h4>
@@ -2084,7 +2105,7 @@
                             <div class="testi-card">
                                 <div class="testi-header">
                                     <div class="testi-avatar">
-                                        <img src="assets/images/02.jpg" alt="Depoimento de Gabriel Martins" loading="lazy" decoding="async" width="50" height="50">
+                                        <img src="assets/images/02.jpg" alt="Depoimento de Gabriel Martins" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
                                     </div>
                                     <div class="testi-info">
                                         <h4>Gabriel Martins</h4>
@@ -2102,7 +2123,7 @@
                             <div class="testi-card">
                                 <div class="testi-header">
                                     <div class="testi-avatar">
-                                        <img src="assets/images/03.jpg" alt="Depoimento de Lucas Ferreira" loading="lazy" decoding="async" width="50" height="50">
+                                        <img src="assets/images/03.jpg" alt="Depoimento de Lucas Ferreira" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
                                     </div>
                                     <div class="testi-info">
                                         <h4>Lucas Ferreira</h4>
@@ -2223,7 +2244,7 @@
                             <div class="price-old">DE R$ 69,90</div>
                             <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
 
-                            <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">
+                            <a href="#preco" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">
                                 GARANTIR PACOTE INICIANTE
                             </a>
                             
@@ -2367,7 +2388,7 @@
         </p>
         
         <div class="footer-bottom">
-            <p>&copy; 2026 Cortes Virais. Todos os direitos reservados.</p>
+            <p>&copy; 2026 O Mago Dos Cortes. Todos os direitos reservados.</p>
             <p class="mt">Design By <span>VELLUX Studio</span></p>
         </div>
     </footer>
@@ -2776,10 +2797,20 @@
                 initInfiniteCarousel(document.getElementById('slider-depoimentos'));
             };
 
-            if ('requestIdleCallback' in window) {
-                requestIdleCallback(startCarousels, { timeout: 1200 });
+            const scheduleCarouselInit = () => {
+                if ('requestIdleCallback' in window) {
+                    requestIdleCallback(startCarousels, { timeout: 1800 });
+                } else {
+                    setTimeout(startCarousels, 500);
+                }
+            };
+
+            if ('requestAnimationFrame' in window) {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(scheduleCarouselInit);
+                });
             } else {
-                setTimeout(startCarousels, 250);
+                setTimeout(scheduleCarouselInit, 100);
             }
         })();
 
