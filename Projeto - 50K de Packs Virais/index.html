@@ -21,7 +21,7 @@
     <!-- End Meta Pixel Code -->
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://magodoscortesvirais.vercel.app/">
@@ -34,8 +34,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet"></noscript>
+
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- O modo de animação é ativado pelo script somente após a inicialização -->
 
@@ -682,6 +685,11 @@
         }
 
         .faq-question {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            font: inherit;
+            text-align: left;
             padding: 20px;
             cursor: pointer;
             display: flex;
@@ -2274,11 +2282,11 @@
                 <div class="faq-container">
 
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
                             Eu preciso aparecer nos vídeos?
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-1">
                             <p>
                                 De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".
                             </p>
@@ -2286,11 +2294,11 @@
                     </div>
 
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
                             Como acesso ao Pack após comprar?
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-2">
                             <p>
                                 Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.
                             </p>
@@ -2298,11 +2306,11 @@
                     </div>
 
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
                             Preciso editar os vídeos?
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-3">
                             <p>
                                 Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!
                             </p>
@@ -2310,11 +2318,11 @@
                     </div>
 
                     <div class="faq-item">
-                        <div class="faq-question">
+                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
                             Recebo novos vídeos no futuro?
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-answer">
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <div class="faq-answer" id="faq-answer-4">
                             <p>
                                 Atualizamos as pastas com frequência. E você sempre é avisado!
                             </p>
@@ -2395,7 +2403,7 @@
                 SIM! GARANTIR PACOTE COMPLETO
             </a>
             
-            <button class="modal-btn-no" id="btnContinueBasic">
+            <button type="button" class="modal-btn-no" id="btnContinueBasic">
                 Não, obrigado. Quero continuar com o pacote iniciante.
             </button>
         </div>
@@ -2531,12 +2539,15 @@
 
                 const isOpen = item.classList.contains('faq-open');
 
-                faqItems.forEach(otherItem =>
-                    otherItem.classList.remove('faq-open')
-                );
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('faq-open');
+                    const otherQuestion = otherItem.querySelector('.faq-question');
+                    if (otherQuestion) otherQuestion.setAttribute('aria-expanded', 'false');
+                });
 
                 if (!isOpen) {
                     item.classList.add('faq-open');
+                    question.setAttribute('aria-expanded', 'true');
                 }
 
             });
@@ -2760,8 +2771,16 @@
                 start();
             };
 
-            initInfiniteCarousel(document.getElementById('slider-perfis'));
-            initInfiniteCarousel(document.getElementById('slider-depoimentos'));
+            const startCarousels = () => {
+                initInfiniteCarousel(document.getElementById('slider-perfis'));
+                initInfiniteCarousel(document.getElementById('slider-depoimentos'));
+            };
+
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(startCarousels, { timeout: 1200 });
+            } else {
+                setTimeout(startCarousels, 250);
+            }
         })();
 
 
