@@ -1,36 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3428544167307310');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3428544167307310&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar.">
     <title>Pack de Cortes Virais – Packlândia</title>
     
-    <!-- Google Fonts: Montserrat -->
+    <link rel="preload" as="image" href="assets/images/banner-.jpeg">
+
+    <!-- Pré-conexões para acelerar o carregamento -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome (Ícones) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
+            /* TEMA GLOBAL VERDE ORIGINAL */
             --primary-color: #45E104; 
             --bg-color: #000000;
             --text-color: #ffffff;
             --box-bg: #0a0a0a;
             --light-bg: #ffffff;
             --dark-text: #111111;
+            
+            /* VERDE ALTERNATIVO (Ofertas, Redes e Funciona) */
+            --offer-green: #31B900;
         }
 
-        * {
+        /* RESET LIMPO: SEM TRAVAS DE SCROLL AQUI PARA NÃO BUGAR O CELULAR */
+        *, *:before, *:after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
 
         body {
@@ -38,18 +57,37 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             text-align: center;
-            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Container mestre que blinda o site de ficar solto lateralmente, sem travar o scroll vertical */
+        .site-wrapper {
+            width: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ANIMAÇÕES GERAIS LEVES */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CONTAINERS GERAIS */
         .container {
+            width: 100%;
             max-width: 1100px;
             margin: 0 auto;
             padding: 80px 20px;
         }
 
-        .highlight {
-            color: var(--primary-color);
-        }
+        .highlight { color: var(--primary-color); }
+        .highlight-alt { color: var(--offer-green); }
 
         h2 {
             font-size: 36px;
@@ -74,11 +112,18 @@
             margin: 0 auto;
         }
 
-        /* Botões com efeito Pulse */
+        .hero-img {
+            width: 100%;
+            max-width: 800px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+
+        /* BOTÕES GLOBAIS (ANIMAÇÃO RESTAURADA E TEXTO BRANCO) */
         .btn {
             display: inline-block;
             background-color: var(--primary-color);
-            color: #000;
+            color: #FAFAFA; 
             padding: 20px 45px;
             text-decoration: none;
             font-weight: 900;
@@ -86,66 +131,133 @@
             font-size: 18px;
             margin: 20px 0;
             text-transform: uppercase;
-            box-shadow: 0 4px 20px rgba(69, 225, 4, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse 2s infinite;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            animation: pulse-green 2s infinite;
         }
 
         .btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(69, 225, 4, 0.6);
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0.7); }
-            70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(69, 225, 4, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(69, 225, 4, 0); }
+        /* Pulse com baixo uso de CPU/GPU */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 0 0 var(--primary-color);
+            opacity: 0.7;
+            z-index: -1;
+            animation: pulse-gpu 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
         }
+
+        @keyframes pulse-gpu {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.15); opacity: 0; }
+        }
+
+        .btn.premium-btn {
+            background-color: var(--offer-green);
+        }
+        .btn.premium-btn::after {
+            box-shadow: 0 0 0 0 var(--offer-green);
+        }
+
+        .btn.basic-btn {
+            background-color: #2E2E2E; 
+            box-shadow: none;
+            animation: none;
+        }
+        .btn.basic-btn::after { display: none; }
+        .btn.basic-btn:hover { background-color: #1f1f1f; }
 
         /* Grids */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
-        /* Timeline (Como Funciona) */
-        .timeline {
-            text-align: left;
-            max-width: 700px;
-            margin: 50px auto;
-            position: relative;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: var(--primary-color);
-            opacity: 0.5;
-        }
-        .timeline-step {
-            position: relative;
-            margin-bottom: 50px;
-            padding-left: 60px;
-        }
-        .timeline-icon {
-            position: absolute;
-            left: -2px;
-            top: 0;
-            width: 46px;
-            height: 46px;
-            background-color: var(--bg-color);
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
+        /* Sliders (Carrosséis) - Scroll Livre, Sem bugs de Touch */
+        .slider-wrapper { position: relative; width: 100%; padding: 10px 0;}
+        .slider-container {
             display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch; 
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slider-item {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            color: var(--primary-color);
+            border: none;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 10;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .slider-btn:hover { opacity: 1; }
+        .slider-btn.prev { left: -10px; }
+        .slider-btn.next { right: -10px; }
+
+        /* Esconde setas apenas no slider de perfis */
+        #slider-perfis .slider-btn { display: none !important; }
+
+        /* SEÇÃO: COMO FUNCIONA (BLOCOS) */
+        .simple-card {
+            background-color: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
-            font-size: 18px;
         }
-        .timeline-step h3 { margin: 5px 0 10px 0; font-size: 22px; font-weight: 800; color: #fff;}
-        .timeline-step p { margin: 0; font-size: 16px; color: #aaa; }
+        .simple-card:hover {
+            border-color: var(--offer-green);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            background-color: var(--offer-green);
+            color: #FAFAFA;
+            font-size: 26px;
+            font-weight: 900;
+            width: 60px; 
+            height: 60px;
+            border-radius: 12px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 5px 15px rgba(49, 185, 0, 0.3);
+        }
+        .step-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+        .simple-card h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 0;
+            font-weight: 800;
+            line-height: 1.4;
+        }
 
         /* Cards Nichos */
         .card-nicho {
@@ -154,528 +266,742 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            cursor: pointer;
         }
         .card-nicho-img {
             border-left: 5px solid var(--primary-color);
             border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            background-color: #111; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .card-nicho-img img {
             width: 100%;
-            transition: transform 0.3s ease;
+            transition: transform 0.5s ease;
+            aspect-ratio: 16/9;
+            object-fit: cover;
         }
-        .card-nicho:hover .card-nicho-img img {
-            transform: scale(1.05);
+        .card-nicho:hover .card-nicho-img { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(69, 225, 4, 0.2); 
         }
-        .card-nicho p {
-            font-size: 14px;
-            color: #aaa;
-            margin: 0;
-            line-height: 1.5;
-        }
+        .card-nicho:hover .card-nicho-img img { transform: scale(1.05); }
+        .card-nicho p { font-size: 14px; color: #aaa; margin: 0; line-height: 1.5; }
 
         /* Seções de Fundo Branco */
-        .bg-white {
-            background-color: var(--light-bg);
-            color: var(--dark-text);
-        }
+        .bg-white { background-color: var(--light-bg); color: var(--dark-text); }
         .bg-white h2 { color: var(--dark-text); }
         .bg-white p { color: #444; }
 
-        /* Ícones da seção de Redes */
+        /* Ícones Redes */
         .benefits-box {
-            border: 2px solid #eaeaea;
+            border: 2px solid var(--offer-green); 
             border-radius: 12px;
-            padding: 30px 20px;
+            padding: 35px 20px;
             text-align: center;
-            transition: border-color 0.3s ease;
+            background-color: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .benefits-box:hover {
-            border-color: var(--primary-color);
+        .benefits-box:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(49, 185, 0, 0.15); 
         }
         .benefits-box i {
             font-size: 45px;
-            color: var(--primary-color);
+            color: var(--offer-green); 
             margin-bottom: 20px;
         }
-        .benefits-box p {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0;
-            color: #111;
-        }
+        .benefits-box p { font-size: 16px; font-weight: 600; margin: 0; color: #111; line-height: 1.5; }
 
-        /* Depoimentos */
+        /* DEPOIMENTOS (Prints Retornados) */
         .testimonial-img {
             border-radius: 12px;
+            width: 100%;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             transition: transform 0.3s ease;
-        }
-        .testimonial-img:hover {
-            transform: translateY(-10px);
         }
 
         /* Bônus Section */
         .bonus-card {
-            border: 2px solid #eaeaea;
+            border: 2px solid var(--primary-color);
             border-radius: 12px;
             padding: 40px 20px;
             background: #fff;
-            transition: border-color 0.3s, transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
-        .bonus-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-5px);
+        .bonus-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 10px 25px rgba(69, 225, 4, 0.15);
         }
-        .bonus-card h2 {
-            font-size: 55px;
-            margin-bottom: 10px;
-            color: var(--primary-color);
+        .bonus-card h2 { font-size: 55px; margin-bottom: 5px; color: var(--primary-color); }
+        .bonus-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 15px; color: var(--primary-color); }
+        .bonus-card p { font-size: 15px; font-weight: 600; color: #111; line-height: 1.5; }
+
+        /* =========================================
+           OFERTAS / PREÇOS
+           ========================================= */
+        .pricing-section {
+            background-color: #0d0d0d; 
+            padding: 80px 20px;
+            border-top: 1px solid #222;
         }
-        .bonus-card h3 {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-        .bonus-card p {
-            font-size: 14px;
-            font-weight: 600;
-            color: #333;
+        .pricing-section h2 { color: #ffffff; margin-bottom: 50px; }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+            align-items: stretch; 
         }
 
-        /* Caixa de Preço */
-        .pricing-section {
-            background-color: var(--primary-color);
-            padding: 80px 20px;
-        }
-        .pricing-section h2 {
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
         .pricing-box {
-            background-color: #fff;
+            background-color: #f9f9f9;
             color: #000;
-            max-width: 480px;
-            margin: 40px auto 0;
-            padding: 50px 40px;
+            padding: 40px 30px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease;
         }
-        .pricing-box h3 { 
-            font-size: 26px; 
-            margin-top: 0; 
-            font-weight: 900; 
-            margin-bottom: 30px;
-            color: #111;
+
+        .pricing-box.basic { border: 2px solid #ddd; transform: scale(0.95); }
+        .pricing-box.basic:hover { transform: scale(0.98); border-color: #ccc; }
+
+        .pricing-box.premium {
+            background-color: #ffffff;
+            border: 4px solid var(--offer-green); 
+            transform: scale(1.02); 
+            z-index: 2;
         }
-        .pricing-box ul {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            font-weight: 800;
-            font-size: 16px;
-            margin-bottom: 30px;
-            color: #333;
+        .pricing-box.premium:hover { transform: scale(1.05); }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--offer-green); 
+            color: #ffffff; 
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
-        .pricing-box li { 
-            margin-bottom: 15px; 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
+
+        .pricing-box h3 { font-size: 24px; margin-top: 0; font-weight: 900; margin-bottom: 25px; color: #111; }
+        .pricing-box ul { text-align: left; list-style: none; padding: 0; font-weight: 800; font-size: 15px; margin-bottom: 30px; color: #333; flex-grow: 1; }
+        .pricing-box li { margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .pricing-box li i { color: var(--offer-green); font-size: 20px; }
+        
+        /* Itens Riscados (Plano Básico) com Cor Vermelha (#FE012E) */
+        .pricing-box li.disabled.red-disabled {
+            text-decoration: line-through;
+            opacity: 0.9;
+            color: #FE012E;
         }
-        .pricing-box li i { 
-            color: var(--primary-color); 
-            font-size: 22px; 
+        .pricing-box li.disabled.red-disabled i {
+            color: #FE012E;
         }
-        .price-old { 
-            text-decoration: line-through; 
-            color: #aaa; 
-            font-size: 24px; 
-            font-weight: 800;
+
+        .price-old { text-decoration: line-through; color: #999; font-size: 20px; font-weight: 800; }
+        .price-new { font-size: 55px; font-weight: 900; color: var(--offer-green); margin: 5px 0 20px 0; line-height: 1; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        
+        /* SELOS DE SEGURANÇA NA MESMA LINHA E CINZAS */
+        .trust-badges-inline {
+            display: flex;
+            flex-wrap: nowrap; 
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            white-space: nowrap; 
         }
-        .price-new { 
-            font-size: 65px; 
-            font-weight: 900; 
-            color: var(--primary-color); 
-            margin: 5px 0 20px 0; 
-            line-height: 1;
+        .trust-badges-inline span {
+            font-size: 11px;
+            font-weight: 700;
+            color: #888; 
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
-        .compra-segura { 
-            margin-top: 25px; 
-            width: 90%; 
-        }
+        .trust-badges-inline span i { color: #888; font-size: 12px; }
 
         /* FAQ (Dúvidas Frequentes) */
-        .faq-container {
-            max-width: 800px;
-            margin: 50px auto;
+        .faq-section { background-color: #262524; padding: 80px 0; }
+        .faq-section h2 { color: #fff; }
+        .faq-section .container { padding-top: 0; padding-bottom: 0; }
+
+        .faq-container { max-width: 800px; margin: 50px auto 0 auto; }
+        .faq-item { background-color: #111; margin-bottom: 15px; border-radius: 8px; text-align: left; border: 1px solid #333; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 18px; color: #fff; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .faq-answer p { padding: 0 20px 20px 20px; color: #ccc; font-size: 16px; line-height: 1.6; margin: 0; border-top: 1px solid #333; }
+        .faq-item.faq-open .faq-answer { max-height: 500px; }
+        .faq-item.faq-open .faq-question i { transform: rotate(180deg); color: var(--primary-color); }
+
+        /* MODAL DE UPSELL (POP-UP) */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); display: flex; align-items: center; justify-content: center;
+            z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;
         }
-        .faq-item {
-            background-color: #111;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            overflow: hidden;
-            text-align: left;
-            border: 1px solid #222;
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: #ffffff; width: 90%; max-width: 420px; border-radius: 20px; padding: 35px 25px;
+            text-align: center; position: relative; transform: scale(0.9); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(49, 185, 0, 0.3); border: 4px solid var(--offer-green);
         }
-        .faq-question {
-            padding: 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 800;
-            font-size: 18px;
-            color: #fff;
-            transition: background-color 0.3s;
+        .modal-overlay.show .modal-content { transform: scale(1); }
+        .modal-badge {
+            background: var(--offer-green); color: #ffffff; padding: 6px 20px; border-radius: 20px;
+            font-weight: 900; font-size: 13px; display: inline-block; margin-bottom: 15px; letter-spacing: 1px;
         }
-        .faq-question:hover {
-            background-color: #1a1a1a;
+        .modal-title { font-size: 24px; font-weight: 900; color: #111; margin-bottom: 10px; line-height: 1.2; text-transform: uppercase; }
+        .modal-subtitle { font-size: 15px; font-weight: 600; color: #444; margin-bottom: 25px; }
+        .modal-list { list-style: none; padding: 0; text-align: left; margin-bottom: 25px; }
+        .modal-list li { font-size: 15px; font-weight: 800; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .modal-list li i { color: var(--offer-green); font-size: 18px; }
+        .modal-price { margin-bottom: 25px; }
+        .modal-price-old { display: block; text-decoration: line-through; color: #999; font-size: 16px; font-weight: 800; }
+        .modal-price-new { display: block; font-size: 50px; font-weight: 900; color: var(--offer-green); line-height: 1; }
+        .modal-btn-yes {
+            width: 100%; padding: 18px 10px; font-size: 16px; margin: 0 0 15px 0;
+            background-color: var(--offer-green); color: #FAFAFA; border-radius: 8px;
+            font-weight: 900; text-transform: uppercase; text-decoration: none; display: inline-block;
+            transition: transform 0.2s; animation: pulse-alt 2s infinite;
         }
-        .faq-answer {
-            padding: 0 25px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            color: #bbb;
-            font-size: 16px;
-            line-height: 1.6;
-        }
-        .faq-item.active .faq-answer {
-            padding: 20px 25px 25px 25px;
-            max-height: 400px;
-            border-top: 1px solid #222;
-        }
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-            color: var(--primary-color);
-        }
+        .modal-btn-yes:hover { transform: scale(1.03); }
+        .modal-btn-no { background: none; border: none; color: #888; font-size: 13px; text-decoration: underline; cursor: pointer; font-weight: 600; padding: 5px; }
 
         /* Footer */
-        footer {
-            border-top: 1px solid #222;
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 13px;
-            color: #666;
-            max-width: 1100px;
-            margin: 0 auto;
+        footer { border-top: 1px solid #222; padding: 30px 15px; text-align: center; color: #666; }
+        footer p { max-width: 900px; font-size: 12px; color: #777; margin: 0 auto 15px auto; line-height: 1.5; }
+        .footer-bottom {
+            max-width: 1100px; margin: 0 auto; border-top: 1px solid #222; padding-top: 20px;
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: bold; color: #555;
         }
-        footer p {
-            max-width: 900px;
-            font-size: 13px;
-            color: #777;
+        .footer-bottom span { color: #fff; }
+
+        /* =========================================
+           RESPONSIVIDADE (DESKTOP E MOBILE)
+           ========================================= */
+        @media (min-width: 900px) {
+            .slider-container.grid-desktop-3 { display: grid; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+            .slider-container.grid-desktop-4 { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; }
+            .slider-container.grid-desktop-3 .slider-item, .slider-container.grid-desktop-4 .slider-item { flex: auto; }
+            .slider-wrapper .slider-btn { display: none; } 
+            .footer-bottom { flex-direction: row; }
+            .footer-bottom p.mt { margin-top: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+            .pricing-box.basic { transform: scale(1); }
+            .pricing-box.premium { transform: scale(1); margin-top: 10px; }
+            .footer-bottom p.mt { margin-top: 15px; }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
         }
 
-        /* Responsividade */
-        @media (max-width: 900px) {
-            .grid-3 { grid-template-columns: repeat(2, 1fr); }
-            .grid-4 { grid-template-columns: repeat(2, 1fr); }
-            .container { padding: 60px 20px; }
-        }
         @media (max-width: 600px) {
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
-            h2 { font-size: 28px; }
-            .price-new { font-size: 50px; }
-            .pricing-box { padding: 40px 20px; }
+            .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 20px; }
+            .container { padding: 50px 15px; }
+            .hero-img { max-width: 90%; margin-bottom: 20px; }
+            h2 { font-size: 26px; }
+            p { font-size: 16px; }
+            .btn { width: 100%; padding: 18px 20px; font-size: 16px; }
+            
             .timeline::before { left: 15px; }
-            .timeline-icon { left: -7px; width: 40px; height: 40px; font-size: 16px; }
-            .timeline-step { padding-left: 50px; }
+            .timeline-icon { left: -6px; width: 40px; height: 40px; font-size: 15px; }
+            .timeline-step { padding-left: 45px; }
+            .timeline-content { padding: 20px 15px; }
+            
+            .pricing-section { padding: 50px 15px; }
+            .pricing-box { padding: 30px 20px; }
+            .pricing-box h3 { font-size: 20px; }
+            .price-new { font-size: 45px; }
+            
+            .faq-section { padding: 50px 0; }
+            .faq-question { font-size: 16px; padding: 20px 15px; }
+
+            .trust-badges-inline { gap: 6px; }
+            .trust-badges-inline span { font-size: 9.5px; gap: 3px; }
+            .trust-badges-inline span i { font-size: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. HEADER / HERO SECTION -->
-    <header class="container">
-        <img src="https://packlandia.com/wp-content/uploads/2025/09/banner_index.png" alt="Cortes Prontos" style="max-width: 800px; margin-bottom: 30px;">
-        
-        <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
-        <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
-        
-        <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
-    </header>
+    <!-- A DIV WRAPPER BLINDA A TELA DE VAZAR, RESOLVENDO O TRAVAMENTO NO MOBILE -->
+    <div class="site-wrapper">
 
-    <!-- 2. PROVA SOCIAL -->
-    <section class="container">
-        <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
-        <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
-        
-        <div class="grid-3" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/42-scaled.jpg-1024x576.webp" alt="Perfil 1" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/41-scaled.jpg-1024x576.webp" alt="Perfil 2" style="border-radius: 8px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/40-scaled.jpg-1024x576.webp" alt="Perfil 3" style="border-radius: 8px;">
-        </div>
-    </section>
-
-    <!-- 3. O QUE ELAS TÊM EM COMUM? -->
-    <section class="container">
-        <h2>O QUE ESSAS PÁGINAS <span class="highlight">TÊM EM COMUM?</span></h2>
-        <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
-    </section>
-
-    <!-- 4. COMO FUNCIONA (TIMELINE) -->
-    <section class="container">
-        <h2>COMO <span class="highlight">FUNCIONA?</span></h2>
-        
-        <div class="timeline">
-            <div class="timeline-step">
-                <div class="timeline-icon"><i class="far fa-flag"></i></div>
-                <h3>1. Crie sua conta</h3>
-                <p>Abra um perfil no <strong>TikTok, Instagram ou Kwai</strong>. Não importa se você está começando do zero — qualquer pessoa pode crescer.</p>
-            </div>
-            <div class="timeline-step">
-                <div class="timeline-icon"><i class="fab fa-telegram-plane"></i></div>
-                <h3>2. Poste os cortes</h3>
-                <p>Esqueça perder horas criando vídeos. No pack você já tem vídeos prontos para viralizar. É só escolher, baixar e postar. Poste ao menos 3x ao dia.</p>
-            </div>
-            <div class="timeline-step">
-                <div class="timeline-icon"><i class="fas fa-shopping-cart"></i></div>
-                <h3>3. Venda como afiliado</h3>
-                <p>Você pode <strong>divulgar produtos nos stories</strong> e <strong>ganhar comissão</strong> por cada venda. Sem estoque, sem complicação.</p>
-            </div>
-            <div class="timeline-step">
-                <div class="timeline-icon"><i class="fas fa-money-bill"></i></div>
-                <h3>4. Escale</h3>
-                <p>Com consistência, seus vídeos trazem mais seguidores, engajamento e vendas.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. O QUE VOCÊ VAI RECEBER (GRID DE NICHOS) -->
-    <section class="container">
-        <h2>VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
-        
-        <div class="grid-3" style="margin-top: 50px;">
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/filmes_e_series.png" alt="Filmes e Séries"></div>
-                <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/memes.png" alt="Memes"></div>
-                <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/family_guy.png" alt="Family Guy"></div>
-                <p>Mais de 350 cortes de Family Guy selecionados.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/rick_and_morty.png" alt="Rick and Morty"></div>
-                <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/os_simpsons.png" alt="Os Simpsons"></div>
-                <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/todo_mundo_odeia_o_chris.png" alt="Todo Mundo Odeia o Chris"></div>
-                <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/pica_pau.png" alt="Pica-Pau"></div>
-                <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/lifestyles.png" alt="Lifestyles"></div>
-                <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/futebol.png" alt="Futebol"></div>
-                <p>Mais de 250 cortes de melhores momentos do futebol.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/academia.png" alt="Academia"></div>
-                <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/acao_policial.png" alt="Ação Policial"></div>
-                <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/espinhas.png" alt="Espinhas"></div>
-                <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/parkour.png" alt="Parkour"></div>
-                <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/ladroes_se_f.png" alt="Ladrões se dão mal"></div>
-                <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/marcal.png" alt="Marçal"></div>
-                <p>Os melhores cortes de Pablo Marçal.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/religiosos.png" alt="Religiosos"></div>
-                <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/motivacional.png" alt="Motivacional"></div>
-                <p>Cortes com frases motivacionais e de melhoria de vida.</p>
-            </div>
-            <div class="card-nicho">
-                <div class="card-nicho-img"><img src="https://packlandia.com/wp-content/uploads/2025/09/e_muito_mais.png" alt="E muito mais"></div>
-                <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES (FUNDO BRANCO) -->
-    <section class="bg-white">
-        <div class="container">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/bem-vindos-1.jpg-1024x576.webp" alt="Redes Sociais" style="max-width: 400px; margin-bottom: 30px;">
+        <!-- 1. HEADER / HERO SECTION -->
+        <header class="container reveal">
+            <img src="assets/images/banner-.jpeg" width="800" height="450" alt="Cortes Prontos" fetchpriority="high" decoding="async" class="hero-img">
             
-            <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
+            <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
+            <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
             
-            <div class="grid-4" style="margin-top: 50px;">
-                <div class="benefits-box">
-                    <i class="fas fa-shopping-cart"></i>
-                    <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
+            <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
+        </header>
+
+        <!-- 2. PERFIS QUE MAIS CRESCEM (SEM SETAS, ROLAGEM LIVRE) -->
+        <section class="container reveal">
+            <h2>OS PERFIS QUE MAIS CRESCEM HOJE <span class="highlight">NÃO MOSTRAM O ROSTO!</span></h2>
+            <p>Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência, atraindo seguidores todos os dias, com estratégias simples.</p>
+            
+            <div class="slider-wrapper" id="slider-perfis" style="margin-top: 50px;" data-autoplay="true">
+                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-container grid-desktop-3">
+                    <div class="slider-item">
+                        <img src="assets/images/Comentarios-1.jpeg" width="350" height="350" alt="Perfil 1" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-2.jpeg" width="350" height="350" alt="Perfil 2" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/Comentario-3.jpeg" width="350" height="350" alt="Perfil 3" loading="lazy" decoding="async" style="border-radius: 8px; width: 100%;">
+                    </div>
                 </div>
-                <div class="benefits-box">
-                    <i class="far fa-clock"></i>
-                    <p>Quer economizar tempo criando conteúdo.</p>
+                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- 3. O QUE ELAS TÊM EM COMUM? -->
+        <section class="container reveal">
+            <h2>O QUE ESSAS PÁGINAS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
+            <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
+        </section>
+
+        <!-- 4. COMO FUNCIONA (É SIMPLES ASSIM) -->
+        <section class="container reveal">
+            <div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
+            
+            <div class="grid-4" style="margin-top: 40px;">
+                <div class="simple-card">
+                    <div class="step-num">1</div>
+                    <h3>Escolha um vídeo pronto</h3>
                 </div>
-                <div class="benefits-box">
-                    <i class="fas fa-chart-line"></i>
-                    <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
+                <div class="simple-card">
+                    <div class="step-num">2</div>
+                    <h3>Poste no TikTok ou Instagram</h3>
                 </div>
-                <div class="benefits-box">
-                    <i class="fas fa-users"></i>
-                    <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
+                <div class="simple-card">
+                    <div class="step-num">3</div>
+                    <h3>Repita todos os dias</h3>
+                </div>
+                <div class="simple-card" style="border-color: var(--offer-green);">
+                    <div class="step-icon">🚀</div>
+                    <h3 class="highlight-alt">Comece a crescer</h3>
                 </div>
             </div>
+        </section>
 
-            <h2 style="margin-top: 50px;">ENTÃO ESSE PACK É PRA <span class="highlight">VOCÊ!</span></h2>
-        </div>
-    </section>
-
-    <!-- 7. DEPOIMENTOS -->
-    <section class="container">
-        <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
-        
-        <div class="grid-4" style="margin-top: 50px;">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/14-2.jpg.webp" alt="Depoimento 1" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/13-2.jpg-1.webp" alt="Depoimento 2" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/12-1.jpg.webp" alt="Depoimento 3" class="testimonial-img">
-            <img src="https://packlandia.com/wp-content/uploads/2025/09/11-2.jpg.webp" alt="Depoimento 4" class="testimonial-img">
-        </div>
-    </section>
-
-    <!-- 8. BÔNUS EXCLUSIVOS (FUNDO BRANCO) -->
-    <section class="bg-white">
-        <div class="container">
-            <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
+        <!-- 5. O QUE VOCÊ VAI RECEBER -->
+        <section class="container">
+            <h2 class="reveal">VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
             
-            <div class="grid-4" style="margin-top: 50px;">
-                <div class="bonus-card">
-                    <h2>01</h2>
-                    <h3>Pack Memes</h3>
-                    <p>Pack de memes mais famosos 100% atualizados.</p>
+            <div class="grid-3" style="margin-top: 50px;">
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async"></div>
+                    <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
                 </div>
-                <div class="bonus-card">
-                    <h2>02</h2>
-                    <h3>Efeitos Sonoros</h3>
-                    <p>Efeitos sonoros para utilizar em suas edições.</p>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async"></div>
+                    <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
                 </div>
-                <div class="bonus-card">
-                    <h2>03</h2>
-                    <h3>Músicas Sem Copyright</h3>
-                    <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async"></div>
+                    <p>Mais de 350 cortes de Family Guy selecionados.</p>
                 </div>
-                <div class="bonus-card">
-                    <h2>04</h2>
-                    <h3>Grupo Exclusivo</h3>
-                    <p>Grupo de Criadores Para Compartilhar Ideias.</p>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async"></div>
+                    <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async"></div>
+                    <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async"></div>
+                    <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async"></div>
+                    <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async"></div>
+                    <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async"></div>
+                    <p>Mais de 250 cortes de melhores momentos do futebol.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async"></div>
+                    <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async"></div>
+                    <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async"></div>
+                    <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async"></div>
+                    <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async"></div>
+                    <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async"></div>
+                    <p>Os melhores cortes de Pablo Marçal.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async"></div>
+                    <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async"></div>
+                    <p>Cortes com frases motivacionais e de melhoria de vida.</p>
+                </div>
+                <div class="card-nicho reveal">
+                    <div class="card-nicho-img"><img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async"></div>
+                    <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 9. ÁREA DE PREÇO / OFERTA (FUNDO VERDE) -->
-    <section id="preco" class="pricing-section">
-        <div class="container" style="padding: 0;">
-            <h2>NÃO PERCA ESSA OFERTA!</h2>
-            
-            <div class="pricing-box">
-                <h3>PACK CORTES VIRAIS COMPLETO</h3>
-                <ul>
-                    <li><i class="fas fa-check-circle"></i> 36 NICHOS VIRAIS</li>
-                    <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
-                    <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
-                    <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
-                    <li><i class="fas fa-gift"></i> 4 BÔNUS</li>
-                    <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
-                </ul>
-                <div class="price-old">DE R$ 99,99</div>
-                <div class="price-new">R$ 29,90</div>
-                <a href="#" class="btn" style="width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">GARANTIR ACESSO AGORA</a>
+        <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
+        <section class="bg-white">
+            <div class="container reveal">
+                <img src="assets/images/instagram-e-tiktok.jpeg" width="400" height="200" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;">
                 
-                <img src="https://packlandia.com/wp-content/uploads/2025/09/compra-segura-1024x147-1-1.webp" alt="Compra Segura" class="compra-segura">
-            </div>
-        </div>
-    </section>
+                <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
+                
+                <div class="grid-4" style="margin-top: 50px;">
+                    <div class="benefits-box reveal">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
+                    </div>
+                    <div class="benefits-box reveal">
+                        <i class="far fa-clock"></i>
+                        <p>Quer economizar tempo criando conteúdo.</p>
+                    </div>
+                    <div class="benefits-box reveal">
+                        <i class="fas fa-chart-line"></i>
+                        <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
+                    </div>
+                    <div class="benefits-box reveal">
+                        <i class="fas fa-users"></i>
+                        <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
+                    </div>
+                </div>
 
-    <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
-    <section class="container">
-        <h2>DÚVIDAS FREQUENTES</h2>
-        
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+                <h2 style="margin-top: 50px;" class="reveal">ENTÃO ESSE PACK É PRA <span class="highlight-alt">VOCÊ!</span></h2>
             </div>
-            <div class="faq-item">
-                <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
-                <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-    <section class="container" style="padding-top: 0;">
-        <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
-        <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
-    </section>
+        <!-- 7. DEPOIMENTOS DE IMAGENS RESTAURADOS (CARROSSEL) -->
+        <section class="container reveal">
+            <h2>DEPOIMENTOS DE <span class="highlight">COMPRADORES</span></h2>
+            
+            <div class="slider-wrapper" style="margin-top: 50px;" data-autoplay="true">
+                <button class="slider-btn prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="slider-container grid-desktop-4">
+                    <div class="slider-item">
+                        <img src="assets/images/prova-social-1.jpeg" width="300" height="500" alt="Depoimento 1" loading="lazy" decoding="async" class="testimonial-img">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/prova-social-2.jpeg" width="300" height="500" alt="Depoimento 2" loading="lazy" decoding="async" class="testimonial-img">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/prova-social-3.jpeg" width="300" height="500" alt="Depoimento 3" loading="lazy" decoding="async" class="testimonial-img">
+                    </div>
+                    <div class="slider-item">
+                        <img src="assets/images/prova-social-4.jpeg" width="300" height="500" alt="Depoimento 4" loading="lazy" decoding="async" class="testimonial-img">
+                    </div>
+                </div>
+                <button class="slider-btn next" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- 8. BÔNUS EXCLUSIVOS -->
+        <section class="bg-white">
+            <div class="container reveal" style="padding-top: 80px;">
+                <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
+                
+                <div class="grid-4" style="margin-top: 50px;">
+                    <div class="bonus-card reveal">
+                        <h2>01</h2>
+                        <h3>Pack Memes</h3>
+                        <p>Pack de memes mais famosos 100% atualizados.</p>
+                    </div>
+                    <div class="bonus-card reveal">
+                        <h2>02</h2>
+                        <h3>Efeitos Sonoros</h3>
+                        <p>Efeitos sonoros para utilizar em suas edições.</p>
+                    </div>
+                    <div class="bonus-card reveal">
+                        <h2>03</h2>
+                        <h3>Músicas Sem Copyright</h3>
+                        <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
+                    </div>
+                    <div class="bonus-card reveal">
+                        <h2>04</h2>
+                        <h3>Grupo Exclusivo</h3>
+                        <p>Grupo de Criadores Para Compartilhar Ideias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. ÁREA DE PREÇO / DUAS OFERTAS -->
+        <section id="preco" class="pricing-section reveal">
+            <div class="container" style="padding: 0;">
+                <h2>ESCOLHA SEU PACOTE IDEAL</h2>
+                
+                <div class="pricing-grid">
+                    
+                    <!-- OFERTA 1: BÁSICA -->
+                    <div class="pricing-box basic">
+                        <div>
+                            <h3>PACK INICIANTE</h3>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 10 NICHOS VIRAIS</li>
+                                <li><i class="fas fa-check-circle"></i> 2.000 CORTES PRONTOS</li>
+                                <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+                                <li><i class="fas fa-check-circle"></i> +12GB DE CONTEÚDO</li>
+                                <!-- Itens em Vermelho -->
+                                <li class="disabled red-disabled"><i class="fas fa-times-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+                                <li class="disabled red-disabled"><i class="fas fa-times-circle"></i> 4 BÔNUS EXCLUSIVOS</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="price-old">DE R$ 69,90</div>
+                            <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
+                            <a href="#" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">GARANTIR PACOTE INICIANTE</a>
+                            
+                            <!-- SELOS EM LINHA (CINZA) -->
+                            <div class="trust-badges-inline">
+                                <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
+                                <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
+                                <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OFERTA 2: COMPLETA (DESTAQUE) -->
+                    <div class="pricing-box premium">
+                        <div class="pricing-badge">MAIS VENDIDO 🏆</div>
+                        <div>
+                            <h3>PACK MAGO COMPLETO</h3>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> 40 NICHOS VIRAIS</li>
+                                <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
+                                <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+                                <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+                                <li><i class="fas fa-gift"></i> 4 BÔNUS EXCLUSIVOS</li>
+                                <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="price-old">DE R$ 99,99</div>
+                            <div class="price-new">R$ 29,90</div>
+                            <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">GARANTIR PACOTE COMPLETO</a>
+                            
+                            <!-- SELOS EM LINHA (CINZA) -->
+                            <div class="trust-badges-inline">
+                                <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
+                                <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
+                                <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
+        <section class="faq-section">
+            <div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
+                <h2>DÚVIDAS FREQUENTES</h2>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">Eu preciso aparecer nos vídeos? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Como acesso ao Pack após comprar? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Preciso editar os vídeos? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Recebo novos vídeos no futuro? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer"><p>Atualizamos as pastas com frequência. E você sempre é avisado!</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. CHAMADA PARA AÇÃO FINAL -->
+        <section class="container reveal">
+            <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
+            <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
+        </section>
+
+    </div> <!-- FIM DA SITE-WRAPPER -->
 
     <!-- 12. RODAPÉ -->
-    <footer>
-        <p style="font-size: 14px; margin-bottom: 5px; color:#aaa; font-weight: bold;">Aviso</p>
-        <p><strong>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros.</strong> Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. <strong>Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</strong></p>
-        <p style="margin-top: 30px;">© 2025 Packlândia</p>
+    <footer class="reveal">
+        <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">Aviso Legal</p>
+        <p>Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.</p>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Cortes Virais. Todos os direitos reservados.</p>
+            <p class="mt">Design By <span>VELLUX Studio</span></p>
+        </div>
     </footer>
 
-    <!-- SCRIPT PARA O FAQ (DÚVIDAS) -->
+    <!-- MODAL DE UPSELL (ESCONDIDO POR PADRÃO) -->
+    <div class="modal-overlay" id="upsellModal">
+        <div class="modal-content">
+            <div class="modal-badge">MAIS VENDIDO 🏆</div>
+            <h2 class="modal-title">ESPERE! Oferta Única Antes de Finalizar...</h2>
+            <p class="modal-subtitle">Leve o PACK MAGO COMPLETO por uma diferença mínima!</p>
+            
+            <ul class="modal-list">
+                <li><i class="fas fa-check-circle"></i> 40 Nichos Virais</li>
+                <li><i class="fas fa-check-circle"></i> +50.000 Cortes Prontos</li>
+                <li><i class="fas fa-check-circle"></i> Atualizações Mensais</li>
+                <li><i class="fas fa-check-circle"></i> 4 Bônus Exclusivos</li>
+                <li><i class="fas fa-check-circle"></i> +250GB de Conteúdo</li>
+            </ul>
+            
+            <div class="modal-price">
+                <span class="modal-price-old">De R$ 29,90</span>
+                <span class="modal-price-new">R$ 24,90</span>
+            </div>
+            
+            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes" style="color: #FAFAFA;">SIM! GARANTIR PACOTE COMPLETO</a>
+            
+            <button class="modal-btn-no" id="btnContinueBasic">Não, obrigado. Quero continuar com o pacote iniciante.</button>
+        </div>
+    </div>
+
+    <!-- SCRIPTS GERAIS -->
     <script>
+        // 1. ANIMAÇÕES DE ROLAGEM OTIMIZADAS
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target); 
+                        }
+                    });
+                }, { root: null, threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
+
+                reveals.forEach(el => revealObserver.observe(el));
+            } else {
+                reveals.forEach(el => el.classList.add('active'));
+            }
+        });
+
+        // 2. FAQ (Abre/Fecha)
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Fecha as outras que estiverem abertas
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                });
-                
-                // Se não estava ativa, abre
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                const isOpen = item.classList.contains('faq-open');
+                faqItems.forEach(otherItem => otherItem.classList.remove('faq-open'));
+                if (!isOpen) { item.classList.add('faq-open'); }
             });
         });
+
+        // 3. SLIDER AUTOMÁTICO REFEITO (100% FLUIDO E LOOP SEM BUG)
+        document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
+            const container = wrapper.querySelector('.slider-container');
+            const prevBtn = wrapper.querySelector('.prev');
+            const nextBtn = wrapper.querySelector('.next');
+            const isAutoPlay = wrapper.getAttribute('data-autoplay') === 'true';
+            let autoPlayInterval;
+
+            const nextSlide = () => {
+                if (!container) return;
+                // Volta ao começo instantaneamente (behavior auto) ao chegar no fim para criar o loop
+                if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 5) {
+                    container.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+                }
+            };
+
+            const prevSlide = () => {
+                if (!container) return;
+                container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+            };
+
+            const startAutoPlay = () => {
+                if(isAutoPlay) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = setInterval(nextSlide, 3500);
+                }
+            };
+
+            const stopAutoPlay = () => clearInterval(autoPlayInterval);
+
+            if(nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlay(); nextSlide(); startAutoPlay(); });
+            if(prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlay(); prevSlide(); startAutoPlay(); });
+
+            startAutoPlay();
+            wrapper.addEventListener('touchstart', stopAutoPlay, {passive: true});
+            wrapper.addEventListener('touchend', startAutoPlay, {passive: true});
+        });
+
+        // 4. MODAL DE UPSELL
+        const btnBasicPlan = document.getElementById('btn-basic-plan');
+        const upsellModal = document.getElementById('upsellModal');
+        const btnContinueBasic = document.getElementById('btnContinueBasic');
+
+        if (btnBasicPlan && upsellModal) {
+            btnBasicPlan.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                upsellModal.classList.add('show'); 
+            });
+        }
+
+        if (btnContinueBasic) {
+            btnContinueBasic.addEventListener('click', function() {
+                upsellModal.classList.remove('show');
+                window.location.href = "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
+            });
+        }
     </script>
 </body>
 </html>
