@@ -2199,6 +2199,223 @@
 }
 </style>
 
+
+<style id="compact-cro-sections">
+/* =========================================================
+   CRO — COMPACTAÇÃO DAS 3 SEÇÕES ANTERIORES À OFERTA
+   Mantém todo o conteúdo; reduz apenas altura e densidade visual,
+   principalmente no mobile, alinhando com as seções já compactadas.
+   ========================================================= */
+.compact-cro {
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+}
+
+.compact-cro > h2 {
+    margin-bottom: 18px;
+}
+
+.compact-cro > p {
+    margin-bottom: 16px;
+}
+
+.compact-pain-section .strategy-grid {
+    margin-top: 28px;
+    gap: 14px;
+}
+
+.compact-pain-section .strategy-card {
+    padding: 22px 18px;
+    border-radius: 10px;
+}
+
+.compact-pain-section .strategy-card .strategy-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.compact-pain-section .strategy-card h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.compact-pain-section .strategy-card p {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.compact-result-section .strategy-flow {
+    margin-top: 24px;
+    gap: 10px;
+}
+
+.compact-result-section .strategy-flow-item {
+    padding: 18px 12px;
+    border-radius: 10px;
+}
+
+.compact-result-section .strategy-flow-item strong {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.compact-result-section .strategy-flow-item span {
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.compact-howto-section .grid-4 {
+    margin-top: 24px !important;
+    gap: 12px !important;
+}
+
+.compact-howto-section .simple-card {
+    padding: 20px 14px;
+    border-radius: 10px;
+}
+
+.compact-howto-section .step-num {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.compact-howto-section .step-icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.compact-howto-section .simple-card h3 {
+    font-size: 16px;
+}
+
+@media (max-width: 600px) {
+    .compact-cro {
+        padding-top: 34px !important;
+        padding-bottom: 34px !important;
+    }
+
+    .compact-cro > h2 {
+        font-size: 23px !important;
+        line-height: 1.18;
+        margin-bottom: 12px;
+    }
+
+    .compact-cro > p {
+        font-size: 14px !important;
+        line-height: 1.42 !important;
+        margin-bottom: 12px;
+    }
+
+    /* VOCÊ QUER POSTAR MAIS... — 4 cards em 2 colunas, como Bônus/Redes */
+    .compact-pain-section .strategy-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+
+    .compact-pain-section .strategy-card {
+        min-height: 132px;
+        padding: 15px 10px !important;
+        border-radius: 9px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .compact-pain-section .strategy-card .strategy-icon {
+        font-size: 20px !important;
+        margin-bottom: 7px !important;
+    }
+
+    .compact-pain-section .strategy-card h3 {
+        font-size: 13px !important;
+        line-height: 1.25;
+        margin-bottom: 5px;
+    }
+
+    .compact-pain-section .strategy-card p {
+        font-size: 10.5px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* IMAGINE TER... — cards compactos em 2 colunas; setas deixam de ocupar espaço */
+    .compact-result-section .strategy-flow {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+
+    .compact-result-section .strategy-flow-arrow {
+        display: none !important;
+    }
+
+    .compact-result-section .strategy-flow-item {
+        min-height: 105px;
+        padding: 15px 10px !important;
+        border-radius: 9px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .compact-result-section .strategy-flow-item strong {
+        font-size: 13px !important;
+        margin-bottom: 5px;
+    }
+
+    .compact-result-section .strategy-flow-item span {
+        font-size: 10.5px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* COMO FUNCIONA — 4 cards em 2 colunas e bem compactos */
+    .compact-howto-section {
+        padding-top: 30px !important;
+        padding-bottom: 34px !important;
+    }
+
+    .compact-howto-section > div:first-child {
+        font-size: 24px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .compact-howto-section .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 8px !important;
+        margin-top: 20px !important;
+    }
+
+    .compact-howto-section .simple-card {
+        min-height: 118px;
+        padding: 15px 10px !important;
+        border-radius: 9px !important;
+    }
+
+    .compact-howto-section .step-num {
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+        border-radius: 9px;
+        margin-bottom: 9px;
+    }
+
+    .compact-howto-section .step-icon {
+        font-size: 25px;
+        margin-bottom: 9px;
+    }
+
+    .compact-howto-section .simple-card h3 {
+        font-size: 12.5px !important;
+        line-height: 1.25;
+    }
+}
+</style>
+
 </head>
 <body>
 <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
@@ -2251,11 +2468,11 @@
 <span class="hero-offer-new">R$ 19,90</span>
 </div>
 </div>
-<a class="btn checkout-link" data-plan="iniciante" data-value="19.90" href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc">QUERO ACESSAR AGORA! ⚡</a>
+<a class="btn checkout-link" data-plan="iniciante" data-value="19.90" href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc">QUERO ACESSAR AGORA ⚡</a>
 <div class="hero-microcopy">Pagamento único • Acesso imediato • Garantia de 7 dias</div>
 </header>
 <!-- NOVA: PROBLEMA / DOR -->
-<section class="container reveal strategy-section">
+<section class="container reveal strategy-section compact-cro compact-pain-section">
 <h2>VOCÊ QUER POSTAR MAIS, <span class="highlight">MAS FALTA CONTEÚDO?</span></h2>
 <p>Encontrar vídeos todos os dias, separar por nicho e manter uma rotina de postagem pode consumir muito tempo.</p>
 <div class="strategy-grid">
@@ -2282,7 +2499,7 @@
 </div>
 </section>
 <!-- NOVA: RESULTADO DESEJADO -->
-<section class="container reveal strategy-section">
+<section class="container reveal strategy-section compact-cro compact-result-section">
 <h2>IMAGINE TER <span class="highlight">CONTEÚDO DISPONÍVEL</span> QUANDO PRECISAR</h2>
 <p>Em vez de começar do zero todos os dias, você pode escolher um conteúdo, baixar e preparar sua próxima publicação.</p>
 <div class="strategy-flow">
@@ -2403,8 +2620,8 @@
 <p>Conteúdo frequente, um nicho definido e uma rotina simples de publicação. O pack entra justamente na parte mais trabalhosa: ter material para postar.</p>
 </section>
 <!-- 4. COMO FUNCIONA (É SIMPLES ASSIM) -->
-<section class="container reveal">
-<div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
+<section class="container reveal compact-cro compact-howto-section">
+<div style="font-size: 30px; color: var(--offer-green); margin-bottom: 8px;">
 <i class="fas fa-arrow-down"></i>
 </div>
 <h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
