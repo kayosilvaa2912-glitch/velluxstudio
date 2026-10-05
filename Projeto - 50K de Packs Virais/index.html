@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-    <!-- Meta Pixel Code -->
-    <script>
+<!-- Meta Pixel Code -->
+<script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -15,46 +16,31 @@
     fbq('track', 'PageView');
     fbq('track', 'ViewContent');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3428544167307310&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://magodoscortesvirais.vercel.app/">
-    <title>Pack de Cortes Virais | 50.000 Vídeos Prontos para Postar</title>
-    <link rel="icon" type="image/jpeg" href="assets/images/Favicon.jpeg">
-    
-    <link rel="preload" as="image" href="assets/images/banner-.jpeg"
-          type="image/jpeg" fetchpriority="high">
-
-    <!-- Pré-conexões para acelerar o carregamento -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <!-- CSS externo não bloqueia a primeira pintura -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap"
-          rel="stylesheet" media="print"
-          onload="this.onload=null;this.media='all'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap"
-              rel="stylesheet">
-    </noscript>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          rel="stylesheet" media="print"
-          onload="this.onload=null;this.media='all'">
-    <noscript>
-        <link rel="stylesheet"
-              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
-
-    <!-- O modo de animação é ativado pelo script somente após a inicialização -->
-
-    <style>
+<noscript><img height="1" src="https://www.facebook.com/tr?id=3428544167307310&amp;ev=PageView&amp;noscript=1" style="display:none" width="1"/></noscript>
+<!-- End Meta Pixel Code -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Tenha acesso à maior biblioteca de cortes temáticos do Brasil. Mais de 50.000 vídeos virais prontos para postar e monetizar." name="description"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://magodoscortesvirais.vercel.app/" rel="canonical"/>
+<title>Pack de Cortes Virais | 50.000 Vídeos Prontos para Postar</title>
+<link href="assets/images/Favicon.jpeg" rel="icon" type="image/jpeg"/>
+<link as="image" fetchpriority="high" href="assets/images/banner-.jpeg" rel="preload" type="image/jpeg"/>
+<!-- Pré-conexões para acelerar o carregamento -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<!-- CSS externo não bloqueia a primeira pintura -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&amp;display=swap" media="print" onload="this.onload=null;this.media='all'" rel="stylesheet"/>
+<noscript>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&amp;display=swap" rel="stylesheet"/>
+</noscript>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.onload=null;this.media='all'" rel="stylesheet"/>
+<noscript>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</noscript>
+<!-- O modo de animação é ativado pelo script somente após a inicialização -->
+<style>
         :root {
             /* TEMA GLOBAL VERDE ORIGINAL */
             --primary-color: #45E104; 
@@ -183,7 +169,7 @@
         }
 
         .hero-offer-deadline strong {
-            color: var(--primary-color);
+            color: #ff2b2b;
             font-weight: 900;
         }
 
@@ -211,6 +197,15 @@
             border: 0;
             background: transparent;
             line-height: 1.05;
+        }
+
+        .hero-offer-title {
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .hero-offer-old {
@@ -242,6 +237,15 @@
         }
 
         @media (max-width: 600px) {
+            .hero-offer-bottom {
+                gap: 6px;
+                justify-content: center;
+            }
+
+            .hero-offer-title {
+                font-size: 15px;
+            }
+
             .hero-offer-old {
                 font-size: 18px;
             }
@@ -412,6 +416,57 @@
             margin-bottom: 0;
             font-weight: 800;
             line-height: 1.4;
+        }
+
+        /* OFERTA NO HERO — Âncora de preço */
+        .hero-offer-old {
+            display: block;
+            color: #ff2b2b;
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1;
+            text-decoration: line-through;
+            margin-bottom: 6px;
+        }
+
+        /* MARQUEE DOS NICHOS — controle 100% via JavaScript */
+        .nichos-section { overflow: hidden; }
+        .nichos-subtitle { color: #8f8f8f; margin: 12px auto 0; max-width: 680px; }
+        .nichos-marquee {
+            width: 100%; max-width: 100%; margin-top: 30px; overflow: hidden;
+            position: relative; display: flex; flex-direction: column; gap: 18px;
+            mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 97%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 3%, #000 97%, transparent 100%);
+        }
+        .marquee-row {
+            display: block !important; width: 100%; max-width: 100%; overflow: hidden;
+            position: relative;
+        }
+        .marquee-track {
+            display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+            align-items: flex-start; width: max-content !important; min-width: max-content !important;
+            gap: 22px; will-change: transform; transform: translate3d(0,0,0);
+        }
+        .marquee-group {
+            display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+            flex: 0 0 auto !important; align-items: flex-start; gap: 22px;
+            width: max-content !important; min-width: max-content !important;
+        }
+        .marquee-row .card-nicho {
+            display: flex !important; flex: 0 0 245px !important; width: 245px !important;
+            min-width: 245px !important; max-width: 245px !important;
+            flex-direction: column !important; gap: 9px; margin: 0;
+        }
+        .marquee-row .card-nicho-img { width: 100%; flex: 0 0 auto; }
+        .marquee-row .card-nicho-img img { display: block; width: 100%; height: auto; }
+        .marquee-row .card-nicho p { font-size: 12px; line-height: 1.35; }
+        .marquee-row .card-nicho:hover .card-nicho-img { transform: none; box-shadow: none; }
+        .marquee-row .card-nicho:hover .card-nicho-img img { transform: none; }
+        @media (max-width: 768px) {
+            .nichos-marquee { gap: 14px; margin-top: 24px; }
+            .marquee-track, .marquee-group { gap: 14px; }
+            .marquee-row .card-nicho { flex-basis: 190px !important; width: 190px !important; min-width: 190px !important; max-width: 190px !important; }
+            .marquee-row .card-nicho p { font-size: 11px; }
         }
 
         /* Cards Nichos */
@@ -733,7 +788,50 @@
             font-weight: 800;
         }
 
-        .price-new {
+        
+        .offer-discount-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 4px;
+        }
+
+        .discount-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--offer-green);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: .2px;
+        }
+
+        .economy-note {
+            color: #666;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .15px;
+            text-transform: uppercase;
+        }
+
+        .hero-offer-label {
+            display: block;
+        }
+
+        .hero-offer-bottom {
+            flex-wrap: wrap;
+            row-gap: 2px;
+        }
+
+        .hero-offer-note {
+            display: block;
+        }
+
+.price-new {
             font-size: 55px;
             font-weight: 900;
             color: var(--offer-green);
@@ -1739,8 +1837,134 @@
             }
         }
 
-</style>
+        /* =========================================
+           CRO — COMPACTAÇÃO DAS SEÇÕES BRANCAS
+           Mantém os conteúdos, mas reduz altura da LP.
+           ========================================= */
+        .social-benefits-section .container,
+        .bonuses-section .container {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+        }
 
+        .social-benefits-section .hero-img {
+            max-width: 300px !important;
+            margin-bottom: 18px !important;
+        }
+
+        .social-benefits-section .grid-4,
+        .bonuses-section .grid-4 {
+            margin-top: 30px !important;
+            gap: 12px !important;
+        }
+
+        .social-benefits-section .benefits-box {
+            padding: 22px 14px !important;
+            border-width: 1px !important;
+            border-radius: 10px !important;
+        }
+
+        .social-benefits-section .benefits-box i {
+            font-size: 32px !important;
+            margin-bottom: 12px !important;
+        }
+
+        .social-benefits-section .benefits-box p {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+
+        .social-benefits-section h2.reveal {
+            margin-top: 30px !important;
+        }
+
+        .bonuses-section .bonus-card {
+            padding: 24px 14px !important;
+            border-width: 1px !important;
+            border-radius: 10px !important;
+        }
+
+        .bonuses-section .bonus-card h2 {
+            font-size: 40px !important;
+            margin-bottom: 2px !important;
+        }
+
+        .bonuses-section .bonus-card h3 {
+            font-size: 18px !important;
+            margin-bottom: 8px !important;
+        }
+
+        .bonuses-section .bonus-card p {
+            font-size: 13px !important;
+            line-height: 1.4 !important;
+        }
+
+        @media (max-width: 600px) {
+            .social-benefits-section .container,
+            .bonuses-section .container {
+                padding-top: 40px !important;
+                padding-bottom: 40px !important;
+            }
+
+            .social-benefits-section .hero-img {
+                max-width: 250px !important;
+            }
+
+            .social-benefits-section .grid-4,
+            .bonuses-section .grid-4 {
+                gap: 10px !important;
+            }
+
+            .social-benefits-section .benefits-box {
+                padding: 18px 12px !important;
+            }
+
+            .social-benefits-section .benefits-box i {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+
+            .social-benefits-section .benefits-box p {
+                font-size: 12px !important;
+            }
+
+            .bonuses-section .bonus-card {
+                padding: 20px 12px !important;
+            }
+
+            .bonuses-section .bonus-card h2 {
+                font-size: 34px !important;
+            }
+
+            .bonuses-section .bonus-card h3 {
+                font-size: 16px !important;
+            }
+
+            .bonuses-section .bonus-card p {
+                font-size: 12px !important;
+            }
+
+            /* Em celulares, duas colunas reduzem bastante a altura sem remover informação. */
+            .social-benefits-section .grid-4,
+            .bonuses-section .grid-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 10px !important;
+            }
+
+            .social-benefits-section .benefits-box {
+                min-height: 150px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .bonuses-section .bonus-card {
+                min-height: 155px;
+            }
+        }
+
+</style>
 <style id="social-proof-carousel-fix">
 /* CORREÇÃO CIRÚRGICA — PROVAS SOCIAIS
    O carrossel global usa 3 itens por vez. Aqui queremos 1 imagem quadrada por vez,
@@ -1823,15 +2047,162 @@
         height: 38px !important;
     }
 }
+
+        /* =========================================
+           OTIMIZAÇÕES CRO — HIERARQUIA DA OFERTA
+           ========================================= */
+        .hero-title {
+            font-size: 42px;
+            text-transform: uppercase;
+            font-weight: 900;
+            line-height: 1.08;
+            max-width: 900px;
+            margin: 0 auto 18px;
+        }
+
+        .hero-subtitle {
+            max-width: 820px;
+            font-size: 19px;
+        }
+
+        .hero-benefits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px auto 8px;
+        }
+
+        .hero-benefits span {
+            background: #101010;
+            border: 1px solid #252525;
+            color: #fff;
+            border-radius: 999px;
+            padding: 9px 13px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .hero-offer-note {
+            color: #aaa;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 8px;
+        }
+
+        .hero-microcopy {
+            color: #777;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: -4px;
+        }
+
+        .offer-kicker {
+            display: inline-block;
+            color: var(--offer-green);
+            border: 1px solid rgba(49,185,0,.35);
+            background: rgba(49,185,0,.06);
+            border-radius: 999px;
+            padding: 7px 13px;
+            margin-bottom: 12px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .offer-subtitle {
+            color: #aaa;
+            font-size: 15px;
+            max-width: 700px;
+            margin: -30px auto 42px;
+        }
+
+        .mini-upsell-trigger {
+            display: block;
+            margin: 10px auto 0;
+            padding: 5px 8px;
+            border: 0;
+            background: transparent;
+            color: #666;
+            text-decoration: underline;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .mini-upsell-trigger:hover { color: var(--offer-green); }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 29px; }
+            .hero-subtitle { font-size: 16px; }
+            .hero-benefits { gap: 6px; }
+            .hero-benefits span { font-size: 10px; padding: 8px 9px; }
+            .offer-subtitle { margin-top: -20px; margin-bottom: 30px; }
+        }
+</style>
+
+<style id="nicho-marquee-final-fix">
+/* FIX DEFINITIVO — carrossel horizontal dos nichos */
+.nichos-marquee {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+  position: relative;
+}
+.nichos-marquee .marquee-row {
+  display: block !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  position: relative;
+}
+.nichos-marquee .marquee-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  gap: 22px !important;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+.nichos-marquee .marquee-group {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  flex: 0 0 auto !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  gap: 22px !important;
+}
+.nichos-marquee .card-nicho {
+  display: flex !important;
+  flex: 0 0 245px !important;
+  width: 245px !important;
+  min-width: 245px !important;
+  max-width: 245px !important;
+  margin: 0 !important;
+}
+@media (max-width: 768px) {
+  .nichos-marquee .marquee-track,
+  .nichos-marquee .marquee-group { gap: 14px !important; }
+  .nichos-marquee .card-nicho {
+    flex-basis: 190px !important;
+    width: 190px !important;
+    min-width: 190px !important;
+    max-width: 190px !important;
+  }
+}
 </style>
 
 </head>
-
 <body>
-
-    <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
-
-    <script>
+<!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
+<script>
         // Atualiza automaticamente a data exibida no topo conforme o dia atual.
         // O DOMContentLoaded garante que o elemento #offer-date já exista antes da execução.
         (function updateOfferDate() {
@@ -1863,934 +2234,743 @@
             }
         })();
     </script>
-
-    <div class="site-wrapper">
-
-        <!-- 1. HEADER / HERO SECTION -->
-        <header class="container reveal">
-            <div class="hero-offer-deadline" aria-label="Oferta especial válida somente até a data de hoje">
+<div class="site-wrapper">
+<!-- 1. HEADER / HERO SECTION -->
+<header class="container reveal">
+<div class="hero-offer-deadline" aria-label="Oferta especial válida somente até a data de hoje">
                 🔥 OFERTA ESPECIAL VÁLIDA SOMENTE ATÉ <strong id="offer-date">--/--/----</strong>
             </div>
-
-            <img src="assets/images/banner-.jpeg"
-             width="800" height="450"
-             alt="Cortes Prontos"
-             fetchpriority="high"
-             class="hero-img">
-            
-            <h2>TENHA UM PERFIL DE <span class="highlight">SUCESSO</span> COM <span class="highlight">CORTES VIRAIS!</span></h2>
-            <p>Você não precisa aparecer. <strong>Só precisa postar</strong>. Tenha acesso à <strong>maior biblioteca de cortes temáticos</strong> do Brasil, com todos os nichos mais quentes do momento.</p>
-            
-            <div class="hero-offer" aria-label="Oferta de R$ 67,90 por apenas R$ 19,90">
-                <span class="hero-offer-old">DE R$ 67,90</span>
-                <div class="hero-offer-bottom">
-                    <span class="hero-offer-label">POR APENAS</span>
-                    <span class="hero-offer-new">R$ 19,90</span>
-                </div>
-            </div>
-
-            <a href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc" class="btn">QUERO ACESSO IMEDIATO! ⚡</a>
-        </header>
-
-        <!-- NOVA: PROBLEMA / DOR -->
-        <section class="container reveal strategy-section">
-            <h2>VOCÊ QUER POSTAR MAIS, <span class="highlight">MAS FALTA CONTEÚDO?</span></h2>
-            <p>Encontrar vídeos todos os dias, separar por nicho e manter uma rotina de postagem pode consumir muito tempo.</p>
-
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <div class="strategy-icon"><i class="fas fa-search"></i></div>
-                    <h3>Perde tempo procurando vídeos</h3>
-                    <p>Em vez de passar horas procurando conteúdo, tenha uma biblioteca organizada para encontrar o que precisa.</p>
-                </div>
-
-                <div class="strategy-card">
-                    <div class="strategy-icon"><i class="fas fa-clock"></i></div>
-                    <h3>Fica difícil manter frequência</h3>
-                    <p>Quando cada postagem começa do zero, manter uma rotina de conteúdo fica muito mais trabalhoso.</p>
-                </div>
-
-                <div class="strategy-card">
-                    <div class="strategy-icon"><i class="fas fa-folder-open"></i></div>
-                    <h3>Conteúdo espalhado</h3>
-                    <p>Ter materiais organizados por categorias facilita encontrar diferentes opções para o seu perfil.</p>
-                </div>
-
-                <div class="strategy-card">
-                    <div class="strategy-icon"><i class="fas fa-mobile-screen-button"></i></div>
-                    <h3>Você quer começar de forma simples</h3>
-                    <p>A ideia é reduzir a parte mais trabalhosa: encontrar conteúdo para publicar com consistência.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- NOVA: RESULTADO DESEJADO -->
-        <section class="container reveal strategy-section">
-            <h2>IMAGINE TER <span class="highlight">CONTEÚDO DISPONÍVEL</span> QUANDO PRECISAR</h2>
-            <p>Em vez de começar do zero todos os dias, você pode escolher um conteúdo, baixar e preparar sua próxima publicação.</p>
-
-            <div class="strategy-flow">
-                <div class="strategy-flow-item">
-                    <strong>ESCOLHA</strong>
-                    <span>Encontre um conteúdo no seu nicho.</span>
-                </div>
-                <div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
-                <div class="strategy-flow-item">
-                    <strong>BAIXE</strong>
-                    <span>Tenha o material disponível para usar.</span>
-                </div>
-                <div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
-                <div class="strategy-flow-item">
-                    <strong>PUBLIQUE</strong>
-                    <span>Prepare e publique no seu perfil.</span>
-                </div>
-            </div>
-        </section>
-
-
-     <!-- 2. PERFIS QUE MAIS CRESCEM -->
-
+<img alt="Cortes Prontos" class="hero-img" fetchpriority="high" height="450" src="assets/images/banner-.jpeg" width="800"/>
+<h1 class="hero-title">TENHA <span class="highlight">CONTEÚDO PRONTO</span> PARA POSTAR TODOS OS DIAS</h1>
+<p class="hero-subtitle">Mais de <strong>50.000 cortes prontos</strong> em dezenas de nichos para você criar ou alimentar seu perfil sem precisar produzir vídeos do zero.</p>
+<div aria-label="Oferta do pacote iniciante por R$ 19,90" class="hero-offer">
+<span class="hero-offer-title">PACOTE INICIANTE</span>
+<span class="hero-offer-old">DE R$ 67,90</span>
+<div class="hero-offer-bottom">
+<span class="hero-offer-label">POR APENAS</span>
+<span class="hero-offer-new">R$ 19,90</span>
+</div>
+</div>
+<a class="btn checkout-link" data-plan="iniciante" data-value="19.90" href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc">QUERO ACESSAR AGORA! ⚡</a>
+<div class="hero-microcopy">Pagamento único • Acesso imediato • Garantia de 7 dias</div>
+</header>
+<!-- NOVA: PROBLEMA / DOR -->
+<section class="container reveal strategy-section">
+<h2>VOCÊ QUER POSTAR MAIS, <span class="highlight">MAS FALTA CONTEÚDO?</span></h2>
+<p>Encontrar vídeos todos os dias, separar por nicho e manter uma rotina de postagem pode consumir muito tempo.</p>
+<div class="strategy-grid">
+<div class="strategy-card">
+<div class="strategy-icon"><i class="fas fa-search"></i></div>
+<h3>Perde tempo procurando vídeos</h3>
+<p>Em vez de passar horas procurando conteúdo, tenha uma biblioteca organizada para encontrar o que precisa.</p>
+</div>
+<div class="strategy-card">
+<div class="strategy-icon"><i class="fas fa-clock"></i></div>
+<h3>Fica difícil manter frequência</h3>
+<p>Quando cada postagem começa do zero, manter uma rotina de conteúdo fica muito mais trabalhoso.</p>
+</div>
+<div class="strategy-card">
+<div class="strategy-icon"><i class="fas fa-folder-open"></i></div>
+<h3>Conteúdo espalhado</h3>
+<p>Ter materiais organizados por categorias facilita encontrar diferentes opções para o seu perfil.</p>
+</div>
+<div class="strategy-card">
+<div class="strategy-icon"><i class="fas fa-mobile-screen-button"></i></div>
+<h3>Você quer começar de forma simples</h3>
+<p>A ideia é reduzir a parte mais trabalhosa: encontrar conteúdo para publicar com consistência.</p>
+</div>
+</div>
+</section>
+<!-- NOVA: RESULTADO DESEJADO -->
+<section class="container reveal strategy-section">
+<h2>IMAGINE TER <span class="highlight">CONTEÚDO DISPONÍVEL</span> QUANDO PRECISAR</h2>
+<p>Em vez de começar do zero todos os dias, você pode escolher um conteúdo, baixar e preparar sua próxima publicação.</p>
+<div class="strategy-flow">
+<div class="strategy-flow-item">
+<strong>ESCOLHA</strong>
+<span>Encontre um conteúdo no seu nicho.</span>
+</div>
+<div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+<div class="strategy-flow-item">
+<strong>BAIXE</strong>
+<span>Tenha o material disponível para usar.</span>
+</div>
+<div class="strategy-flow-arrow"><i class="fas fa-arrow-right"></i></div>
+<div class="strategy-flow-item">
+<strong>PUBLIQUE</strong>
+<span>Prepare e publique no seu perfil.</span>
+</div>
+</div>
+</section>
+<!-- 2. PERFIS QUE MAIS CRESCEM -->
 <section class="container reveal profile-proof-section">
-
-    <h2>
-        OS PERFIS QUE MAIS CRESCEM HOJE
-        <span class="highlight">NÃO MOSTRAM O ROSTO!</span>
-    </h2>
-
-    <p>
-        Mostram <strong>conteúdo</strong>. E conteúdo bom, postado com frequência,
-        atraindo seguidores todos os dias, com estratégias simples.
+<h2>
+        MUITOS PERFIS CRESCEM
+        <span class="highlight">SEM MOSTRAR O ROSTO</span>
+</h2>
+<p>
+        Eles constroem audiência com <strong>conteúdo</strong>, consistência e estratégias simples — sem depender de aparecer em todos os vídeos.
     </p>
-
-    <div
-        class="slider-wrapper infinite-carousel"
-        id="slider-perfis"
-        data-autoplay="true"
-        aria-label="Perfis que crescem sem mostrar o rosto"
-    >
-
-        <button
-            class="slider-btn prev"
-            type="button"
-            aria-label="Ver perfil anterior"
-        >
-            <i class="fas fa-chevron-left"></i>
-        </button>
-
-        <div
-            class="carousel-viewport"
-            style="
+<div aria-label="Perfis que crescem sem mostrar o rosto" class="slider-wrapper infinite-carousel" data-autoplay="true" id="slider-perfis">
+<button aria-label="Ver perfil anterior" class="slider-btn prev" type="button">
+<i class="fas fa-chevron-left"></i>
+</button>
+<div class="carousel-viewport" style="
                 width: 100%;
                 max-width: 1120px;
                 margin: 0 auto;
                 overflow: hidden;
-            "
-        >
-
-            <div
-                class="carousel-track"
-                style="
+            ">
+<div class="carousel-track" style="
                     display: flex;
                     align-items: center;
-                "
-            >
-
-                <!-- IMAGEM 1 -->
-                <div
-                    class="slider-item"
-                    style="
+                ">
+<!-- IMAGEM 1 -->
+<div class="slider-item" style="
                         flex: 0 0 33.333%;
                         max-width: 360px;
                         padding: 0 8px;
                         box-sizing: border-box;
-                    "
-                >
-                    <img
-                        src="assets/images/Comentarios-1.jpeg"
-                        width="360"
-                        height="203"
-                        alt="Comentário de perfil 1"
-                        loading="lazy"
-                        decoding="async"
-                        style="
+                    ">
+<img alt="Comentário de perfil 1" decoding="async" fetchpriority="low" height="203" loading="lazy" src="assets/images/Comentarios-1.jpeg" style="
                             display: block;
                             width: 100%;
                             height: auto;
                             aspect-ratio: 16 / 9;
                             object-fit: cover;
                             border-radius: 12px;
-                        "
-                     fetchpriority="low">
-                </div>
-
-                <!-- IMAGEM 2 -->
-                <div
-                    class="slider-item"
-                    style="
+                        " width="360"/>
+</div>
+<!-- IMAGEM 2 -->
+<div class="slider-item" style="
                         flex: 0 0 33.333%;
                         max-width: 360px;
                         padding: 0 8px;
                         box-sizing: border-box;
-                    "
-                >
-                    <img
-                        src="assets/images/Comentario-2.jpeg"
-                        width="360"
-                        height="203"
-                        alt="Comentário de perfil 2"
-                        loading="lazy"
-                        decoding="async"
-                        style="
+                    ">
+<img alt="Comentário de perfil 2" decoding="async" fetchpriority="low" height="203" loading="lazy" src="assets/images/Comentario-2.jpeg" style="
                             display: block;
                             width: 100%;
                             height: auto;
                             aspect-ratio: 16 / 9;
                             object-fit: cover;
                             border-radius: 12px;
-                        "
-                     fetchpriority="low">
-                </div>
-
-                <!-- IMAGEM 3 -->
-                <div
-                    class="slider-item"
-                    style="
+                        " width="360"/>
+</div>
+<!-- IMAGEM 3 -->
+<div class="slider-item" style="
                         flex: 0 0 33.333%;
                         max-width: 360px;
                         padding: 0 8px;
                         box-sizing: border-box;
-                    "
-                >
-                    <img
-                        src="assets/images/Comentario-3.jpeg"
-                        width="360"
-                        height="203"
-                        alt="Comentário de perfil 3"
-                        loading="lazy"
-                        decoding="async"
-                        style="
+                    ">
+<img alt="Comentário de perfil 3" decoding="async" fetchpriority="low" height="203" loading="lazy" src="assets/images/Comentario-3.jpeg" style="
                             display: block;
                             width: 100%;
                             height: auto;
                             aspect-ratio: 16 / 9;
                             object-fit: cover;
                             border-radius: 12px;
-                        "
-                     fetchpriority="low">
-                </div>
-
-                <!-- IMAGEM 4 -->
-                <div
-                    class="slider-item"
-                    style="
+                        " width="360"/>
+</div>
+<!-- IMAGEM 4 -->
+<div class="slider-item" style="
                         flex: 0 0 33.333%;
                         max-width: 360px;
                         padding: 0 8px;
                         box-sizing: border-box;
-                    "
-                >
-                    <img
-                        src="assets/images/Comentario-04.jpeg"
-                        width="360"
-                        height="203"
-                        alt="Comentário de perfil 4"
-                        loading="lazy"
-                        decoding="async"
-                        style="
+                    ">
+<img alt="Comentário de perfil 4" decoding="async" fetchpriority="low" height="203" loading="lazy" src="assets/images/Comentario-04.jpeg" style="
                             display: block;
                             width: 100%;
                             height: auto;
                             aspect-ratio: 16 / 9;
                             object-fit: cover;
                             border-radius: 12px;
-                        "
-                     fetchpriority="low">
-                </div>
-
-            </div>
-
-        </div>
-
-        <button
-            class="slider-btn next"
-            type="button"
-            aria-label="Ver próximo perfil"
-        >
-            <i class="fas fa-chevron-right"></i>
-        </button>
-
-        <div
-            class="slider-dots"
-            aria-label="Navegação dos perfis"
-        ></div>
-
-    </div>
-
+                        " width="360"/>
+</div>
+</div>
+</div>
+<button aria-label="Ver próximo perfil" class="slider-btn next" type="button">
+<i class="fas fa-chevron-right"></i>
+</button>
+<div aria-label="Navegação dos perfis" class="slider-dots"></div>
+</div>
 </section>
-
-        <!-- 3. O QUE ELAS TÊM EM COMUM? -->
-        <section class="container reveal common-pages-section">
-           
-            <h2>O QUE ESSAS PÁGINAS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
-            <p>Elas vendem todos os dias nos Stories e na Bio. Tudo isso sem aparecer, apenas postando cortes virais e aplicando estratégias simples de monetização.</p>
-        </section>
-
-        <!-- 4. COMO FUNCIONA (É SIMPLES ASSIM) -->
-        <section class="container reveal">
-            <div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
-                <i class="fas fa-arrow-down"></i>
-            </div>
-
-            <h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
-            
-            <div class="grid-4" style="margin-top: 40px;">
-                <div class="simple-card">
-                    <div class="step-num">1</div>
-                    <h3>Escolha um vídeo pronto</h3>
-                </div>
-
-                <div class="simple-card">
-                    <div class="step-num">2</div>
-                    <h3>Poste no TikTok ou Instagram</h3>
-                </div>
-
-                <div class="simple-card">
-                    <div class="step-num">3</div>
-                    <h3>Repita todos os dias</h3>
-                </div>
-
-                <div class="simple-card" style="border-color: var(--offer-green);">
-                    <div class="step-icon">🚀</div>
-                    <h3 class="highlight-alt">Comece a crescer</h3>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. O QUE VOCÊ VAI RECEBER -->
-        <section class="container">
-            <h2 class="reveal">VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
-            
-            <div class="grid-3" style="margin-top: 50px;">
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/Filmes-e-series.jpeg" width="350" height="200" alt="Filmes e Séries" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/Memes.jpeg" width="350" height="200" alt="Memes" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/Family-Guy.jpeg" width="350" height="200" alt="Family Guy" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 350 cortes de Family Guy selecionados.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/Rick-and-morty.jpeg" width="350" height="200" alt="Rick and Morty" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/os-simpsons.jpeg" width="350" height="200" alt="Os Simpsons" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350" height="200" alt="Todo Mundo Odeia o Chris" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/pica-pau.jpeg" width="350" height="200" alt="Pica-Pau" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/lifestyles-luxo.jpeg" width="350" height="200" alt="Lifestyles" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/futebol.jpeg" width="350" height="200" alt="Futebol" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Mais de 250 cortes de melhores momentos do futebol.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/academia.jpeg" width="350" height="200" alt="Academia" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/ação-policial.jpeg" width="350" height="200" alt="Ação Policial" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/espinhas.jpeg" width="350" height="200" alt="Espinhas" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/parkour.jpeg" width="350" height="200" alt="Parkour" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Centenas de cortes de parkour, ideal para vários nichos.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/ladroes-se-F.jpeg" width="350" height="200" alt="Ladrões se dão mal" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/marçal.jpeg" width="350" height="200" alt="Marçal" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Os melhores cortes de Pablo Marçal.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/religiosos.jpeg" width="350" height="200" alt="Religiosos" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/motivacional.jpeg" width="350" height="200" alt="Motivacional" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Cortes com frases motivacionais e de melhoria de vida.</p>
-                </div>
-
-                <div class="card-nicho reveal">
-                    <div class="card-nicho-img">
-                        <img src="assets/images/e-muito-mais.jpeg" width="350" height="200" alt="E muito mais" loading="lazy" decoding="async" fetchpriority="low">
-                    </div>
-                    <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA INTERMEDIÁRIO -->
-        <section class="container reveal" style="padding-top: 10px; padding-bottom: 10px; text-align: center;">
-            <a href="#preco" class="btn">QUERO GARANTIR O ACESSO AGORA!</a>
-        </section>
-
-        <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
-        <section class="bg-white">
-            <div class="container reveal">
-                <img src="assets/images/instagram-e-tiktok.jpeg" width="400" height="200" alt="Redes Sociais" loading="lazy" decoding="async" class="hero-img" style="max-width: 400px; margin-bottom: 30px;" fetchpriority="low">
-                
-                <h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
-                
-                <div class="grid-4" style="margin-top: 50px;">
-                    <div class="benefits-box reveal">
-                        <i class="fas fa-shopping-cart"></i>
-                        <p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
-                    </div>
-
-                    <div class="benefits-box reveal">
-                        <i class="far fa-clock"></i>
-                        <p>Quer economizar tempo criando conteúdo.</p>
-                    </div>
-
-                    <div class="benefits-box reveal">
-                        <i class="fas fa-chart-line"></i>
-                        <p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
-                    </div>
-
-                    <div class="benefits-box reveal">
-                        <i class="fas fa-users"></i>
-                        <p>Quer manter seu perfil ativo e atraindo seguidores.</p>
-                    </div>
-                </div>
-
-                <h2 style="margin-top: 50px;" class="reveal">
+<!-- 3. O QUE ELAS TÊM EM COMUM? -->
+<section class="container reveal common-pages-section">
+<h2>O QUE ESSES PERFIS <span class="highlight-alt">TÊM EM COMUM?</span></h2>
+<p>Conteúdo frequente, um nicho definido e uma rotina simples de publicação. O pack entra justamente na parte mais trabalhosa: ter material para postar.</p>
+</section>
+<!-- 4. COMO FUNCIONA (É SIMPLES ASSIM) -->
+<section class="container reveal">
+<div style="font-size: 30px; color: var(--offer-green); margin-bottom: 10px;">
+<i class="fas fa-arrow-down"></i>
+</div>
+<h2>COMO <span class="highlight-alt">FUNCIONA?</span></h2>
+<div class="grid-4" style="margin-top: 40px;">
+<div class="simple-card">
+<div class="step-num">1</div>
+<h3>Escolha um vídeo pronto</h3>
+</div>
+<div class="simple-card">
+<div class="step-num">2</div>
+<h3>Poste no TikTok ou Instagram</h3>
+</div>
+<div class="simple-card">
+<div class="step-num">3</div>
+<h3>Repita todos os dias</h3>
+</div>
+<div class="simple-card" style="border-color: var(--offer-green);">
+<div class="step-icon">🚀</div>
+<h3 class="highlight-alt">Publique com consistência</h3>
+</div>
+</div>
+</section>
+<!-- 5. O QUE VOCÊ VAI RECEBER -->
+<section class="container nichos-section">
+<h2 class="reveal">VEJA O QUE VOCÊ <span class="highlight">VAI RECEBER:</span></h2>
+<p class="nichos-subtitle reveal">Explore alguns dos principais nichos disponíveis no pack.</p>
+<div aria-label="Nichos disponíveis no Pack de Cortes Virais" class="nichos-marquee" id="nichos-marquee"><div class="marquee-row marquee-row-right"><div class="marquee-track"><div class="marquee-group"><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Filmes e Séries" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Filmes-e-series.jpeg" width="350"/>
+</div>
+<p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Memes" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Memes.jpeg" width="350"/>
+</div>
+<p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Family Guy" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Family-Guy.jpeg" width="350"/>
+</div>
+<p>Mais de 350 cortes de Family Guy selecionados.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Rick and Morty" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Rick-and-morty.jpeg" width="350"/>
+</div>
+<p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Os Simpsons" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/os-simpsons.jpeg" width="350"/>
+</div>
+<p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Todo Mundo Odeia o Chris" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350"/>
+</div>
+<p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Pica-Pau" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/pica-pau.jpeg" width="350"/>
+</div>
+<p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Lifestyles" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/lifestyles-luxo.jpeg" width="350"/>
+</div>
+<p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Futebol" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/futebol.jpeg" width="350"/>
+</div>
+<p>Mais de 250 cortes de melhores momentos do futebol.</p>
+</div></div><div aria-hidden="true" class="marquee-group"><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Filmes e Séries" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Filmes-e-series.jpeg" width="350"/>
+</div>
+<p>São mais de 900 cortes prontos para postar de filmes e séries variadas.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Memes" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Memes.jpeg" width="350"/>
+</div>
+<p>Mais de 500 vídeos de memes limpos + efeitos sonoros.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Family Guy" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Family-Guy.jpeg" width="350"/>
+</div>
+<p>Mais de 350 cortes de Family Guy selecionados.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Rick and Morty" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/Rick-and-morty.jpeg" width="350"/>
+</div>
+<p>Cortes de Rick and Morty estão viralizando com força. Receba mais de 100 cortes prontos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Os Simpsons" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/os-simpsons.jpeg" width="350"/>
+</div>
+<p>Não tem quem não goste de Cortes de Os Simpsons. Mais de 120 cortes prontos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Todo Mundo Odeia o Chris" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/todo-mundo-odeia-o-chris.jpeg" width="350"/>
+</div>
+<p>Mais de 130 cortes de Todo Mundo Odeia o Chris prontos para postar.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Pica-Pau" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/pica-pau.jpeg" width="350"/>
+</div>
+<p>Mais de 600 cortes prontos de Pica-Pau, a maioria já legendados, só postar!</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Lifestyles" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/lifestyles-luxo.jpeg" width="350"/>
+</div>
+<p>Mais de 2500 vídeos de lifestyle / luxo. Ideal para vários nichos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Futebol" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/futebol.jpeg" width="350"/>
+</div>
+<p>Mais de 250 cortes de melhores momentos do futebol.</p>
+</div></div></div></div><div class="marquee-row marquee-row-left"><div class="marquee-track"><div class="marquee-group"><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Academia" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/academia.jpeg" width="350"/>
+</div>
+<p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Ação Policial" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/ação-policial.jpeg" width="350"/>
+</div>
+<p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Espinhas" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/espinhas.jpeg" width="350"/>
+</div>
+<p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Parkour" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/parkour.jpeg" width="350"/>
+</div>
+<p>Centenas de cortes de parkour, ideal para vários nichos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Ladrões se dão mal" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/ladroes-se-F.jpeg" width="350"/>
+</div>
+<p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Marçal" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/marçal.jpeg" width="350"/>
+</div>
+<p>Os melhores cortes de Pablo Marçal.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Religiosos" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/religiosos.jpeg" width="350"/>
+</div>
+<p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Motivacional" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/motivacional.jpeg" width="350"/>
+</div>
+<p>Cortes com frases motivacionais e de melhoria de vida.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="E muito mais" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/e-muito-mais.jpeg" width="350"/>
+</div>
+<p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
+</div></div><div aria-hidden="true" class="marquee-group"><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Academia" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/academia.jpeg" width="350"/>
+</div>
+<p>São mais de 500 cortes de Academia para postar na sua página e viralizar!</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Ação Policial" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/ação-policial.jpeg" width="350"/>
+</div>
+<p>Vários cortes de ações policiais e melhores momentos de enquadros, fugas, perseguições.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Espinhas" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/espinhas.jpeg" width="350"/>
+</div>
+<p>Diversos vídeos satisfatórios de espinhas para viralizar rápido.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Parkour" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/parkour.jpeg" width="350"/>
+</div>
+<p>Centenas de cortes de parkour, ideal para vários nichos.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Ladrões se dão mal" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/ladroes-se-F.jpeg" width="350"/>
+</div>
+<p>Vídeos de ladrões se dando mal no Brasil e em outros países.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Marçal" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/marçal.jpeg" width="350"/>
+</div>
+<p>Os melhores cortes de Pablo Marçal.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Religiosos" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/religiosos.jpeg" width="350"/>
+</div>
+<p>Centenas de cortes religiosos para viralizar sua página gospel.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="Motivacional" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/motivacional.jpeg" width="350"/>
+</div>
+<p>Cortes com frases motivacionais e de melhoria de vida.</p>
+</div><div class="card-nicho">
+<div class="card-nicho-img">
+<img alt="E muito mais" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/e-muito-mais.jpeg" width="350"/>
+</div>
+<p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
+</div></div></div></div></div></section>
+<!-- CTA INTERMEDIÁRIO -->
+<section class="container reveal" style="padding-top: 10px; padding-bottom: 10px; text-align: center;">
+<a class="btn" href="#preco">QUERO VER OS PACOTES AGORA!</a>
+</section>
+<!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
+<section class="bg-white social-benefits-section">
+<div class="container reveal">
+<img alt="Redes Sociais" class="hero-img" decoding="async" fetchpriority="low" height="200" loading="lazy" src="assets/images/instagram-e-tiktok.jpeg" style="max-width: 400px; margin-bottom: 30px;" width="400"/>
+<h2>SE VOCÊ TEM UMA CONTA NAS REDES E...</h2>
+<div class="grid-4" style="margin-top: 50px;">
+<div class="benefits-box reveal">
+<i class="fas fa-shopping-cart"></i>
+<p>Quer um método que pode ajudar a gerar vendas, sem aparecer.</p>
+</div>
+<div class="benefits-box reveal">
+<i class="far fa-clock"></i>
+<p>Quer economizar tempo criando conteúdo.</p>
+</div>
+<div class="benefits-box reveal">
+<i class="fas fa-chart-line"></i>
+<p>Quer descobrir como crescer nas redes sem gastar horas editando vídeos.</p>
+</div>
+<div class="benefits-box reveal">
+<i class="fas fa-users"></i>
+<p>Quer manter seu perfil ativo e atraindo seguidores.</p>
+</div>
+</div>
+<h2 class="reveal" style="margin-top: 50px;">
                     ENTÃO ESSE PACK É PRA <span class="highlight-alt">VOCÊ!</span>
-                </h2>
-            </div>
-        </section>
-
-        <!-- 7. PROVAS SOCIAIS (DEPOIMENTOS TEXTO) -->
-        <section class="container reveal">
-            <h2>PESSOAS COMUNS JÁ ESTÃO <span class="highlight">USANDO</span></h2>
-            <p style="font-size: 16px; margin-bottom: 40px;">
-                Jute-se a mais de <strong class="highlight">2.970 pessoas</strong> que estão viralizando todos os dias.
-            </p>
-
-            <div class="testimonials-slider-wrapper infinite-carousel" id="slider-depoimentos" data-autoplay="true" aria-label="Depoimentos de clientes">
-                <button class="slider-btn prev" type="button" aria-label="Depoimento anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <div class="testimonials-slider carousel-viewport">
-                    <div class="testimonials-track carousel-track">
-                        <div class="testimonials-slide">
-                            <div class="testi-card">
-                                <div class="testi-header">
-                                    <div class="testi-avatar">
-                                        <img src="assets/images/01.jpg" alt="Depoimento de Luan Pereira" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
-                                    </div>
-                                    <div class="testi-info">
-                                        <h4>Luan Pereira</h4>
-                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
-                                    </div>
-                                </div>
-                                <div class="testi-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                                <p class="testi-text">"Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"</p>
-                            </div>
-                        </div>
-
-                        <div class="testimonials-slide">
-                            <div class="testi-card">
-                                <div class="testi-header">
-                                    <div class="testi-avatar">
-                                        <img src="assets/images/02.jpg" alt="Depoimento de Gabriel Martins" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
-                                    </div>
-                                    <div class="testi-info">
-                                        <h4>Gabriel Martins</h4>
-                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
-                                    </div>
-                                </div>
-                                <div class="testi-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                                <p class="testi-text">"Gostei muito do material. Ta tudo muito bem feito e a biblioteca e muito bem organizada, tudo está separado por categoria. O suporte também é muito bom e prestativo! Otima qualidade, Recomendo."</p>
-                            </div>
-                        </div>
-
-                        <div class="testimonials-slide">
-                            <div class="testi-card">
-                                <div class="testi-header">
-                                    <div class="testi-avatar">
-                                        <img src="assets/images/03.jpg" alt="Depoimento de Lucas Ferreira" loading="lazy" decoding="async" width="50" height="50" fetchpriority="low">
-                                    </div>
-                                    <div class="testi-info">
-                                        <h4>Lucas Ferreira</h4>
-                                        <span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
-                                    </div>
-                                </div>
-                                <div class="testi-stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                </div>
-                                <p class="testi-text">"O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="slider-btn next" type="button" aria-label="Próximo depoimento">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-
-                <div class="testimonials-slider-dots" aria-label="Navegação dos depoimentos"></div>
-            </div>
-        </section>
-
-        <!-- 7.1. PROVAS SOCIAIS EM IMAGEM -->
-        <section class="container reveal social-proof-section">
-            <h2>VEJA QUEM JÁ <span class="highlight">COMPROU O PACK</span></h2>
-            <p style="font-size: 16px; margin-bottom: 0;">
+</h2>
+</div>
+</section>
+<!-- 7. PROVAS SOCIAIS EM IMAGEM -->
+<section class="container reveal social-proof-section">
+<h2>VEJA QUEM JÁ <span class="highlight">COMPROU O PACK</span></h2>
+<p style="font-size: 16px; margin-bottom: 0;">
                 Confira alguns registros compartilhados por pessoas que já adquiriram o pack.
             </p>
+<div aria-label="Provas sociais do Pack de Cortes Virais" class="social-proof-carousel infinite-carousel" data-autoplay="true" id="slider-provas-sociais">
+<button aria-label="Ver prova social anterior" class="slider-btn prev" type="button">
+<i class="fas fa-chevron-left"></i>
+</button>
+<div class="carousel-viewport">
+<div class="carousel-track">
+<div class="slider-item">
+<img alt="Prova social 1" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-5.jpeg" width="1024"/>
+</div>
+<div class="slider-item">
+<img alt="Prova social 2" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-4.jpeg" width="1024"/>
+</div>
+<div class="slider-item">
+<img alt="Prova social 3" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-2.jpeg" width="1024"/>
+</div>
+<div class="slider-item">
+<img alt="Prova social 4" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-3.jpeg" width="1024"/>
+</div>
+<div class="slider-item">
+<img alt="Prova social 5" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-1.jpeg" width="1024"/>
+</div>
+</div>
+</div>
+<button aria-label="Ver próxima prova social" class="slider-btn next" type="button">
+<i class="fas fa-chevron-right"></i>
+</button>
+<div aria-label="Navegação das provas sociais" class="slider-dots"></div>
+</div>
+</section>
+<!-- 8. BÔNUS EXCLUSIVOS -->
+<section class="bg-white bonuses-section">
+<div class="container reveal" style="padding-top: 80px;">
+<h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
+<div class="grid-4" style="margin-top: 50px;">
+<div class="bonus-card reveal">
+<h2>01</h2>
+<h3>Pack Memes</h3>
+<p>Pack de memes mais famosos 100% atualizados.</p>
+</div>
+<div class="bonus-card reveal">
+<h2>02</h2>
+<h3>Efeitos Sonoros</h3>
+<p>Efeitos sonoros para utilizar em suas edições.</p>
+</div>
+<div class="bonus-card reveal">
+<h2>03</h2>
+<h3>Músicas Sem Copyright</h3>
+<p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
+</div>
+<div class="bonus-card reveal">
+<h2>04</h2>
+<h3>Grupo Exclusivo</h3>
+<p>Grupo de Criadores Para Compartilhar Ideias.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- PROVA SOCIAL: PESSOAS COMUNS (MANTIDA ABAIXO DOS BÔNUS) -->
+<!-- 7. PROVAS SOCIAIS (DEPOIMENTOS TEXTO) -->
+<section class="container reveal">
+<h2>PESSOAS COMUNS JÁ ESTÃO <span class="highlight">USANDO</span></h2>
+<p style="font-size: 16px; margin-bottom: 40px;">
+                Junte-se a mais de <strong class="highlight">2.970 pessoas</strong> que já adquiriram o pack.
+            </p>
+<div aria-label="Depoimentos de clientes" class="testimonials-slider-wrapper infinite-carousel" data-autoplay="true" id="slider-depoimentos">
+<button aria-label="Depoimento anterior" class="slider-btn prev" type="button">
+<i class="fas fa-chevron-left"></i>
+</button>
+<div class="testimonials-slider carousel-viewport">
+<div class="testimonials-track carousel-track">
+<div class="testimonials-slide">
+<div class="testi-card">
+<div class="testi-header">
+<div class="testi-avatar">
+<img alt="Depoimento de Luan Pereira" decoding="async" fetchpriority="low" height="50" loading="lazy" src="assets/images/01.jpg" width="50"/>
+</div>
+<div class="testi-info">
+<h4>Luan Pereira</h4>
+<span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+</div>
+</div>
+<div class="testi-stars">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<p class="testi-text">"Bati 10k seguidores no TikTok em poucos dias só postando os cortes. Loucura total, já comecei a monetizar!"</p>
+</div>
+</div>
+<div class="testimonials-slide">
+<div class="testi-card">
+<div class="testi-header">
+<div class="testi-avatar">
+<img alt="Depoimento de Gabriel Martins" decoding="async" fetchpriority="low" height="50" loading="lazy" src="assets/images/02.jpg" width="50"/>
+</div>
+<div class="testi-info">
+<h4>Gabriel Martins</h4>
+<span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+</div>
+</div>
+<div class="testi-stars">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<p class="testi-text">"Gostei muito do material. Ta tudo muito bem feito e a biblioteca e muito bem organizada, tudo está separado por categoria. O suporte também é muito bom e prestativo! Otima qualidade, Recomendo."</p>
+</div>
+</div>
+<div class="testimonials-slide">
+<div class="testi-card">
+<div class="testi-header">
+<div class="testi-avatar">
+<img alt="Depoimento de Lucas Ferreira" decoding="async" fetchpriority="low" height="50" loading="lazy" src="assets/images/03.jpg" width="50"/>
+</div>
+<div class="testi-info">
+<h4>Lucas Ferreira</h4>
+<span class="testi-verified"><i class="fas fa-check"></i> Compra Verificada</span>
+</div>
+</div>
+<div class="testi-stars">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<p class="testi-text">"O conteúdo realmente converte. Já fiz minha primeira venda como afiliado usando apenas os vídeos. Top!"</p>
+</div>
+</div>
+</div>
+</div>
+<button aria-label="Próximo depoimento" class="slider-btn next" type="button">
+<i class="fas fa-chevron-right"></i>
+</button>
+<div aria-label="Navegação dos depoimentos" class="testimonials-slider-dots"></div>
+</div>
+</section>
 
-            <div
-                class="social-proof-carousel infinite-carousel"
-                id="slider-provas-sociais"
-                data-autoplay="true"
-                aria-label="Provas sociais do Pack de Cortes Virais"
-            >
-                <button class="slider-btn prev" type="button" aria-label="Ver prova social anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <div class="carousel-viewport">
-                    <div class="carousel-track">
-                        <div class="slider-item">
-                            <img
-                                src="assets/images/prova-social-1.jpeg"
-                                width="1024"
-                                height="1024"
-                                alt="Prova social 1"
-                                loading="lazy"
-                                decoding="async"
-                                fetchpriority="low"
-                            >
-                        </div>
-
-                        <div class="slider-item">
-                            <img
-                                src="assets/images/prova-social-2.jpeg"
-                                width="1024"
-                                height="1024"
-                                alt="Prova social 2"
-                                loading="lazy"
-                                decoding="async"
-                                fetchpriority="low"
-                            >
-                        </div>
-
-                        <div class="slider-item">
-                            <img
-                                src="assets/images/prova-social-3.jpeg"
-                                width="1024"
-                                height="1024"
-                                alt="Prova social 3"
-                                loading="lazy"
-                                decoding="async"
-                                fetchpriority="low"
-                            >
-                        </div>
-
-                        <div class="slider-item">
-                            <img
-                                src="assets/images/prova-social-4.jpeg"
-                                width="1024"
-                                height="1024"
-                                alt="Prova social 4"
-                                loading="lazy"
-                                decoding="async"
-                                fetchpriority="low"
-                            >
-                        </div>
-
-                        <div class="slider-item">
-                            <img
-                                src="assets/images/prova-social-5.jpeg"
-                                width="1024"
-                                height="1024"
-                                alt="Prova social 5"
-                                loading="lazy"
-                                decoding="async"
-                                fetchpriority="low"
-                            >
-                        </div>
-                    </div>
-                </div>
-
-                <button class="slider-btn next" type="button" aria-label="Ver próxima prova social">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-
-                <div class="slider-dots" aria-label="Navegação das provas sociais"></div>
-            </div>
-        </section>
-
-        <!-- 8. BÔNUS EXCLUSIVOS -->
-        <section class="bg-white">
-            <div class="container reveal" style="padding-top: 80px;">
-                <h2>BÔNUS EXCLUSIVOS QUE VOCÊ <span class="highlight">RECEBERÁ</span></h2>
-                
-                <div class="grid-4" style="margin-top: 50px;">
-
-                    <div class="bonus-card reveal">
-                        <h2>01</h2>
-                        <h3>Pack Memes</h3>
-                        <p>Pack de memes mais famosos 100% atualizados.</p>
-                    </div>
-
-                    <div class="bonus-card reveal">
-                        <h2>02</h2>
-                        <h3>Efeitos Sonoros</h3>
-                        <p>Efeitos sonoros para utilizar em suas edições.</p>
-                    </div>
-
-                    <div class="bonus-card reveal">
-                        <h2>03</h2>
-                        <h3>Músicas Sem Copyright</h3>
-                        <p>Músicas sem direitos autorais para monetizar seus vídeos.</p>
-                    </div>
-
-                    <div class="bonus-card reveal">
-                        <h2>04</h2>
-                        <h3>Grupo Exclusivo</h3>
-                        <p>Grupo de Criadores Para Compartilhar Ideias.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- NOVA: TRANSIÇÃO E QUEBRA DE OBJEÇÕES -->
-        <section class="container reveal strategy-section">
-            <div class="offer-transition">
-                <span class="strategy-kicker">PRÓXIMO PASSO</span>
-                <div class="offer-transition-title">Agora você já entende o que tem dentro.</div>
-                <p>Antes de escolher, vale eliminar as principais dúvidas sobre como o pack funciona.</p>
-            </div>
-
-            <h2 class="objection-title">ANTES DE DECIDIR, <span class="highlight">TIRE SUAS DÚVIDAS</span></h2>
-
-            <div class="objection-grid">
-                <div class="objection-item">
-                    <strong>“Preciso aparecer?”</strong>
-                    <span>Não. O material foi pensado para perfis que trabalham com conteúdo sem depender de aparecer nos vídeos.</span>
-                </div>
-
-                <div class="objection-item">
-                    <strong>“Preciso saber editar?”</strong>
-                    <span>Não é obrigatório. Ainda assim, uma edição básica pode ajudar a diferenciar o conteúdo antes da publicação.</span>
-                </div>
-
-                <div class="objection-item">
-                    <strong>“Vou receber o quê?”</strong>
-                    <span>Você recebe acesso ao pacote escolhido, com os conteúdos e recursos descritos na oferta.</span>
-                </div>
-
-                <div class="objection-item">
-                    <strong>“Isso garante viralização?”</strong>
-                    <span>Não. O conteúdo é uma ferramenta para facilitar sua produção; alcance, crescimento e vendas dependem também da execução e da plataforma.</span>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 9. ÁREA DE PREÇO / DUAS OFERTAS -->
-        <section id="preco" class="pricing-section reveal">
-            <div class="container" style="padding: 0;">
-                <h2>ESCOLHA SEU PACOTE IDEAL</h2>
-                
-                <div class="pricing-grid">
-                    
-                    <!-- OFERTA 1: BÁSICA -->
-                    <div class="pricing-box basic">
-                        <div>
-                            <h3>Para quem quer começar</h3>
-
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> 8 NICHOS VIRAIS</li>
-                                <li><i class="fas fa-check-circle"></i> 1.500 CORTES PRONTOS</li>
-                                <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
-                                <li><i class="fas fa-check-circle"></i> +10GB DE CONTEÚDO</li>
-                                <li class="disabled"><i class="fas fa-times-circle"></i> ATUALIZAÇÕES MENSAIS</li>
-                                <li class="disabled"><i class="fas fa-times-circle"></i> 4 BÔNUS EXCLUSIVOS</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <div class="price-old">DE R$ 67,90</div>
-                            <div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
-
-                            <a href="#preco" class="btn basic-btn" id="btn-basic-plan" style="width: 100%;">
+<!-- 9. ÁREA DE PREÇO / DUAS OFERTAS -->
+<section class="pricing-section reveal" id="preco">
+<div class="container" style="padding: 0;">
+<div class="offer-kicker">ESCOLHA O NÍVEL DE CONTEÚDO QUE VOCÊ PRECISA</div>
+<h2>ESCOLHA SEU PACOTE IDEAL</h2>
+<p class="offer-subtitle">Comece com o essencial por R$ 19,90 ou tenha a biblioteca completa por apenas R$ 29,90.</p>
+<div class="pricing-grid">
+<!-- OFERTA 1: BÁSICA -->
+<div class="pricing-box basic">
+<div>
+<h3>Para quem quer começar</h3>
+<ul>
+<li><i class="fas fa-check-circle"></i> 8 NICHOS VIRAIS</li>
+<li><i class="fas fa-check-circle"></i> 1.500 CORTES PRONTOS</li>
+<li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+<li><i class="fas fa-check-circle"></i> +10GB DE CONTEÚDO</li>
+<li class="disabled"><i class="fas fa-times-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+<li class="disabled"><i class="fas fa-times-circle"></i> 4 BÔNUS EXCLUSIVOS</li>
+</ul>
+</div>
+<div>
+<div class="offer-discount-line">
+<span class="discount-badge">-71%</span>
+<span class="economy-note">ECONOMIZE R$ 48,00</span>
+</div>
+<div class="price-old">DE R$ 67,90</div>
+<div class="price-new" style="color: var(--offer-green);">R$ 19,90</div>
+<a class="btn basic-btn" href="#preco" id="btn-basic-plan" style="width: 100%;">
                                 COMEÇAR COM O INICIANTE
                             </a>
-                            
-                            <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
                             <div class="trust-badges-inline">
                                 <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
                                 <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
                                 <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- OFERTA 2: COMPLETA (DESTAQUE) -->
-                    <div class="pricing-box premium">
-                        <div class="pricing-badge">MAIS VENDIDO 🏆</div>
-
-                        <div>
-                            <h3>Para quem quer ter acesso a tudo</h3>
-
-                            <ul>
-                                <li><i class="fas fa-check-circle"></i> 40 NICHOS VIRAIS</li>
-                                <li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
-                                <li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
-                                <li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
-                                <li><i class="fas fa-gift"></i> 4 BÔNUS EXCLUSIVOS</li>
-                                <li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <div class="price-old">DE R$ 92,73</div>
-                            <div class="price-new">R$ 29,90</div>
-
-                            <a href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" class="btn premium-btn" style="width: 100%;">
+</div>
+</div>
+<!-- OFERTA 2: COMPLETA (DESTAQUE) -->
+<div class="pricing-box premium">
+<div class="pricing-badge">MAIS VENDIDO 🏆</div>
+<div>
+<h3>Para quem quer ter acesso a tudo</h3>
+<ul>
+<li><i class="fas fa-check-circle"></i> 40 NICHOS VIRAIS</li>
+<li><i class="fas fa-check-circle"></i> 50.000 CORTES PRONTOS</li>
+<li><i class="fas fa-check-circle"></i> ATUALIZAÇÕES MENSAIS</li>
+<li><i class="fas fa-check-circle"></i> ACESSO VITALÍCIO</li>
+<li><i class="fas fa-gift"></i> 4 BÔNUS EXCLUSIVOS</li>
+<li><i class="fas fa-gift"></i> +250GB DE CONTEÚDO</li>
+</ul>
+</div>
+<div>
+<div class="offer-discount-line">
+<span class="discount-badge">-68%</span>
+<span class="economy-note">ECONOMIZE R$ 62,83</span>
+</div>
+<div class="price-old">DE R$ 92,73</div>
+<div class="price-new">R$ 29,90</div>
+<a class="btn premium-btn checkout-link" data-plan="completo" data-value="29.90" href="https://app.zuptos.com.br/checkout/cca51d6d71bacec5" style="width: 100%;">
                                 GARANTIR PACOTE COMPLETO
                             </a>
-                            
-                            <!-- SELOS DE CONFIANÇA TEXTUAIS NA MESMA LINHA -->
                             <div class="trust-badges-inline">
                                 <span><i class="fas fa-shield-alt"></i> Compra Segura</span>
                                 <span><i class="fas fa-bolt"></i> Acesso Imediato</span>
                                 <span><i class="fas fa-medal"></i> Garantia 7 dias</span>
                             </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
-        <section class="faq-section">
-            <div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
-                <h2>DÚVIDAS FREQUENTES</h2>
-                
-                <div class="faq-container">
-
-                    <div class="faq-item">
-                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
+<section class="faq-section">
+<div class="container reveal" style="padding-top: 0; padding-bottom: 0;">
+<h2>DÚVIDAS FREQUENTES</h2>
+<div class="faq-container">
+<div class="faq-item">
+<button aria-controls="faq-answer-1" aria-expanded="false" class="faq-question" type="button">
                             Eu preciso aparecer nos vídeos?
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <div class="faq-answer" id="faq-answer-1">
-                            <p>
+                            <i aria-hidden="true" class="fas fa-chevron-down"></i>
+</button>
+<div class="faq-answer" id="faq-answer-1">
+<p>
                                 De jeito nenhum! Os cortes já estão prontos, preparados para você postar sem mostrar o rosto. Você só precisa apertar o botão "publicar".
                             </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+</div>
+</div>
+<div class="faq-item">
+<button aria-controls="faq-answer-2" aria-expanded="false" class="faq-question" type="button">
                             Como acesso ao Pack após comprar?
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <div class="faq-answer" id="faq-answer-2">
-                            <p>
+                            <i aria-hidden="true" class="fas fa-chevron-down"></i>
+</button>
+<div class="faq-answer" id="faq-answer-2">
+<p>
                                 Você receberá um link de acesso no seu e-mail para a nossa área de membros exclusiva.
                             </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+</div>
+</div>
+<div class="faq-item">
+<button aria-controls="faq-answer-3" aria-expanded="false" class="faq-question" type="button">
                             Preciso editar os vídeos?
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <div class="faq-answer" id="faq-answer-3">
-                            <p>
+                            <i aria-hidden="true" class="fas fa-chevron-down"></i>
+</button>
+<div class="faq-answer" id="faq-answer-3">
+<p>
                                 Você não precisa editar, se não quiser. Porém, recomendamos que você faça uma edição básica do vídeo, pelo menos. E o motivo é simples: se várias pessoas postam exatamente o mesmo vídeo, nenhuma delas terá o resultado esperado. Por isso, é preciso se diferenciar!
                             </p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+</div>
+</div>
+<div class="faq-item">
+<button aria-controls="faq-answer-4" aria-expanded="false" class="faq-question" type="button">
                             Recebo novos vídeos no futuro?
-                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
-                        </button>
-                        <div class="faq-answer" id="faq-answer-4">
-                            <p>
+                            <i aria-hidden="true" class="fas fa-chevron-down"></i>
+</button>
+<div class="faq-answer" id="faq-answer-4">
+<p>
                                 Atualizamos as pastas com frequência. E você sempre é avisado!
                             </p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- NOVA: FECHAMENTO E REDUÇÃO DE RISCO -->
-        <section class="container reveal strategy-section">
-            <div class="strategy-final">
-                <h2>VOCÊ NÃO PRECISA <span class="highlight">COMEÇAR DO ZERO</span></h2>
-                <p>Tenha uma biblioteca de conteúdos para facilitar sua rotina de postagem e escolha o pacote de acordo com a quantidade de material que você deseja ter disponível.</p>
-
-                <div class="strategy-final-box">
-                    <p><strong>Compare os pacotes acima e veja exatamente o que está incluído antes de finalizar a compra.</strong></p>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- 11. CHAMADA PARA AÇÃO FINAL -->
-        <section class="container reveal">
-            <h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
-            <a href="#preco" class="btn">GARANTIR ACESSO AGORA</a>
-        </section>
-
-    </div> <!-- FIM DA WRAPPER DE BLINDAGEM DE ROLAGEM HORIZONTAL -->
-
-    <!-- 12. RODAPÉ -->
-    <footer class="reveal">
-        <p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- NOVA: FECHAMENTO E REDUÇÃO DE RISCO -->
+<section class="container reveal strategy-section">
+<div class="strategy-final">
+<h2>VOCÊ NÃO PRECISA <span class="highlight">COMEÇAR DO ZERO</span></h2>
+<p>Tenha uma biblioteca de conteúdos para facilitar sua rotina de postagem e escolha o pacote de acordo com a quantidade de material que você deseja ter disponível.</p>
+<div class="strategy-final-box">
+<p><strong>Compare os pacotes acima e veja exatamente o que está incluído antes de finalizar a compra.</strong></p>
+</div>
+</div>
+</section>
+<!-- 11. CHAMADA PARA AÇÃO FINAL -->
+<section class="container reveal">
+<h2>NÃO PERCA MAIS <span class="highlight">TEMPO!</span></h2>
+<a class="btn" href="#preco">GARANTIR ACESSO AGORA</a>
+</section>
+</div> <!-- FIM DA WRAPPER DE BLINDAGEM DE ROLAGEM HORIZONTAL -->
+<!-- 12. RODAPÉ -->
+<footer class="reveal">
+<p style="font-weight: bold; margin-bottom: 5px; color:#aaa;">
             Aviso Legal
         </p>
-
-        <p>
+<p>
             Não oferecemos qualquer tipo de garantia de resultados específicos, como viralização, alcance de métricas ou ganhos financeiros. Qualquer exemplo mencionado é apenas ilustrativo e não deve ser interpretado como promessa de desempenho. Os resultados podem variar conforme a constância, a determinação e o nível de comprometimento de cada pessoa, sendo uma experiência individual e única.
         </p>
+<div class="footer-bottom">
+<p>© 2026 Mago Dos Cortes. Todos os direitos reservados.</p>
+<p class="mt">Design By <span>VELLUX Studio</span></p>
+</div>
+</footer>
+<!-- MODAL DE UPSELL (ESCONDIDO POR PADRÃO) -->
+<div class="modal-overlay" id="upsellModal">
+    <div class="modal-content">
+
+        <div class="modal-badge">MAIS VENDIDO 🏆</div>
+
+        <h2 class="modal-title">
+            ESPERE! Oferta Única Antes de Finalizar...
+        </h2>
+
+        <p class="modal-subtitle">
+            Leve o PACK MAGO COMPLETO por uma diferença mínima!
+        </p>
         
-        <div class="footer-bottom">
-            <p>&copy; 2026 Mago Dos Cortes. Todos os direitos reservados.</p>
-            <p class="mt">Design By <span>VELLUX Studio</span></p>
+        <ul class="modal-list">
+            <li><i class="fas fa-check-circle"></i> 40 Nichos Virais</li>
+            <li><i class="fas fa-check-circle"></i> +50.000 Cortes Prontos</li>
+            <li><i class="fas fa-check-circle"></i> Atualizações Mensais</li>
+            <li><i class="fas fa-check-circle"></i> 4 Bônus Exclusivos</li>
+            <li><i class="fas fa-check-circle"></i> +250GB de Conteúdo</li>
+        </ul>
+        
+        <div class="modal-price">
+            <span class="modal-price-old">De R$ 29,90</span>
+            <span class="modal-price-new">R$ 24,90</span>
         </div>
-    </footer>
-
-    <!-- MODAL DE UPSELL (ESCONDIDO POR PADRÃO) -->
-    <div class="modal-overlay" id="upsellModal">
-        <div class="modal-content">
-
-            <div class="modal-badge">MAIS VENDIDO 🏆</div>
-
-            <h2 class="modal-title">
-                ESPERE! Oferta Única Antes de Finalizar...
-            </h2>
-
-            <p class="modal-subtitle">
-                Leve o PACK MAGO COMPLETO por uma diferença mínima!
-            </p>
-            
-            <ul class="modal-list">
-                <li><i class="fas fa-check-circle"></i> 40 Nichos Virais</li>
-                <li><i class="fas fa-check-circle"></i> +50.000 Cortes Prontos</li>
-                <li><i class="fas fa-check-circle"></i> Atualizações Mensais</li>
-                <li><i class="fas fa-check-circle"></i> 4 Bônus Exclusivos</li>
-                <li><i class="fas fa-check-circle"></i> +250GB de Conteúdo</li>
-            </ul>
-            
-            <div class="modal-price">
-                <span class="modal-price-old">De R$ 29,90</span>
-                <span class="modal-price-new">R$ 24,90</span>
-            </div>
-            
-            <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes" style="color: #FAFAFA;">
-                SIM! GARANTIR PACOTE COMPLETO
-            </a>
-            
-            <button type="button" class="modal-btn-no" id="btnContinueBasic">
-                Não, obrigado. Quero continuar com o pacote iniciante.
-            </button>
-        </div>
+        
+        <a href="https://app.zuptos.com.br/checkout/ba21f243fbda3188" class="btn modal-btn-yes checkout-link" data-plan="upsell" data-value="24.90" style="color: #FAFAFA;">
+            SIM! GARANTIR PACOTE COMPLETO
+        </a>
+        
+        <button type="button" class="modal-btn-no" id="btnContinueBasic">
+            Não, obrigado. Quero continuar com o pacote iniciante.
+        </button>
     </div>
+</div>
 
-    <!-- SCRIPTS GERAIS -->
-    <script>
+<!-- SCRIPTS GERAIS -->
+<script>
 
         // 1. ANIMAÇÕES DE ROLAGEM
         // CORREÇÃO:
@@ -3175,45 +3355,167 @@
         })();
 
 
-        // 5. MODAL DE UPSELL (CAIXINHA DE AVISO)
+        // 5. UPSELL OPCIONAL + TRACKING DE INITIATECHECKOUT
 
-        const btnBasicPlan =
-            document.getElementById('btn-basic-plan');
-
-        const upsellModal =
-            document.getElementById('upsellModal');
-
-        const btnContinueBasic =
-            document.getElementById('btnContinueBasic');
-
+        const btnBasicPlan = document.getElementById('btn-basic-plan');
+        const upsellModal = document.getElementById('upsellModal');
 
         if (btnBasicPlan && upsellModal) {
-
             btnBasicPlan.addEventListener('click', function(e) {
-
                 e.preventDefault();
-
                 upsellModal.classList.add('show');
-
             });
-
         }
 
+        // O upsell não possui botão "X" nem fechamento ao clicar fora.
+        // O visitante precisa escolher uma das duas opções.
+        // Também impede que a tecla ESC feche o upsell.
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && upsellModal && upsellModal.classList.contains('show')) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        }, true);
 
-        if (btnContinueBasic) {
+        // MARQUEE DOS NICHOS — movimento horizontal contínuo e infinito.
+        // Não usa CSS animation: o JavaScript é o único responsável pelo transform.
+        (function initNichoMarquee() {
+            const marquee = document.getElementById('nichos-marquee');
+            if (!marquee) return;
 
-            btnContinueBasic.addEventListener('click', function() {
+            const rows = Array.from(marquee.querySelectorAll('.marquee-row'));
+            const items = rows.map((row, index) => ({
+                row,
+                track: row.querySelector('.marquee-track'),
+                group: row.querySelector('.marquee-group'),
+                direction: index === 0 ? 1 : -1,
+                speed: index === 0 ? 32 : 36,
+                x: index === 0 ? 0 : 0,
+                loop: 0,
+                visible: false,
+                hover: false,
+                lastTime: 0
+            })).filter(item => item.track && item.group);
 
-                upsellModal.classList.remove('show');
+            const measure = item => {
+                // A largura de UM grupo + o gap que existe entre os dois grupos.
+                const groupWidth = item.group.getBoundingClientRect().width;
+                const style = getComputedStyle(item.track);
+                const gap = parseFloat(style.columnGap || style.gap) || 0;
+                item.loop = groupWidth + gap;
+                return item.loop > 0;
+            };
 
-                window.location.href =
-                    "https://app.zuptos.com.br/checkout/8a84e7474b2852cc";
+            const apply = item => {
+                item.track.style.transform = `translate3d(${item.x}px, 0, 0)`;
+            };
 
+            // Começa as duas linhas em posições diferentes para que o movimento
+            // seja imediatamente visível quando a seção entra na tela.
+            items.forEach(item => {
+                measure(item);
+                item.x = item.direction === 1 ? -item.loop : 0;
+                apply(item);
             });
 
+            const observer = 'IntersectionObserver' in window
+                ? new IntersectionObserver(entries => {
+                    const visible = entries.some(entry => entry.isIntersecting);
+                    items.forEach(item => {
+                        item.visible = visible;
+                        item.lastTime = performance.now();
+                    });
+                }, { threshold: 0.01 })
+                : null;
+
+            if (observer) observer.observe(marquee);
+            else items.forEach(item => item.visible = true);
+
+            rows.forEach((row, index) => {
+                const item = items[index];
+                row.addEventListener('mouseenter', () => { item.hover = true; });
+                row.addEventListener('mouseleave', () => { item.hover = false; item.lastTime = performance.now(); });
+            });
+
+            window.addEventListener('resize', () => {
+                items.forEach(item => {
+                    const oldLoop = item.loop;
+                    if (!measure(item)) return;
+                    // Mantém a posição proporcional ao novo tamanho.
+                    if (oldLoop > 0) item.x = (item.x / oldLoop) * item.loop;
+                    apply(item);
+                });
+            }, { passive: true });
+
+            const animate = now => {
+                items.forEach(item => {
+                    if (!item.visible || item.hover) {
+                        item.lastTime = now;
+                        return;
+                    }
+
+                    if (!item.loop || !measure(item)) {
+                        item.lastTime = now;
+                        return;
+                    }
+
+                    const dt = Math.min((now - item.lastTime) / 1000, 0.05);
+                    item.lastTime = now;
+                    item.x += item.direction * item.speed * dt;
+
+                    // Loop perfeito: não existe salto perceptível porque os dois
+                    // grupos são idênticos e estão encostados pelo mesmo gap.
+                    if (item.direction === -1 && item.x <= -item.loop) {
+                        item.x += item.loop;
+                    }
+                    if (item.direction === 1 && item.x >= 0) {
+                        item.x -= item.loop;
+                    }
+
+                    apply(item);
+                });
+
+                requestAnimationFrame(animate);
+            };
+
+            requestAnimationFrame(animate);
+        })();
+
+        // Envia InitiateCheckout antes da ida para a Zuptos.
+        // O Purchase continua sendo responsabilidade do checkout.
+        document.querySelectorAll('a.checkout-link').forEach(link => {
+            link.addEventListener('click', function() {
+                const value = Number(this.dataset.value || 0);
+                const plan = this.dataset.plan || 'indefinido';
+
+                if (typeof fbq === 'function') {
+                    fbq('track', 'InitiateCheckout', {
+                        content_name: 'Pack de Cortes Virais - ' + plan,
+                        value: value,
+                        currency: 'BRL'
+                    });
+                }
+            });
+        });
+
+        const btnContinueBasic = document.getElementById('btnContinueBasic');
+
+        if (btnContinueBasic) {
+            btnContinueBasic.addEventListener('click', function() {
+                upsellModal?.classList.remove('show');
+
+                if (typeof fbq === 'function') {
+                    fbq('track', 'InitiateCheckout', {
+                        content_name: 'Pack de Cortes Virais - iniciante',
+                        value: 19.90,
+                        currency: 'BRL'
+                    });
+                }
+
+                window.location.href = 'https://app.zuptos.com.br/checkout/8a84e7474b2852cc';
+            });
         }
 
     </script>
-
 </body>
 </html>
