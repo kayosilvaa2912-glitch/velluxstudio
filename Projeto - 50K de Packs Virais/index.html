@@ -2414,62 +2414,66 @@
         line-height: 1.25;
     }
 }
+
+
+/* CRO: bloco de garantia redesenhado, mantendo a paleta original */
+.guarantee-upgrade {
+    position: relative;
+    max-width: 980px;
+    margin: 34px auto 42px;
+    padding: clamp(22px, 4vw, 38px);
+    display: grid;
+    grid-template-columns: minmax(150px, 260px) 1fr;
+    align-items: center;
+    gap: clamp(20px, 4vw, 42px);
+    overflow: hidden;
+    border: 1px solid rgba(69,225,4,.38);
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 12% 0%, rgba(69,225,4,.11), transparent 45%), linear-gradient(135deg,#10130d 0%,#080808 68%,#10110c 100%);
+    box-shadow: 0 16px 45px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.guarantee-upgrade::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--primary-color); }
+.guarantee-upgrade-art { display:flex; align-items:center; justify-content:center; min-width:0; }
+.guarantee-upgrade-art img { display:block; width:100%; max-width:230px; height:auto; object-fit:contain; filter: drop-shadow(0 8px 22px rgba(69,225,4,.12)); }
+.guarantee-upgrade-copy .guarantee-eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--primary-color); font-size:11px; font-weight:800; letter-spacing:1.7px; text-transform:uppercase; margin-bottom:12px; }
+.guarantee-upgrade-copy h2 { margin:0 0 12px; color:#fff; font-size:clamp(23px,3.3vw,36px); line-height:1.12; font-weight:900; }
+.guarantee-upgrade-copy h2 span { color:var(--primary-color); }
+.guarantee-upgrade-copy p { margin:0 0 16px; color:#d1d1d1; font-size:14px; line-height:1.7; }
+.guarantee-points { display:flex; flex-wrap:wrap; gap:9px; margin:0 0 15px; padding:0; list-style:none; }
+.guarantee-points li { display:flex; align-items:center; gap:7px; color:#f1f1f1; font-size:11px; font-weight:700; padding:9px 10px; border:1px solid rgba(255,255,255,.1); border-radius:8px; background:rgba(255,255,255,.035); }
+.guarantee-points i { color:var(--primary-color); }
+.guarantee-note { color:#a7a7a7 !important; font-size:11px !important; margin:0 !important; }
+
+/* CTA flutuante contextual: mantém o visual dos botões globais e só aparece quando nenhum CTA principal estiver visível */
+#contextual-buy-cta { position:fixed; z-index:9998; left:50%; bottom:calc(18px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 18px); display:block; width:min(440px, calc(100% - 28px)); padding:20px 45px; margin:0; border:0; border-radius:8px; background:var(--primary-color); color:#FAFAFA; font-family:inherit; font-size:18px; font-weight:900; line-height:1.2; text-align:center; text-decoration:none; text-transform:uppercase; text-shadow:0px 1px 3px rgba(0,0,0,.5); box-shadow:0 0 0 0 rgba(69,225,4,.7); animation:pulse-green 2s infinite; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .22s ease, transform .22s ease, visibility .22s ease; }
+#contextual-buy-cta.is-visible { opacity:1; visibility:visible; pointer-events:auto; transform:translate(-50%,0); }
+#contextual-buy-cta:hover { transform:translate(-50%,0) scale(1.02); }
+@media (max-width:640px) {
+  .guarantee-upgrade { grid-template-columns:1fr; text-align:center; gap:14px; margin:25px 14px 32px; padding:23px 18px; border-radius:15px; }
+  .guarantee-upgrade-art img { max-width:150px; max-height:160px; }
+  .guarantee-upgrade-copy .guarantee-eyebrow { justify-content:center; }
+  .guarantee-upgrade-copy p { font-size:13px; }
+  .guarantee-points { justify-content:center; }
+  .guarantee-points li { font-size:10px; }
+  #contextual-buy-cta { bottom:calc(12px + env(safe-area-inset-bottom, 0px)); width:calc(100% - 24px); padding:18px 20px; font-size:16px; }
+}
+
 </style>
 
 </head>
 <body>
 <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
-<script>
-        // Atualiza automaticamente a data exibida no topo conforme o dia atual.
-        // O DOMContentLoaded garante que o elemento #offer-date já exista antes da execução.
-        (function updateOfferDate() {
-            function setOfferDate() {
-                var dateEl = document.getElementById('offer-date');
-                if (!dateEl) return;
 
-                var today = new Date();
-                var day = String(today.getDate()).padStart(2, '0');
-                var month = String(today.getMonth() + 1).padStart(2, '0');
-                var year = today.getFullYear();
-
-                var formattedDate = day + '/' + month + '/' + year;
-                dateEl.textContent = formattedDate;
-
-                var deadline = dateEl.closest('.hero-offer-deadline');
-                if (deadline) {
-                    deadline.setAttribute(
-                        'aria-label',
-                        'Oferta especial válida somente até ' + formattedDate
-                    );
-                }
-            }
-
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', setOfferDate, { once: true });
-            } else {
-                setOfferDate();
-            }
-        })();
-    </script>
 <div class="site-wrapper">
 <!-- 1. HEADER / HERO SECTION -->
 <header class="container reveal">
-<div class="hero-offer-deadline" aria-label="Oferta especial válida somente até a data de hoje">
-                🔥 OFERTA ESPECIAL VÁLIDA SOMENTE ATÉ <strong id="offer-date">--/--/----</strong>
+<div class="hero-offer-deadline" aria-label="Acesso imediato e garantia de 7 dias">
+                ✓ ACESSO IMEDIATO <span aria-hidden="true">+</span> GARANTIA DE 7 DIAS
             </div>
 <img alt="Cortes Prontos" class="hero-img" fetchpriority="high" height="450" src="assets/images/banner-.jpeg" width="800"/>
 <h1 class="hero-title">TENHA <span class="highlight">CONTEÚDO PRONTO</span> PARA POSTAR TODOS OS DIAS</h1>
 <p class="hero-subtitle">Mais de <strong>50.000 cortes prontos</strong> em dezenas de nichos para você criar ou alimentar seu perfil sem precisar produzir vídeos do zero.</p>
-<div aria-label="Oferta do pacote iniciante por R$ 19,90" class="hero-offer">
-<span class="hero-offer-title">PACOTE INICIANTE</span>
-<span class="hero-offer-old">DE R$ 67,90</span>
-<div class="hero-offer-bottom">
-<span class="hero-offer-label">POR APENAS</span>
-<span class="hero-offer-new">R$ 19,90</span>
-</div>
-</div>
-<a class="btn checkout-link" data-plan="iniciante" data-value="19.90" href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc">QUERO ACESSAR AGORA ⚡</a>
-<div class="hero-microcopy">Pagamento único • Acesso imediato • Garantia de 7 dias</div>
+
 </header>
 <!-- NOVA: PROBLEMA / DOR -->
 <section class="container reveal strategy-section compact-cro compact-pain-section">
@@ -2829,10 +2833,6 @@
 </div>
 <p>Muitos outros conteúdos esperando por você! Temos atualizações mensais!</p>
 </div></div></div></div></div></section>
-<!-- CTA INTERMEDIÁRIO -->
-<section class="container reveal" style="padding-top: 10px; padding-bottom: 10px; text-align: center;">
-<a class="btn" href="#preco">QUERO VER OS PACOTES AGORA!</a>
-</section>
 <!-- 6. SE VOCÊ TEM UMA CONTA NAS REDES -->
 <section class="bg-white social-benefits-section">
 <div class="container reveal">
@@ -2874,19 +2874,19 @@
 <div class="carousel-viewport">
 <div class="carousel-track">
 <div class="slider-item">
-<img alt="Prova social 1" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-5.jpeg" width="1024"/>
+<img alt="Prova social 1" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-1.jpeg" width="1024"/>
 </div>
 <div class="slider-item">
-<img alt="Prova social 2" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-4.jpeg" width="1024"/>
+<img alt="Prova social 2" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-2.jpeg" width="1024"/>
 </div>
 <div class="slider-item">
-<img alt="Prova social 3" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-2.jpeg" width="1024"/>
+<img alt="Prova social 3" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-3.jpeg" width="1024"/>
 </div>
 <div class="slider-item">
-<img alt="Prova social 4" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-3.jpeg" width="1024"/>
+<img alt="Prova social 4" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-4.jpeg" width="1024"/>
 </div>
 <div class="slider-item">
-<img alt="Prova social 5" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-1.jpeg" width="1024"/>
+<img alt="Prova social 5" decoding="async" fetchpriority="low" height="1024" loading="lazy" src="assets/images/prova-social-5.jpeg" width="1024"/>
 </div>
 </div>
 </div>
@@ -3067,6 +3067,24 @@
 </div>
 </div>
 </div>
+</section>
+
+<!-- BLOCO DE GARANTIA: reforço de confiança abaixo das ofertas -->
+<section class="guarantee-upgrade" aria-labelledby="guarantee-upgrade-title">
+    <div class="guarantee-upgrade-art">
+        <img src="assets/images/7dias.png" alt="Garantia de 7 dias" loading="lazy" width="420" height="420">
+    </div>
+    <div class="guarantee-upgrade-copy">
+        <div class="guarantee-eyebrow"><i class="fas fa-shield-alt" aria-hidden="true"></i> Sua compra protegida</div>
+        <h2 id="guarantee-upgrade-title">Experimente por 7 dias.<br><span>O risco é nosso.</span></h2>
+        <p>Você terá tempo para acessar o material e conferir o conteúdo. Se, dentro de 7 dias da compra, não ficar satisfeito, entre em contato com o suporte e solicite o reembolso conforme as condições da garantia.</p>
+        <ul class="guarantee-points">
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i> 7 dias de garantia</li>
+            <li><i class="fas fa-lock" aria-hidden="true"></i> Compra protegida</li>
+            <li><i class="fas fa-bolt" aria-hidden="true"></i> Acesso imediato</li>
+        </ul>
+        <p class="guarantee-note">Garantia válida por 7 dias após a compra. Consulte os termos aplicáveis e os canais de suporte informados no checkout.</p>
+    </div>
 </section>
 <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
 <section class="faq-section">
@@ -3734,5 +3752,55 @@
         }
 
     </script>
+
+<a id="contextual-buy-cta" href="#preco" aria-label="Ver pacotes disponíveis">VER PACOTES</a>
+<script>
+(function initContextualBuyCTA() {
+    const cta = document.getElementById('contextual-buy-cta');
+    if (!cta) return;
+
+    // O CTA flutuante leva à seção de ofertas, sem abrir checkout nem disparar InitiateCheckout.
+    cta.addEventListener('click', function(event) {
+      const offers = document.getElementById('preco');
+      if (!offers) return;
+      event.preventDefault();
+      offers.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Considera CTAs de compra e ações principais da página, sem contar controles de carrossel/FAQ.
+    const candidates = Array.from(document.querySelectorAll(
+      'a.btn, a.checkout-link, button.cta, button.primary-btn, button.modal-btn-yes, [data-primary-action="true"]'
+    )).filter(el => el !== cta && !el.closest('#contextual-buy-cta'));
+
+    const isActuallyVisible = el => {
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < window.innerHeight;
+    };
+
+    const update = () => {
+      // Só habilita o CTA flutuante a partir da terceira dobra (após duas alturas de viewport).
+      const thirdFoldReached = window.scrollY >= (window.innerHeight * 2);
+      const hasVisibleAction = candidates.some(isActuallyVisible);
+      cta.classList.toggle('is-visible', thirdFoldReached && !hasVisibleAction);
+    };
+
+    let scheduled = false;
+    const scheduleUpdate = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => { scheduled = false; update(); });
+    };
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+    window.addEventListener('orientationchange', scheduleUpdate, { passive: true });
+    if ('MutationObserver' in window) {
+      new MutationObserver(scheduleUpdate).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style', 'hidden'] });
+    }
+    update();
+})();
+</script>
+
 </body>
 </html>

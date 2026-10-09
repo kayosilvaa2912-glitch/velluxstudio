@@ -2414,6 +2414,50 @@
         line-height: 1.25;
     }
 }
+
+
+/* CRO: bloco de garantia redesenhado, mantendo a paleta original */
+.guarantee-upgrade {
+    position: relative;
+    max-width: 980px;
+    margin: 34px auto 42px;
+    padding: clamp(22px, 4vw, 38px);
+    display: grid;
+    grid-template-columns: minmax(150px, 260px) 1fr;
+    align-items: center;
+    gap: clamp(20px, 4vw, 42px);
+    overflow: hidden;
+    border: 1px solid rgba(69,225,4,.38);
+    border-radius: 20px;
+    background: radial-gradient(ellipse at 12% 0%, rgba(69,225,4,.11), transparent 45%), linear-gradient(135deg,#10130d 0%,#080808 68%,#10110c 100%);
+    box-shadow: 0 16px 45px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+}
+.guarantee-upgrade::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--primary-color); }
+.guarantee-upgrade-art { display:flex; align-items:center; justify-content:center; min-width:0; }
+.guarantee-upgrade-art img { display:block; width:100%; max-width:230px; height:auto; object-fit:contain; filter: drop-shadow(0 8px 22px rgba(69,225,4,.12)); }
+.guarantee-upgrade-copy .guarantee-eyebrow { display:inline-flex; align-items:center; gap:8px; color:var(--primary-color); font-size:11px; font-weight:800; letter-spacing:1.7px; text-transform:uppercase; margin-bottom:12px; }
+.guarantee-upgrade-copy h2 { margin:0 0 12px; color:#fff; font-size:clamp(23px,3.3vw,36px); line-height:1.12; font-weight:900; }
+.guarantee-upgrade-copy h2 span { color:var(--primary-color); }
+.guarantee-upgrade-copy p { margin:0 0 16px; color:#d1d1d1; font-size:14px; line-height:1.7; }
+.guarantee-points { display:flex; flex-wrap:wrap; gap:9px; margin:0 0 15px; padding:0; list-style:none; }
+.guarantee-points li { display:flex; align-items:center; gap:7px; color:#f1f1f1; font-size:11px; font-weight:700; padding:9px 10px; border:1px solid rgba(255,255,255,.1); border-radius:8px; background:rgba(255,255,255,.035); }
+.guarantee-points i { color:var(--primary-color); }
+.guarantee-note { color:#a7a7a7 !important; font-size:11px !important; margin:0 !important; }
+
+/* CTA flutuante contextual: só aparece quando nenhum CTA de compra estiver visível */
+#contextual-buy-cta { position:fixed; z-index:9998; left:50%; bottom:calc(18px + env(safe-area-inset-bottom, 0px)); transform:translate(-50%, 18px); width:min(440px, calc(100% - 28px)); display:flex; align-items:center; justify-content:center; gap:10px; padding:15px 20px; border:1px solid rgba(255,255,255,.22); border-radius:999px; background:linear-gradient(135deg,#45E104,#31B900); color:#071000; font-family:inherit; font-size:13px; font-weight:900; line-height:1.2; text-align:center; text-decoration:none; box-shadow:0 8px 30px rgba(49,185,0,.28), 0 2px 10px rgba(0,0,0,.45); opacity:0; visibility:hidden; pointer-events:none; transition:opacity .22s ease, transform .22s ease, visibility .22s ease; }
+#contextual-buy-cta.is-visible { opacity:1; visibility:visible; pointer-events:auto; transform:translate(-50%,0); }
+#contextual-buy-cta i { font-size:15px; }
+@media (max-width:640px) {
+  .guarantee-upgrade { grid-template-columns:1fr; text-align:center; gap:14px; margin:25px 14px 32px; padding:23px 18px; border-radius:15px; }
+  .guarantee-upgrade-art img { max-width:150px; max-height:160px; }
+  .guarantee-upgrade-copy .guarantee-eyebrow { justify-content:center; }
+  .guarantee-upgrade-copy p { font-size:13px; }
+  .guarantee-points { justify-content:center; }
+  .guarantee-points li { font-size:10px; }
+  #contextual-buy-cta { bottom:calc(12px + env(safe-area-inset-bottom, 0px)); width:calc(100% - 24px); padding:14px 16px; font-size:12px; }
+}
+
 </style>
 
 </head>
@@ -3067,6 +3111,24 @@
 </div>
 </div>
 </div>
+</section>
+
+<!-- BLOCO DE GARANTIA: reforço de confiança abaixo das ofertas -->
+<section class="guarantee-upgrade" aria-labelledby="guarantee-upgrade-title">
+    <div class="guarantee-upgrade-art">
+        <img src="assets/images/7dias.jpeg" alt="Garantia de 7 dias" loading="lazy" width="420" height="420">
+    </div>
+    <div class="guarantee-upgrade-copy">
+        <div class="guarantee-eyebrow"><i class="fas fa-shield-alt" aria-hidden="true"></i> Sua compra protegida</div>
+        <h2 id="guarantee-upgrade-title">Experimente por 7 dias.<br><span>O risco é nosso.</span></h2>
+        <p>Você terá tempo para acessar o material e conferir o conteúdo. Se, dentro de 7 dias da compra, não ficar satisfeito, entre em contato com o suporte e solicite o reembolso conforme as condições da garantia.</p>
+        <ul class="guarantee-points">
+            <li><i class="fas fa-check-circle" aria-hidden="true"></i> 7 dias de garantia</li>
+            <li><i class="fas fa-lock" aria-hidden="true"></i> Compra protegida</li>
+            <li><i class="fas fa-bolt" aria-hidden="true"></i> Acesso imediato</li>
+        </ul>
+        <p class="guarantee-note">Garantia válida por 7 dias após a compra. Consulte os termos aplicáveis e os canais de suporte informados no checkout.</p>
+    </div>
 </section>
 <!-- 10. DÚVIDAS FREQUENTES (FAQ) -->
 <section class="faq-section">
@@ -3734,5 +3796,47 @@
         }
 
     </script>
+
+<a id="contextual-buy-cta" class="checkout-link" data-plan="iniciante" data-value="19.90" href="https://app.zuptos.com.br/checkout/8a84e7474b2852cc" aria-label="Garantir acesso ao pacote iniciante por R$ 19,90">
+  <i class="fas fa-bolt" aria-hidden="true"></i><span>QUERO GARANTIR MEU ACESSO — R$ 19,90</span>
+</a>
+<script>
+(function initContextualBuyCTA() {
+    const cta = document.getElementById('contextual-buy-cta');
+    if (!cta) return;
+
+    // Considera CTAs de compra e ações principais da página, sem contar controles de carrossel/FAQ.
+    const candidates = Array.from(document.querySelectorAll(
+      'a.btn, a.checkout-link, button.cta, button.primary-btn, button.modal-btn-yes, [data-primary-action="true"]'
+    )).filter(el => el !== cta && !el.closest('#contextual-buy-cta'));
+
+    const isActuallyVisible = el => {
+      const style = window.getComputedStyle(el);
+      if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < window.innerHeight;
+    };
+
+    const update = () => {
+      const hasVisibleAction = candidates.some(isActuallyVisible);
+      cta.classList.toggle('is-visible', !hasVisibleAction);
+    };
+
+    let scheduled = false;
+    const scheduleUpdate = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(() => { scheduled = false; update(); });
+    };
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate, { passive: true });
+    window.addEventListener('orientationchange', scheduleUpdate, { passive: true });
+    if ('MutationObserver' in window) {
+      new MutationObserver(scheduleUpdate).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style', 'hidden'] });
+    }
+    update();
+})();
+</script>
+
 </body>
 </html>
