@@ -1957,6 +1957,34 @@
             }
         }
 
+
+
+        /* Ajuste global e leve de tipografia em toda a página. */
+        html { font-size: 17px; }
+        body { font-size: 17px; }
+        :where(p, li, label, input, select, textarea, summary, blockquote,
+               .subtitle, .description, .benefit, .feature, .card-nicho p,
+               .testimonial, .comment, .social-proof, .faq-answer, .offer-benefit,
+               .price-description, .trust-item, .guarantee-text) {
+            font-size: calc(1em + 1px);
+        }
+        /* Leve aumento nos títulos de todas as seções. */
+        :where(h1, h2, h3, h4, .section-title, .section-heading, .offer-title) {
+            font-size: calc(1em + 2px);
+        }
+        @media (max-width: 600px) {
+            html, body { font-size: 16.5px; }
+            :where(p, li, label, input, select, textarea, summary, blockquote,
+                   .subtitle, .description, .benefit, .feature, .card-nicho p,
+                   .testimonial, .comment, .social-proof, .faq-answer, .offer-benefit,
+                   .price-description, .trust-item, .guarantee-text) {
+                font-size: calc(1em + 0.75px);
+            }
+            :where(h1, h2, h3, h4, .section-title, .section-heading, .offer-title) {
+                font-size: calc(1em + 1.5px);
+            }
+        }
+
 </style>
 <style id="social-proof-carousel-fix">
 /* CORREÇÃO CIRÚRGICA — PROVAS SOCIAIS
@@ -2395,6 +2423,25 @@
 
 </style>
 
+
+<style id="requested-safe-adjustments">
+/* Ajustes solicitados aplicados sobre o código enviado, sem reconstruir seções. */
+/* Materiais: uma coluna no mobile, uma imagem/card por linha. */
+@media (max-width: 768px) {
+  .nichos-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .nichos-grid .card-nicho { width: 100%; }
+}
+/* Aumento leve e consistente da tipografia, com prioridade aos primeiros títulos. */
+.hero-title { font-size: clamp(31px, 4.4vw, 46px); }
+.container > h2, .social-benefits-section h2.reveal { font-size: clamp(29px, 3.3vw, 38px); }
+@media (max-width: 600px) {
+  .hero-title { font-size: 31px !important; line-height: 1.18; }
+  h2, .container > h2, .social-benefits-section h2.reveal { font-size: 28px; line-height: 1.2; }
+  .nichos-grid .card-nicho p { font-size: 15px; }
+}
+/* Destaca apenas o sinal de + da faixa superior em verde. */
+.hero-offer-deadline > span[aria-hidden="true"] { color: var(--primary-color, #45e104) !important; font-weight: 900; }
+</style>
 </head>
 <body>
 <!-- A DIV WRAPPER ENVOLVE O SITE E IMPEDE 100% QUE A TELA FIQUE "SOLTA" PARA OS LADOS -->
@@ -3218,7 +3265,8 @@
         // Carrosséis automáticos: troca a cada 1,5 segundo e pausa quando a seção sai da tela.
         (() => {
             const initInfiniteCarousel = (wrapper) => {
-                if (!wrapper) return;
+                if (!wrapper || wrapper.dataset.carouselInitialized === 'true') return;
+                wrapper.dataset.carouselInitialized = 'true';
 
                 const viewport = wrapper.querySelector('.carousel-viewport');
                 const track = wrapper.querySelector('.carousel-track');
@@ -3427,7 +3475,12 @@
                 }, { passive: true });
 
                 buildClones();
-                start();
+                // Recalcula após o navegador aplicar o layout inicial para evitar salto no primeiro movimento.
+                requestAnimationFrame(() => {
+                    updateSlideWidths();
+                    move(false);
+                    start();
+                });
             };
 
             const startCarousels = () => {
