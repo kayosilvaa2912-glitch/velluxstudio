@@ -1,0 +1,10 @@
+{
+  "installCommand": "npm ci --include=optional",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
