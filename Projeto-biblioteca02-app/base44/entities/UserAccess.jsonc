@@ -1,0 +1,78 @@
+{
+  "name": "UserAccess",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "user_email": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pendente",
+        "ativo",
+        "suspenso",
+        "reembolsado",
+        "cancelado",
+        "bloqueado"
+      ],
+      "enumColors": [
+        "yellow",
+        "green",
+        "orange",
+        "purple",
+        "gray",
+        "red"
+      ],
+      "default": "pendente"
+    },
+    "provider": {
+      "type": "string",
+      "default": "zuptos"
+    },
+    "note": {
+      "type": "string"
+    },
+    "activated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

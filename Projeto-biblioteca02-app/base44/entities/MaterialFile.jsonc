@@ -1,0 +1,43 @@
+{
+  "name": "MaterialFile",
+  "type": "object",
+  "properties": {
+    "material_id": {
+      "type": "string",
+      "description": "Material ao qual o arquivo pertence"
+    },
+    "file_uri": {
+      "type": "string",
+      "description": "URI privada do arquivo, acess\u00edvel apenas pelo servidor"
+    },
+    "file_name": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "material_id",
+    "file_uri"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "WebhookEvent",
+  "type": "object",
+  "properties": {
+    "provider": {
+      "type": "string",
+      "default": "zuptos"
+    },
+    "external_event_id": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string"
+    },
+    "processing_status": {
+      "type": "string",
+      "enum": [
+        "received",
+        "processed",
+        "ignored",
+        "failed"
+      ],
+      "enumColors": [
+        "blue",
+        "green",
+        "gray",
+        "red"
+      ],
+      "default": "received"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "note": {
+      "type": "string"
+    },
+    "received_at": {
+      "type": "string"
+    },
+    "processed_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "external_event_id",
+    "processing_status"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
