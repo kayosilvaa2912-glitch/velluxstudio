@@ -1,0 +1,43 @@
+{
+  "name": "BnccSkill",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "C\u00f3digo oficial da habilidade, ex.: EF67LP07"
+    },
+    "description": {
+      "type": "string"
+    },
+    "school_year": {
+      "type": "string",
+      "description": "Ano ou bloco de anos a que a habilidade se refere"
+    },
+    "source_reference": {
+      "type": "string",
+      "description": "Refer\u00eancia de origem (documento oficial da BNCC)"
+    }
+  },
+  "required": [
+    "code",
+    "description"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

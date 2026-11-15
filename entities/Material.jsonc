@@ -1,0 +1,62 @@
+{
+  "name": "Material",
+  "type": "object",
+  "properties": {
+    "subject_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "aluno_pdf",
+        "editavel_word",
+        "gabarito",
+        "orientacoes",
+        "complementar"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "green",
+        "yellow",
+        "gray"
+      ],
+      "default": "aluno_pdf"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "file_size": {
+      "type": "number"
+    },
+    "mime_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "subject_id",
+    "title",
+    "kind"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

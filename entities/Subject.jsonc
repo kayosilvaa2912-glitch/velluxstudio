@@ -1,0 +1,68 @@
+{
+  "name": "Subject",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo do conte\u00fado, ex.: Hist\u00f3rias em quadrinhos"
+    },
+    "description": {
+      "type": "string"
+    },
+    "objectives": {
+      "type": "string",
+      "description": "Objetivos de aprendizagem"
+    },
+    "school_year": {
+      "type": "string",
+      "description": "6, 7, 8 ou 9"
+    },
+    "bimester": {
+      "type": "number",
+      "description": "1 a 4"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bncc_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "search_text": {
+      "type": "string",
+      "description": "Texto normalizado para busca (t\u00edtulo, descri\u00e7\u00e3o, categorias, BNCC)"
+    },
+    "published": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "title",
+    "school_year",
+    "bimester"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
