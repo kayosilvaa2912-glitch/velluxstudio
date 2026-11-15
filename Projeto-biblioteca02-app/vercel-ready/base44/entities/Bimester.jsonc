@@ -1,0 +1,39 @@
+{
+  "name": "Bimester",
+  "type": "object",
+  "properties": {
+    "school_year": {
+      "type": "string",
+      "description": "Ano escolar ao qual pertence (6, 7, 8 ou 9)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Ex.: 1\u00ba bimestre"
+    },
+    "order_index": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "school_year",
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
