@@ -12,31 +12,74 @@ export const AuthProvider = ({ children }) => {
   const [authError, setAuthError] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
 
-  useEffect(() => {
-    // 1. Verificar sessão ativa no Supabase
-    supabase.auth.getSession().then(({ data: { session }, error }) => {
+  const resetAuthState = () => {
+    setUser(null);
+    setProfile(null);
+    setIsAuthenticated(false);
+    setAuthError(null);
+  };
+
+  const checkUserAuth = async () => {
+    try {
+      setIsLoadingAuth(true);
+      const { data: { session }, error } = await supabase.auth.getSession();
+
       if (error) {
         console.error('Erro ao recuperar sessão:', error);
-      }
-      if (session?.user) {
-        handleUserSession(session.user);
-      } else {
-        setUser(null);
-        setProfile(null);
-        setIsAuthenticated(false);
+        setAuthError({ type: 'auth_required' });
         setIsLoadingAuth(false);
         setAuthChecked(true);
+        return;
       }
-    });
 
-    // 2. Ouvir mudanças no estado de autenticação (login, logout, token refresh)
+      if (!session?.user) {
+        resetAuthState();
+        setAuthError({ type: 'auth_required' });
+        setIsLoadingAuth(false);
+        setAuthChecked(true);
+        return;
+      }
+
+      const { data, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .maybeSingle();
+
+      if (profileError && profileError.code !== 'PGRST116') {
+        console.error('Falha ao carregar perfil do usuário:', profileError);
+      }
+
+      if (!data) {
+        resetAuthState();
+        setAuthError({ type: 'user_not_registered' });
+        setIsLoadingAuth(false);
+        setAuthChecked(true);
+        return;
+      }
+
+      setUser(session.user);
+      setProfile(data);
+      setIsAuthenticated(true);
+      setAuthError(null);
+    } catch (err) {
+      console.error('Falha ao verificar autenticação:', err);
+      setAuthError({ type: 'auth_required' });
+    } finally {
+      setIsLoadingAuth(false);
+      setAuthChecked(true);
+    }
+  };
+
+  useEffect(() => {
+    checkUserAuth();
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
-        handleUserSession(session.user);
+        checkUserAuth();
       } else {
-        setUser(null);
-        setProfile(null);
-        setIsAuthenticated(false);
+        resetAuthState();
+        setAuthError({ type: 'auth_required' });
         setIsLoadingAuth(false);
         setAuthChecked(true);
       }
@@ -47,41 +90,10 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  const handleUserSession = async (authUser) => {
-    try {
-      setUser(authUser);
-      setIsAuthenticated(true);
-
-      // Buscar perfil com a role do usuário
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', authUser.id)
-        .single();
-
-      if (!error && data) {
-        setProfile(data);
-      } else {
-        // Fallback básico caso o trigger ainda esteja processando
-        setProfile({
-          id: authUser.id,
-          email: authUser.email,
-          role: authUser.user_metadata?.role || 'user'
-        });
-      }
-    } catch (err) {
-      console.error('Falha ao carregar perfil do usuário:', err);
-    } finally {
-      setIsLoadingAuth(false);
-      setAuthChecked(true);
-    }
-  };
-
   const logout = async (shouldRedirect = true) => {
     await supabase.auth.signOut();
-    setUser(null);
-    setProfile(null);
-    setIsAuthenticated(false);
+    resetAuthState();
+    setAuthError({ type: 'auth_required' });
     if (shouldRedirect) {
       window.location.href = '/login';
     }
@@ -101,7 +113,8 @@ export const AuthProvider = ({ children }) => {
       authError,
       authChecked,
       logout,
-      navigateToLogin
+      navigateToLogin,
+      checkUserAuth
     }}>
       {children}
     </AuthContext.Provider>
