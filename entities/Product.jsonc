@@ -1,0 +1,45 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "external_product_id": {
+      "type": "string",
+      "description": "Identificador do produto na Zuptos"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "external_product_id"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

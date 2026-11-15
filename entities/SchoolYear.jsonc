@@ -1,0 +1,42 @@
+{
+  "name": "SchoolYear",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Ex.: 6\u00ba ano"
+    },
+    "short_label": {
+      "type": "string",
+      "description": "Ex.: 6\u00ba Ano"
+    },
+    "order_index": {
+      "type": "number"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
