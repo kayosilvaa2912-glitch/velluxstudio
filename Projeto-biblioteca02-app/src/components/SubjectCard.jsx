@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CalendarDays, FileText, ArrowUpRight } from 'lucide-react';
+import { FileText, ArrowUpRight } from 'lucide-react';
 import { yearLabel, bimesterLabel } from '@/lib/constants';
 
 export default function SubjectCard({ subject }) {
