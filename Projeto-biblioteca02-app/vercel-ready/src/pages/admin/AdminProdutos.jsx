@@ -73,7 +73,7 @@ export default function AdminProdutos() {
   };
 
   // URL da Edge Function do Supabase para cadastrar na Zuptos
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://tjxdedkttuhdwyyifwcl.supabase.co';
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
   const webhookUrl = `${supabaseUrl}/functions/v1/zuptos-webhook`;
 
   return (
@@ -83,13 +83,11 @@ export default function AdminProdutos() {
           <Webhook className="h-4 w-4 text-primary" /> Webhook de pagamento (Zuptos)
         </p>
         <p className="text-[11px] leading-relaxed text-muted-foreground">
-          Cadastre esta URL no painel da Zuptos. O evento é validado por assinatura criptográfica HMAC SHA-256 e cada evento é processado uma única vez de forma idempotente.
+          Publique a função <code>supabase/functions/zuptos-webhook</code> com Supabase CLI e configure os segredos <code>ZUPTOS_WEBHOOK_SECRET</code> e <code>ZUPTOS_SIGNATURE_HEADER</code>. Ela confere assinatura HMAC, limita o corpo a 1 MB e processa cada evento uma vez.
         </p>
-        <code className="mt-2 block overflow-x-auto rounded-lg bg-secondary px-3 py-2 text-[11px] font-mono text-primary font-semibold">
-          {webhookUrl}
-        </code>
+        {supabaseUrl ? <code className="mt-2 block overflow-x-auto rounded-lg bg-secondary px-3 py-2 text-[11px] font-mono text-primary font-semibold">{webhookUrl}</code> : <p className="mt-2 text-xs font-semibold text-amber-700">Configure VITE_SUPABASE_URL para exibir a URL do webhook.</p>}
         <p className="mt-2 text-[11px] text-muted-foreground">
-          Os segredos do webhook são configurados como Environment Secrets da Edge Function no Supabase.
+          Nunca coloque a chave service_role no Vercel nem no navegador. Cadastre somente nos secrets da Edge Function do Supabase e configure a Zuptos para enviar a assinatura no cabeçalho definido.
         </p>
       </div>
 

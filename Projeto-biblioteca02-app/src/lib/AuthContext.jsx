@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { supabase } from '@/lib/supabaseClient';
+import { isSupabaseConfigured, supabase } from '@/lib/supabaseClient';
 
 const AuthContext = createContext();
 
@@ -20,6 +20,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const checkUserAuth = async () => {
+    if (!isSupabaseConfigured) {
+      setAuthError({ type: 'supabase_config_missing' });
+      setIsLoadingAuth(false);
+      setAuthChecked(true);
+      return;
+    }
+
     try {
       setIsLoadingAuth(true);
       const { data: { session }, error } = await supabase.auth.getSession();
@@ -73,6 +80,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkUserAuth();
+
+    if (!isSupabaseConfigured) return undefined;
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {

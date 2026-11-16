@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Star, ArrowRight } from 'lucide-react';
 
-export default function BnccHighlight({ skill }) {
+export default function BnccHighlight({ skill, loadError = false }) {
   return (
     <section className="flex flex-col rounded-2xl border border-primary/15 bg-accent p-5">
       <div className="mb-3 flex items-center gap-2">
@@ -21,10 +21,19 @@ export default function BnccHighlight({ skill }) {
             Ver materiais desta habilidade <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </>
-      ) : (
+      ) : loadError ? (
         <p className="text-xs leading-relaxed text-muted-foreground">
-          As habilidades da BNCC serão exibidas aqui assim que forem cadastradas.
+          Não foi possível carregar as habilidades. Confira se a tabela <code>public.bncc_skills</code> existe e permite leitura para usuários autenticados.
         </p>
+      ) : (
+        <>
+          <p className="text-xs leading-relaxed text-muted-foreground">
+            Ainda não há habilidades cadastradas no acervo. Quando a curadoria incluir códigos e descrições oficiais, uma habilidade será destacada aqui.
+          </p>
+          <Link to="/biblioteca" className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline">
+            Explorar materiais <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </>
       )}
     </section>
   );

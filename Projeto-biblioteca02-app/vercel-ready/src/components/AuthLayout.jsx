@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export default function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
   return (
@@ -17,6 +18,9 @@ export default function AuthLayout({ icon: Icon, title, subtitle, footer, childr
         {footer && (
           <p className="text-center text-sm text-muted-foreground mt-6">{footer}</p>
         )}
+        <p className="mt-4 text-center text-xs text-muted-foreground">
+          Ao usar a plataforma, consulte nossos <Link to="/termos" className="text-primary underline">Termos de uso</Link> e a <Link to="/privacidade" className="text-primary underline">Política de privacidade</Link>.
+        </p>
       </div>
     </div>
   );

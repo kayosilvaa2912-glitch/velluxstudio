@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { UserPlus, Mail, Lock, User, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
-import GoogleIcon from "@/components/GoogleIcon";
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
@@ -14,6 +13,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -51,20 +51,6 @@ export default function Register() {
     }
   };
 
-  const handleGoogle = async () => {
-    try {
-      const { error: googleError } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${window.location.origin}/`,
-        },
-      });
-      if (googleError) throw googleError;
-    } catch (err) {
-      setError(err.message || "Não foi possível conectar com o Google");
-    }
-  };
-
   return (
     <AuthLayout
       icon={UserPlus}
@@ -79,24 +65,6 @@ export default function Register() {
         </>
       }
     >
-      <Button
-        variant="outline"
-        className="w-full h-12 text-sm font-medium mb-6"
-        onClick={handleGoogle}
-      >
-        <GoogleIcon className="w-5 h-5 mr-2" />
-        Continuar com Google
-      </Button>
-
-      <div className="relative mb-6">
-        <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-border" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-card px-3 text-muted-foreground">ou</span>
-        </div>
-      </div>
-
       {error && (
         <div className="mb-4 p-3 rounded-lg bg-destructive/10 text-destructive text-sm">
           {error}
@@ -167,7 +135,12 @@ export default function Register() {
             </div>
           </div>
 
-          <Button type="submit" className="w-full h-12 font-medium" disabled={loading}>
+          <label className="flex items-start gap-2 text-xs leading-relaxed text-muted-foreground">
+            <input type="checkbox" checked={acceptedTerms} onChange={(event) => setAcceptedTerms(event.target.checked)} required className="mt-0.5 h-4 w-4 accent-primary" />
+            <span>Li e aceito os <Link to="/termos" target="_blank" className="font-medium text-primary underline">Termos de uso</Link> e a <Link to="/privacidade" target="_blank" className="font-medium text-primary underline">Política de privacidade</Link>.</span>
+          </label>
+
+          <Button type="submit" className="w-full h-12 font-medium" disabled={loading || !acceptedTerms}>
             {loading ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />

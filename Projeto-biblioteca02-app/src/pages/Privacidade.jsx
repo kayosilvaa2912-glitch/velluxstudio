@@ -1,34 +1,16 @@
 export default function Privacidade() {
-  return (
-    <div className="mx-auto max-w-3xl space-y-4">
-      <h1 className="font-heading text-2xl font-bold">Política de privacidade</h1>
-      <div className="card-soft space-y-4 p-6 text-sm leading-relaxed text-muted-foreground">
-        <p>
-          A Biblioteca do Professor trata apenas os dados necessários para criar e manter o acesso do professor ao
-          acervo: nome, e-mail de acesso, situação da compra e registros de uso dos materiais.
-        </p>
-        <p>
-          <strong className="text-foreground">Finalidade.</strong> Os dados são usados para autenticar a conta, verificar
-          a autorização de acesso, liberar downloads, prestar suporte e cumprir obrigações legais e fiscais.
-        </p>
-        <p>
-          <strong className="text-foreground">Compartilhamento.</strong> Os dados de pagamento são processados pela Zuptos,
-          responsável pela transação financeira. Não vendemos dados pessoais.
-        </p>
-        <p>
-          <strong className="text-foreground">Segurança.</strong> Senhas não são armazenadas em texto puro; o acesso aos
-          arquivos é verificado no servidor a cada visualização ou download, com links assinados de curta duração.
-        </p>
-        <p>
-          <strong className="text-foreground">Direitos do titular.</strong> Você pode solicitar confirmação de tratamento,
-          correção, portabilidade ou exclusão dos seus dados pessoais, respeitadas as obrigações legais de retenção, pelo
-          canal de atendimento usado na compra.
-        </p>
-        <p>
-          <strong className="text-foreground">Retenção.</strong> Registros de acesso e de transações são mantidos pelo
-          período necessário ao cumprimento de obrigações legais e à comprovação de autorização de uso do conteúdo.
-        </p>
-      </div>
+  return <div className="mx-auto max-w-3xl space-y-4">
+    <h1 className="font-heading text-2xl font-bold">Política de privacidade</h1>
+    <div className="card-soft space-y-4 p-6 text-sm leading-relaxed text-muted-foreground">
+      <p>A Biblioteca do Professor trata dados necessários para manter sua conta e prestar o serviço: nome, e-mail, estado da compra e acesso, anotações, favoritos, agenda, feedback e registros de materiais acessados.</p>
+      <p><strong className="text-foreground">Finalidades.</strong> Usamos esses dados para autenticar sua conta, confirmar autorização de acesso, salvar suas preferências e conteúdos pessoais, manter o histórico, responder ao suporte e cumprir obrigações legais aplicáveis.</p>
+      <p><strong className="text-foreground">Serviços envolvidos.</strong> A autenticação, o banco de dados e o armazenamento de arquivos são fornecidos pelo Supabase. O site é publicado pela Vercel. Os pagamentos são processados pela Zuptos. Alguns fluxos de autenticação e MFA ainda usam serviços Base44. Esses provedores tratam dados necessários à operação conforme seus serviços e configurações. A Biblioteca do Professor não vende dados pessoais.</p>
+      <p><strong className="text-foreground">Cookies e armazenamento local.</strong> O aplicativo utiliza armazenamento local essencial para manter sua sessão e preferências. O aviso de cookies não representa consentimento para publicidade. Atualmente, o código do app não inclui analytics, pixels de publicidade ou cookies de rastreamento não essenciais.</p>
+      <p><strong className="text-foreground">Segurança e acesso.</strong> Senhas são gerenciadas pelo provedor de autenticação. Arquivos ficam em bucket privado e devem ser liberados somente com política de banco/storage que confirme uma compra ativa. Links assinados são temporários. A proteção depende também de as políticas de segurança do projeto Supabase estarem aplicadas e corretamente configuradas.</p>
+      <p><strong className="text-foreground">Retenção.</strong> Mantemos dados enquanto necessários para fornecer o serviço, preservar a conta, comprovar transações e cumprir obrigações legais. Os registros estritamente necessários podem ser retidos pelo período exigido por lei, mesmo após solicitação de exclusão.</p>
+      <p><strong className="text-foreground">Seus direitos e contato.</strong> Você pode pedir confirmação, acesso, correção e, quando aplicável, anonimização ou exclusão dos seus dados. Fale com o responsável pelo serviço pelo WhatsApp <a className="text-primary underline" href="https://wa.me/5562997016766">+55 62 9 9701-6766</a>. O pedido será verificado para proteger sua conta. A exclusão pode ser limitada por obrigações legais de retenção.</p>
+      <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900">Antes de publicar, informe também nesta política a razão social/nome e CPF/CNPJ do controlador e um canal de contato permanente, se diferentes dos dados do serviço. O nome “Biblioteca do Professor” sozinho pode não identificar juridicamente o responsável.</p>
+      <p className="border-t border-border pt-3 text-xs">Última atualização: 15 de novembro de 2026.</p>
     </div>
-  );
+  </div>;
 }

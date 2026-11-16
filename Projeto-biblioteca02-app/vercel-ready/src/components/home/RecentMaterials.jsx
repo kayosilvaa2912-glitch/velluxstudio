@@ -5,7 +5,7 @@ export default function RecentMaterials({ items = [] }) {
   return (
     <section className="card-soft flex flex-col p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-sm font-semibold">Materiais recentes</h2>
+        <h2 className="text-sm font-semibold">Materiais acessados recentemente</h2>
         <Link to="/biblioteca" className="flex items-center gap-1 text-xs font-medium text-primary hover:underline">
           Ver todos <ArrowRight className="h-3.5 w-3.5" />
         </Link>

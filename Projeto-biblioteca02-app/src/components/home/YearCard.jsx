@@ -11,8 +11,8 @@ const palettes = {
 export default function YearCard({ year, label, color = 'blue', materials = 0 }) {
   return (
     <Link
-      to={`/biblioteca?ano=${year}`}
-      className={`group relative flex items-center justify-between overflow-hidden rounded-2xl ${palettes[color]} px-5 py-5 text-white shadow-lg transition-transform duration-300 hover:-translate-y-0.5`}
+      to={`/bimestres?ano=${year}`}
+      className={`group relative flex min-h-32 items-center justify-between overflow-hidden rounded-2xl ${palettes[color]} px-6 py-6 text-white shadow-lg transition-transform duration-300 hover:-translate-y-0.5`}
     >
       <div className="absolute -right-6 -top-8 h-24 w-24 rounded-full bg-white/10" />
       <div className="relative">

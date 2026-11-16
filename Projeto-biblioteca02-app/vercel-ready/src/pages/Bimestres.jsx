@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Loader2, FileText, ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 import useAccess from '@/hooks/useAccess';
@@ -7,7 +7,8 @@ import { YEARS, BIMESTERS } from '@/lib/constants';
 
 export default function Bimestres() {
   const { isAdmin } = useAccess();
-  const [year, setYear] = useState('6');
+  const [params, setParams] = useSearchParams();
+  const [year, setYear] = useState(params.get('ano') || '6');
   const [counts, setCounts] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -59,7 +60,8 @@ export default function Bimestres() {
         {YEARS.map((y) => (
           <button
             key={y.value}
-            onClick={() => setYear(y.value)}
+            onClick={() => { setYear(y.value); setParams({ ano: y.value }); }}
+            aria-pressed={year === y.value}
             className={`rounded-xl px-4 py-2 text-sm font-medium transition-colors ${
               year === y.value ? 'bg-navy text-white' : 'border border-border bg-card'
             }`}

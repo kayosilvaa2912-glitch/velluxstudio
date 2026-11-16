@@ -36,7 +36,12 @@ export default async function (req) {
     return Response.json({ error: 'Method not allowed' }, { status: 405 });
   }
 
+  const contentLength = Number(req.headers.get('content-length') || 0);
+  if (contentLength > 1_000_000) return Response.json({ error: 'payload_too_large' }, { status: 413 });
   const raw = await req.text();
+  if (new TextEncoder().encode(raw).length > 1_000_000) {
+    return Response.json({ error: 'payload_too_large' }, { status: 413 });
+  }
   const secret = secrets.get('ZUPTOS_WEBHOOK_SECRET');
   const headerName = (secrets.get('ZUPTOS_SIGNATURE_HEADER') || 'x-zuptos-signature').toLowerCase();
   const sharedToken = secrets.get('ZUPTOS_WEBHOOK_TOKEN');
@@ -56,9 +61,8 @@ export default async function (req) {
   }
   if (!authentic && sharedToken) {
     const fromHeader = req.headers.get('x-zuptos-token') || req.headers.get('authorization') || '';
-    const fromQuery = new URL(req.url).searchParams.get('token') || '';
     authentic =
-      safeEqual(fromHeader.replace(/^Bearer\s+/i, ''), sharedToken) || safeEqual(fromQuery, sharedToken);
+      safeEqual(fromHeader.replace(/^Bearer\s+/i, ''), sharedToken);
   }
   if (!authentic) {
     return Response.json({ error: 'invalid_signature' }, { status: 401 });
@@ -113,7 +117,12 @@ export default async function (req) {
       external_event_id: externalEventId,
       event_type: eventType,
       processing_status: 'received',
-      payload,
+      payload: {
+        event_type: eventType,
+        transaction_id: transactionId,
+        product_id: externalProductId,
+        payment_status: rawStatus
+      },
       received_at: new Date().toISOString()
     }));
 

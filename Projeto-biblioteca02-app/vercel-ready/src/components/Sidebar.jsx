@@ -15,6 +15,7 @@ const nav = [
   { to: '/favoritos', label: 'Favoritos', icon: Heart },
   { to: '/downloads', label: 'Histórico', icon: Download },
   { to: '/anotacoes', label: 'Minhas anotações', icon: StickyNote },
+  { to: '/agenda', label: 'Agenda do professor', icon: CalendarDays },
   { to: '/feedback', label: 'Feedback', icon: MessageSquare },
   { to: '/meus-dados', label: 'Meus Dados', icon: User },
   { to: '/ajuda', label: 'Ajuda', icon: HelpCircle }

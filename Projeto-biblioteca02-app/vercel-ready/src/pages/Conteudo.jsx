@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { Loader2, Heart, ArrowLeft, Target, GraduationCap, FileText } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 import { useAuth } from '@/lib/AuthContext';
@@ -10,6 +10,8 @@ import { yearLabel, bimesterLabel, kindMeta } from '@/lib/constants';
 
 export default function Conteudo() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const resumeMaterialId = searchParams.get('material');
   const { user } = useAuth();
   const { hasAccess, access, loading: accessLoading, isAdmin } = useAccess();
   const [subject, setSubject] = useState(null);
@@ -95,7 +97,7 @@ export default function Conteudo() {
     if (!user) return;
     try {
       if (favoriteId) {
-        await supabase.from('favorites').delete().eq('id', favoriteId);
+        await supabase.from('favorites').delete().eq('id', favoriteId).eq('user_id', user.id);
         setFavoriteId(null);
       } else {
         const { data } = await supabase
@@ -219,7 +221,7 @@ export default function Conteudo() {
                     <p className="truncate text-sm font-medium">{m.title}</p>
                     <p className="text-[11px] text-muted-foreground">{meta.label}</p>
                   </div>
-                  <FileActions material={m} hasAccess={hasAccess} />
+                  <FileActions material={m} hasAccess={hasAccess} autoOpen={resumeMaterialId === m.id} />
                 </li>
               );
             })}

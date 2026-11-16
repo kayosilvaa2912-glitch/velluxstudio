@@ -42,7 +42,8 @@ export default function Anotacoes() {
         const { error } = await supabase
           .from('teacher_notes')
           .update({ title, content, updated_at: new Date().toISOString() })
-          .eq('id', editing.id);
+          .eq('id', editing.id)
+          .eq('user_id', user.id);
         if (error) throw error;
       } else {
         const { error } = await supabase
@@ -62,7 +63,7 @@ export default function Anotacoes() {
   const remove = async (note) => {
     if (!window.confirm('Excluir esta anotação? Essa ação não pode ser desfeita.')) return;
     try {
-      const { error } = await supabase.from('teacher_notes').delete().eq('id', note.id);
+      const { error } = await supabase.from('teacher_notes').delete().eq('id', note.id).eq('user_id', user.id);
       if (error) throw error;
       if (editing?.id === note.id) setEditing(null);
       await load();

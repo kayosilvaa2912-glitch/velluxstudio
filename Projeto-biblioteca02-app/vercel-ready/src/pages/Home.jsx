@@ -10,6 +10,7 @@ import RecentMaterials from '@/components/home/RecentMaterials';
 import BnccHighlight from '@/components/home/BnccHighlight';
 import AccessNotice from '@/components/AccessNotice';
 import { Lightbulb } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const { user } = useAuth();
@@ -17,6 +18,8 @@ export default function Home() {
   const [counts, setCounts] = useState({});
   const [recent, setRecent] = useState([]);
   const [skill, setSkill] = useState(null);
+  const [skillLoadError, setSkillLoadError] = useState(false);
+  const [continueItem, setContinueItem] = useState(null);
   const firstName = (user?.full_name || 'professor(a)').split(' ')[0];
 
   // Contagem exata por ano escolar usando Supabase
@@ -82,16 +85,32 @@ export default function Home() {
             if (items.length === 4) break;
           }
           if (alive) setRecent(items);
+
+          const { data: progress } = await supabase
+            .from('user_progress')
+            .select('material_id, subject_id, updated_at, materials(title), subjects(title)')
+            .eq('user_id', user.id)
+            .maybeSingle();
+          if (alive && progress) setContinueItem(progress);
         }
 
-        const { data: skills } = await supabase
+        const { data: skills, error: skillsError } = await supabase
           .from('bncc_skills')
           .select('*')
           .order('code', { ascending: true })
           .limit(120);
 
+        if (skillsError) {
+          console.warn('Não foi possível carregar habilidades BNCC:', skillsError);
+          if (alive) setSkillLoadError(true);
+          return;
+        }
+
         const pool = skills || [];
-        if (alive) setSkill(pool.length ? pool[Math.floor(Math.random() * pool.length)] : null);
+        if (alive) {
+          setSkillLoadError(false);
+          setSkill(pool.length ? pool[Math.floor(Math.random() * pool.length)] : null);
+        }
       } catch (err) {
         console.warn('Erro ao carregar dados do usuário:', err);
       }
@@ -128,11 +147,18 @@ export default function Home() {
 
       <QuickAccess />
 
+      {continueItem && (
+        <Link to={`/conteudo/${continueItem.subject_id}?material=${continueItem.material_id}`} className="flex items-center justify-between gap-4 rounded-2xl border border-primary/15 bg-primary/5 p-4 transition-colors hover:bg-primary/10">
+          <div className="min-w-0"><p className="text-[11px] font-semibold uppercase tracking-wide text-primary">Continuar de onde parou</p><p className="mt-1 truncate text-sm font-semibold">{continueItem.materials?.title || continueItem.subjects?.title || 'Seu último material'}</p><p className="text-xs text-muted-foreground">Aberto em {new Date(continueItem.updated_at).toLocaleDateString('pt-BR')}</p></div>
+          <span className="shrink-0 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-white">Retomar</span>
+        </Link>
+      )}
+
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <RecentMaterials items={recent} />
         </div>
-        <BnccHighlight skill={skill} />
+        <BnccHighlight skill={skill} loadError={skillLoadError} />
       </div>
 
       <div className="flex items-center gap-2.5 rounded-xl border border-border/70 bg-card px-4 py-3 text-xs text-muted-foreground">

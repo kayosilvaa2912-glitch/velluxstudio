@@ -103,6 +103,14 @@ export default function MeusDados() {
               >
                 <LogOut className="h-3.5 w-3.5" /> Encerrar sessão
               </button>
+              <a
+                href={`https://wa.me/5562997016766?text=${encodeURIComponent('Olá, gostaria de solicitar uma cópia ou a exclusão dos meus dados pessoais da Biblioteca do Professor.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-xs font-medium"
+              >
+                Solicitar cópia ou exclusão dos dados
+              </a>
             </div>
           </div>
         </form>
